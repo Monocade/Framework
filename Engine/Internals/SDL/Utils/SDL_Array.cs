@@ -7,23 +7,30 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static T[] SDL_PointerToArray<T>(T* ptr, out int count, bool free = true) where T : unmanaged
+        public static T*[] SDL_PointerToPointerArray<T>(T** ptr, out int count, bool free = true) where T : unmanaged
         {
             count = 0;
 
             if (ptr == null)
             {
-                return Array.Empty<T>();
+                return [];
             }
 
             try
             {
-                while (!EqualityComparer<T>.Default.Equals(ptr[count], default(T)))
+                while (ptr[count] != null)
                 {
                     count++;
                 }
 
-                return new ReadOnlySpan<T>(ptr, count).ToArray();
+                var result = new T*[count];
+
+                for (int i = 0; i < count; i++)
+                {
+                    result[i] = ptr[i];
+                }
+
+                return result;
             }
             finally
             {
@@ -34,13 +41,47 @@ namespace Engine.SDL3
             }
         }
         
-        public static T[] SDL_PointerToArray<T>(T* ptr, bool free = true) where T : unmanaged
+        public static T[] SDL_PointerToArray<T>(T** ptr, out int count, bool free = true) where T : unmanaged
         {
-            int count = 0;
+            count = 0;
 
             if (ptr == null)
             {
-                return Array.Empty<T>();
+                return [];
+            }
+
+            try
+            {
+                while (ptr[count] != null)
+                {
+                    count++;
+                }
+
+                var result = new T[count];
+
+                for (int i = 0; i < count; i++)
+                {
+                    result[i] = *ptr[i];
+                }
+
+                return result;
+            }
+            finally
+            {
+                if (free)
+                {
+                    iSDL_free(ptr);
+                }
+            }
+        }
+        
+        public static T[] SDL_PointerToArray<T>(T* ptr, out int count, bool free = true) where T : unmanaged
+        {
+            count = 0;
+
+            if (ptr == null)
+            {
+                return [];
             }
 
             try
