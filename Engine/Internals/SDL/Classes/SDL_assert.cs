@@ -5,37 +5,29 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_AssertState SDL_ReportAssertion(ref SDL_AssertData data, string func, string file, int line)
+        public static SDL_AssertState SDL_ReportAssertion(SDL_AssertData* data, byte* func, byte* file, int line)
         {
-            fixed (SDL_AssertData* ptr1 = &data)
-            fixed (byte* ptr2 = SDL_StringToUtf8(func))
-            fixed (byte* ptr3 = SDL_StringToUtf8(file))
-            {
-                return iSDL_ReportAssertion(ptr1, ptr2, ptr3, line);
-            }
+            return iSDL_ReportAssertion(data, func, file, line);
         }
 
-        public static void SDL_SetAssertionHandler(SDL_AssertionHandler handler, IntPtr userdata)
+        public static void SDL_SetAssertionHandler(IntPtr handler, void* userdata)
         {
-            iSDL_SetAssertionHandler(Marshal.GetFunctionPointerForDelegate(handler), (void*)userdata);
+            iSDL_SetAssertionHandler(handler, userdata);
         }
 
-        public static SDL_AssertionHandler SDL_GetDefaultAssertionHandler()
+        public static IntPtr SDL_GetDefaultAssertionHandler()
         {
-            return Marshal.GetDelegateForFunctionPointer<SDL_AssertionHandler>(iSDL_GetDefaultAssertionHandler());
+            return iSDL_GetDefaultAssertionHandler();
         }
 
-        public static SDL_AssertionHandler SDL_GetAssertionHandler(out IntPtr puserdata)
+        public static IntPtr SDL_GetAssertionHandler(void** puserdata)
         {
-            fixed (IntPtr* ptr1 = &puserdata)
-            {
-                return Marshal.GetDelegateForFunctionPointer<SDL_AssertionHandler>(iSDL_GetAssertionHandler((void**)ptr1));
-            }
+            return iSDL_GetAssertionHandler(puserdata);
         }
 
-        public static SDL_AssertData SDL_GetAssertionReport()
+        public static SDL_AssertData* SDL_GetAssertionReport()
         {
-            return *iSDL_GetAssertionReport();
+            return iSDL_GetAssertionReport();
         }
 
         public static void SDL_ResetAssertionReport()

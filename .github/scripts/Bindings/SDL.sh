@@ -16,10 +16,15 @@ fi
 # Files
 FILES=(
   SDL_assert
+  SDL_atomic
+  SDL_asyncio
   SDL_audio
+  SDL_bits
   SDL_blendmode
   SDL_camera
   SDL_clipboard
+  SDL_cpuinfo
+  SDL_dialog
   SDL_error
   SDL_events
   SDL_filesystem
@@ -27,31 +32,43 @@ FILES=(
   SDL_gpu
   SDL_guid
   SDL_haptic
+  SDL_hidapi
   SDL_hints
   SDL_init
   SDL_iostream
   SDL_joystick
   SDL_keyboard
   SDL_keycode
+  SDL_loadso
+  SDL_locale
   SDL_log
   SDL_main
+  SDL_messagebox
   SDL_misc
   SDL_mouse
+  SDL_mutex
+  SDL_notification
   SDL_pen
   SDL_pixels
   SDL_platform
   SDL_power
+  SDL_process
   SDL_properties
   SDL_rect
   SDL_render
+  SDL_revision
   SDL_scancode
   SDL_sensor
   SDL_stdinc
   SDL_storage
   SDL_surface
+  SDL_system
+  SDL_thread
   SDL_time
   SDL_timer
+  SDL_tray
   SDL_touch
+  SDL_version
   SDL_video
 )
 
