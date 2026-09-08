@@ -5,14 +5,21 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static byte* SDL_GetPixelFormatName(SDL_PixelFormat format)
+        public static string SDL_GetPixelFormatName(SDL_PixelFormat format)
         {
-            return iSDL_GetPixelFormatName(format);
+            return SDL_NativeToString(iSDL_GetPixelFormatName(format));
         }
 
-        public static SDL_Bool SDL_GetMasksForPixelFormat(SDL_PixelFormat format, int* bpp, uint* Rmask, uint* Gmask, uint* Bmask, uint* Amask)
+        public static bool SDL_GetMasksForPixelFormat(SDL_PixelFormat format, out int bpp, out uint Rmask, out uint Gmask, out uint Bmask, out uint Amask)
         {
-            return iSDL_GetMasksForPixelFormat(format, bpp, Rmask, Gmask, Bmask, Amask);
+            fixed (int* ptr1 = &bpp)
+            fixed (uint* ptr2 = &Rmask)
+            fixed (uint* ptr3 = &Gmask)
+            fixed (uint* ptr4 = &Bmask)
+            fixed (uint* ptr5 = &Amask)
+            {
+                return iSDL_GetMasksForPixelFormat(format, ptr1, ptr2, ptr3, ptr4, ptr5);
+            }
         }
 
         public static SDL_PixelFormat SDL_GetPixelFormatForMasks(int bpp, uint Rmask, uint Gmask, uint Bmask, uint Amask)
@@ -30,9 +37,12 @@ namespace Engine.SDL3
             return iSDL_CreatePalette(ncolors);
         }
 
-        public static SDL_Bool SDL_SetPaletteColors(SDL_Palette* palette, SDL_Color* colors, int firstcolor, int ncolors)
+        public static bool SDL_SetPaletteColors(SDL_Palette* palette, SDL_Color[] colors, int firstcolor, int ncolors)
         {
-            return iSDL_SetPaletteColors(palette, colors, firstcolor, ncolors);
+            fixed (SDL_Color* ptr1 = colors)
+            {
+                return iSDL_SetPaletteColors(palette, ptr1, firstcolor, ncolors);
+            }
         }
 
         public static void SDL_DestroyPalette(SDL_Palette* palette)
@@ -50,14 +60,25 @@ namespace Engine.SDL3
             return iSDL_MapRGBA(format, palette, r, g, b, a);
         }
 
-        public static void SDL_GetRGB(uint pixelvalue, SDL_PixelFormatDetails* format, SDL_Palette* palette, byte* r, byte* g, byte* b)
+        public static void SDL_GetRGB(uint pixelvalue, SDL_PixelFormatDetails* format, SDL_Palette* palette, out byte r, out byte g, out byte b)
         {
-            iSDL_GetRGB(pixelvalue, format, palette, r, g, b);
+            fixed (byte* ptr1 = &r)
+            fixed (byte* ptr2 = &g)
+            fixed (byte* ptr3 = &b)
+            {
+                iSDL_GetRGB(pixelvalue, format, palette, ptr1, ptr2, ptr3);
+            }
         }
 
-        public static void SDL_GetRGBA(uint pixelvalue, SDL_PixelFormatDetails* format, SDL_Palette* palette, byte* r, byte* g, byte* b, byte* a)
+        public static void SDL_GetRGBA(uint pixelvalue, SDL_PixelFormatDetails* format, SDL_Palette* palette, out byte r, out byte g, out byte b, out byte a)
         {
-            iSDL_GetRGBA(pixelvalue, format, palette, r, g, b, a);
+            fixed (byte* ptr1 = &r)
+            fixed (byte* ptr2 = &g)
+            fixed (byte* ptr3 = &b)
+            fixed (byte* ptr4 = &a)
+            {
+                iSDL_GetRGBA(pixelvalue, format, palette, ptr1, ptr2, ptr3, ptr4);
+            }
         }
     }
 }
