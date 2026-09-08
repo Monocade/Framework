@@ -5,29 +5,46 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_Bool SDL_GetDateTimeLocalePreferences(SDL_DateFormat* dateFormat, SDL_TimeFormat* timeFormat)
+        public static bool SDL_GetDateTimeLocalePreferences(out SDL_DateFormat dateFormat, out SDL_TimeFormat timeFormat)
         {
-            return iSDL_GetDateTimeLocalePreferences(dateFormat, timeFormat);
+            fixed (SDL_DateFormat* ptr1 = &dateFormat)
+            fixed (SDL_TimeFormat* ptr2 = &timeFormat)
+            {
+                return iSDL_GetDateTimeLocalePreferences(ptr1, ptr2);
+            }
         }
 
-        public static SDL_Bool SDL_GetCurrentTime(long* ticks)
+        public static bool SDL_GetCurrentTime(ref long ticks)
         {
-            return iSDL_GetCurrentTime(ticks);
+            fixed (long* ptr1 = &ticks)
+            {
+                return iSDL_GetCurrentTime(ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_TimeToDateTime(long ticks, SDL_DateTime* dt, SDL_Bool localTime)
+        public static bool SDL_TimeToDateTime(long ticks, out SDL_DateTime dt, bool localTime)
         {
-            return iSDL_TimeToDateTime(ticks, dt, localTime);
+            fixed (SDL_DateTime* ptr1 = &dt)
+            {
+                return iSDL_TimeToDateTime(ticks, ptr1, localTime);
+            }
         }
 
-        public static SDL_Bool SDL_DateTimeToTime(SDL_DateTime* dt, long* ticks)
+        public static bool SDL_DateTimeToTime(SDL_DateTime* dt, out long ticks)
         {
-            return iSDL_DateTimeToTime(dt, ticks);
+            fixed (long* ptr1 = &ticks)
+            {
+                return iSDL_DateTimeToTime(dt, ptr1);
+            }
         }
 
-        public static void SDL_TimeToWindows(long ticks, uint* dwLowDateTime, uint* dwHighDateTime)
+        public static void SDL_TimeToWindows(long ticks, out uint dwLowDateTime, out uint dwHighDateTime)
         {
-            iSDL_TimeToWindows(ticks, dwLowDateTime, dwHighDateTime);
+            fixed (uint* ptr1 = &dwLowDateTime)
+            fixed (uint* ptr2 = &dwHighDateTime)
+            {
+                iSDL_TimeToWindows(ticks, ptr1, ptr2);
+            }
         }
 
         public static long SDL_TimeFromWindows(uint dwLowDateTime, uint dwHighDateTime)
