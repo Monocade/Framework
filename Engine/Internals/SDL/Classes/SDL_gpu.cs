@@ -5,19 +5,25 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_Bool SDL_GPUSupportsShaderFormats(uint format_flags, byte* name)
+        public static bool SDL_GPUSupportsShaderFormats(uint format_flags, string name)
         {
-            return iSDL_GPUSupportsShaderFormats(format_flags, name);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_GPUSupportsShaderFormats(format_flags, ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_GPUSupportsProperties(uint props)
+        public static bool SDL_GPUSupportsProperties(uint props)
         {
             return iSDL_GPUSupportsProperties(props);
         }
 
-        public static SDL_GPUDevice* SDL_CreateGPUDevice(uint format_flags, SDL_Bool debug_mode, byte* name)
+        public static SDL_GPUDevice* SDL_CreateGPUDevice(uint format_flags, bool debug_mode, string name)
         {
-            return iSDL_CreateGPUDevice(format_flags, debug_mode, name);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_CreateGPUDevice(format_flags, debug_mode, ptr1);
+            }
         }
 
         public static SDL_GPUDevice* SDL_CreateGPUDeviceWithProperties(uint props)
@@ -35,14 +41,14 @@ namespace Engine.SDL3
             return iSDL_GetNumGPUDrivers();
         }
 
-        public static byte* SDL_GetGPUDriver(int index)
+        public static string SDL_GetGPUDriver(int index)
         {
-            return iSDL_GetGPUDriver(index);
+            return SDL_NativeToString(iSDL_GetGPUDriver(index));
         }
 
-        public static byte* SDL_GetGPUDeviceDriver(SDL_GPUDevice* device)
+        public static string SDL_GetGPUDeviceDriver(SDL_GPUDevice* device)
         {
-            return iSDL_GetGPUDeviceDriver(device);
+            return SDL_NativeToString(iSDL_GetGPUDeviceDriver(device));
         }
 
         public static uint SDL_GetGPUShaderFormats(SDL_GPUDevice* device)
@@ -90,24 +96,36 @@ namespace Engine.SDL3
             return iSDL_CreateGPUTransferBuffer(device, createinfo);
         }
 
-        public static void SDL_SetGPUBufferName(SDL_GPUDevice* device, SDL_GPUBuffer* buffer, byte* text)
+        public static void SDL_SetGPUBufferName(SDL_GPUDevice* device, SDL_GPUBuffer* buffer, string text)
         {
-            iSDL_SetGPUBufferName(device, buffer, text);
+            fixed (byte* ptr1 = SDL_StringToNative(text))
+            {
+                iSDL_SetGPUBufferName(device, buffer, ptr1);
+            }
         }
 
-        public static void SDL_SetGPUTextureName(SDL_GPUDevice* device, SDL_GPUTexture* texture, byte* text)
+        public static void SDL_SetGPUTextureName(SDL_GPUDevice* device, SDL_GPUTexture* texture, string text)
         {
-            iSDL_SetGPUTextureName(device, texture, text);
+            fixed (byte* ptr1 = SDL_StringToNative(text))
+            {
+                iSDL_SetGPUTextureName(device, texture, ptr1);
+            }
         }
 
-        public static void SDL_InsertGPUDebugLabel(SDL_GPUCommandBuffer* command_buffer, byte* text)
+        public static void SDL_InsertGPUDebugLabel(SDL_GPUCommandBuffer* command_buffer, string text)
         {
-            iSDL_InsertGPUDebugLabel(command_buffer, text);
+            fixed (byte* ptr1 = SDL_StringToNative(text))
+            {
+                iSDL_InsertGPUDebugLabel(command_buffer, ptr1);
+            }
         }
 
-        public static void SDL_PushGPUDebugGroup(SDL_GPUCommandBuffer* command_buffer, byte* name)
+        public static void SDL_PushGPUDebugGroup(SDL_GPUCommandBuffer* command_buffer, string name)
         {
-            iSDL_PushGPUDebugGroup(command_buffer, name);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                iSDL_PushGPUDebugGroup(command_buffer, ptr1);
+            }
         }
 
         public static void SDL_PopGPUDebugGroup(SDL_GPUCommandBuffer* command_buffer)
@@ -170,9 +188,12 @@ namespace Engine.SDL3
             iSDL_PushGPUComputeUniformData(command_buffer, slot_index, data, length);
         }
 
-        public static SDL_GPURenderPass* SDL_BeginGPURenderPass(SDL_GPUCommandBuffer* command_buffer, SDL_GPUColorTargetInfo* color_target_infos, uint num_color_targets, SDL_GPUDepthStencilTargetInfo* depth_stencil_target_info)
+        public static SDL_GPURenderPass* SDL_BeginGPURenderPass(SDL_GPUCommandBuffer* command_buffer, SDL_GPUColorTargetInfo[] color_target_infos, uint num_color_targets, SDL_GPUDepthStencilTargetInfo* depth_stencil_target_info)
         {
-            return iSDL_BeginGPURenderPass(command_buffer, color_target_infos, num_color_targets, depth_stencil_target_info);
+            fixed(SDL_GPUColorTargetInfo* ptr1 = color_target_infos)
+            {
+                return iSDL_BeginGPURenderPass(command_buffer, ptr1, num_color_targets, depth_stencil_target_info);
+            }
         }
 
         public static void SDL_BindGPUGraphicsPipeline(SDL_GPURenderPass* render_pass, SDL_GPUGraphicsPipeline* graphics_pipeline)
@@ -200,9 +221,12 @@ namespace Engine.SDL3
             iSDL_SetGPUStencilReference(render_pass, reference);
         }
 
-        public static void SDL_BindGPUVertexBuffers(SDL_GPURenderPass* render_pass, uint first_slot, SDL_GPUBufferBinding* bindings, uint num_bindings)
+        public static void SDL_BindGPUVertexBuffers(SDL_GPURenderPass* render_pass, uint first_slot, SDL_GPUBufferBinding[] bindings, uint num_bindings)
         {
-            iSDL_BindGPUVertexBuffers(render_pass, first_slot, bindings, num_bindings);
+            fixed (SDL_GPUBufferBinding* ptr1 = bindings)
+            {
+                iSDL_BindGPUVertexBuffers(render_pass, first_slot, ptr1, num_bindings);
+            }
         }
 
         public static void SDL_BindGPUIndexBuffer(SDL_GPURenderPass* render_pass, SDL_GPUBufferBinding* binding, SDL_GPUIndexElementSize index_element_size)
@@ -210,34 +234,52 @@ namespace Engine.SDL3
             iSDL_BindGPUIndexBuffer(render_pass, binding, index_element_size);
         }
 
-        public static void SDL_BindGPUVertexSamplers(SDL_GPURenderPass* render_pass, uint first_slot, SDL_GPUTextureSamplerBinding* texture_sampler_bindings, uint num_bindings)
+        public static void SDL_BindGPUVertexSamplers(SDL_GPURenderPass* render_pass, uint first_slot, SDL_GPUTextureSamplerBinding[] texture_sampler_bindings, uint num_bindings)
         {
-            iSDL_BindGPUVertexSamplers(render_pass, first_slot, texture_sampler_bindings, num_bindings);
+            fixed (SDL_GPUTextureSamplerBinding* ptr1 = texture_sampler_bindings)
+            {
+                iSDL_BindGPUVertexSamplers(render_pass, first_slot, ptr1, num_bindings);
+            }
         }
 
-        public static void SDL_BindGPUVertexStorageTextures(SDL_GPURenderPass* render_pass, uint first_slot, SDL_GPUTexture** storage_textures, uint num_bindings)
+        public static void SDL_BindGPUVertexStorageTextures(SDL_GPURenderPass* render_pass, uint first_slot, SDL_GPUTexture*[] storage_textures, uint num_bindings)
         {
-            iSDL_BindGPUVertexStorageTextures(render_pass, first_slot, storage_textures, num_bindings);
+            fixed (SDL_GPUTexture** ptr1 = storage_textures)
+            {
+                iSDL_BindGPUVertexStorageTextures(render_pass, first_slot, ptr1, num_bindings);
+            }
         }
 
-        public static void SDL_BindGPUVertexStorageBuffers(SDL_GPURenderPass* render_pass, uint first_slot, SDL_GPUBuffer** storage_buffers, uint num_bindings)
+        public static void SDL_BindGPUVertexStorageBuffers(SDL_GPURenderPass* render_pass, uint first_slot, SDL_GPUBuffer*[] storage_buffers, uint num_bindings)
         {
-            iSDL_BindGPUVertexStorageBuffers(render_pass, first_slot, storage_buffers, num_bindings);
+            fixed (SDL_GPUBuffer** ptr1 = storage_buffers)
+            {
+                iSDL_BindGPUVertexStorageBuffers(render_pass, first_slot, ptr1, num_bindings);
+            }
         }
 
-        public static void SDL_BindGPUFragmentSamplers(SDL_GPURenderPass* render_pass, uint first_slot, SDL_GPUTextureSamplerBinding* texture_sampler_bindings, uint num_bindings)
+        public static void SDL_BindGPUFragmentSamplers(SDL_GPURenderPass* render_pass, uint first_slot, SDL_GPUTextureSamplerBinding[] texture_sampler_bindings, uint num_bindings)
         {
-            iSDL_BindGPUFragmentSamplers(render_pass, first_slot, texture_sampler_bindings, num_bindings);
+            fixed (SDL_GPUTextureSamplerBinding* ptr1 = texture_sampler_bindings)
+            {
+                iSDL_BindGPUFragmentSamplers(render_pass, first_slot, ptr1, num_bindings);
+            }
         }
 
-        public static void SDL_BindGPUFragmentStorageTextures(SDL_GPURenderPass* render_pass, uint first_slot, SDL_GPUTexture** storage_textures, uint num_bindings)
+        public static void SDL_BindGPUFragmentStorageTextures(SDL_GPURenderPass* render_pass, uint first_slot, SDL_GPUTexture*[] storage_textures, uint num_bindings)
         {
-            iSDL_BindGPUFragmentStorageTextures(render_pass, first_slot, storage_textures, num_bindings);
+            fixed (SDL_GPUTexture** ptr1 = storage_textures)
+            {
+                iSDL_BindGPUFragmentStorageTextures(render_pass, first_slot, ptr1, num_bindings);
+            }
         }
 
-        public static void SDL_BindGPUFragmentStorageBuffers(SDL_GPURenderPass* render_pass, uint first_slot, SDL_GPUBuffer** storage_buffers, uint num_bindings)
+        public static void SDL_BindGPUFragmentStorageBuffers(SDL_GPURenderPass* render_pass, uint first_slot, SDL_GPUBuffer*[] storage_buffers, uint num_bindings)
         {
-            iSDL_BindGPUFragmentStorageBuffers(render_pass, first_slot, storage_buffers, num_bindings);
+            fixed (SDL_GPUBuffer** ptr1 = storage_buffers)
+            {
+                iSDL_BindGPUFragmentStorageBuffers(render_pass, first_slot, ptr1, num_bindings);
+            }
         }
 
         public static void SDL_DrawGPUIndexedPrimitives(SDL_GPURenderPass* render_pass, uint num_indices, uint num_instances, uint first_index, int vertex_offset, uint first_instance)
@@ -265,9 +307,13 @@ namespace Engine.SDL3
             iSDL_EndGPURenderPass(render_pass);
         }
 
-        public static SDL_GPUComputePass* SDL_BeginGPUComputePass(SDL_GPUCommandBuffer* command_buffer, SDL_GPUStorageTextureReadWriteBinding* storage_texture_bindings, uint num_storage_texture_bindings, SDL_GPUStorageBufferReadWriteBinding* storage_buffer_bindings, uint num_storage_buffer_bindings)
+        public static SDL_GPUComputePass* SDL_BeginGPUComputePass(SDL_GPUCommandBuffer* command_buffer, SDL_GPUStorageTextureReadWriteBinding[] storage_texture_bindings, uint num_storage_texture_bindings, SDL_GPUStorageBufferReadWriteBinding[] storage_buffer_bindings, uint num_storage_buffer_bindings)
         {
-            return iSDL_BeginGPUComputePass(command_buffer, storage_texture_bindings, num_storage_texture_bindings, storage_buffer_bindings, num_storage_buffer_bindings);
+            fixed (SDL_GPUStorageTextureReadWriteBinding* ptr1 = storage_texture_bindings)
+            fixed (SDL_GPUStorageBufferReadWriteBinding* ptr2 = storage_buffer_bindings)
+            {
+                return iSDL_BeginGPUComputePass(command_buffer, ptr1, num_storage_texture_bindings, ptr2, num_storage_buffer_bindings);
+            }
         }
 
         public static void SDL_BindGPUComputePipeline(SDL_GPUComputePass* compute_pass, SDL_GPUComputePipeline* compute_pipeline)
@@ -275,19 +321,28 @@ namespace Engine.SDL3
             iSDL_BindGPUComputePipeline(compute_pass, compute_pipeline);
         }
 
-        public static void SDL_BindGPUComputeSamplers(SDL_GPUComputePass* compute_pass, uint first_slot, SDL_GPUTextureSamplerBinding* texture_sampler_bindings, uint num_bindings)
+        public static void SDL_BindGPUComputeSamplers(SDL_GPUComputePass* compute_pass, uint first_slot, SDL_GPUTextureSamplerBinding[] texture_sampler_bindings, uint num_bindings)
         {
-            iSDL_BindGPUComputeSamplers(compute_pass, first_slot, texture_sampler_bindings, num_bindings);
+            fixed (SDL_GPUTextureSamplerBinding* ptr1 = texture_sampler_bindings)
+            {
+                iSDL_BindGPUComputeSamplers(compute_pass, first_slot, ptr1, num_bindings);
+            }
         }
 
-        public static void SDL_BindGPUComputeStorageTextures(SDL_GPUComputePass* compute_pass, uint first_slot, SDL_GPUTexture** storage_textures, uint num_bindings)
+        public static void SDL_BindGPUComputeStorageTextures(SDL_GPUComputePass* compute_pass, uint first_slot, SDL_GPUTexture*[] storage_textures, uint num_bindings)
         {
-            iSDL_BindGPUComputeStorageTextures(compute_pass, first_slot, storage_textures, num_bindings);
+            fixed (SDL_GPUTexture** ptr1 = storage_textures)
+            {
+                iSDL_BindGPUComputeStorageTextures(compute_pass, first_slot, ptr1, num_bindings);
+            }
         }
 
-        public static void SDL_BindGPUComputeStorageBuffers(SDL_GPUComputePass* compute_pass, uint first_slot, SDL_GPUBuffer** storage_buffers, uint num_bindings)
+        public static void SDL_BindGPUComputeStorageBuffers(SDL_GPUComputePass* compute_pass, uint first_slot, SDL_GPUBuffer*[] storage_buffers, uint num_bindings)
         {
-            iSDL_BindGPUComputeStorageBuffers(compute_pass, first_slot, storage_buffers, num_bindings);
+            fixed (SDL_GPUBuffer** ptr1 = storage_buffers)
+            {
+                iSDL_BindGPUComputeStorageBuffers(compute_pass, first_slot, ptr1, num_bindings);
+            }
         }
 
         public static void SDL_DispatchGPUCompute(SDL_GPUComputePass* compute_pass, uint groupcount_x, uint groupcount_y, uint groupcount_z)
@@ -305,7 +360,7 @@ namespace Engine.SDL3
             iSDL_EndGPUComputePass(compute_pass);
         }
 
-        public static IntPtr SDL_MapGPUTransferBuffer(SDL_GPUDevice* device, SDL_GPUTransferBuffer* transfer_buffer, SDL_Bool cycle)
+        public static IntPtr SDL_MapGPUTransferBuffer(SDL_GPUDevice* device, SDL_GPUTransferBuffer* transfer_buffer, bool cycle)
         {
             return iSDL_MapGPUTransferBuffer(device, transfer_buffer, cycle);
         }
@@ -320,22 +375,22 @@ namespace Engine.SDL3
             return iSDL_BeginGPUCopyPass(command_buffer);
         }
 
-        public static void SDL_UploadToGPUTexture(SDL_GPUCopyPass* copy_pass, SDL_GPUTextureTransferInfo* source, SDL_GPUTextureRegion* destination, SDL_Bool cycle)
+        public static void SDL_UploadToGPUTexture(SDL_GPUCopyPass* copy_pass, SDL_GPUTextureTransferInfo* source, SDL_GPUTextureRegion* destination, bool cycle)
         {
             iSDL_UploadToGPUTexture(copy_pass, source, destination, cycle);
         }
 
-        public static void SDL_UploadToGPUBuffer(SDL_GPUCopyPass* copy_pass, SDL_GPUTransferBufferLocation* source, SDL_GPUBufferRegion* destination, SDL_Bool cycle)
+        public static void SDL_UploadToGPUBuffer(SDL_GPUCopyPass* copy_pass, SDL_GPUTransferBufferLocation* source, SDL_GPUBufferRegion* destination, bool cycle)
         {
             iSDL_UploadToGPUBuffer(copy_pass, source, destination, cycle);
         }
 
-        public static void SDL_CopyGPUTextureToTexture(SDL_GPUCopyPass* copy_pass, SDL_GPUTextureLocation* source, SDL_GPUTextureLocation* destination, uint w, uint h, uint d, SDL_Bool cycle)
+        public static void SDL_CopyGPUTextureToTexture(SDL_GPUCopyPass* copy_pass, SDL_GPUTextureLocation* source, SDL_GPUTextureLocation* destination, uint w, uint h, uint d, bool cycle)
         {
             iSDL_CopyGPUTextureToTexture(copy_pass, source, destination, w, h, d, cycle);
         }
 
-        public static void SDL_CopyGPUBufferToBuffer(SDL_GPUCopyPass* copy_pass, SDL_GPUBufferLocation* source, SDL_GPUBufferLocation* destination, uint size, SDL_Bool cycle)
+        public static void SDL_CopyGPUBufferToBuffer(SDL_GPUCopyPass* copy_pass, SDL_GPUBufferLocation* source, SDL_GPUBufferLocation* destination, uint size, bool cycle)
         {
             iSDL_CopyGPUBufferToBuffer(copy_pass, source, destination, size, cycle);
         }
@@ -365,17 +420,17 @@ namespace Engine.SDL3
             iSDL_BlitGPUTexture(command_buffer, info);
         }
 
-        public static SDL_Bool SDL_WindowSupportsGPUSwapchainComposition(SDL_GPUDevice* device, SDL_Window* window, SDL_GPUSwapchainComposition swapchain_composition)
+        public static bool SDL_WindowSupportsGPUSwapchainComposition(SDL_GPUDevice* device, SDL_Window* window, SDL_GPUSwapchainComposition swapchain_composition)
         {
             return iSDL_WindowSupportsGPUSwapchainComposition(device, window, swapchain_composition);
         }
 
-        public static SDL_Bool SDL_WindowSupportsGPUPresentMode(SDL_GPUDevice* device, SDL_Window* window, SDL_GPUPresentMode present_mode)
+        public static bool SDL_WindowSupportsGPUPresentMode(SDL_GPUDevice* device, SDL_Window* window, SDL_GPUPresentMode present_mode)
         {
             return iSDL_WindowSupportsGPUPresentMode(device, window, present_mode);
         }
 
-        public static SDL_Bool SDL_ClaimWindowForGPUDevice(SDL_GPUDevice* device, SDL_Window* window)
+        public static bool SDL_ClaimWindowForGPUDevice(SDL_GPUDevice* device, SDL_Window* window)
         {
             return iSDL_ClaimWindowForGPUDevice(device, window);
         }
@@ -385,12 +440,12 @@ namespace Engine.SDL3
             iSDL_ReleaseWindowFromGPUDevice(device, window);
         }
 
-        public static SDL_Bool SDL_SetGPUSwapchainParameters(SDL_GPUDevice* device, SDL_Window* window, SDL_GPUSwapchainComposition swapchain_composition, SDL_GPUPresentMode present_mode)
+        public static bool SDL_SetGPUSwapchainParameters(SDL_GPUDevice* device, SDL_Window* window, SDL_GPUSwapchainComposition swapchain_composition, SDL_GPUPresentMode present_mode)
         {
             return iSDL_SetGPUSwapchainParameters(device, window, swapchain_composition, present_mode);
         }
 
-        public static SDL_Bool SDL_SetGPUAllowedFramesInFlight(SDL_GPUDevice* device, uint allowed_frames_in_flight)
+        public static bool SDL_SetGPUAllowedFramesInFlight(SDL_GPUDevice* device, uint allowed_frames_in_flight)
         {
             return iSDL_SetGPUAllowedFramesInFlight(device, allowed_frames_in_flight);
         }
@@ -400,22 +455,38 @@ namespace Engine.SDL3
             return iSDL_GetGPUSwapchainTextureFormat(device, window);
         }
 
-        public static SDL_Bool SDL_AcquireGPUSwapchainTexture(SDL_GPUCommandBuffer* command_buffer, SDL_Window* window, SDL_GPUTexture** swapchain_texture, uint* swapchain_texture_width, uint* swapchain_texture_height)
+        public static bool SDL_AcquireGPUSwapchainTexture(SDL_GPUCommandBuffer* command_buffer, SDL_Window* window, out SDL_GPUTexture* swapchain_texture, out uint swapchain_texture_width, out uint swapchain_texture_height)
         {
-            return iSDL_AcquireGPUSwapchainTexture(command_buffer, window, swapchain_texture, swapchain_texture_width, swapchain_texture_height);
+            SDL_GPUTexture* ptr1 = null;
+
+            fixed (uint* ptr2 = &swapchain_texture_width)
+            fixed (uint* ptr3 = &swapchain_texture_height)
+            {
+                var result = iSDL_AcquireGPUSwapchainTexture(command_buffer, window, &ptr1, ptr2, ptr3);
+                swapchain_texture = ptr1;
+                return result;
+            }
         }
 
-        public static SDL_Bool SDL_WaitForGPUSwapchain(SDL_GPUDevice* device, SDL_Window* window)
+        public static bool SDL_WaitForGPUSwapchain(SDL_GPUDevice* device, SDL_Window* window)
         {
             return iSDL_WaitForGPUSwapchain(device, window);
         }
 
-        public static SDL_Bool SDL_WaitAndAcquireGPUSwapchainTexture(SDL_GPUCommandBuffer* command_buffer, SDL_Window* window, SDL_GPUTexture** swapchain_texture, uint* swapchain_texture_width, uint* swapchain_texture_height)
+        public static bool SDL_WaitAndAcquireGPUSwapchainTexture(SDL_GPUCommandBuffer* command_buffer, SDL_Window* window, out SDL_GPUTexture* swapchain_texture, out uint swapchain_texture_width, out uint swapchain_texture_height)
         {
-            return iSDL_WaitAndAcquireGPUSwapchainTexture(command_buffer, window, swapchain_texture, swapchain_texture_width, swapchain_texture_height);
+            SDL_GPUTexture* ptr1 = null;
+
+            fixed (uint* ptr2 = &swapchain_texture_width)
+            fixed (uint* ptr3 = &swapchain_texture_height)
+            {
+                var result = iSDL_WaitAndAcquireGPUSwapchainTexture(command_buffer, window, &ptr1, ptr2, ptr3);
+                swapchain_texture = ptr1;
+                return result;
+            }
         }
 
-        public static SDL_Bool SDL_SubmitGPUCommandBuffer(SDL_GPUCommandBuffer* command_buffer)
+        public static bool SDL_SubmitGPUCommandBuffer(SDL_GPUCommandBuffer* command_buffer)
         {
             return iSDL_SubmitGPUCommandBuffer(command_buffer);
         }
@@ -425,22 +496,25 @@ namespace Engine.SDL3
             return iSDL_SubmitGPUCommandBufferAndAcquireFence(command_buffer);
         }
 
-        public static SDL_Bool SDL_CancelGPUCommandBuffer(SDL_GPUCommandBuffer* command_buffer)
+        public static bool SDL_CancelGPUCommandBuffer(SDL_GPUCommandBuffer* command_buffer)
         {
             return iSDL_CancelGPUCommandBuffer(command_buffer);
         }
 
-        public static SDL_Bool SDL_WaitForGPUIdle(SDL_GPUDevice* device)
+        public static bool SDL_WaitForGPUIdle(SDL_GPUDevice* device)
         {
             return iSDL_WaitForGPUIdle(device);
         }
 
-        public static SDL_Bool SDL_WaitForGPUFences(SDL_GPUDevice* device, SDL_Bool wait_all, SDL_GPUFence** fences, uint num_fences)
+        public static bool SDL_WaitForGPUFences(SDL_GPUDevice* device, bool wait_all, SDL_GPUFence*[] fences, uint num_fences)
         {
-            return iSDL_WaitForGPUFences(device, wait_all, fences, num_fences);
+            fixed (SDL_GPUFence** ptr1 = fences)
+            {
+                return iSDL_WaitForGPUFences(device, wait_all, ptr1, num_fences);
+            }
         }
 
-        public static SDL_Bool SDL_QueryGPUFence(SDL_GPUDevice* device, SDL_GPUFence* fence)
+        public static bool SDL_QueryGPUFence(SDL_GPUDevice* device, SDL_GPUFence* fence)
         {
             return iSDL_QueryGPUFence(device, fence);
         }
@@ -455,12 +529,12 @@ namespace Engine.SDL3
             return iSDL_GPUTextureFormatTexelBlockSize(format);
         }
 
-        public static SDL_Bool SDL_GPUTextureSupportsFormat(SDL_GPUDevice* device, SDL_GPUTextureFormat format, SDL_GPUTextureType type, uint usage)
+        public static bool SDL_GPUTextureSupportsFormat(SDL_GPUDevice* device, SDL_GPUTextureFormat format, SDL_GPUTextureType type, uint usage)
         {
             return iSDL_GPUTextureSupportsFormat(device, format, type, usage);
         }
 
-        public static SDL_Bool SDL_GPUTextureSupportsSampleCount(SDL_GPUDevice* device, SDL_GPUTextureFormat format, SDL_GPUSampleCount sample_count)
+        public static bool SDL_GPUTextureSupportsSampleCount(SDL_GPUDevice* device, SDL_GPUTextureFormat format, SDL_GPUSampleCount sample_count)
         {
             return iSDL_GPUTextureSupportsSampleCount(device, format, sample_count);
         }
