@@ -5,19 +5,19 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_Bool SDL_TryLockSpinlock(int* @lock)
+        public static bool SDL_TryLockSpinlock(IntPtr @lock)
         {
-            return iSDL_TryLockSpinlock(@lock);
+            return iSDL_TryLockSpinlock((int*)@lock);
         }
 
-        public static void SDL_LockSpinlock(int* @lock)
+        public static void SDL_LockSpinlock(IntPtr @lock)
         {
-            iSDL_LockSpinlock(@lock);
+            iSDL_LockSpinlock((int*)@lock);
         }
 
-        public static void SDL_UnlockSpinlock(int* @lock)
+        public static void SDL_UnlockSpinlock(IntPtr @lock)
         {
-            iSDL_UnlockSpinlock(@lock);
+            iSDL_UnlockSpinlock((int*)@lock);
         }
 
         public static void SDL_MemoryBarrierReleaseFunction()
@@ -30,7 +30,7 @@ namespace Engine.SDL3
             iSDL_MemoryBarrierAcquireFunction();
         }
 
-        public static SDL_Bool SDL_CompareAndSwapAtomicInt(SDL_AtomicInt* a, int oldval, int newval)
+        public static bool SDL_CompareAndSwapAtomicInt(SDL_AtomicInt* a, int oldval, int newval)
         {
             return iSDL_CompareAndSwapAtomicInt(a, oldval, newval);
         }
@@ -50,7 +50,7 @@ namespace Engine.SDL3
             return iSDL_AddAtomicInt(a, v);
         }
 
-        public static SDL_Bool SDL_CompareAndSwapAtomicU32(SDL_AtomicU32* a, uint oldval, uint newval)
+        public static bool SDL_CompareAndSwapAtomicU32(SDL_AtomicU32* a, uint oldval, uint newval)
         {
             return iSDL_CompareAndSwapAtomicU32(a, oldval, newval);
         }
@@ -70,7 +70,7 @@ namespace Engine.SDL3
             return iSDL_AddAtomicU32(a, v);
         }
 
-        public static SDL_Bool SDL_CompareAndSwapAtomicPointer(IntPtr* a, IntPtr oldval, IntPtr newval)
+        public static bool SDL_CompareAndSwapAtomicPointer(IntPtr* a, IntPtr oldval, IntPtr newval)
         {
             return iSDL_CompareAndSwapAtomicPointer(a, oldval, newval);
         }
