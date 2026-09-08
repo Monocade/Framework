@@ -5,14 +5,14 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static uint* SDL_GetSensors(int* count)
+        public static uint[] SDL_GetSensors(out int count)
         {
-            return iSDL_GetSensors(count);
+            return SDL_NativeToArray(iSDL_GetSensors(null), out count);
         }
 
-        public static byte* SDL_GetSensorNameForID(uint instance_id)
+        public static string SDL_GetSensorNameForID(uint instance_id)
         {
-            return iSDL_GetSensorNameForID(instance_id);
+            return SDL_NativeToString(iSDL_GetSensorNameForID(instance_id));
         }
 
         public static SDL_SensorType SDL_GetSensorTypeForID(uint instance_id)
@@ -40,9 +40,9 @@ namespace Engine.SDL3
             return iSDL_GetSensorProperties(sensor);
         }
 
-        public static byte* SDL_GetSensorName(SDL_Sensor* sensor)
+        public static string SDL_GetSensorName(SDL_Sensor* sensor)
         {
-            return iSDL_GetSensorName(sensor);
+            return SDL_NativeToString(iSDL_GetSensorName(sensor));
         }
 
         public static SDL_SensorType SDL_GetSensorType(SDL_Sensor* sensor)
@@ -60,9 +60,15 @@ namespace Engine.SDL3
             return iSDL_GetSensorID(sensor);
         }
 
-        public static SDL_Bool SDL_GetSensorData(SDL_Sensor* sensor, float* data, int num_values)
+        public static bool SDL_GetSensorData(SDL_Sensor* sensor, out float[] data, int num_values)
         {
-            return iSDL_GetSensorData(sensor, data, num_values);
+            data = new float[num_values];
+            {
+                fixed (float* ptr1 = data)
+                {
+                    return iSDL_GetSensorData(sensor, ptr1, num_values);
+                }
+            }
         }
 
         public static void SDL_CloseSensor(SDL_Sensor* sensor)
