@@ -10,9 +10,9 @@ namespace Engine.SDL3
             return iSDL_GetVersion();
         }
 
-        public static byte* SDL_GetRevision()
+        public static string SDL_GetRevision()
         {
-            return iSDL_GetRevision();
+            return SDL_NativeToString(iSDL_GetRevision());
         }
     }
 }
