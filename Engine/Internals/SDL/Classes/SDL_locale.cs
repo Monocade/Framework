@@ -5,9 +5,9 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_Locale** SDL_GetPreferredLocales(int* count)
+        public static SDL_Locale*[] SDL_GetPreferredLocales(out int count)
         {
-            return iSDL_GetPreferredLocales(count);
+            return SDL_NativeToArray(iSDL_GetPreferredLocales(null), out count);
         }
     }
 }
