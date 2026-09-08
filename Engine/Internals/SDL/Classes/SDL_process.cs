@@ -5,9 +5,9 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_Process* SDL_CreateProcess(byte** args, SDL_Bool pipe_stdio)
+        public static SDL_Process* SDL_CreateProcess(IntPtr args, bool pipe_stdio)
         {
-            return iSDL_CreateProcess(args, pipe_stdio);
+            return iSDL_CreateProcess((byte**)args, pipe_stdio);
         }
 
         public static SDL_Process* SDL_CreateProcessWithProperties(uint props)
@@ -20,9 +20,13 @@ namespace Engine.SDL3
             return iSDL_GetProcessProperties(process);
         }
 
-        public static IntPtr SDL_ReadProcess(SDL_Process* process, nuint* datasize, int* exitcode)
+        public static IntPtr SDL_ReadProcess(SDL_Process* process, out UIntPtr datasize, out int exitcode)
         {
-            return iSDL_ReadProcess(process, datasize, exitcode);
+            fixed (UIntPtr* ptr1 = &datasize)
+            fixed (int* ptr2 = &exitcode)
+            {
+                return iSDL_ReadProcess(process, ptr1, ptr2);
+            }
         }
 
         public static SDL_IOStream* SDL_GetProcessInput(SDL_Process* process)
@@ -35,14 +39,17 @@ namespace Engine.SDL3
             return iSDL_GetProcessOutput(process);
         }
 
-        public static SDL_Bool SDL_KillProcess(SDL_Process* process, SDL_Bool force)
+        public static bool SDL_KillProcess(SDL_Process* process, bool force)
         {
             return iSDL_KillProcess(process, force);
         }
 
-        public static SDL_Bool SDL_WaitProcess(SDL_Process* process, SDL_Bool block, int* exitcode)
+        public static bool SDL_WaitProcess(SDL_Process* process, bool block, out int exitcode)
         {
-            return iSDL_WaitProcess(process, block, exitcode);
+            fixed (int* ptr1 = &exitcode)
+            {
+                return iSDL_WaitProcess(process, block, ptr1);
+            }
         }
 
         public static void SDL_DestroyProcess(SDL_Process* process)
