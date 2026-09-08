@@ -15,7 +15,7 @@ namespace Engine.SDL3
             iSDL_LockMutex(mutex);
         }
 
-        public static SDL_Bool SDL_TryLockMutex(SDL_Mutex* mutex)
+        public static bool SDL_TryLockMutex(SDL_Mutex* mutex)
         {
             return iSDL_TryLockMutex(mutex);
         }
@@ -45,12 +45,12 @@ namespace Engine.SDL3
             iSDL_LockRWLockForWriting(rwlock);
         }
 
-        public static SDL_Bool SDL_TryLockRWLockForReading(SDL_RWLock* rwlock)
+        public static bool SDL_TryLockRWLockForReading(SDL_RWLock* rwlock)
         {
             return iSDL_TryLockRWLockForReading(rwlock);
         }
 
-        public static SDL_Bool SDL_TryLockRWLockForWriting(SDL_RWLock* rwlock)
+        public static bool SDL_TryLockRWLockForWriting(SDL_RWLock* rwlock)
         {
             return iSDL_TryLockRWLockForWriting(rwlock);
         }
@@ -80,12 +80,12 @@ namespace Engine.SDL3
             iSDL_WaitSemaphore(sem);
         }
 
-        public static SDL_Bool SDL_TryWaitSemaphore(SDL_Semaphore* sem)
+        public static bool SDL_TryWaitSemaphore(SDL_Semaphore* sem)
         {
             return iSDL_TryWaitSemaphore(sem);
         }
 
-        public static SDL_Bool SDL_WaitSemaphoreTimeout(SDL_Semaphore* sem, int timeoutMS)
+        public static bool SDL_WaitSemaphoreTimeout(SDL_Semaphore* sem, int timeoutMS)
         {
             return iSDL_WaitSemaphoreTimeout(sem, timeoutMS);
         }
@@ -125,22 +125,22 @@ namespace Engine.SDL3
             iSDL_WaitCondition(cond, mutex);
         }
 
-        public static SDL_Bool SDL_WaitConditionTimeout(SDL_Condition* cond, SDL_Mutex* mutex, int timeoutMS)
+        public static bool SDL_WaitConditionTimeout(SDL_Condition* cond, SDL_Mutex* mutex, int timeoutMS)
         {
             return iSDL_WaitConditionTimeout(cond, mutex, timeoutMS);
         }
 
-        public static SDL_Bool SDL_ShouldInit(SDL_InitState* state)
+        public static bool SDL_ShouldInit(SDL_InitState* state)
         {
             return iSDL_ShouldInit(state);
         }
 
-        public static SDL_Bool SDL_ShouldQuit(SDL_InitState* state)
+        public static bool SDL_ShouldQuit(SDL_InitState* state)
         {
             return iSDL_ShouldQuit(state);
         }
 
-        public static void SDL_SetInitialized(SDL_InitState* state, SDL_Bool initialized)
+        public static void SDL_SetInitialized(SDL_InitState* state, bool initialized)
         {
             iSDL_SetInitialized(state, initialized);
         }
