@@ -5,14 +5,14 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static ulong* SDL_GetTouchDevices(int* count)
+        public static ulong[] SDL_GetTouchDevices(out int count)
         {
-            return iSDL_GetTouchDevices(count);
+            return SDL_NativeToArray(iSDL_GetTouchDevices(null), out count);
         }
 
-        public static byte* SDL_GetTouchDeviceName(ulong touchID)
+        public static string SDL_GetTouchDeviceName(ulong touchID)
         {
-            return iSDL_GetTouchDeviceName(touchID);
+            return SDL_NativeToString(iSDL_GetTouchDeviceName(touchID));
         }
 
         public static SDL_TouchDeviceType SDL_GetTouchDeviceType(ulong touchID)
@@ -20,9 +20,9 @@ namespace Engine.SDL3
             return iSDL_GetTouchDeviceType(touchID);
         }
 
-        public static SDL_Finger** SDL_GetTouchFingers(ulong touchID, int* count)
+        public static SDL_Finger*[] SDL_GetTouchFingers(ulong touchID, out int count)
         {
-            return iSDL_GetTouchFingers(touchID, count);
+            return SDL_NativeToArray(iSDL_GetTouchFingers(touchID, null), out count);
         }
     }
 }
