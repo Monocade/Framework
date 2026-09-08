@@ -5,9 +5,12 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_Bool SDL_OpenURL(byte* url)
+        public static bool SDL_OpenURL(string url)
         {
-            return iSDL_OpenURL(url);
+            fixed (byte* ptr1 = SDL_StringToNative(url))
+            {
+                return iSDL_OpenURL(ptr1);
+            }
         }
     }
 }
