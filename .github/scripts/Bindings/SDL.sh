@@ -86,6 +86,8 @@ for file in "${FILES[@]}"; do
     --remap char=byte
     --remap Sint64=long
     --remap Uint64=ulong
+    --remap void*=IntPtr
+    --remap nuint=UIntPtr
     --remap bool=SDL_Bool
 
     --generate macro-bindings
