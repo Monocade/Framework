@@ -5,9 +5,13 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_PowerState SDL_GetPowerInfo(int* seconds, int* percent)
+        public static SDL_PowerState SDL_GetPowerInfo(out int seconds, out int percent)
         {
-            return iSDL_GetPowerInfo(seconds, percent);
+            fixed(int* ptr1 = &seconds)
+            fixed(int* ptr2 = &percent)
+            {
+                return iSDL_GetPowerInfo(ptr1, ptr2);
+            }
         }
     }
 }
