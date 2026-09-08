@@ -5,14 +5,14 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static uint* SDL_GetHaptics(int* count)
+        public static uint[] SDL_GetHaptics(out int count)
         {
-            return iSDL_GetHaptics(count);
+            return SDL_NativeToArray(iSDL_GetHaptics(null), out count);
         }
 
-        public static byte* SDL_GetHapticNameForID(uint instance_id)
+        public static string SDL_GetHapticNameForID(uint instance_id)
         {
-            return iSDL_GetHapticNameForID(instance_id);
+            return SDL_NativeToString(iSDL_GetHapticNameForID(instance_id));
         }
 
         public static SDL_Haptic* SDL_OpenHaptic(uint instance_id)
@@ -30,12 +30,12 @@ namespace Engine.SDL3
             return iSDL_GetHapticID(haptic);
         }
 
-        public static byte* SDL_GetHapticName(SDL_Haptic* haptic)
+        public static string SDL_GetHapticName(SDL_Haptic* haptic)
         {
-            return iSDL_GetHapticName(haptic);
+            return SDL_NativeToString(iSDL_GetHapticName(haptic));
         }
 
-        public static SDL_Bool SDL_IsMouseHaptic()
+        public static bool SDL_IsMouseHaptic()
         {
             return iSDL_IsMouseHaptic();
         }
@@ -45,7 +45,7 @@ namespace Engine.SDL3
             return iSDL_OpenHapticFromMouse();
         }
 
-        public static SDL_Bool SDL_IsJoystickHaptic(SDL_Joystick* joystick)
+        public static bool SDL_IsJoystickHaptic(SDL_Joystick* joystick)
         {
             return iSDL_IsJoystickHaptic(joystick);
         }
@@ -80,7 +80,7 @@ namespace Engine.SDL3
             return iSDL_GetNumHapticAxes(haptic);
         }
 
-        public static SDL_Bool SDL_HapticEffectSupported(SDL_Haptic* haptic, SDL_HapticEffect* effect)
+        public static bool SDL_HapticEffectSupported(SDL_Haptic* haptic, SDL_HapticEffect* effect)
         {
             return iSDL_HapticEffectSupported(haptic, effect);
         }
@@ -90,17 +90,17 @@ namespace Engine.SDL3
             return iSDL_CreateHapticEffect(haptic, effect);
         }
 
-        public static SDL_Bool SDL_UpdateHapticEffect(SDL_Haptic* haptic, int effect, SDL_HapticEffect* data)
+        public static bool SDL_UpdateHapticEffect(SDL_Haptic* haptic, int effect, SDL_HapticEffect* data)
         {
             return iSDL_UpdateHapticEffect(haptic, effect, data);
         }
 
-        public static SDL_Bool SDL_RunHapticEffect(SDL_Haptic* haptic, int effect, uint iterations)
+        public static bool SDL_RunHapticEffect(SDL_Haptic* haptic, int effect, uint iterations)
         {
             return iSDL_RunHapticEffect(haptic, effect, iterations);
         }
 
-        public static SDL_Bool SDL_StopHapticEffect(SDL_Haptic* haptic, int effect)
+        public static bool SDL_StopHapticEffect(SDL_Haptic* haptic, int effect)
         {
             return iSDL_StopHapticEffect(haptic, effect);
         }
@@ -110,52 +110,52 @@ namespace Engine.SDL3
             iSDL_DestroyHapticEffect(haptic, effect);
         }
 
-        public static SDL_Bool SDL_GetHapticEffectStatus(SDL_Haptic* haptic, int effect)
+        public static bool SDL_GetHapticEffectStatus(SDL_Haptic* haptic, int effect)
         {
             return iSDL_GetHapticEffectStatus(haptic, effect);
         }
 
-        public static SDL_Bool SDL_SetHapticGain(SDL_Haptic* haptic, int gain)
+        public static bool SDL_SetHapticGain(SDL_Haptic* haptic, int gain)
         {
             return iSDL_SetHapticGain(haptic, gain);
         }
 
-        public static SDL_Bool SDL_SetHapticAutocenter(SDL_Haptic* haptic, int autocenter)
+        public static bool SDL_SetHapticAutocenter(SDL_Haptic* haptic, int autocenter)
         {
             return iSDL_SetHapticAutocenter(haptic, autocenter);
         }
 
-        public static SDL_Bool SDL_PauseHaptic(SDL_Haptic* haptic)
+        public static bool SDL_PauseHaptic(SDL_Haptic* haptic)
         {
             return iSDL_PauseHaptic(haptic);
         }
 
-        public static SDL_Bool SDL_ResumeHaptic(SDL_Haptic* haptic)
+        public static bool SDL_ResumeHaptic(SDL_Haptic* haptic)
         {
             return iSDL_ResumeHaptic(haptic);
         }
 
-        public static SDL_Bool SDL_StopHapticEffects(SDL_Haptic* haptic)
+        public static bool SDL_StopHapticEffects(SDL_Haptic* haptic)
         {
             return iSDL_StopHapticEffects(haptic);
         }
 
-        public static SDL_Bool SDL_HapticRumbleSupported(SDL_Haptic* haptic)
+        public static bool SDL_HapticRumbleSupported(SDL_Haptic* haptic)
         {
             return iSDL_HapticRumbleSupported(haptic);
         }
 
-        public static SDL_Bool SDL_InitHapticRumble(SDL_Haptic* haptic)
+        public static bool SDL_InitHapticRumble(SDL_Haptic* haptic)
         {
             return iSDL_InitHapticRumble(haptic);
         }
 
-        public static SDL_Bool SDL_PlayHapticRumble(SDL_Haptic* haptic, float strength, uint length)
+        public static bool SDL_PlayHapticRumble(SDL_Haptic* haptic, float strength, uint length)
         {
             return iSDL_PlayHapticRumble(haptic, strength, length);
         }
 
-        public static SDL_Bool SDL_StopHapticRumble(SDL_Haptic* haptic)
+        public static bool SDL_StopHapticRumble(SDL_Haptic* haptic)
         {
             return iSDL_StopHapticRumble(haptic);
         }
