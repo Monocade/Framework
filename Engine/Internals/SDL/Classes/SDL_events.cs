@@ -10,17 +10,23 @@ namespace Engine.SDL3
             iSDL_PumpEvents();
         }
 
-        public static int SDL_PeepEvents(SDL_Event* events, int numevents, SDL_EventAction action, uint minType, uint maxType)
+        public static int SDL_PeepEvents(out SDL_Event[] events, int numevents, SDL_EventAction action, uint minType, uint maxType)
         {
-            return iSDL_PeepEvents(events, numevents, action, minType, maxType);
+            events = new SDL_Event[numevents];
+            {
+                fixed (SDL_Event* ptr1 = events)
+                {
+                    return iSDL_PeepEvents(ptr1, numevents, action, minType, maxType);
+                }
+            }
         }
 
-        public static SDL_Bool SDL_HasEvent(uint type)
+        public static bool SDL_HasEvent(uint type)
         {
             return iSDL_HasEvent(type);
         }
 
-        public static SDL_Bool SDL_HasEvents(uint minType, uint maxType)
+        public static bool SDL_HasEvents(uint minType, uint maxType)
         {
             return iSDL_HasEvents(minType, maxType);
         }
@@ -35,57 +41,72 @@ namespace Engine.SDL3
             iSDL_FlushEvents(minType, maxType);
         }
 
-        public static SDL_Bool SDL_PollEvent(SDL_Event* @event)
+        public static bool SDL_PollEvent(out SDL_Event @event)
         {
-            return iSDL_PollEvent(@event);
+            fixed (SDL_Event* ptr1 = &@event)
+            {
+                return iSDL_PollEvent(ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_WaitEvent(SDL_Event* @event)
+        public static bool SDL_WaitEvent(out SDL_Event @event)
         {
-            return iSDL_WaitEvent(@event);
+            fixed (SDL_Event* ptr1 = &@event)
+            {
+                return iSDL_WaitEvent(ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_WaitEventTimeout(SDL_Event* @event, int timeoutMS)
+        public static bool SDL_WaitEventTimeout(out SDL_Event @event, int timeoutMS)
         {
-            return iSDL_WaitEventTimeout(@event, timeoutMS);
+            fixed (SDL_Event* ptr1 = &@event)
+            {
+                return iSDL_WaitEventTimeout(ptr1, timeoutMS);
+            }
         }
 
-        public static SDL_Bool SDL_PushEvent(SDL_Event* @event)
+        public static bool SDL_PushEvent(SDL_Event* @event)
         {
             return iSDL_PushEvent(@event);
         }
 
-        public static void SDL_SetEventFilter(IntPtr filter, IntPtr userdata)
+        public static void SDL_SetEventFilter(SDL_EventFilter filter, IntPtr userdata)
         {
-            iSDL_SetEventFilter(filter, userdata);
+            iSDL_SetEventFilter(Marshal.GetFunctionPointerForDelegate(filter), userdata);
         }
 
-        public static SDL_Bool SDL_GetEventFilter(IntPtr* filter, IntPtr* userdata)
+        public static bool SDL_GetEventFilter(out SDL_EventFilter filter, out IntPtr userdata)
         {
-            return iSDL_GetEventFilter(filter, userdata);
+            IntPtr ptr1 = IntPtr.Zero;
+            fixed (IntPtr* ptr2 = &userdata)
+            {
+                var result = iSDL_GetEventFilter(&ptr1, ptr2);
+                filter = Marshal.GetDelegateForFunctionPointer<SDL_EventFilter>(ptr1);
+                return result;
+            }
         }
 
-        public static SDL_Bool SDL_AddEventWatch(IntPtr filter, IntPtr userdata)
+        public static bool SDL_AddEventWatch(SDL_EventFilter filter, IntPtr userdata)
         {
-            return iSDL_AddEventWatch(filter, userdata);
+            return iSDL_AddEventWatch(Marshal.GetFunctionPointerForDelegate(filter), userdata);
         }
 
-        public static void SDL_RemoveEventWatch(IntPtr filter, IntPtr userdata)
+        public static void SDL_RemoveEventWatch(SDL_EventFilter filter, IntPtr userdata)
         {
-            iSDL_RemoveEventWatch(filter, userdata);
+            iSDL_RemoveEventWatch(Marshal.GetFunctionPointerForDelegate(filter), userdata);
         }
 
-        public static void SDL_FilterEvents(IntPtr filter, IntPtr userdata)
+        public static void SDL_FilterEvents(SDL_EventFilter filter, IntPtr userdata)
         {
-            iSDL_FilterEvents(filter, userdata);
+            iSDL_FilterEvents(Marshal.GetFunctionPointerForDelegate(filter), userdata);
         }
 
-        public static void SDL_SetEventEnabled(uint type, SDL_Bool enabled)
+        public static void SDL_SetEventEnabled(uint type, bool enabled)
         {
             iSDL_SetEventEnabled(type, enabled);
         }
 
-        public static SDL_Bool SDL_EventEnabled(uint type)
+        public static bool SDL_EventEnabled(uint type)
         {
             return iSDL_EventEnabled(type);
         }
@@ -100,9 +121,12 @@ namespace Engine.SDL3
             return iSDL_GetWindowFromEvent(@event);
         }
 
-        public static int SDL_GetEventDescription(SDL_Event* @event, byte* buf, int buflen)
+        public static int SDL_GetEventDescription(SDL_Event* @event, string buf, int buflen)
         {
-            return iSDL_GetEventDescription(@event, buf, buflen);
+            fixed (byte* ptr1 = SDL_StringToNative(buf))
+            {
+                return iSDL_GetEventDescription(@event, ptr1, buflen);
+            }
         }
     }
 }
