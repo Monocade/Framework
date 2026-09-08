@@ -7,7 +7,7 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static T*[] SDL_PointerToArray<T>(T** ptr, out int count, bool free = true) where T : unmanaged
+        public static T*[] SDL_NativeToArray<T>(T** ptr, out int count, bool free = true) where T : unmanaged
         {
             count = 0;
 
@@ -41,7 +41,7 @@ namespace Engine.SDL3
             }
         }
         
-        public static T[] SDL_PointerToArray<T>(T* ptr, out int count, bool free = true) where T : unmanaged
+        public static T[] SDL_NativeToArray<T>(T* ptr, out int count, bool free = true) where T : unmanaged
         {
             count = 0;
 

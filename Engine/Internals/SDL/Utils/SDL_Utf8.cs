@@ -6,7 +6,7 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static string[] SDL_Utf8ToStringArray(byte** ptr, out int count, bool free = true)
+        public static string[] SDL_NativeToStringArray(byte** ptr, out int count, bool free = true)
         {
             count = 0;
 
@@ -26,7 +26,7 @@ namespace Engine.SDL3
 
                 for (int i = 0; i < count; i++)
                 {
-                    result[i] = SDL_Utf8ToString(ptr[i]);
+                    result[i] = SDL_NativeToString(ptr[i]);
                 }
 
                 return result;
@@ -40,7 +40,7 @@ namespace Engine.SDL3
             }
         }
         
-        public static string SDL_Utf8ToString(byte* ptr, bool free = false)
+        public static string SDL_NativeToString(byte* ptr, bool free = false)
         {
             if (ptr == null)
             {
@@ -60,7 +60,7 @@ namespace Engine.SDL3
             }
         }
 
-        public static byte[] SDL_StringToUtf8(string value)
+        public static byte[] SDL_StringToNative(string value)
         {
             return Encoding.UTF8.GetBytes((value ?? string.Empty) + '\0');
         }
