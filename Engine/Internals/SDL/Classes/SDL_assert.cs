@@ -28,7 +28,7 @@ namespace Engine.SDL3
         {
             fixed (IntPtr* ptr1 = &puserdata)
             {
-                return Marshal.GetDelegateForFunctionPointer<SDL_AssertionHandler>(iSDL_GetAssertionHandler((IntPtr*)ptr1));
+                return Marshal.GetDelegateForFunctionPointer<SDL_AssertionHandler>(iSDL_GetAssertionHandler(ptr1));
             }
         }
 
