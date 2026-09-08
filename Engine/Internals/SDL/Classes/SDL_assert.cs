@@ -5,24 +5,31 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_AssertState SDL_ReportAssertion(SDL_AssertData* data, byte* func, byte* file, int line)
+        public static SDL_AssertState SDL_ReportAssertion(SDL_AssertData* data, string func, string file, int line)
         {
-            return iSDL_ReportAssertion(data, func, file, line);
+            fixed (byte* ptr1 = SDL_StringToNative(func))
+            fixed (byte* ptr2 = SDL_StringToNative(file))
+            {
+                return iSDL_ReportAssertion(data, ptr1, ptr2, line);
+            }
         }
 
-        public static void SDL_SetAssertionHandler(IntPtr handler, IntPtr userdata)
+        public static void SDL_SetAssertionHandler(SDL_AssertionHandler handler, IntPtr userdata)
         {
-            iSDL_SetAssertionHandler(handler, userdata);
+            iSDL_SetAssertionHandler(Marshal.GetFunctionPointerForDelegate(handler), userdata);
         }
 
-        public static IntPtr SDL_GetDefaultAssertionHandler()
+        public static SDL_AssertionHandler SDL_GetDefaultAssertionHandler()
         {
-            return iSDL_GetDefaultAssertionHandler();
+            return Marshal.GetDelegateForFunctionPointer<SDL_AssertionHandler>(iSDL_GetDefaultAssertionHandler());
         }
 
-        public static IntPtr SDL_GetAssertionHandler(IntPtr* puserdata)
+        public static SDL_AssertionHandler SDL_GetAssertionHandler(out IntPtr puserdata)
         {
-            return iSDL_GetAssertionHandler(puserdata);
+            fixed (IntPtr* ptr1 = &puserdata)
+            {
+                return Marshal.GetDelegateForFunctionPointer<SDL_AssertionHandler>(iSDL_GetAssertionHandler((IntPtr*)ptr1));
+            }
         }
 
         public static SDL_AssertData* SDL_GetAssertionReport()
