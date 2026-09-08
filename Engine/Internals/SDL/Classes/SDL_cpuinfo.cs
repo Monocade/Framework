@@ -15,77 +15,77 @@ namespace Engine.SDL3
             return iSDL_GetCPUCacheLineSize();
         }
 
-        public static SDL_Bool SDL_HasAltiVec()
+        public static bool SDL_HasAltiVec()
         {
             return iSDL_HasAltiVec();
         }
 
-        public static SDL_Bool SDL_HasMMX()
+        public static bool SDL_HasMMX()
         {
             return iSDL_HasMMX();
         }
 
-        public static SDL_Bool SDL_HasSSE()
+        public static bool SDL_HasSSE()
         {
             return iSDL_HasSSE();
         }
 
-        public static SDL_Bool SDL_HasSSE2()
+        public static bool SDL_HasSSE2()
         {
             return iSDL_HasSSE2();
         }
 
-        public static SDL_Bool SDL_HasSSE3()
+        public static bool SDL_HasSSE3()
         {
             return iSDL_HasSSE3();
         }
 
-        public static SDL_Bool SDL_HasSSE41()
+        public static bool SDL_HasSSE41()
         {
             return iSDL_HasSSE41();
         }
 
-        public static SDL_Bool SDL_HasSSE42()
+        public static bool SDL_HasSSE42()
         {
             return iSDL_HasSSE42();
         }
 
-        public static SDL_Bool SDL_HasAVX()
+        public static bool SDL_HasAVX()
         {
             return iSDL_HasAVX();
         }
 
-        public static SDL_Bool SDL_HasAVX2()
+        public static bool SDL_HasAVX2()
         {
             return iSDL_HasAVX2();
         }
 
-        public static SDL_Bool SDL_HasAVX512F()
+        public static bool SDL_HasAVX512F()
         {
             return iSDL_HasAVX512F();
         }
 
-        public static SDL_Bool SDL_HasARMSIMD()
+        public static bool SDL_HasARMSIMD()
         {
             return iSDL_HasARMSIMD();
         }
 
-        public static SDL_Bool SDL_HasNEON()
+        public static bool SDL_HasNEON()
         {
             return iSDL_HasNEON();
         }
 
-        public static SDL_Bool SDL_HasSVE2()
+        public static bool SDL_HasSVE2()
         {
             return iSDL_HasSVE2();
         }
 
-        public static SDL_Bool SDL_HasLSX()
+        public static bool SDL_HasLSX()
         {
             return iSDL_HasLSX();
         }
 
-        public static SDL_Bool SDL_HasLASX()
+        public static bool SDL_HasLASX()
         {
             return iSDL_HasLASX();
         }
