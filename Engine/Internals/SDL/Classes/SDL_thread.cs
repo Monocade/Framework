@@ -5,9 +5,12 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_Thread* SDL_CreateThreadRuntime(IntPtr fn, byte* name, IntPtr data, IntPtr pfnBeginThread, IntPtr pfnEndThread)
+        public static SDL_Thread* SDL_CreateThreadRuntime(IntPtr fn, string name, IntPtr data, IntPtr pfnBeginThread, IntPtr pfnEndThread)
         {
-            return iSDL_CreateThreadRuntime(fn, name, data, pfnBeginThread, pfnEndThread);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_CreateThreadRuntime(fn, ptr1, data, pfnBeginThread, pfnEndThread);
+            }
         }
 
         public static SDL_Thread* SDL_CreateThreadWithPropertiesRuntime(uint props, IntPtr pfnBeginThread, IntPtr pfnEndThread)
@@ -15,9 +18,9 @@ namespace Engine.SDL3
             return iSDL_CreateThreadWithPropertiesRuntime(props, pfnBeginThread, pfnEndThread);
         }
 
-        public static byte* SDL_GetThreadName(SDL_Thread* thread)
+        public static string SDL_GetThreadName(SDL_Thread* thread)
         {
-            return iSDL_GetThreadName(thread);
+            return SDL_NativeToString(iSDL_GetThreadName(thread));
         }
 
         public static ulong SDL_GetCurrentThreadID()
@@ -30,14 +33,17 @@ namespace Engine.SDL3
             return iSDL_GetThreadID(thread);
         }
 
-        public static SDL_Bool SDL_SetCurrentThreadPriority(SDL_ThreadPriority priority)
+        public static bool SDL_SetCurrentThreadPriority(SDL_ThreadPriority priority)
         {
             return iSDL_SetCurrentThreadPriority(priority);
         }
 
-        public static void SDL_WaitThread(SDL_Thread* thread, int* status)
+        public static void SDL_WaitThread(SDL_Thread* thread, out int status)
         {
-            iSDL_WaitThread(thread, status);
+            fixed (int* ptr1 = &status)
+            {
+                iSDL_WaitThread(thread, ptr1);
+            }
         }
 
         public static SDL_ThreadState SDL_GetThreadState(SDL_Thread* thread)
@@ -55,9 +61,9 @@ namespace Engine.SDL3
             return iSDL_GetTLS(id);
         }
 
-        public static SDL_Bool SDL_SetTLS(SDL_AtomicInt* id, IntPtr value, IntPtr destructor)
+        public static bool SDL_SetTLS(SDL_AtomicInt* id, IntPtr value, SDL_TLSDestructorCallback destructor)
         {
-            return iSDL_SetTLS(id, value, destructor);
+            return iSDL_SetTLS(id, value, Marshal.GetFunctionPointerForDelegate(destructor));
         }
 
         public static void SDL_CleanupTLS()
