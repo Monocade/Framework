@@ -15,12 +15,12 @@ namespace Engine.SDL3
             return iSDL_CreateProperties();
         }
 
-        public static SDL_Bool SDL_CopyProperties(uint src, uint dst)
+        public static bool SDL_CopyProperties(uint src, uint dst)
         {
             return iSDL_CopyProperties(src, dst);
         }
 
-        public static SDL_Bool SDL_LockProperties(uint props)
+        public static bool SDL_LockProperties(uint props)
         {
             return iSDL_LockProperties(props);
         }
@@ -30,74 +30,118 @@ namespace Engine.SDL3
             iSDL_UnlockProperties(props);
         }
 
-        public static SDL_Bool SDL_SetPointerPropertyWithCleanup(uint props, byte* name, IntPtr value, IntPtr cleanup, IntPtr userdata)
+        public static bool SDL_SetPointerPropertyWithCleanup(uint props, string name, IntPtr value, SDL_CleanupPropertyCallback cleanup, IntPtr userdata)
         {
-            return iSDL_SetPointerPropertyWithCleanup(props, name, value, cleanup, userdata);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_SetPointerPropertyWithCleanup(props, ptr1, value, Marshal.GetFunctionPointerForDelegate(cleanup), userdata);
+            }
         }
 
-        public static SDL_Bool SDL_SetPointerProperty(uint props, byte* name, IntPtr value)
+        public static bool SDL_SetPointerProperty(uint props, string name, IntPtr value)
         {
-            return iSDL_SetPointerProperty(props, name, value);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_SetPointerProperty(props, ptr1, value);
+            }
         }
 
-        public static SDL_Bool SDL_SetStringProperty(uint props, byte* name, byte* value)
+        public static bool SDL_SetStringProperty(uint props, string name, string value)
         {
-            return iSDL_SetStringProperty(props, name, value);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            fixed (byte* ptr2 = SDL_StringToNative(value))
+            {
+                return iSDL_SetStringProperty(props, ptr1, ptr2);
+            }
         }
 
-        public static SDL_Bool SDL_SetNumberProperty(uint props, byte* name, long value)
+        public static bool SDL_SetNumberProperty(uint props, string name, long value)
         {
-            return iSDL_SetNumberProperty(props, name, value);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_SetNumberProperty(props, ptr1, value);
+            }
         }
 
-        public static SDL_Bool SDL_SetFloatProperty(uint props, byte* name, float value)
+        public static bool SDL_SetFloatProperty(uint props, string name, float value)
         {
-            return iSDL_SetFloatProperty(props, name, value);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_SetFloatProperty(props, ptr1, value);
+            }
         }
 
-        public static SDL_Bool SDL_SetBooleanProperty(uint props, byte* name, SDL_Bool value)
+        public static bool SDL_SetBooleanProperty(uint props, string name, bool value)
         {
-            return iSDL_SetBooleanProperty(props, name, value);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_SetBooleanProperty(props, ptr1, value);
+            }
         }
 
-        public static SDL_Bool SDL_HasProperty(uint props, byte* name)
+        public static bool SDL_HasProperty(uint props, string name)
         {
-            return iSDL_HasProperty(props, name);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_HasProperty(props, ptr1);
+            }
         }
 
-        public static SDL_PropertyType SDL_GetPropertyType(uint props, byte* name)
+        public static SDL_PropertyType SDL_GetPropertyType(uint props, string name)
         {
-            return iSDL_GetPropertyType(props, name);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_GetPropertyType(props, ptr1);
+            }
         }
 
-        public static IntPtr SDL_GetPointerProperty(uint props, byte* name, IntPtr default_value)
+        public static IntPtr SDL_GetPointerProperty(uint props, string name, IntPtr default_value)
         {
-            return iSDL_GetPointerProperty(props, name, default_value);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_GetPointerProperty(props, ptr1, default_value);
+            }
         }
 
-        public static byte* SDL_GetStringProperty(uint props, byte* name, byte* default_value)
+        public static string SDL_GetStringProperty(uint props, string name, string default_value)
         {
-            return iSDL_GetStringProperty(props, name, default_value);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            fixed (byte* ptr2 = SDL_StringToNative(default_value))
+            {
+                return SDL_NativeToString(iSDL_GetStringProperty(props, ptr1, ptr2));
+            }
         }
 
-        public static long SDL_GetNumberProperty(uint props, byte* name, long default_value)
+        public static long SDL_GetNumberProperty(uint props, string name, long default_value)
         {
-            return iSDL_GetNumberProperty(props, name, default_value);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_GetNumberProperty(props, ptr1, default_value);
+            }
         }
 
-        public static float SDL_GetFloatProperty(uint props, byte* name, float default_value)
+        public static float SDL_GetFloatProperty(uint props, string name, float default_value)
         {
-            return iSDL_GetFloatProperty(props, name, default_value);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_GetFloatProperty(props, ptr1, default_value);
+            }
         }
 
-        public static SDL_Bool SDL_GetBooleanProperty(uint props, byte* name, SDL_Bool default_value)
+        public static bool SDL_GetBooleanProperty(uint props, string name, bool default_value)
         {
-            return iSDL_GetBooleanProperty(props, name, default_value);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_GetBooleanProperty(props, ptr1, default_value);
+            }
         }
 
-        public static SDL_Bool SDL_ClearProperty(uint props, byte* name)
+        public static bool SDL_ClearProperty(uint props, string name)
         {
-            return iSDL_ClearProperty(props, name);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_ClearProperty(props, ptr1);
+            }
         }
 
         public static int SDL_GetNumProperties(uint props)
@@ -105,9 +149,9 @@ namespace Engine.SDL3
             return iSDL_GetNumProperties(props);
         }
 
-        public static SDL_Bool SDL_EnumerateProperties(uint props, IntPtr callback, IntPtr userdata)
+        public static bool SDL_EnumerateProperties(uint props, SDL_EnumeratePropertiesCallback callback, IntPtr userdata)
         {
-            return iSDL_EnumerateProperties(props, callback, userdata);
+            return iSDL_EnumerateProperties(props, Marshal.GetFunctionPointerForDelegate(callback), userdata);
         }
 
         public static void SDL_DestroyProperties(uint props)
