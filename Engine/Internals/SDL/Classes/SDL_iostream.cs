@@ -5,9 +5,13 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_IOStream* SDL_IOFromFile(byte* file, byte* mode)
+        public static SDL_IOStream* SDL_IOFromFile(string file, string mode)
         {
-            return iSDL_IOFromFile(file, mode);
+            fixed (byte* ptr1 = SDL_StringToNative(file))
+            fixed (byte* ptr2 = SDL_StringToNative(mode))
+            {
+                return iSDL_IOFromFile(ptr1, ptr2);
+            }
         }
 
         public static SDL_IOStream* SDL_IOFromMem(IntPtr mem, nuint size)
@@ -30,7 +34,7 @@ namespace Engine.SDL3
             return iSDL_OpenIO(iface, userdata);
         }
 
-        public static SDL_Bool SDL_CloseIO(SDL_IOStream* context)
+        public static bool SDL_CloseIO(SDL_IOStream* context)
         {
             return iSDL_CloseIO(context);
         }
@@ -70,177 +74,236 @@ namespace Engine.SDL3
             return iSDL_WriteIO(context, ptr, size);
         }
 
-        public static nuint SDL_IOprintf(SDL_IOStream* context, byte* fmt)
+        public static nuint SDL_IOprintf(SDL_IOStream* context, string fmt)
         {
-            return iSDL_IOprintf(context, fmt);
+            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            {
+                return iSDL_IOprintf(context, ptr1);
+            }
         }
 
-        public static nuint SDL_IOvprintf(SDL_IOStream* context, byte* fmt, byte* ap)
+        public static nuint SDL_IOvprintf(SDL_IOStream* context, string fmt, string ap)
         {
-            return iSDL_IOvprintf(context, fmt, ap);
+            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            fixed (byte* ptr2 = SDL_StringToNative(ap))
+            {
+                return iSDL_IOvprintf(context, ptr1, ptr2);
+            }
         }
 
-        public static SDL_Bool SDL_FlushIO(SDL_IOStream* context)
+        public static bool SDL_FlushIO(SDL_IOStream* context)
         {
             return iSDL_FlushIO(context);
         }
 
-        public static IntPtr SDL_LoadFile_IO(SDL_IOStream* src, nuint* datasize, SDL_Bool closeio)
+        public static IntPtr SDL_LoadFile_IO(SDL_IOStream* src, out UIntPtr datasize, bool closeio)
         {
-            return iSDL_LoadFile_IO(src, datasize, closeio);
+            fixed (UIntPtr* ptr1 = &datasize)
+            {
+                return iSDL_LoadFile_IO(src, ptr1, closeio);
+            }
         }
 
-        public static IntPtr SDL_LoadFile(byte* file, nuint* datasize)
+        public static IntPtr SDL_LoadFile(string file, out UIntPtr datasize)
         {
-            return iSDL_LoadFile(file, datasize);
+            fixed (byte* ptr1 = SDL_StringToNative(file))
+            fixed (UIntPtr* ptr2 = &datasize)
+            {
+                return iSDL_LoadFile(ptr1, ptr2);
+            }
         }
 
-        public static SDL_Bool SDL_SaveFile_IO(SDL_IOStream* src, IntPtr data, nuint datasize, SDL_Bool closeio)
+        public static bool SDL_SaveFile_IO(SDL_IOStream* src, IntPtr data, nuint datasize, bool closeio)
         {
             return iSDL_SaveFile_IO(src, data, datasize, closeio);
         }
 
-        public static SDL_Bool SDL_SaveFile(byte* file, IntPtr data, nuint datasize)
+        public static bool SDL_SaveFile(string file, IntPtr data, nuint datasize)
         {
-            return iSDL_SaveFile(file, data, datasize);
+            fixed (byte* ptr1 = SDL_StringToNative(file))
+            {
+                return iSDL_SaveFile(ptr1, data, datasize);
+            }
         }
 
-        public static SDL_Bool SDL_ReadU8(SDL_IOStream* src, byte* value)
+        public static bool SDL_ReadU8(SDL_IOStream* src, out byte value)
         {
-            return iSDL_ReadU8(src, value);
+            fixed (byte* ptr1 = &value)
+            {
+                return iSDL_ReadU8(src, ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_ReadS8(SDL_IOStream* src, sbyte* value)
+        public static bool SDL_ReadS8(SDL_IOStream* src, out sbyte value)
         {
-            return iSDL_ReadS8(src, value);
+            fixed (sbyte* ptr1 = &value)
+            {
+                return iSDL_ReadS8(src, ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_ReadU16LE(SDL_IOStream* src, ushort* value)
+        public static bool SDL_ReadU16LE(SDL_IOStream* src, out ushort value)
         {
-            return iSDL_ReadU16LE(src, value);
+            fixed (ushort* ptr1 = &value)
+            {
+                return iSDL_ReadU16LE(src, ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_ReadS16LE(SDL_IOStream* src, short* value)
+        public static bool SDL_ReadS16LE(SDL_IOStream* src, out short value)
         {
-            return iSDL_ReadS16LE(src, value);
+            fixed (short* ptr1 = &value)
+            {
+                return iSDL_ReadS16LE(src, ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_ReadU16BE(SDL_IOStream* src, ushort* value)
+        public static bool SDL_ReadU16BE(SDL_IOStream* src, out ushort value)
         {
-            return iSDL_ReadU16BE(src, value);
+            fixed (ushort* ptr1 = &value)
+            {
+                return iSDL_ReadU16BE(src, ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_ReadS16BE(SDL_IOStream* src, short* value)
+        public static bool SDL_ReadS16BE(SDL_IOStream* src, out short value)
         {
-            return iSDL_ReadS16BE(src, value);
+            fixed (short* ptr1 = &value)
+            {
+                return iSDL_ReadS16BE(src, ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_ReadU32LE(SDL_IOStream* src, uint* value)
+        public static bool SDL_ReadU32LE(SDL_IOStream* src, out uint value)
         {
-            return iSDL_ReadU32LE(src, value);
+            fixed (uint* ptr1 = &value)
+            {
+                return iSDL_ReadU32LE(src, ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_ReadS32LE(SDL_IOStream* src, int* value)
+        public static bool SDL_ReadS32LE(SDL_IOStream* src, out int value)
         {
-            return iSDL_ReadS32LE(src, value);
+            fixed (int* ptr1 = &value)
+            {
+                return iSDL_ReadS32LE(src, ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_ReadU32BE(SDL_IOStream* src, uint* value)
+        public static bool SDL_ReadU32BE(SDL_IOStream* src, out uint value)
         {
-            return iSDL_ReadU32BE(src, value);
+            fixed (uint* ptr1 = &value)
+            {
+                return iSDL_ReadU32BE(src, ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_ReadS32BE(SDL_IOStream* src, int* value)
+        public static bool SDL_ReadS32BE(SDL_IOStream* src, out int value)
         {
-            return iSDL_ReadS32BE(src, value);
+            fixed (int* ptr1 = &value)
+            {
+                return iSDL_ReadS32BE(src, ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_ReadU64LE(SDL_IOStream* src, ulong* value)
+        public static bool SDL_ReadU64LE(SDL_IOStream* src, out ulong value)
         {
-            return iSDL_ReadU64LE(src, value);
+            fixed (ulong* ptr1 = &value)
+            {
+                return iSDL_ReadU64LE(src, ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_ReadS64LE(SDL_IOStream* src, long* value)
+        public static bool SDL_ReadS64LE(SDL_IOStream* src, out long value)
         {
-            return iSDL_ReadS64LE(src, value);
+            fixed (long* ptr1 = &value)
+            {
+                return iSDL_ReadS64LE(src, ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_ReadU64BE(SDL_IOStream* src, ulong* value)
+        public static bool SDL_ReadU64BE(SDL_IOStream* src, out ulong value)
         {
-            return iSDL_ReadU64BE(src, value);
+            fixed (ulong* ptr1 = &value)
+            {
+                return iSDL_ReadU64BE(src, ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_ReadS64BE(SDL_IOStream* src, long* value)
+        public static bool SDL_ReadS64BE(SDL_IOStream* src, out long value)
         {
-            return iSDL_ReadS64BE(src, value);
+            fixed (long* ptr1 = &value)
+            {
+                return iSDL_ReadS64BE(src, ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_WriteU8(SDL_IOStream* dst, byte value)
+        public static bool SDL_WriteU8(SDL_IOStream* dst, byte value)
         {
             return iSDL_WriteU8(dst, value);
         }
 
-        public static SDL_Bool SDL_WriteS8(SDL_IOStream* dst, sbyte value)
+        public static bool SDL_WriteS8(SDL_IOStream* dst, sbyte value)
         {
             return iSDL_WriteS8(dst, value);
         }
 
-        public static SDL_Bool SDL_WriteU16LE(SDL_IOStream* dst, ushort value)
+        public static bool SDL_WriteU16LE(SDL_IOStream* dst, ushort value)
         {
             return iSDL_WriteU16LE(dst, value);
         }
 
-        public static SDL_Bool SDL_WriteS16LE(SDL_IOStream* dst, short value)
+        public static bool SDL_WriteS16LE(SDL_IOStream* dst, short value)
         {
             return iSDL_WriteS16LE(dst, value);
         }
 
-        public static SDL_Bool SDL_WriteU16BE(SDL_IOStream* dst, ushort value)
+        public static bool SDL_WriteU16BE(SDL_IOStream* dst, ushort value)
         {
             return iSDL_WriteU16BE(dst, value);
         }
 
-        public static SDL_Bool SDL_WriteS16BE(SDL_IOStream* dst, short value)
+        public static bool SDL_WriteS16BE(SDL_IOStream* dst, short value)
         {
             return iSDL_WriteS16BE(dst, value);
         }
 
-        public static SDL_Bool SDL_WriteU32LE(SDL_IOStream* dst, uint value)
+        public static bool SDL_WriteU32LE(SDL_IOStream* dst, uint value)
         {
             return iSDL_WriteU32LE(dst, value);
         }
 
-        public static SDL_Bool SDL_WriteS32LE(SDL_IOStream* dst, int value)
+        public static bool SDL_WriteS32LE(SDL_IOStream* dst, int value)
         {
             return iSDL_WriteS32LE(dst, value);
         }
 
-        public static SDL_Bool SDL_WriteU32BE(SDL_IOStream* dst, uint value)
+        public static bool SDL_WriteU32BE(SDL_IOStream* dst, uint value)
         {
             return iSDL_WriteU32BE(dst, value);
         }
 
-        public static SDL_Bool SDL_WriteS32BE(SDL_IOStream* dst, int value)
+        public static bool SDL_WriteS32BE(SDL_IOStream* dst, int value)
         {
             return iSDL_WriteS32BE(dst, value);
         }
 
-        public static SDL_Bool SDL_WriteU64LE(SDL_IOStream* dst, ulong value)
+        public static bool SDL_WriteU64LE(SDL_IOStream* dst, ulong value)
         {
             return iSDL_WriteU64LE(dst, value);
         }
 
-        public static SDL_Bool SDL_WriteS64LE(SDL_IOStream* dst, long value)
+        public static bool SDL_WriteS64LE(SDL_IOStream* dst, long value)
         {
             return iSDL_WriteS64LE(dst, value);
         }
 
-        public static SDL_Bool SDL_WriteU64BE(SDL_IOStream* dst, ulong value)
+        public static bool SDL_WriteU64BE(SDL_IOStream* dst, ulong value)
         {
             return iSDL_WriteU64BE(dst, value);
         }
 
-        public static SDL_Bool SDL_WriteS64BE(SDL_IOStream* dst, long value)
+        public static bool SDL_WriteS64BE(SDL_IOStream* dst, long value)
         {
             return iSDL_WriteS64BE(dst, value);
         }
