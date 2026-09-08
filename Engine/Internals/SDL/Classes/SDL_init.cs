@@ -5,12 +5,12 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_Bool SDL_Init(uint flags)
+        public static bool SDL_Init(uint flags)
         {
             return iSDL_Init(flags);
         }
 
-        public static SDL_Bool SDL_InitSubSystem(uint flags)
+        public static bool SDL_InitSubSystem(uint flags)
         {
             return iSDL_InitSubSystem(flags);
         }
@@ -30,29 +30,41 @@ namespace Engine.SDL3
             iSDL_Quit();
         }
 
-        public static SDL_Bool SDL_IsMainThread()
+        public static bool SDL_IsMainThread()
         {
             return iSDL_IsMainThread();
         }
 
-        public static SDL_Bool SDL_RunOnMainThread(IntPtr callback, IntPtr userdata, SDL_Bool wait_complete)
+        public static bool SDL_RunOnMainThread(SDL_MainThreadCallback callback, IntPtr userdata, bool wait_complete)
         {
-            return iSDL_RunOnMainThread(callback, userdata, wait_complete);
+            return iSDL_RunOnMainThread(Marshal.GetFunctionPointerForDelegate(callback), userdata, wait_complete);
         }
 
-        public static SDL_Bool SDL_SetAppMetadata(byte* appname, byte* appversion, byte* appidentifier)
+        public static bool SDL_SetAppMetadata(string appname, string appversion, string appidentifier)
         {
-            return iSDL_SetAppMetadata(appname, appversion, appidentifier);
+            fixed (byte* ptr1 = SDL_StringToNative(appname))
+            fixed (byte* ptr2 = SDL_StringToNative(appversion))
+            fixed (byte* ptr3 = SDL_StringToNative(appidentifier))
+            {
+                return iSDL_SetAppMetadata(ptr1, ptr2, ptr3);
+            }
         }
 
-        public static SDL_Bool SDL_SetAppMetadataProperty(byte* name, byte* value)
+        public static bool SDL_SetAppMetadataProperty(string name, string value)
         {
-            return iSDL_SetAppMetadataProperty(name, value);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            fixed (byte* ptr2 = SDL_StringToNative(value))
+            {
+                return iSDL_SetAppMetadataProperty(ptr1, ptr2);
+            }
         }
 
-        public static byte* SDL_GetAppMetadataProperty(byte* name)
+        public static string SDL_GetAppMetadataProperty(string name)
         {
-            return iSDL_GetAppMetadataProperty(name);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return SDL_NativeToString(iSDL_GetAppMetadataProperty(ptr1));
+            }
         }
     }
 }
