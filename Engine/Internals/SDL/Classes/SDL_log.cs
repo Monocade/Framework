@@ -25,74 +25,113 @@ namespace Engine.SDL3
             iSDL_ResetLogPriorities();
         }
 
-        public static SDL_Bool SDL_SetLogPriorityPrefix(SDL_LogPriority priority, byte* prefix)
+        public static bool SDL_SetLogPriorityPrefix(SDL_LogPriority priority, string prefix)
         {
-            return iSDL_SetLogPriorityPrefix(priority, prefix);
+            fixed (byte* ptr1 = SDL_StringToNative(prefix))
+            {
+                return iSDL_SetLogPriorityPrefix(priority, ptr1);
+            }
         }
 
-        public static void SDL_Log(byte* fmt)
+        public static void SDL_Log(string fmt)
         {
-            iSDL_Log(fmt);
+            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            {
+                iSDL_Log(ptr1);
+            }
         }
 
-        public static void SDL_LogTrace(int category, byte* fmt)
+        public static void SDL_LogTrace(int category, string fmt)
         {
-            iSDL_LogTrace(category, fmt);
+            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            {
+                iSDL_LogTrace(category, ptr1);
+            }
         }
 
-        public static void SDL_LogVerbose(int category, byte* fmt)
+        public static void SDL_LogVerbose(int category, string fmt)
         {
-            iSDL_LogVerbose(category, fmt);
+            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            {
+                iSDL_LogVerbose(category, ptr1);
+            }
         }
 
-        public static void SDL_LogDebug(int category, byte* fmt)
+        public static void SDL_LogDebug(int category, string fmt)
         {
-            iSDL_LogDebug(category, fmt);
+            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            {
+                iSDL_LogDebug(category, ptr1);
+            }
         }
 
-        public static void SDL_LogInfo(int category, byte* fmt)
+        public static void SDL_LogInfo(int category, string fmt)
         {
-            iSDL_LogInfo(category, fmt);
+            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            {
+                iSDL_LogInfo(category, ptr1);
+            }
         }
 
-        public static void SDL_LogWarn(int category, byte* fmt)
+        public static void SDL_LogWarn(int category, string fmt)
         {
-            iSDL_LogWarn(category, fmt);
+            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            {
+                iSDL_LogWarn(category, ptr1);
+            }
         }
 
-        public static void SDL_LogError(int category, byte* fmt)
+        public static void SDL_LogError(int category, string fmt)
         {
-            iSDL_LogError(category, fmt);
+            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            {
+                iSDL_LogError(category, ptr1);
+            }
         }
 
-        public static void SDL_LogCritical(int category, byte* fmt)
+        public static void SDL_LogCritical(int category, string fmt)
         {
-            iSDL_LogCritical(category, fmt);
+            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            {
+                iSDL_LogCritical(category, ptr1);
+            }
         }
 
-        public static void SDL_LogMessage(int category, SDL_LogPriority priority, byte* fmt)
+        public static void SDL_LogMessage(int category, SDL_LogPriority priority, string fmt)
         {
-            iSDL_LogMessage(category, priority, fmt);
+            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            {
+                iSDL_LogMessage(category, priority, ptr1);
+            }
         }
 
-        public static void SDL_LogMessageV(int category, SDL_LogPriority priority, byte* fmt, byte* ap)
+        public static void SDL_LogMessageV(int category, SDL_LogPriority priority, string fmt, string ap)
         {
-            iSDL_LogMessageV(category, priority, fmt, ap);
+            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            fixed (byte* ptr2 = SDL_StringToNative(ap))
+            {
+                iSDL_LogMessageV(category, priority, ptr1, ptr2);
+            }
         }
 
-        public static IntPtr SDL_GetDefaultLogOutputFunction()
+        public static SDL_LogOutputFunction SDL_GetDefaultLogOutputFunction()
         {
-            return iSDL_GetDefaultLogOutputFunction();
+            return Marshal.GetDelegateForFunctionPointer<SDL_LogOutputFunction>(iSDL_GetDefaultLogOutputFunction());
         }
 
-        public static void SDL_GetLogOutputFunction(IntPtr* callback, IntPtr* userdata)
+        public static void SDL_GetLogOutputFunction(out SDL_LogOutputFunction callback, out IntPtr userdata)
         {
-            iSDL_GetLogOutputFunction(callback, userdata);
+            IntPtr ptr1 = IntPtr.Zero;
+            fixed (IntPtr* ptr2 = &userdata)
+            {
+                iSDL_GetLogOutputFunction(&ptr1, ptr2);
+                callback = Marshal.GetDelegateForFunctionPointer<SDL_LogOutputFunction>(ptr1);
+            }
         }
 
-        public static void SDL_SetLogOutputFunction(IntPtr callback, IntPtr userdata)
+        public static void SDL_SetLogOutputFunction(SDL_LogOutputFunction callback, IntPtr userdata)
         {
-            iSDL_SetLogOutputFunction(callback, userdata);
+            iSDL_SetLogOutputFunction(Marshal.GetFunctionPointerForDelegate(callback), userdata);
         }
     }
 }
