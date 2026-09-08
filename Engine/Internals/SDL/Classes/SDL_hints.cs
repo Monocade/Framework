@@ -5,19 +5,30 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_Bool SDL_SetHintWithPriority(byte* name, byte* value, SDL_HintPriority priority)
+        public static bool SDL_SetHintWithPriority(string name, string value, SDL_HintPriority priority)
         {
-            return iSDL_SetHintWithPriority(name, value, priority);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            fixed (byte* ptr2 = SDL_StringToNative(value))
+            {
+                return iSDL_SetHintWithPriority(ptr1, ptr2, priority);
+            }
         }
 
-        public static SDL_Bool SDL_SetHint(byte* name, byte* value)
+        public static bool SDL_SetHint(string name, string value)
         {
-            return iSDL_SetHint(name, value);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            fixed (byte* ptr2 = SDL_StringToNative(value))
+            {
+                return iSDL_SetHint(ptr1, ptr2);
+            }
         }
 
-        public static SDL_Bool SDL_ResetHint(byte* name)
+        public static bool SDL_ResetHint(string name)
         {
-            return iSDL_ResetHint(name);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_ResetHint(ptr1);
+            }
         }
 
         public static void SDL_ResetHints()
@@ -25,24 +36,36 @@ namespace Engine.SDL3
             iSDL_ResetHints();
         }
 
-        public static byte* SDL_GetHint(byte* name)
+        public static string SDL_GetHint(string name)
         {
-            return iSDL_GetHint(name);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return SDL_NativeToString(iSDL_GetHint(ptr1));
+            }
         }
 
-        public static SDL_Bool SDL_GetHintBoolean(byte* name, SDL_Bool default_value)
+        public static bool SDL_GetHintBoolean(string name, bool default_value)
         {
-            return iSDL_GetHintBoolean(name, default_value);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_GetHintBoolean(ptr1, default_value);
+            }
         }
 
-        public static SDL_Bool SDL_AddHintCallback(byte* name, IntPtr callback, IntPtr userdata)
+        public static bool SDL_AddHintCallback(string name, SDL_HintCallback callback, IntPtr userdata)
         {
-            return iSDL_AddHintCallback(name, callback, userdata);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                return iSDL_AddHintCallback(ptr1, Marshal.GetFunctionPointerForDelegate(callback), userdata);
+            }
         }
 
-        public static void SDL_RemoveHintCallback(byte* name, IntPtr callback, IntPtr userdata)
+        public static void SDL_RemoveHintCallback(string name, SDL_HintCallback callback, IntPtr userdata)
         {
-            iSDL_RemoveHintCallback(name, callback, userdata);
+            fixed (byte* ptr1 = SDL_StringToNative(name))
+            {
+                iSDL_RemoveHintCallback(ptr1, Marshal.GetFunctionPointerForDelegate(callback), userdata);
+            }
         }
     }
 }
