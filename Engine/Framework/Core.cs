@@ -1,35 +1,13 @@
 ﻿using System;
+using Engine.SDL3;
 
 namespace Engine
 {
-    public class Core
+    public unsafe class Core
     {
-        private bool IsRunning;
-        
         public void Run()
         {
-            if (!IsRunning)
-            {
-                IsRunning = true;
-                {
-                    Main();
-                }
-            }
-        }
-
-        private void Main()
-        {
-            while (IsRunning)
-            {
-                Console.WriteLine("Running");
-            }
             
-            Exit();
-        }
-
-        private void Exit()
-        {
-            IsRunning = false;
         }
     }
 }
