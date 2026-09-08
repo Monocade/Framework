@@ -5,19 +5,29 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_Storage* SDL_OpenTitleStorage(byte* @override, uint props)
+        public static SDL_Storage* SDL_OpenTitleStorage(string @override, uint props)
         {
-            return iSDL_OpenTitleStorage(@override, props);
+            fixed (byte* ptr1 = SDL_StringToNative(@override))
+            {
+                return iSDL_OpenTitleStorage(@ptr1, props);
+            }
         }
 
-        public static SDL_Storage* SDL_OpenUserStorage(byte* org, byte* app, uint props)
+        public static SDL_Storage* SDL_OpenUserStorage(string org, string app, uint props)
         {
-            return iSDL_OpenUserStorage(org, app, props);
+            fixed (byte* ptr1 = SDL_StringToNative(org))
+            fixed (byte* ptr2 = SDL_StringToNative(app))
+            {
+                return iSDL_OpenUserStorage(ptr1, ptr2, props);
+            }
         }
 
-        public static SDL_Storage* SDL_OpenFileStorage(byte* path)
+        public static SDL_Storage* SDL_OpenFileStorage(string path)
         {
-            return iSDL_OpenFileStorage(path);
+            fixed (byte* ptr1 = SDL_StringToNative(path))
+            {
+                return iSDL_OpenFileStorage(ptr1);
+            }
         }
 
         public static SDL_Storage* SDL_OpenStorage(SDL_StorageInterface* iface, IntPtr userdata)
@@ -25,59 +35,90 @@ namespace Engine.SDL3
             return iSDL_OpenStorage(iface, userdata);
         }
 
-        public static SDL_Bool SDL_CloseStorage(SDL_Storage* storage)
+        public static bool SDL_CloseStorage(SDL_Storage* storage)
         {
             return iSDL_CloseStorage(storage);
         }
 
-        public static SDL_Bool SDL_StorageReady(SDL_Storage* storage)
+        public static bool SDL_StorageReady(SDL_Storage* storage)
         {
             return iSDL_StorageReady(storage);
         }
 
-        public static SDL_Bool SDL_GetStorageFileSize(SDL_Storage* storage, byte* path, ulong* length)
+        public static bool SDL_GetStorageFileSize(SDL_Storage* storage, string path, out ulong length)
         {
-            return iSDL_GetStorageFileSize(storage, path, length);
+            fixed (byte* ptr1 = SDL_StringToNative(path))
+            fixed (ulong* ptr2 = &length)
+            {
+                return iSDL_GetStorageFileSize(storage, ptr1, ptr2);
+            }
         }
 
-        public static SDL_Bool SDL_ReadStorageFile(SDL_Storage* storage, byte* path, IntPtr destination, ulong length)
+        public static bool SDL_ReadStorageFile(SDL_Storage* storage, string path, IntPtr destination, ulong length)
         {
-            return iSDL_ReadStorageFile(storage, path, destination, length);
+            fixed (byte* ptr1 = SDL_StringToNative(path))
+            {
+                return iSDL_ReadStorageFile(storage, ptr1, destination, length);
+            }
         }
 
-        public static SDL_Bool SDL_WriteStorageFile(SDL_Storage* storage, byte* path, IntPtr source, ulong length)
+        public static bool SDL_WriteStorageFile(SDL_Storage* storage, string path, IntPtr source, ulong length)
         {
-            return iSDL_WriteStorageFile(storage, path, source, length);
+            fixed (byte* ptr1 = SDL_StringToNative(path))
+            {
+                return iSDL_WriteStorageFile(storage, ptr1, source, length);
+            }
         }
 
-        public static SDL_Bool SDL_CreateStorageDirectory(SDL_Storage* storage, byte* path)
+        public static bool SDL_CreateStorageDirectory(SDL_Storage* storage, string path)
         {
-            return iSDL_CreateStorageDirectory(storage, path);
+            fixed (byte* ptr1 = SDL_StringToNative(path))
+            {
+                return iSDL_CreateStorageDirectory(storage, ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_EnumerateStorageDirectory(SDL_Storage* storage, byte* path, IntPtr callback, IntPtr userdata)
+        public static bool SDL_EnumerateStorageDirectory(SDL_Storage* storage, string path, SDL_EnumerateDirectoryCallback callback, IntPtr userdata)
         {
-            return iSDL_EnumerateStorageDirectory(storage, path, callback, userdata);
+            fixed (byte* ptr1 = SDL_StringToNative(path))
+            {
+                return iSDL_EnumerateStorageDirectory(storage, ptr1, Marshal.GetFunctionPointerForDelegate(callback), userdata);
+            }
         }
 
-        public static SDL_Bool SDL_RemoveStoragePath(SDL_Storage* storage, byte* path)
+        public static bool SDL_RemoveStoragePath(SDL_Storage* storage, string path)
         {
-            return iSDL_RemoveStoragePath(storage, path);
+            fixed (byte* ptr1 = SDL_StringToNative(path))
+            {
+                return iSDL_RemoveStoragePath(storage, ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_RenameStoragePath(SDL_Storage* storage, byte* oldpath, byte* newpath)
+        public static bool SDL_RenameStoragePath(SDL_Storage* storage, string oldpath, string newpath)
         {
-            return iSDL_RenameStoragePath(storage, oldpath, newpath);
+            fixed (byte* ptr1 = SDL_StringToNative(oldpath))
+            fixed (byte* ptr2 = SDL_StringToNative(newpath))
+            {
+                return iSDL_RenameStoragePath(storage, ptr1, ptr2);
+            }
         }
 
-        public static SDL_Bool SDL_CopyStorageFile(SDL_Storage* storage, byte* oldpath, byte* newpath)
+        public static bool SDL_CopyStorageFile(SDL_Storage* storage, string oldpath, string newpath)
         {
-            return iSDL_CopyStorageFile(storage, oldpath, newpath);
+            fixed (byte* ptr1 = SDL_StringToNative(oldpath))
+            fixed (byte* ptr2 = SDL_StringToNative(newpath))
+            {
+                return iSDL_CopyStorageFile(storage, ptr1, ptr2);
+            }
         }
 
-        public static SDL_Bool SDL_GetStoragePathInfo(SDL_Storage* storage, byte* path, SDL_PathInfo* info)
+        public static bool SDL_GetStoragePathInfo(SDL_Storage* storage, string path, out SDL_PathInfo info)
         {
-            return iSDL_GetStoragePathInfo(storage, path, info);
+            fixed (byte* ptr1 = SDL_StringToNative(path))
+            fixed (SDL_PathInfo* ptr2 = &info)
+            {
+                return iSDL_GetStoragePathInfo(storage, ptr1, ptr2);
+            }
         }
 
         public static ulong SDL_GetStorageSpaceRemaining(SDL_Storage* storage)
@@ -85,9 +126,13 @@ namespace Engine.SDL3
             return iSDL_GetStorageSpaceRemaining(storage);
         }
 
-        public static byte** SDL_GlobStorageDirectory(SDL_Storage* storage, byte* path, byte* pattern, uint flags, int* count)
+        public static string[] SDL_GlobStorageDirectory(SDL_Storage* storage, string path, string pattern, uint flags, out int count)
         {
-            return iSDL_GlobStorageDirectory(storage, path, pattern, flags, count);
+            fixed (byte* ptr1 = SDL_StringToNative(path))
+            fixed (byte* ptr2 = SDL_StringToNative(pattern))
+            {
+                return SDL_NativeToStringArray(iSDL_GlobStorageDirectory(storage, ptr1, ptr2, flags, null), out count);
+            }
         }
     }
 }
