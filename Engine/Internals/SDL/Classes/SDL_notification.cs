@@ -5,7 +5,7 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_Bool SDL_RequestNotificationPermission()
+        public static bool SDL_RequestNotificationPermission()
         {
             return iSDL_RequestNotificationPermission();
         }
@@ -15,12 +15,17 @@ namespace Engine.SDL3
             return iSDL_ShowNotificationWithProperties(props);
         }
 
-        public static uint SDL_ShowNotification(byte* title, byte* message, SDL_Surface* image, SDL_NotificationAction* actions, int num_actions)
+        public static uint SDL_ShowNotification(string title, string message, SDL_Surface* image, SDL_NotificationAction[] actions, int num_actions)
         {
-            return iSDL_ShowNotification(title, message, image, actions, num_actions);
+            fixed (byte* ptr1 = SDL_StringToNative(title))
+            fixed (byte* ptr2 = SDL_StringToNative(message))
+            fixed (SDL_NotificationAction* ptr3 = actions)
+            {
+                return iSDL_ShowNotification(ptr1, ptr2, image, ptr3, num_actions);
+            }
         }
 
-        public static SDL_Bool SDL_RemoveNotification(uint notification)
+        public static bool SDL_RemoveNotification(uint notification)
         {
             return iSDL_RemoveNotification(notification);
         }
