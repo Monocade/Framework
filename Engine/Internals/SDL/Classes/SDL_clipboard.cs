@@ -68,11 +68,11 @@ namespace Engine.SDL3
             }
         }
 
-        public static IntPtr SDL_GetClipboardMimeTypes(out UIntPtr num_mime_types)
+        public static string[] SDL_GetClipboardMimeTypes(out UIntPtr num_mime_types)
         {
             fixed (nuint* ptr1 = &num_mime_types)
             {
-                return (IntPtr)iSDL_GetClipboardMimeTypes(ptr1);
+                return SDL_NativeToStringArray(iSDL_GetClipboardMimeTypes(ptr1), out _);
             }
         }
     }
