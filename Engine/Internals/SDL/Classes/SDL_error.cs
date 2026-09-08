@@ -5,27 +5,34 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_Bool SDL_SetError(byte* fmt)
+        public static bool SDL_SetError(string fmt)
         {
-            return iSDL_SetError(fmt);
+            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            {
+                return iSDL_SetError(ptr1);
+            }
         }
 
-        public static SDL_Bool SDL_SetErrorV(byte* fmt, byte* ap)
+        public static bool SDL_SetErrorV(string fmt, string ap)
         {
-            return iSDL_SetErrorV(fmt, ap);
+            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            fixed (byte* ptr2 = SDL_StringToNative(ap))
+            {
+                return iSDL_SetErrorV(ptr1, ptr2);
+            }
         }
 
-        public static SDL_Bool SDL_OutOfMemory()
+        public static bool SDL_OutOfMemory()
         {
             return iSDL_OutOfMemory();
         }
 
-        public static byte* SDL_GetError()
+        public static string SDL_GetError()
         {
-            return iSDL_GetError();
+            return SDL_NativeToString(iSDL_GetError());
         }
 
-        public static SDL_Bool SDL_ClearError()
+        public static bool SDL_ClearError()
         {
             return iSDL_ClearError();
         }
