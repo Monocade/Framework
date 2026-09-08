@@ -360,7 +360,7 @@ namespace Engine.SDL3
             return iSDL_SetGamepadLED(gamepad, red, green, blue);
         }
 
-        public static SDL_Bool SDL_SendGamepadEffect(SDL_Gamepad* gamepad, void* data, int size)
+        public static SDL_Bool SDL_SendGamepadEffect(SDL_Gamepad* gamepad, IntPtr data, int size)
         {
             return iSDL_SendGamepadEffect(gamepad, data, size);
         }

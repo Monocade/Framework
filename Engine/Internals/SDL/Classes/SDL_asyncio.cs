@@ -15,17 +15,17 @@ namespace Engine.SDL3
             return iSDL_GetAsyncIOSize(asyncio);
         }
 
-        public static SDL_Bool SDL_ReadAsyncIO(SDL_AsyncIO* asyncio, void* ptr, ulong offset, ulong size, SDL_AsyncIOQueue* queue, void* userdata)
+        public static SDL_Bool SDL_ReadAsyncIO(SDL_AsyncIO* asyncio, IntPtr ptr, ulong offset, ulong size, SDL_AsyncIOQueue* queue, IntPtr userdata)
         {
             return iSDL_ReadAsyncIO(asyncio, ptr, offset, size, queue, userdata);
         }
 
-        public static SDL_Bool SDL_WriteAsyncIO(SDL_AsyncIO* asyncio, void* ptr, ulong offset, ulong size, SDL_AsyncIOQueue* queue, void* userdata)
+        public static SDL_Bool SDL_WriteAsyncIO(SDL_AsyncIO* asyncio, IntPtr ptr, ulong offset, ulong size, SDL_AsyncIOQueue* queue, IntPtr userdata)
         {
             return iSDL_WriteAsyncIO(asyncio, ptr, offset, size, queue, userdata);
         }
 
-        public static SDL_Bool SDL_CloseAsyncIO(SDL_AsyncIO* asyncio, SDL_Bool flush, SDL_AsyncIOQueue* queue, void* userdata)
+        public static SDL_Bool SDL_CloseAsyncIO(SDL_AsyncIO* asyncio, SDL_Bool flush, SDL_AsyncIOQueue* queue, IntPtr userdata)
         {
             return iSDL_CloseAsyncIO(asyncio, flush, queue, userdata);
         }
@@ -55,7 +55,7 @@ namespace Engine.SDL3
             iSDL_SignalAsyncIOQueue(queue);
         }
 
-        public static SDL_Bool SDL_LoadFileAsync(byte* file, SDL_AsyncIOQueue* queue, void* userdata)
+        public static SDL_Bool SDL_LoadFileAsync(byte* file, SDL_AsyncIOQueue* queue, IntPtr userdata)
         {
             return iSDL_LoadFileAsync(file, queue, userdata);
         }

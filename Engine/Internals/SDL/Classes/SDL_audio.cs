@@ -175,22 +175,22 @@ namespace Engine.SDL3
             return iSDL_SetAudioStreamOutputChannelMap(stream, chmap, count);
         }
 
-        public static SDL_Bool SDL_PutAudioStreamData(SDL_AudioStream* stream, void* buf, int len)
+        public static SDL_Bool SDL_PutAudioStreamData(SDL_AudioStream* stream, IntPtr buf, int len)
         {
             return iSDL_PutAudioStreamData(stream, buf, len);
         }
 
-        public static SDL_Bool SDL_PutAudioStreamDataNoCopy(SDL_AudioStream* stream, void* buf, int len, IntPtr callback, void* userdata)
+        public static SDL_Bool SDL_PutAudioStreamDataNoCopy(SDL_AudioStream* stream, IntPtr buf, int len, IntPtr callback, IntPtr userdata)
         {
             return iSDL_PutAudioStreamDataNoCopy(stream, buf, len, callback, userdata);
         }
 
-        public static SDL_Bool SDL_PutAudioStreamPlanarData(SDL_AudioStream* stream, void** channel_buffers, int num_channels, int num_samples)
+        public static SDL_Bool SDL_PutAudioStreamPlanarData(SDL_AudioStream* stream, IntPtr* channel_buffers, int num_channels, int num_samples)
         {
             return iSDL_PutAudioStreamPlanarData(stream, channel_buffers, num_channels, num_samples);
         }
 
-        public static int SDL_GetAudioStreamData(SDL_AudioStream* stream, void* buf, int len)
+        public static int SDL_GetAudioStreamData(SDL_AudioStream* stream, IntPtr buf, int len)
         {
             return iSDL_GetAudioStreamData(stream, buf, len);
         }
@@ -240,12 +240,12 @@ namespace Engine.SDL3
             return iSDL_UnlockAudioStream(stream);
         }
 
-        public static SDL_Bool SDL_SetAudioStreamGetCallback(SDL_AudioStream* stream, IntPtr callback, void* userdata)
+        public static SDL_Bool SDL_SetAudioStreamGetCallback(SDL_AudioStream* stream, IntPtr callback, IntPtr userdata)
         {
             return iSDL_SetAudioStreamGetCallback(stream, callback, userdata);
         }
 
-        public static SDL_Bool SDL_SetAudioStreamPutCallback(SDL_AudioStream* stream, IntPtr callback, void* userdata)
+        public static SDL_Bool SDL_SetAudioStreamPutCallback(SDL_AudioStream* stream, IntPtr callback, IntPtr userdata)
         {
             return iSDL_SetAudioStreamPutCallback(stream, callback, userdata);
         }
@@ -255,12 +255,12 @@ namespace Engine.SDL3
             iSDL_DestroyAudioStream(stream);
         }
 
-        public static SDL_AudioStream* SDL_OpenAudioDeviceStream(uint devid, SDL_AudioSpec* spec, IntPtr callback, void* userdata)
+        public static SDL_AudioStream* SDL_OpenAudioDeviceStream(uint devid, SDL_AudioSpec* spec, IntPtr callback, IntPtr userdata)
         {
             return iSDL_OpenAudioDeviceStream(devid, spec, callback, userdata);
         }
 
-        public static SDL_Bool SDL_SetAudioPostmixCallback(uint devid, IntPtr callback, void* userdata)
+        public static SDL_Bool SDL_SetAudioPostmixCallback(uint devid, IntPtr callback, IntPtr userdata)
         {
             return iSDL_SetAudioPostmixCallback(devid, callback, userdata);
         }

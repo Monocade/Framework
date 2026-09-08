@@ -5,7 +5,7 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static void SDL_SetX11EventHook(IntPtr callback, void* userdata)
+        public static void SDL_SetX11EventHook(IntPtr callback, IntPtr userdata)
         {
             iSDL_SetX11EventHook(callback, userdata);
         }

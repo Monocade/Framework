@@ -40,12 +40,12 @@ namespace Engine.SDL3
             iSDL_DelayPrecise(ns);
         }
 
-        public static uint SDL_AddTimer(uint interval, IntPtr callback, void* userdata)
+        public static uint SDL_AddTimer(uint interval, IntPtr callback, IntPtr userdata)
         {
             return iSDL_AddTimer(interval, callback, userdata);
         }
 
-        public static uint SDL_AddTimerNS(ulong interval, IntPtr callback, void* userdata)
+        public static uint SDL_AddTimerNS(ulong interval, IntPtr callback, IntPtr userdata)
         {
             return iSDL_AddTimerNS(interval, callback, userdata);
         }

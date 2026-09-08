@@ -5,7 +5,7 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_Thread* SDL_CreateThreadRuntime(IntPtr fn, byte* name, void* data, IntPtr pfnBeginThread, IntPtr pfnEndThread)
+        public static SDL_Thread* SDL_CreateThreadRuntime(IntPtr fn, byte* name, IntPtr data, IntPtr pfnBeginThread, IntPtr pfnEndThread)
         {
             return iSDL_CreateThreadRuntime(fn, name, data, pfnBeginThread, pfnEndThread);
         }
@@ -50,12 +50,12 @@ namespace Engine.SDL3
             iSDL_DetachThread(thread);
         }
 
-        public static void* SDL_GetTLS(SDL_AtomicInt* id)
+        public static IntPtr SDL_GetTLS(SDL_AtomicInt* id)
         {
             return iSDL_GetTLS(id);
         }
 
-        public static SDL_Bool SDL_SetTLS(SDL_AtomicInt* id, void* value, IntPtr destructor)
+        public static SDL_Bool SDL_SetTLS(SDL_AtomicInt* id, IntPtr value, IntPtr destructor)
         {
             return iSDL_SetTLS(id, value, destructor);
         }

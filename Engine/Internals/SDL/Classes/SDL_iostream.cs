@@ -10,12 +10,12 @@ namespace Engine.SDL3
             return iSDL_IOFromFile(file, mode);
         }
 
-        public static SDL_IOStream* SDL_IOFromMem(void* mem, nuint size)
+        public static SDL_IOStream* SDL_IOFromMem(IntPtr mem, nuint size)
         {
             return iSDL_IOFromMem(mem, size);
         }
 
-        public static SDL_IOStream* SDL_IOFromConstMem(void* mem, nuint size)
+        public static SDL_IOStream* SDL_IOFromConstMem(IntPtr mem, nuint size)
         {
             return iSDL_IOFromConstMem(mem, size);
         }
@@ -25,7 +25,7 @@ namespace Engine.SDL3
             return iSDL_IOFromDynamicMem();
         }
 
-        public static SDL_IOStream* SDL_OpenIO(SDL_IOStreamInterface* iface, void* userdata)
+        public static SDL_IOStream* SDL_OpenIO(SDL_IOStreamInterface* iface, IntPtr userdata)
         {
             return iSDL_OpenIO(iface, userdata);
         }
@@ -60,12 +60,12 @@ namespace Engine.SDL3
             return iSDL_TellIO(context);
         }
 
-        public static nuint SDL_ReadIO(SDL_IOStream* context, void* ptr, nuint size)
+        public static nuint SDL_ReadIO(SDL_IOStream* context, IntPtr ptr, nuint size)
         {
             return iSDL_ReadIO(context, ptr, size);
         }
 
-        public static nuint SDL_WriteIO(SDL_IOStream* context, void* ptr, nuint size)
+        public static nuint SDL_WriteIO(SDL_IOStream* context, IntPtr ptr, nuint size)
         {
             return iSDL_WriteIO(context, ptr, size);
         }
@@ -85,22 +85,22 @@ namespace Engine.SDL3
             return iSDL_FlushIO(context);
         }
 
-        public static void* SDL_LoadFile_IO(SDL_IOStream* src, nuint* datasize, SDL_Bool closeio)
+        public static IntPtr SDL_LoadFile_IO(SDL_IOStream* src, nuint* datasize, SDL_Bool closeio)
         {
             return iSDL_LoadFile_IO(src, datasize, closeio);
         }
 
-        public static void* SDL_LoadFile(byte* file, nuint* datasize)
+        public static IntPtr SDL_LoadFile(byte* file, nuint* datasize)
         {
             return iSDL_LoadFile(file, datasize);
         }
 
-        public static SDL_Bool SDL_SaveFile_IO(SDL_IOStream* src, void* data, nuint datasize, SDL_Bool closeio)
+        public static SDL_Bool SDL_SaveFile_IO(SDL_IOStream* src, IntPtr data, nuint datasize, SDL_Bool closeio)
         {
             return iSDL_SaveFile_IO(src, data, datasize, closeio);
         }
 
-        public static SDL_Bool SDL_SaveFile(byte* file, void* data, nuint datasize)
+        public static SDL_Bool SDL_SaveFile(byte* file, IntPtr data, nuint datasize)
         {
             return iSDL_SaveFile(file, data, datasize);
         }

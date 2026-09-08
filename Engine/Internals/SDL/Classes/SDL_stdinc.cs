@@ -7,18 +7,18 @@ namespace Engine.SDL3
     {
         // Missing due to ClangSharp generator
         [DllImport("SDL3", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SDL_memcpy", ExactSpelling = true)]
-        private static extern void* iSDL_memcpy(void* dst, void* src, nuint len);
-        public static void* SDL_memcpy(void* dst, void* src, nuint len)
+        private static extern IntPtr iSDL_memcpy(IntPtr dst, IntPtr src, nuint len);
+        public static IntPtr SDL_memcpy(IntPtr dst, IntPtr src, nuint len)
         {
             return iSDL_memcpy(dst, src, len);
         }
         
-        public static void* SDL_malloc(nuint size)
+        public static IntPtr SDL_malloc(nuint size)
         {
             return iSDL_malloc(size);
         }
         
-        public static void SDL_free(void* mem)
+        public static void SDL_free(IntPtr mem)
         {
             iSDL_free(mem);
         }

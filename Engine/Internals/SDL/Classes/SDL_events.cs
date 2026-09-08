@@ -55,27 +55,27 @@ namespace Engine.SDL3
             return iSDL_PushEvent(@event);
         }
 
-        public static void SDL_SetEventFilter(IntPtr filter, void* userdata)
+        public static void SDL_SetEventFilter(IntPtr filter, IntPtr userdata)
         {
             iSDL_SetEventFilter(filter, userdata);
         }
 
-        public static SDL_Bool SDL_GetEventFilter(IntPtr* filter, void** userdata)
+        public static SDL_Bool SDL_GetEventFilter(IntPtr* filter, IntPtr* userdata)
         {
             return iSDL_GetEventFilter(filter, userdata);
         }
 
-        public static SDL_Bool SDL_AddEventWatch(IntPtr filter, void* userdata)
+        public static SDL_Bool SDL_AddEventWatch(IntPtr filter, IntPtr userdata)
         {
             return iSDL_AddEventWatch(filter, userdata);
         }
 
-        public static void SDL_RemoveEventWatch(IntPtr filter, void* userdata)
+        public static void SDL_RemoveEventWatch(IntPtr filter, IntPtr userdata)
         {
             iSDL_RemoveEventWatch(filter, userdata);
         }
 
-        public static void SDL_FilterEvents(IntPtr filter, void* userdata)
+        public static void SDL_FilterEvents(IntPtr filter, IntPtr userdata)
         {
             iSDL_FilterEvents(filter, userdata);
         }

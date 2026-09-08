@@ -35,7 +35,7 @@ namespace Engine.SDL3
             return iSDL_IsMainThread();
         }
 
-        public static SDL_Bool SDL_RunOnMainThread(IntPtr callback, void* userdata, SDL_Bool wait_complete)
+        public static SDL_Bool SDL_RunOnMainThread(IntPtr callback, IntPtr userdata, SDL_Bool wait_complete)
         {
             return iSDL_RunOnMainThread(callback, userdata, wait_complete);
         }

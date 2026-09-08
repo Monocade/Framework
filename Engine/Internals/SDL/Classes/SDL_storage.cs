@@ -20,7 +20,7 @@ namespace Engine.SDL3
             return iSDL_OpenFileStorage(path);
         }
 
-        public static SDL_Storage* SDL_OpenStorage(SDL_StorageInterface* iface, void* userdata)
+        public static SDL_Storage* SDL_OpenStorage(SDL_StorageInterface* iface, IntPtr userdata)
         {
             return iSDL_OpenStorage(iface, userdata);
         }
@@ -40,12 +40,12 @@ namespace Engine.SDL3
             return iSDL_GetStorageFileSize(storage, path, length);
         }
 
-        public static SDL_Bool SDL_ReadStorageFile(SDL_Storage* storage, byte* path, void* destination, ulong length)
+        public static SDL_Bool SDL_ReadStorageFile(SDL_Storage* storage, byte* path, IntPtr destination, ulong length)
         {
             return iSDL_ReadStorageFile(storage, path, destination, length);
         }
 
-        public static SDL_Bool SDL_WriteStorageFile(SDL_Storage* storage, byte* path, void* source, ulong length)
+        public static SDL_Bool SDL_WriteStorageFile(SDL_Storage* storage, byte* path, IntPtr source, ulong length)
         {
             return iSDL_WriteStorageFile(storage, path, source, length);
         }
@@ -55,7 +55,7 @@ namespace Engine.SDL3
             return iSDL_CreateStorageDirectory(storage, path);
         }
 
-        public static SDL_Bool SDL_EnumerateStorageDirectory(SDL_Storage* storage, byte* path, IntPtr callback, void* userdata)
+        public static SDL_Bool SDL_EnumerateStorageDirectory(SDL_Storage* storage, byte* path, IntPtr callback, IntPtr userdata)
         {
             return iSDL_EnumerateStorageDirectory(storage, path, callback, userdata);
         }

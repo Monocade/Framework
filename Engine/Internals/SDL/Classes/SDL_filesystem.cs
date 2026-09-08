@@ -25,7 +25,7 @@ namespace Engine.SDL3
             return iSDL_CreateDirectory(path);
         }
 
-        public static SDL_Bool SDL_EnumerateDirectory(byte* path, IntPtr callback, void* userdata)
+        public static SDL_Bool SDL_EnumerateDirectory(byte* path, IntPtr callback, IntPtr userdata)
         {
             return iSDL_EnumerateDirectory(path, callback, userdata);
         }

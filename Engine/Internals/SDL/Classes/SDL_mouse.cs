@@ -50,7 +50,7 @@ namespace Engine.SDL3
             return iSDL_WarpMouseGlobal(x, y);
         }
 
-        public static SDL_Bool SDL_SetRelativeMouseTransform(IntPtr callback, void* userdata)
+        public static SDL_Bool SDL_SetRelativeMouseTransform(IntPtr callback, IntPtr userdata)
         {
             return iSDL_SetRelativeMouseTransform(callback, userdata);
         }

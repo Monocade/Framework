@@ -10,7 +10,7 @@ namespace Engine.SDL3
             return iSDL_ReportAssertion(data, func, file, line);
         }
 
-        public static void SDL_SetAssertionHandler(IntPtr handler, void* userdata)
+        public static void SDL_SetAssertionHandler(IntPtr handler, IntPtr userdata)
         {
             iSDL_SetAssertionHandler(handler, userdata);
         }
@@ -20,7 +20,7 @@ namespace Engine.SDL3
             return iSDL_GetDefaultAssertionHandler();
         }
 
-        public static IntPtr SDL_GetAssertionHandler(void** puserdata)
+        public static IntPtr SDL_GetAssertionHandler(IntPtr* puserdata)
         {
             return iSDL_GetAssertionHandler(puserdata);
         }

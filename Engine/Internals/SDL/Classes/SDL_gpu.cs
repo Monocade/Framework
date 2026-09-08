@@ -155,17 +155,17 @@ namespace Engine.SDL3
             return iSDL_AcquireGPUCommandBuffer(device);
         }
 
-        public static void SDL_PushGPUVertexUniformData(SDL_GPUCommandBuffer* command_buffer, uint slot_index, void* data, uint length)
+        public static void SDL_PushGPUVertexUniformData(SDL_GPUCommandBuffer* command_buffer, uint slot_index, IntPtr data, uint length)
         {
             iSDL_PushGPUVertexUniformData(command_buffer, slot_index, data, length);
         }
 
-        public static void SDL_PushGPUFragmentUniformData(SDL_GPUCommandBuffer* command_buffer, uint slot_index, void* data, uint length)
+        public static void SDL_PushGPUFragmentUniformData(SDL_GPUCommandBuffer* command_buffer, uint slot_index, IntPtr data, uint length)
         {
             iSDL_PushGPUFragmentUniformData(command_buffer, slot_index, data, length);
         }
 
-        public static void SDL_PushGPUComputeUniformData(SDL_GPUCommandBuffer* command_buffer, uint slot_index, void* data, uint length)
+        public static void SDL_PushGPUComputeUniformData(SDL_GPUCommandBuffer* command_buffer, uint slot_index, IntPtr data, uint length)
         {
             iSDL_PushGPUComputeUniformData(command_buffer, slot_index, data, length);
         }
@@ -305,7 +305,7 @@ namespace Engine.SDL3
             iSDL_EndGPUComputePass(compute_pass);
         }
 
-        public static void* SDL_MapGPUTransferBuffer(SDL_GPUDevice* device, SDL_GPUTransferBuffer* transfer_buffer, SDL_Bool cycle)
+        public static IntPtr SDL_MapGPUTransferBuffer(SDL_GPUDevice* device, SDL_GPUTransferBuffer* transfer_buffer, SDL_Bool cycle)
         {
             return iSDL_MapGPUTransferBuffer(device, transfer_buffer, cycle);
         }

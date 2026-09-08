@@ -30,12 +30,12 @@ namespace Engine.SDL3
             iSDL_UnlockProperties(props);
         }
 
-        public static SDL_Bool SDL_SetPointerPropertyWithCleanup(uint props, byte* name, void* value, IntPtr cleanup, void* userdata)
+        public static SDL_Bool SDL_SetPointerPropertyWithCleanup(uint props, byte* name, IntPtr value, IntPtr cleanup, IntPtr userdata)
         {
             return iSDL_SetPointerPropertyWithCleanup(props, name, value, cleanup, userdata);
         }
 
-        public static SDL_Bool SDL_SetPointerProperty(uint props, byte* name, void* value)
+        public static SDL_Bool SDL_SetPointerProperty(uint props, byte* name, IntPtr value)
         {
             return iSDL_SetPointerProperty(props, name, value);
         }
@@ -70,7 +70,7 @@ namespace Engine.SDL3
             return iSDL_GetPropertyType(props, name);
         }
 
-        public static void* SDL_GetPointerProperty(uint props, byte* name, void* default_value)
+        public static IntPtr SDL_GetPointerProperty(uint props, byte* name, IntPtr default_value)
         {
             return iSDL_GetPointerProperty(props, name, default_value);
         }
@@ -105,7 +105,7 @@ namespace Engine.SDL3
             return iSDL_GetNumProperties(props);
         }
 
-        public static SDL_Bool SDL_EnumerateProperties(uint props, IntPtr callback, void* userdata)
+        public static SDL_Bool SDL_EnumerateProperties(uint props, IntPtr callback, IntPtr userdata)
         {
             return iSDL_EnumerateProperties(props, callback, userdata);
         }

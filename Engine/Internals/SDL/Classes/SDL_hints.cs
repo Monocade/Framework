@@ -35,12 +35,12 @@ namespace Engine.SDL3
             return iSDL_GetHintBoolean(name, default_value);
         }
 
-        public static SDL_Bool SDL_AddHintCallback(byte* name, IntPtr callback, void* userdata)
+        public static SDL_Bool SDL_AddHintCallback(byte* name, IntPtr callback, IntPtr userdata)
         {
             return iSDL_AddHintCallback(name, callback, userdata);
         }
 
-        public static void SDL_RemoveHintCallback(byte* name, IntPtr callback, void* userdata)
+        public static void SDL_RemoveHintCallback(byte* name, IntPtr callback, IntPtr userdata)
         {
             iSDL_RemoveHintCallback(name, callback, userdata);
         }

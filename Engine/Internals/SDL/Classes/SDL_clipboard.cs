@@ -35,7 +35,7 @@ namespace Engine.SDL3
             return iSDL_HasPrimarySelectionText();
         }
 
-        public static SDL_Bool SDL_SetClipboardData(IntPtr callback, IntPtr cleanup, void* userdata, byte** mime_types, nuint num_mime_types)
+        public static SDL_Bool SDL_SetClipboardData(IntPtr callback, IntPtr cleanup, IntPtr userdata, byte** mime_types, nuint num_mime_types)
         {
             return iSDL_SetClipboardData(callback, cleanup, userdata, mime_types, num_mime_types);
         }
@@ -45,7 +45,7 @@ namespace Engine.SDL3
             return iSDL_ClearClipboardData();
         }
 
-        public static void* SDL_GetClipboardData(byte* mime_type, nuint* size)
+        public static IntPtr SDL_GetClipboardData(byte* mime_type, nuint* size)
         {
             return iSDL_GetClipboardData(mime_type, size);
         }

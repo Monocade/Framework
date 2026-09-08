@@ -125,7 +125,7 @@ namespace Engine.SDL3
             return iSDL_GetWindowFullscreenMode(window);
         }
 
-        public static void* SDL_GetWindowICCProfile(SDL_Window* window, nuint* size)
+        public static IntPtr SDL_GetWindowICCProfile(SDL_Window* window, nuint* size)
         {
             return iSDL_GetWindowICCProfile(window, size);
         }
@@ -420,7 +420,7 @@ namespace Engine.SDL3
             return iSDL_ShowWindowSystemMenu(window, x, y);
         }
 
-        public static SDL_Bool SDL_SetWindowHitTest(SDL_Window* window, IntPtr callback, void* callback_data)
+        public static SDL_Bool SDL_SetWindowHitTest(SDL_Window* window, IntPtr callback, IntPtr callback_data)
         {
             return iSDL_SetWindowHitTest(window, callback, callback_data);
         }
@@ -535,22 +535,22 @@ namespace Engine.SDL3
             return iSDL_GL_GetCurrentContext();
         }
 
-        public static void* SDL_EGL_GetCurrentDisplay()
+        public static IntPtr SDL_EGL_GetCurrentDisplay()
         {
             return iSDL_EGL_GetCurrentDisplay();
         }
 
-        public static void* SDL_EGL_GetCurrentConfig()
+        public static IntPtr SDL_EGL_GetCurrentConfig()
         {
             return iSDL_EGL_GetCurrentConfig();
         }
 
-        public static void* SDL_EGL_GetWindowSurface(SDL_Window* window)
+        public static IntPtr SDL_EGL_GetWindowSurface(SDL_Window* window)
         {
             return iSDL_EGL_GetWindowSurface(window);
         }
 
-        public static void SDL_EGL_SetAttributeCallbacks(IntPtr platformAttribCallback, IntPtr surfaceAttribCallback, IntPtr contextAttribCallback, void* userdata)
+        public static void SDL_EGL_SetAttributeCallbacks(IntPtr platformAttribCallback, IntPtr surfaceAttribCallback, IntPtr contextAttribCallback, IntPtr userdata)
         {
             iSDL_EGL_SetAttributeCallbacks(platformAttribCallback, surfaceAttribCallback, contextAttribCallback, userdata);
         }

@@ -175,7 +175,7 @@ namespace Engine.SDL3
             return iSDL_GetTextureScaleMode(texture, scaleMode);
         }
 
-        public static SDL_Bool SDL_UpdateTexture(SDL_Texture* texture, SDL_Rect* rect, void* pixels, int pitch)
+        public static SDL_Bool SDL_UpdateTexture(SDL_Texture* texture, SDL_Rect* rect, IntPtr pixels, int pitch)
         {
             return iSDL_UpdateTexture(texture, rect, pixels, pitch);
         }
@@ -190,7 +190,7 @@ namespace Engine.SDL3
             return iSDL_UpdateNVTexture(texture, rect, Yplane, Ypitch, UVplane, UVpitch);
         }
 
-        public static SDL_Bool SDL_LockTexture(SDL_Texture* texture, SDL_Rect* rect, void** pixels, int* pitch)
+        public static SDL_Bool SDL_LockTexture(SDL_Texture* texture, SDL_Rect* rect, IntPtr* pixels, int* pitch)
         {
             return iSDL_LockTexture(texture, rect, pixels, pitch);
         }
@@ -410,7 +410,7 @@ namespace Engine.SDL3
             return iSDL_RenderGeometry(renderer, texture, vertices, num_vertices, indices, num_indices);
         }
 
-        public static SDL_Bool SDL_RenderGeometryRaw(SDL_Renderer* renderer, SDL_Texture* texture, float* xy, int xy_stride, SDL_FColor* color, int color_stride, float* uv, int uv_stride, int num_vertices, void* indices, int num_indices, int size_indices)
+        public static SDL_Bool SDL_RenderGeometryRaw(SDL_Renderer* renderer, SDL_Texture* texture, float* xy, int xy_stride, SDL_FColor* color, int color_stride, float* uv, int uv_stride, int num_vertices, IntPtr indices, int num_indices, int size_indices)
         {
             return iSDL_RenderGeometryRaw(renderer, texture, xy, xy_stride, color, color_stride, uv, uv_stride, num_vertices, indices, num_indices, size_indices);
         }
@@ -450,12 +450,12 @@ namespace Engine.SDL3
             return iSDL_FlushRenderer(renderer);
         }
 
-        public static void* SDL_GetRenderMetalLayer(SDL_Renderer* renderer)
+        public static IntPtr SDL_GetRenderMetalLayer(SDL_Renderer* renderer)
         {
             return iSDL_GetRenderMetalLayer(renderer);
         }
 
-        public static void* SDL_GetRenderMetalCommandEncoder(SDL_Renderer* renderer)
+        public static IntPtr SDL_GetRenderMetalCommandEncoder(SDL_Renderer* renderer)
         {
             return iSDL_GetRenderMetalCommandEncoder(renderer);
         }
@@ -515,7 +515,7 @@ namespace Engine.SDL3
             return iSDL_SetGPURenderStateStorageBuffers(state, num_storage_buffers, storage_buffers);
         }
 
-        public static SDL_Bool SDL_SetGPURenderStateFragmentUniforms(SDL_GPURenderState* state, uint slot_index, void* data, uint length)
+        public static SDL_Bool SDL_SetGPURenderStateFragmentUniforms(SDL_GPURenderState* state, uint slot_index, IntPtr data, uint length)
         {
             return iSDL_SetGPURenderStateFragmentUniforms(state, slot_index, data, length);
         }

@@ -20,7 +20,7 @@ namespace Engine.SDL3
             return iSDL_GetProcessProperties(process);
         }
 
-        public static void* SDL_ReadProcess(SDL_Process* process, nuint* datasize, int* exitcode)
+        public static IntPtr SDL_ReadProcess(SDL_Process* process, nuint* datasize, int* exitcode)
         {
             return iSDL_ReadProcess(process, datasize, exitcode);
         }

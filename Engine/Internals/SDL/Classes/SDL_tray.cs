@@ -90,7 +90,7 @@ namespace Engine.SDL3
             return iSDL_GetTrayEntryEnabled(entry);
         }
 
-        public static void SDL_SetTrayEntryCallback(SDL_TrayEntry* entry, IntPtr callback, void* userdata)
+        public static void SDL_SetTrayEntryCallback(SDL_TrayEntry* entry, IntPtr callback, IntPtr userdata)
         {
             iSDL_SetTrayEntryCallback(entry, callback, userdata);
         }

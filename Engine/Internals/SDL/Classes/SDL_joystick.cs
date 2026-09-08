@@ -305,7 +305,7 @@ namespace Engine.SDL3
             return iSDL_SetJoystickLED(joystick, red, green, blue);
         }
 
-        public static SDL_Bool SDL_SendJoystickEffect(SDL_Joystick* joystick, void* data, int size)
+        public static SDL_Bool SDL_SendJoystickEffect(SDL_Joystick* joystick, IntPtr data, int size)
         {
             return iSDL_SendJoystickEffect(joystick, data, size);
         }

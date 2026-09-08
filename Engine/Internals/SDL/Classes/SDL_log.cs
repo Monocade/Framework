@@ -85,12 +85,12 @@ namespace Engine.SDL3
             return iSDL_GetDefaultLogOutputFunction();
         }
 
-        public static void SDL_GetLogOutputFunction(IntPtr* callback, void** userdata)
+        public static void SDL_GetLogOutputFunction(IntPtr* callback, IntPtr* userdata)
         {
             iSDL_GetLogOutputFunction(callback, userdata);
         }
 
-        public static void SDL_SetLogOutputFunction(IntPtr callback, void* userdata)
+        public static void SDL_SetLogOutputFunction(IntPtr callback, IntPtr userdata)
         {
             iSDL_SetLogOutputFunction(callback, userdata);
         }

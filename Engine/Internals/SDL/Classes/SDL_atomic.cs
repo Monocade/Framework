@@ -70,17 +70,17 @@ namespace Engine.SDL3
             return iSDL_AddAtomicU32(a, v);
         }
 
-        public static SDL_Bool SDL_CompareAndSwapAtomicPointer(void** a, void* oldval, void* newval)
+        public static SDL_Bool SDL_CompareAndSwapAtomicPointer(IntPtr* a, IntPtr oldval, IntPtr newval)
         {
             return iSDL_CompareAndSwapAtomicPointer(a, oldval, newval);
         }
 
-        public static void* SDL_SetAtomicPointer(void** a, void* v)
+        public static IntPtr SDL_SetAtomicPointer(IntPtr* a, IntPtr v)
         {
             return iSDL_SetAtomicPointer(a, v);
         }
 
-        public static void* SDL_GetAtomicPointer(void** a)
+        public static IntPtr SDL_GetAtomicPointer(IntPtr* a)
         {
             return iSDL_GetAtomicPointer(a);
         }

@@ -10,7 +10,7 @@ namespace Engine.SDL3
             return iSDL_CreateSurface(width, height, format);
         }
 
-        public static SDL_Surface* SDL_CreateSurfaceFrom(int width, int height, SDL_PixelFormat format, void* pixels, int pitch)
+        public static SDL_Surface* SDL_CreateSurfaceFrom(int width, int height, SDL_PixelFormat format, IntPtr pixels, int pitch)
         {
             return iSDL_CreateSurfaceFrom(width, height, format, pixels, pitch);
         }
@@ -235,17 +235,17 @@ namespace Engine.SDL3
             return iSDL_ConvertSurfaceAndColorspace(surface, format, palette, colorspace, props);
         }
 
-        public static SDL_Bool SDL_ConvertPixels(int width, int height, SDL_PixelFormat src_format, void* src, int src_pitch, SDL_PixelFormat dst_format, void* dst, int dst_pitch)
+        public static SDL_Bool SDL_ConvertPixels(int width, int height, SDL_PixelFormat src_format, IntPtr src, int src_pitch, SDL_PixelFormat dst_format, IntPtr dst, int dst_pitch)
         {
             return iSDL_ConvertPixels(width, height, src_format, src, src_pitch, dst_format, dst, dst_pitch);
         }
 
-        public static SDL_Bool SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormat src_format, SDL_Colorspace src_colorspace, uint src_properties, void* src, int src_pitch, SDL_PixelFormat dst_format, SDL_Colorspace dst_colorspace, uint dst_properties, void* dst, int dst_pitch)
+        public static SDL_Bool SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormat src_format, SDL_Colorspace src_colorspace, uint src_properties, IntPtr src, int src_pitch, SDL_PixelFormat dst_format, SDL_Colorspace dst_colorspace, uint dst_properties, IntPtr dst, int dst_pitch)
         {
             return iSDL_ConvertPixelsAndColorspace(width, height, src_format, src_colorspace, src_properties, src, src_pitch, dst_format, dst_colorspace, dst_properties, dst, dst_pitch);
         }
 
-        public static SDL_Bool SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormat src_format, void* src, int src_pitch, SDL_PixelFormat dst_format, void* dst, int dst_pitch, SDL_Bool linear)
+        public static SDL_Bool SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormat src_format, IntPtr src, int src_pitch, SDL_PixelFormat dst_format, IntPtr dst, int dst_pitch, SDL_Bool linear)
         {
             return iSDL_PremultiplyAlpha(width, height, src_format, src, src_pitch, dst_format, dst, dst_pitch, linear);
         }

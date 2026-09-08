@@ -35,7 +35,7 @@ namespace Engine.SDL3
             {
                 if (free)
                 {
-                    iSDL_free(ptr);
+                    iSDL_free((IntPtr)ptr);
                 }
             }
         }
@@ -55,7 +55,7 @@ namespace Engine.SDL3
             {
                 if (free)
                 {
-                    iSDL_free(ptr);
+                    iSDL_free((IntPtr)ptr);
                 }
             }
         }

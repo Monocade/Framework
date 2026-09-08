@@ -15,7 +15,7 @@ namespace Engine.SDL3
             iSDL_SetMainReady();
         }
 
-        public static int SDL_RunApp(int argc, byte** argv, IntPtr mainFunction, void* reserved)
+        public static int SDL_RunApp(int argc, byte** argv, IntPtr mainFunction, IntPtr reserved)
         {
             return iSDL_RunApp(argc, argv, mainFunction, reserved);
         }
