@@ -7,7 +7,7 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static T*[] SDL_PointerToPointerArray<T>(T** ptr, out int count, bool free = true) where T : unmanaged
+        public static T*[] SDL_PointerToArray<T>(T** ptr, out int count, bool free = true) where T : unmanaged
         {
             count = 0;
 
@@ -28,40 +28,6 @@ namespace Engine.SDL3
                 for (int i = 0; i < count; i++)
                 {
                     result[i] = ptr[i];
-                }
-
-                return result;
-            }
-            finally
-            {
-                if (free)
-                {
-                    iSDL_free(ptr);
-                }
-            }
-        }
-        
-        public static T[] SDL_PointerToArray<T>(T** ptr, out int count, bool free = true) where T : unmanaged
-        {
-            count = 0;
-
-            if (ptr == null)
-            {
-                return [];
-            }
-
-            try
-            {
-                while (ptr[count] != null)
-                {
-                    count++;
-                }
-
-                var result = new T[count];
-
-                for (int i = 0; i < count; i++)
-                {
-                    result[i] = *ptr[i];
                 }
 
                 return result;
