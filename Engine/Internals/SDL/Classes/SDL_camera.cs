@@ -10,29 +10,29 @@ namespace Engine.SDL3
             return iSDL_GetNumCameraDrivers();
         }
 
-        public static byte* SDL_GetCameraDriver(int index)
+        public static string SDL_GetCameraDriver(int index)
         {
-            return iSDL_GetCameraDriver(index);
+            return SDL_NativeToString(iSDL_GetCameraDriver(index));
         }
 
-        public static byte* SDL_GetCurrentCameraDriver()
+        public static string SDL_GetCurrentCameraDriver()
         {
-            return iSDL_GetCurrentCameraDriver();
+            return SDL_NativeToString(iSDL_GetCurrentCameraDriver());
         }
 
-        public static uint* SDL_GetCameras(int* count)
+        public static uint[] SDL_GetCameras(out int count)
         {
-            return iSDL_GetCameras(count);
+            return SDL_NativeToArray(iSDL_GetCameras(null), out count);
         }
 
-        public static SDL_CameraSpec** SDL_GetCameraSupportedFormats(uint instance_id, int* count)
+        public static SDL_CameraSpec*[] SDL_GetCameraSupportedFormats(uint instance_id, out int count)
         {
-            return iSDL_GetCameraSupportedFormats(instance_id, count);
+            return SDL_NativeToArray(iSDL_GetCameraSupportedFormats(instance_id, null), out count);
         }
 
-        public static byte* SDL_GetCameraName(uint instance_id)
+        public static string SDL_GetCameraName(uint instance_id)
         {
-            return iSDL_GetCameraName(instance_id);
+            return SDL_NativeToString(iSDL_GetCameraName(instance_id));
         }
 
         public static SDL_CameraPosition SDL_GetCameraPosition(uint instance_id)
@@ -60,14 +60,20 @@ namespace Engine.SDL3
             return iSDL_GetCameraProperties(camera);
         }
 
-        public static SDL_Bool SDL_GetCameraFormat(SDL_Camera* camera, SDL_CameraSpec* spec)
+        public static bool SDL_GetCameraFormat(SDL_Camera* camera, out SDL_CameraSpec spec)
         {
-            return iSDL_GetCameraFormat(camera, spec);
+            fixed (SDL_CameraSpec* ptr1 = &spec)
+            {
+                return iSDL_GetCameraFormat(camera, ptr1);
+            }
         }
 
-        public static SDL_Surface* SDL_AcquireCameraFrame(SDL_Camera* camera, ulong* timestampNS)
+        public static SDL_Surface* SDL_AcquireCameraFrame(SDL_Camera* camera, out ulong timestampNS)
         {
-            return iSDL_AcquireCameraFrame(camera, timestampNS);
+            fixed (ulong* ptr1 = &timestampNS)
+            {
+                return iSDL_AcquireCameraFrame(camera, ptr1);
+            }
         }
 
         public static void SDL_ReleaseCameraFrame(SDL_Camera* camera, SDL_Surface* frame)
