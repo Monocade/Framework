@@ -5,22 +5,22 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static void SDL_SetX11EventHook(IntPtr callback, IntPtr userdata)
+        public static void SDL_SetX11EventHook(SDL_X11EventHook callback, IntPtr userdata)
         {
-            iSDL_SetX11EventHook(callback, userdata);
+            iSDL_SetX11EventHook(Marshal.GetFunctionPointerForDelegate(callback), userdata);
         }
 
-        public static SDL_Bool SDL_IsPhone()
+        public static bool SDL_IsPhone()
         {
             return iSDL_IsPhone();
         }
 
-        public static SDL_Bool SDL_IsTablet()
+        public static bool SDL_IsTablet()
         {
             return iSDL_IsTablet();
         }
 
-        public static SDL_Bool SDL_IsTV()
+        public static bool SDL_IsTV()
         {
             return iSDL_IsTV();
         }
@@ -30,9 +30,9 @@ namespace Engine.SDL3
             return iSDL_GetDeviceFormFactor();
         }
 
-        public static byte* SDL_GetDeviceFormFactorName(SDL_FormFactor form_factor)
+        public static string SDL_GetDeviceFormFactorName(SDL_FormFactor form_factor)
         {
-            return iSDL_GetDeviceFormFactorName(form_factor);
+            return SDL_NativeToString(iSDL_GetDeviceFormFactorName(form_factor));
         }
 
         public static SDL_Sandbox SDL_GetSandbox()
