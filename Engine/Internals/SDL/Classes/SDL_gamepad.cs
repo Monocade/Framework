@@ -33,7 +33,10 @@ namespace Engine.SDL3
 
         public static string[] SDL_GetGamepadMappings(out int count)
         {
-            return SDL_NativeToStringArray(iSDL_GetGamepadMappings(null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToStringArray(iSDL_GetGamepadMappings(&size), size, out count);
+            }
         }
 
         public static string SDL_GetGamepadMappingForGUID(SDL_GUID guid)

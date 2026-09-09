@@ -131,7 +131,10 @@ namespace Engine.SDL3
             fixed (byte* ptr1 = SDL_StringToNative(path))
             fixed (byte* ptr2 = SDL_StringToNative(pattern))
             {
-                return SDL_NativeToStringArray(iSDL_GlobStorageDirectory(storage, ptr1, ptr2, flags, null), out count);
+                int size = 0;
+                {
+                    return SDL_NativeToStringArray(iSDL_GlobStorageDirectory(storage, ptr1, ptr2, flags, &size), size, out count);
+                }
             }
         }
     }
