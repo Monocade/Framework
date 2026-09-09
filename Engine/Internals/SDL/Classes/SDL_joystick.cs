@@ -27,7 +27,10 @@ namespace Engine.SDL3
 
         public static uint[] SDL_GetJoysticks(out int count)
         {
-            return SDL_NativeToArray(iSDL_GetJoysticks(null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetJoysticks(&size), size, out count);
+            }
         }
 
         public static string SDL_GetJoystickNameForID(uint instance_id)

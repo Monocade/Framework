@@ -22,12 +22,18 @@ namespace Engine.SDL3
 
         public static uint[] SDL_GetAudioPlaybackDevices(out int count)
         {
-            return SDL_NativeToArray(iSDL_GetAudioPlaybackDevices(null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetAudioPlaybackDevices(&size), size, out count);
+            }
         }
 
         public static uint[] SDL_GetAudioRecordingDevices(out int count)
         {
-            return SDL_NativeToArray(iSDL_GetAudioRecordingDevices(null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetAudioRecordingDevices(&size), size, out count);
+            }
         }
 
         public static string SDL_GetAudioDeviceName(uint devid)
@@ -46,7 +52,10 @@ namespace Engine.SDL3
 
         public static int[] SDL_GetAudioDeviceChannelMap(uint devid, out int count)
         {
-            return SDL_NativeToArray(iSDL_GetAudioDeviceChannelMap(devid, null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetAudioDeviceChannelMap(devid, &size), size, out count);
+            }
         }
 
         public static uint SDL_OpenAudioDevice(uint devid, SDL_AudioSpec* spec)
@@ -171,12 +180,18 @@ namespace Engine.SDL3
 
         public static int[] SDL_GetAudioStreamInputChannelMap(SDL_AudioStream* stream, out int count)
         {
-            return SDL_NativeToArray(iSDL_GetAudioStreamInputChannelMap(stream, null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetAudioStreamInputChannelMap(stream, &size), size, out count);
+            }
         }
 
         public static int[] SDL_GetAudioStreamOutputChannelMap(SDL_AudioStream* stream, out int count)
         {
-            return SDL_NativeToArray(iSDL_GetAudioStreamOutputChannelMap(stream, null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetAudioStreamOutputChannelMap(stream, &size), size, out count);
+            }
         }
 
         public static bool SDL_SetAudioStreamInputChannelMap(SDL_AudioStream* stream, int[] chmap, int count)

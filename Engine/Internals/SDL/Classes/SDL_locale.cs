@@ -7,7 +7,10 @@ namespace Engine.SDL3
     {
         public static SDL_Locale*[] SDL_GetPreferredLocales(out int count)
         {
-            return SDL_NativeToArray(iSDL_GetPreferredLocales(null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetPreferredLocales(&size), size, out count);
+            }
         }
     }
 }

@@ -7,7 +7,10 @@ namespace Engine.SDL3
     {
         public static uint[] SDL_GetHaptics(out int count)
         {
-            return SDL_NativeToArray(iSDL_GetHaptics(null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetHaptics(&size), size, out count);
+            }
         }
 
         public static string SDL_GetHapticNameForID(uint instance_id)

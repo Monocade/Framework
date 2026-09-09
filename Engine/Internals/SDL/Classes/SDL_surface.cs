@@ -62,7 +62,10 @@ namespace Engine.SDL3
 
         public static SDL_Surface*[] SDL_GetSurfaceImages(SDL_Surface* surface, out int count)
         {
-            return SDL_NativeToArray(iSDL_GetSurfaceImages(surface, null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetSurfaceImages(surface, &size), size, out count);
+            }
         }
 
         public static void SDL_RemoveSurfaceAlternateImages(SDL_Surface* surface)

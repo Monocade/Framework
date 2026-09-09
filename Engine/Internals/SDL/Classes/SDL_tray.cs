@@ -53,7 +53,10 @@ namespace Engine.SDL3
 
         public static SDL_TrayEntry*[] SDL_GetTrayEntries(SDL_TrayMenu* menu, out int count)
         {
-            return SDL_NativeToArray(iSDL_GetTrayEntries(menu, null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetTrayEntries(menu, &size), size, out count);
+            }
         }
 
         public static void SDL_RemoveTrayEntry(SDL_TrayEntry* entry)

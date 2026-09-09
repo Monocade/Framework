@@ -27,7 +27,10 @@ namespace Engine.SDL3
 
         public static uint[] SDL_GetDisplays(out int count)
         {
-            return SDL_NativeToArray(iSDL_GetDisplays(null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetDisplays(&size), size, out count);
+            }
         }
 
         public static uint SDL_GetPrimaryDisplay()
@@ -78,7 +81,10 @@ namespace Engine.SDL3
 
         public static SDL_DisplayMode*[] SDL_GetFullscreenDisplayModes(uint displayID, out int count)
         {
-            return SDL_NativeToArray(iSDL_GetFullscreenDisplayModes(displayID, null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetFullscreenDisplayModes(displayID, &size), size, out count);
+            }
         }
 
         public static bool SDL_GetClosestFullscreenDisplayMode(uint displayID, int w, int h, float refresh_rate, bool include_high_density_modes, out SDL_DisplayMode closest)
@@ -149,7 +155,10 @@ namespace Engine.SDL3
 
         public static SDL_Window*[] SDL_GetWindows(out int count)
         {
-            return SDL_NativeToArray(iSDL_GetWindows(null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetWindows(&size), size, out count);
+            }
         }
 
         public static SDL_Window* SDL_CreateWindow(string title, int w, int h, ulong flags)

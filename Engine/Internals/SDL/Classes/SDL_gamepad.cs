@@ -61,7 +61,10 @@ namespace Engine.SDL3
 
         public static uint[] SDL_GetGamepads(out int count)
         {
-            return SDL_NativeToArray(iSDL_GetGamepads(null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetGamepads(&size), size, out count);
+            }
         }
 
         public static bool SDL_IsGamepad(uint instance_id)
@@ -239,7 +242,10 @@ namespace Engine.SDL3
 
         public static SDL_GamepadBinding*[] SDL_GetGamepadBindings(SDL_Gamepad* gamepad, out int count)
         {
-            return SDL_NativeToArray(iSDL_GetGamepadBindings(gamepad, null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetGamepadBindings(gamepad, &size), size, out count);
+            }
         }
 
         public static void SDL_UpdateGamepads()

@@ -7,7 +7,10 @@ namespace Engine.SDL3
     {
         public static ulong[] SDL_GetTouchDevices(out int count)
         {
-            return SDL_NativeToArray(iSDL_GetTouchDevices(null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetTouchDevices(&size), size, out count);
+            }
         }
 
         public static string SDL_GetTouchDeviceName(ulong touchID)
@@ -22,7 +25,10 @@ namespace Engine.SDL3
 
         public static SDL_Finger*[] SDL_GetTouchFingers(ulong touchID, out int count)
         {
-            return SDL_NativeToArray(iSDL_GetTouchFingers(touchID, null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetTouchFingers(touchID, &size), size, out count);
+            }
         }
     }
 }

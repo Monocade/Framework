@@ -12,7 +12,10 @@ namespace Engine.SDL3
 
         public static uint[] SDL_GetMice(out int count)
         {
-            return SDL_NativeToArray(iSDL_GetMice(null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetMice(&size), size, out count);
+            }
         }
 
         public static string SDL_GetMouseNameForID(uint instance_id)

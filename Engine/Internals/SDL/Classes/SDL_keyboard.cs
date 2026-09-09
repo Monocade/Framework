@@ -12,7 +12,10 @@ namespace Engine.SDL3
 
         public static uint[] SDL_GetKeyboards(out int count)
         {
-            return SDL_NativeToArray(iSDL_GetKeyboards(null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetKeyboards(&size), size, out count);
+            }
         }
 
         public static string SDL_GetKeyboardNameForID(uint instance_id)
@@ -27,7 +30,10 @@ namespace Engine.SDL3
 
         public static SDL_Bool[] SDL_GetKeyboardState(out int numkeys)
         {
-            return SDL_NativeToArray(iSDL_GetKeyboardState(null), out numkeys);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetKeyboardState(&size), size, out numkeys);
+            }
         }
 
         public static void SDL_ResetKeyboard()

@@ -22,12 +22,18 @@ namespace Engine.SDL3
 
         public static uint[] SDL_GetCameras(out int count)
         {
-            return SDL_NativeToArray(iSDL_GetCameras(null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetCameras(&size), size, out count);
+            }
         }
 
         public static SDL_CameraSpec*[] SDL_GetCameraSupportedFormats(uint instance_id, out int count)
         {
-            return SDL_NativeToArray(iSDL_GetCameraSupportedFormats(instance_id, null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetCameraSupportedFormats(instance_id, &size), size, out count);
+            }
         }
 
         public static string SDL_GetCameraName(uint instance_id)

@@ -7,7 +7,10 @@ namespace Engine.SDL3
     {
         public static uint[] SDL_GetSensors(out int count)
         {
-            return SDL_NativeToArray(iSDL_GetSensors(null), out count);
+            int size = 0;
+            {
+                return SDL_NativeToArray(iSDL_GetSensors(&size), size, out count);
+            }
         }
 
         public static string SDL_GetSensorNameForID(uint instance_id)
