@@ -6,20 +6,52 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_JoyHatEvent
     {
-        private SDL_EventType type;
+        public SDL_EventType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private uint reserved;
+        public uint Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
 
-        private ulong timestamp;
+        public ulong Timestamp
+        {
+            get => timestamp;
+            set => timestamp = value;
+        }
 
-        private uint which;
+        public uint Which
+        {
+            get => which;
+            set => which = value;
+        }
 
-        private byte hat;
+        public byte Hat
+        {
+            get => hat;
+            set => hat = value;
+        }
 
-        private byte value;
+        public byte Value
+        {
+            get => this.value;
+            set => this.value = value;
+        }
 
-        private byte padding1;
+        public byte Padding1
+        {
+            get => padding1;
+            set => padding1 = value;
+        }
 
-        private byte padding2;
+        public byte Padding2
+        {
+            get => padding2;
+            set => padding2 = value;
+        }
     }
 }

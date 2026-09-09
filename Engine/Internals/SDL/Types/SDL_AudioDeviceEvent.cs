@@ -6,20 +6,52 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_AudioDeviceEvent
     {
-        private SDL_EventType type;
+        public SDL_EventType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private uint reserved;
+        public uint Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
 
-        private ulong timestamp;
+        public ulong Timestamp
+        {
+            get => timestamp;
+            set => timestamp = value;
+        }
 
-        private uint which;
+        public uint Which
+        {
+            get => which;
+            set => which = value;
+        }
 
-        private SDL_Bool recording;
+        public SDL_Bool Recording
+        {
+            get => recording;
+            set => recording = value;
+        }
 
-        private byte padding1;
+        public byte Padding1
+        {
+            get => padding1;
+            set => padding1 = value;
+        }
 
-        private byte padding2;
+        public byte Padding2
+        {
+            get => padding2;
+            set => padding2 = value;
+        }
 
-        private byte padding3;
+        public byte Padding3
+        {
+            get => padding3;
+            set => padding3 = value;
+        }
     }
 }

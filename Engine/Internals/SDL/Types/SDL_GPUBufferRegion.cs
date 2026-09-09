@@ -6,10 +6,22 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUBufferRegion
     {
-        private SDL_GPUBuffer* buffer;
+        public SDL_GPUBuffer* Buffer
+        {
+            get => buffer;
+            set => buffer = value;
+        }
 
-        private uint offset;
+        public uint Offset
+        {
+            get => offset;
+            set => offset = value;
+        }
 
-        private uint size;
+        public uint Size
+        {
+            get => size;
+            set => size = value;
+        }
     }
 }

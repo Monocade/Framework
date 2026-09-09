@@ -6,8 +6,16 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_CursorFrameInfo
     {
-        private SDL_Surface* surface;
+        public SDL_Surface* Surface
+        {
+            get => surface;
+            set => surface = value;
+        }
 
-        private uint duration;
+        public uint Duration
+        {
+            get => duration;
+            set => duration = value;
+        }
     }
 }

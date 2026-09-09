@@ -6,24 +6,64 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPURasterizerState
     {
-        private SDL_GPUFillMode fill_mode;
+        public SDL_GPUFillMode Fill_mode
+        {
+            get => fill_mode;
+            set => fill_mode = value;
+        }
 
-        private SDL_GPUCullMode cull_mode;
+        public SDL_GPUCullMode Cull_mode
+        {
+            get => cull_mode;
+            set => cull_mode = value;
+        }
 
-        private SDL_GPUFrontFace front_face;
+        public SDL_GPUFrontFace Front_face
+        {
+            get => front_face;
+            set => front_face = value;
+        }
 
-        private float depth_bias_constant_factor;
+        public float Depth_bias_constant_factor
+        {
+            get => depth_bias_constant_factor;
+            set => depth_bias_constant_factor = value;
+        }
 
-        private float depth_bias_clamp;
+        public float Depth_bias_clamp
+        {
+            get => depth_bias_clamp;
+            set => depth_bias_clamp = value;
+        }
 
-        private float depth_bias_slope_factor;
+        public float Depth_bias_slope_factor
+        {
+            get => depth_bias_slope_factor;
+            set => depth_bias_slope_factor = value;
+        }
 
-        private SDL_Bool enable_depth_bias;
+        public SDL_Bool Enable_depth_bias
+        {
+            get => enable_depth_bias;
+            set => enable_depth_bias = value;
+        }
 
-        private SDL_Bool enable_depth_clip;
+        public SDL_Bool Enable_depth_clip
+        {
+            get => enable_depth_clip;
+            set => enable_depth_clip = value;
+        }
 
-        private byte padding1;
+        public byte Padding1
+        {
+            get => padding1;
+            set => padding1 = value;
+        }
 
-        private byte padding2;
+        public byte Padding2
+        {
+            get => padding2;
+            set => padding2 = value;
+        }
     }
 }

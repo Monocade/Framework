@@ -6,12 +6,28 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_Palette
     {
-        private int ncolors;
+        public int Ncolors
+        {
+            get => ncolors;
+            set => ncolors = value;
+        }
 
-        private SDL_Color* colors;
+        public SDL_Color* Colors
+        {
+            get => colors;
+            set => colors = value;
+        }
 
-        private uint version;
+        public uint Version
+        {
+            get => version;
+            set => version = value;
+        }
 
-        private int refcount;
+        public int Refcount
+        {
+            get => refcount;
+            set => refcount = value;
+        }
     }
 }

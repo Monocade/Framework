@@ -6,26 +6,70 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_TextEditingCandidatesEvent
     {
-        private SDL_EventType type;
+        public SDL_EventType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private uint reserved;
+        public uint Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
 
-        private ulong timestamp;
+        public ulong Timestamp
+        {
+            get => timestamp;
+            set => timestamp = value;
+        }
 
-        private uint windowID;
+        public uint WindowID
+        {
+            get => windowID;
+            set => windowID = value;
+        }
 
-        private byte** candidates;
+        public byte** Candidates
+        {
+            get => candidates;
+            set => candidates = value;
+        }
 
-        private int num_candidates;
+        public int Num_candidates
+        {
+            get => num_candidates;
+            set => num_candidates = value;
+        }
 
-        private int selected_candidate;
+        public int Selected_candidate
+        {
+            get => selected_candidate;
+            set => selected_candidate = value;
+        }
 
-        private SDL_Bool horizontal;
+        public SDL_Bool Horizontal
+        {
+            get => horizontal;
+            set => horizontal = value;
+        }
 
-        private byte padding1;
+        public byte Padding1
+        {
+            get => padding1;
+            set => padding1 = value;
+        }
 
-        private byte padding2;
+        public byte Padding2
+        {
+            get => padding2;
+            set => padding2 = value;
+        }
 
-        private byte padding3;
+        public byte Padding3
+        {
+            get => padding3;
+            set => padding3 = value;
+        }
     }
 }

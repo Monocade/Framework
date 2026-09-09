@@ -6,10 +6,22 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUBufferCreateInfo
     {
-        private uint usage;
+        public uint Usage
+        {
+            get => usage;
+            set => usage = value;
+        }
 
-        private uint size;
+        public uint Size
+        {
+            get => size;
+            set => size = value;
+        }
 
-        private uint props;
+        public uint Props
+        {
+            get => props;
+            set => props = value;
+        }
     }
 }

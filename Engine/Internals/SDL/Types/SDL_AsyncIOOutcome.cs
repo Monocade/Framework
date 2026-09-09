@@ -6,20 +6,52 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_AsyncIOOutcome
     {
-        private SDL_AsyncIO* asyncio;
+        public SDL_AsyncIO* Asyncio
+        {
+            get => asyncio;
+            set => asyncio = value;
+        }
 
-        private SDL_AsyncIOTaskType type;
+        public SDL_AsyncIOTaskType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private SDL_AsyncIOResult result;
+        public SDL_AsyncIOResult Result
+        {
+            get => result;
+            set => result = value;
+        }
 
-        private IntPtr buffer;
+        public IntPtr Buffer
+        {
+            get => buffer;
+            set => buffer = value;
+        }
 
-        private ulong offset;
+        public ulong Offset
+        {
+            get => offset;
+            set => offset = value;
+        }
 
-        private ulong bytes_requested;
+        public ulong Bytes_requested
+        {
+            get => bytes_requested;
+            set => bytes_requested = value;
+        }
 
-        private ulong bytes_transferred;
+        public ulong Bytes_transferred
+        {
+            get => bytes_transferred;
+            set => bytes_transferred = value;
+        }
 
-        private IntPtr userdata;
+        public IntPtr Userdata
+        {
+            get => userdata;
+            set => userdata = value;
+        }
     }
 }

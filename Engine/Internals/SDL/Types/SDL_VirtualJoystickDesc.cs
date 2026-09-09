@@ -6,56 +6,160 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_VirtualJoystickDesc
     {
-        private uint version;
+        public uint Version
+        {
+            get => version;
+            set => version = value;
+        }
 
-        private ushort type;
+        public ushort Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private ushort padding;
+        public ushort Padding
+        {
+            get => padding;
+            set => padding = value;
+        }
 
-        private ushort vendor_id;
+        public ushort Vendor_id
+        {
+            get => vendor_id;
+            set => vendor_id = value;
+        }
 
-        private ushort product_id;
+        public ushort Product_id
+        {
+            get => product_id;
+            set => product_id = value;
+        }
 
-        private ushort naxes;
+        public ushort Naxes
+        {
+            get => naxes;
+            set => naxes = value;
+        }
 
-        private ushort nbuttons;
+        public ushort Nbuttons
+        {
+            get => nbuttons;
+            set => nbuttons = value;
+        }
 
-        private ushort nballs;
+        public ushort Nballs
+        {
+            get => nballs;
+            set => nballs = value;
+        }
 
-        private ushort nhats;
+        public ushort Nhats
+        {
+            get => nhats;
+            set => nhats = value;
+        }
 
-        private ushort ntouchpads;
+        public ushort Ntouchpads
+        {
+            get => ntouchpads;
+            set => ntouchpads = value;
+        }
 
-        private ushort nsensors;
+        public ushort Nsensors
+        {
+            get => nsensors;
+            set => nsensors = value;
+        }
 
-        private _padding2_e__FixedBuffer padding2;
+        public _padding2_e__FixedBuffer Padding2
+        {
+            get => padding2;
+            set => padding2 = value;
+        }
 
-        private uint button_mask;
+        public uint Button_mask
+        {
+            get => button_mask;
+            set => button_mask = value;
+        }
 
-        private uint axis_mask;
+        public uint Axis_mask
+        {
+            get => axis_mask;
+            set => axis_mask = value;
+        }
 
-        private byte* name;
+        public byte* Name
+        {
+            get => name;
+            set => name = value;
+        }
 
-        private SDL_VirtualJoystickTouchpadDesc* touchpads;
+        public SDL_VirtualJoystickTouchpadDesc* Touchpads
+        {
+            get => touchpads;
+            set => touchpads = value;
+        }
 
-        private SDL_VirtualJoystickSensorDesc* sensors;
+        public SDL_VirtualJoystickSensorDesc* Sensors
+        {
+            get => sensors;
+            set => sensors = value;
+        }
 
-        private IntPtr userdata;
+        public IntPtr Userdata
+        {
+            get => userdata;
+            set => userdata = value;
+        }
 
-        private IntPtr Update;
+        public IntPtr update
+        {
+            get => Update;
+            set => Update = value;
+        }
 
-        private IntPtr SetPlayerIndex;
+        public IntPtr setPlayerIndex
+        {
+            get => SetPlayerIndex;
+            set => SetPlayerIndex = value;
+        }
 
-        private IntPtr Rumble;
+        public IntPtr rumble
+        {
+            get => Rumble;
+            set => Rumble = value;
+        }
 
-        private IntPtr RumbleTriggers;
+        public IntPtr rumbleTriggers
+        {
+            get => RumbleTriggers;
+            set => RumbleTriggers = value;
+        }
 
-        private IntPtr SetLED;
+        public IntPtr setLED
+        {
+            get => SetLED;
+            set => SetLED = value;
+        }
 
-        private IntPtr SendEffect;
+        public IntPtr sendEffect
+        {
+            get => SendEffect;
+            set => SendEffect = value;
+        }
 
-        private IntPtr SetSensorsEnabled;
+        public IntPtr setSensorsEnabled
+        {
+            get => SetSensorsEnabled;
+            set => SetSensorsEnabled = value;
+        }
 
-        private IntPtr Cleanup;
+        public IntPtr cleanup
+        {
+            get => Cleanup;
+            set => Cleanup = value;
+        }
     }
 }

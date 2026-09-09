@@ -6,6 +6,10 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_AtomicU32
     {
-        private uint value;
+        public uint Value
+        {
+            get => this.value;
+            set => this.value = value;
+        }
     }
 }

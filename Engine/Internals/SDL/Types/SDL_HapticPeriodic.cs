@@ -6,32 +6,88 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_HapticPeriodic
     {
-        private ushort type;
+        public ushort Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private SDL_HapticDirection direction;
+        public SDL_HapticDirection Direction
+        {
+            get => direction;
+            set => direction = value;
+        }
 
-        private uint length;
+        public uint Length
+        {
+            get => length;
+            set => length = value;
+        }
 
-        private ushort delay;
+        public ushort Delay
+        {
+            get => delay;
+            set => delay = value;
+        }
 
-        private ushort button;
+        public ushort Button
+        {
+            get => button;
+            set => button = value;
+        }
 
-        private ushort interval;
+        public ushort Interval
+        {
+            get => interval;
+            set => interval = value;
+        }
 
-        private ushort period;
+        public ushort Period
+        {
+            get => period;
+            set => period = value;
+        }
 
-        private short magnitude;
+        public short Magnitude
+        {
+            get => magnitude;
+            set => magnitude = value;
+        }
 
-        private short offset;
+        public short Offset
+        {
+            get => offset;
+            set => offset = value;
+        }
 
-        private ushort phase;
+        public ushort Phase
+        {
+            get => phase;
+            set => phase = value;
+        }
 
-        private ushort attack_length;
+        public ushort Attack_length
+        {
+            get => attack_length;
+            set => attack_length = value;
+        }
 
-        private ushort attack_level;
+        public ushort Attack_level
+        {
+            get => attack_level;
+            set => attack_level = value;
+        }
 
-        private ushort fade_length;
+        public ushort Fade_length
+        {
+            get => fade_length;
+            set => fade_length = value;
+        }
 
-        private ushort fade_level;
+        public ushort Fade_level
+        {
+            get => fade_level;
+            set => fade_level = value;
+        }
     }
 }

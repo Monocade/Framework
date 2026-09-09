@@ -6,22 +6,58 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_DateTime
     {
-        private int year;
+        public int Year
+        {
+            get => year;
+            set => year = value;
+        }
 
-        private int month;
+        public int Month
+        {
+            get => month;
+            set => month = value;
+        }
 
-        private int day;
+        public int Day
+        {
+            get => day;
+            set => day = value;
+        }
 
-        private int hour;
+        public int Hour
+        {
+            get => hour;
+            set => hour = value;
+        }
 
-        private int minute;
+        public int Minute
+        {
+            get => minute;
+            set => minute = value;
+        }
 
-        private int second;
+        public int Second
+        {
+            get => second;
+            set => second = value;
+        }
 
-        private int nanosecond;
+        public int Nanosecond
+        {
+            get => nanosecond;
+            set => nanosecond = value;
+        }
 
-        private int day_of_week;
+        public int Day_of_week
+        {
+            get => day_of_week;
+            set => day_of_week = value;
+        }
 
-        private int utc_offset;
+        public int Utc_offset
+        {
+            get => utc_offset;
+            set => utc_offset = value;
+        }
     }
 }

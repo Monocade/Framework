@@ -6,12 +6,28 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_Texture
     {
-        private SDL_PixelFormat format;
+        public SDL_PixelFormat Format
+        {
+            get => format;
+            set => format = value;
+        }
 
-        private int w;
+        public int W
+        {
+            get => w;
+            set => w = value;
+        }
 
-        private int h;
+        public int H
+        {
+            get => h;
+            set => h = value;
+        }
 
-        private int refcount;
+        public int Refcount
+        {
+            get => refcount;
+            set => refcount = value;
+        }
     }
 }

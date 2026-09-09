@@ -6,8 +6,16 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUColorTargetDescription
     {
-        private SDL_GPUTextureFormat format;
+        public SDL_GPUTextureFormat Format
+        {
+            get => format;
+            set => format = value;
+        }
 
-        private SDL_GPUColorTargetBlendState blend_state;
+        public SDL_GPUColorTargetBlendState Blend_state
+        {
+            get => blend_state;
+            set => blend_state = value;
+        }
     }
 }

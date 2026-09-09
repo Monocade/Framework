@@ -6,16 +6,40 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_CameraSpec
     {
-        private SDL_PixelFormat format;
+        public SDL_PixelFormat Format
+        {
+            get => format;
+            set => format = value;
+        }
 
-        private SDL_Colorspace colorspace;
+        public SDL_Colorspace Colorspace
+        {
+            get => colorspace;
+            set => colorspace = value;
+        }
 
-        private int width;
+        public int Width
+        {
+            get => width;
+            set => width = value;
+        }
 
-        private int height;
+        public int Height
+        {
+            get => height;
+            set => height = value;
+        }
 
-        private int framerate_numerator;
+        public int Framerate_numerator
+        {
+            get => framerate_numerator;
+            set => framerate_numerator = value;
+        }
 
-        private int framerate_denominator;
+        public int Framerate_denominator
+        {
+            get => framerate_denominator;
+            set => framerate_denominator = value;
+        }
     }
 }

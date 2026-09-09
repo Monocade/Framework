@@ -6,12 +6,28 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_HapticLeftRight
     {
-        private ushort type;
+        public ushort Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private uint length;
+        public uint Length
+        {
+            get => length;
+            set => length = value;
+        }
 
-        private ushort large_magnitude;
+        public ushort Large_magnitude
+        {
+            get => large_magnitude;
+            set => large_magnitude = value;
+        }
 
-        private ushort small_magnitude;
+        public ushort Small_magnitude
+        {
+            get => small_magnitude;
+            set => small_magnitude = value;
+        }
     }
 }

@@ -6,14 +6,34 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_NotificationEvent
     {
-        private SDL_EventType type;
+        public SDL_EventType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private uint reserved;
+        public uint Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
 
-        private ulong timestamp;
+        public ulong Timestamp
+        {
+            get => timestamp;
+            set => timestamp = value;
+        }
 
-        private uint which;
+        public uint Which
+        {
+            get => which;
+            set => which = value;
+        }
 
-        private byte* action_id;
+        public byte* Action_id
+        {
+            get => action_id;
+            set => action_id = value;
+        }
     }
 }

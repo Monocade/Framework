@@ -6,10 +6,22 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_CommonEvent
     {
-        private uint type;
+        public uint Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private uint reserved;
+        public uint Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
 
-        private ulong timestamp;
+        public ulong Timestamp
+        {
+            get => timestamp;
+            set => timestamp = value;
+        }
     }
 }

@@ -6,10 +6,22 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_AudioSpec
     {
-        private SDL_AudioFormat format;
+        public SDL_AudioFormat Format
+        {
+            get => format;
+            set => format = value;
+        }
 
-        private int channels;
+        public int Channels
+        {
+            get => channels;
+            set => channels = value;
+        }
 
-        private int freq;
+        public int Freq
+        {
+            get => freq;
+            set => freq = value;
+        }
     }
 }

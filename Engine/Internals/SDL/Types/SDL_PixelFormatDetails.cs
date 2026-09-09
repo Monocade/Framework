@@ -6,36 +6,100 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_PixelFormatDetails
     {
-        private SDL_PixelFormat format;
+        public SDL_PixelFormat Format
+        {
+            get => format;
+            set => format = value;
+        }
 
-        private byte bits_per_pixel;
+        public byte Bits_per_pixel
+        {
+            get => bits_per_pixel;
+            set => bits_per_pixel = value;
+        }
 
-        private byte bytes_per_pixel;
+        public byte Bytes_per_pixel
+        {
+            get => bytes_per_pixel;
+            set => bytes_per_pixel = value;
+        }
 
-        private _padding_e__FixedBuffer padding;
+        public _padding_e__FixedBuffer Padding
+        {
+            get => padding;
+            set => padding = value;
+        }
 
-        private uint Rmask;
+        public uint rmask
+        {
+            get => Rmask;
+            set => Rmask = value;
+        }
 
-        private uint Gmask;
+        public uint gmask
+        {
+            get => Gmask;
+            set => Gmask = value;
+        }
 
-        private uint Bmask;
+        public uint bmask
+        {
+            get => Bmask;
+            set => Bmask = value;
+        }
 
-        private uint Amask;
+        public uint amask
+        {
+            get => Amask;
+            set => Amask = value;
+        }
 
-        private byte Rbits;
+        public byte rbits
+        {
+            get => Rbits;
+            set => Rbits = value;
+        }
 
-        private byte Gbits;
+        public byte gbits
+        {
+            get => Gbits;
+            set => Gbits = value;
+        }
 
-        private byte Bbits;
+        public byte bbits
+        {
+            get => Bbits;
+            set => Bbits = value;
+        }
 
-        private byte Abits;
+        public byte abits
+        {
+            get => Abits;
+            set => Abits = value;
+        }
 
-        private byte Rshift;
+        public byte rshift
+        {
+            get => Rshift;
+            set => Rshift = value;
+        }
 
-        private byte Gshift;
+        public byte gshift
+        {
+            get => Gshift;
+            set => Gshift = value;
+        }
 
-        private byte Bshift;
+        public byte bshift
+        {
+            get => Bshift;
+            set => Bshift = value;
+        }
 
-        private byte Ashift;
+        public byte ashift
+        {
+            get => Ashift;
+            set => Ashift = value;
+        }
     }
 }

@@ -6,12 +6,28 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_FRect
     {
-        private float x;
+        public float X
+        {
+            get => x;
+            set => x = value;
+        }
 
-        private float y;
+        public float Y
+        {
+            get => y;
+            set => y = value;
+        }
 
-        private float w;
+        public float W
+        {
+            get => w;
+            set => w = value;
+        }
 
-        private float h;
+        public float H
+        {
+            get => h;
+            set => h = value;
+        }
     }
 }

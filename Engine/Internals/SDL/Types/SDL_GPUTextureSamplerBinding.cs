@@ -6,8 +6,16 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUTextureSamplerBinding
     {
-        private SDL_GPUTexture* texture;
+        public SDL_GPUTexture* Texture
+        {
+            get => texture;
+            set => texture = value;
+        }
 
-        private SDL_GPUSampler* sampler;
+        public SDL_GPUSampler* Sampler
+        {
+            get => sampler;
+            set => sampler = value;
+        }
     }
 }

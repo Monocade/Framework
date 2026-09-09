@@ -6,22 +6,58 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_DisplayMode
     {
-        private uint displayID;
+        public uint DisplayID
+        {
+            get => displayID;
+            set => displayID = value;
+        }
 
-        private SDL_PixelFormat format;
+        public SDL_PixelFormat Format
+        {
+            get => format;
+            set => format = value;
+        }
 
-        private int w;
+        public int W
+        {
+            get => w;
+            set => w = value;
+        }
 
-        private int h;
+        public int H
+        {
+            get => h;
+            set => h = value;
+        }
 
-        private float pixel_density;
+        public float Pixel_density
+        {
+            get => pixel_density;
+            set => pixel_density = value;
+        }
 
-        private float refresh_rate;
+        public float Refresh_rate
+        {
+            get => refresh_rate;
+            set => refresh_rate = value;
+        }
 
-        private int refresh_rate_numerator;
+        public int Refresh_rate_numerator
+        {
+            get => refresh_rate_numerator;
+            set => refresh_rate_numerator = value;
+        }
 
-        private int refresh_rate_denominator;
+        public int Refresh_rate_denominator
+        {
+            get => refresh_rate_denominator;
+            set => refresh_rate_denominator = value;
+        }
 
-        private SDL_DisplayModeData* @internal;
+        public SDL_DisplayModeData* @Internal
+        {
+            get => @internal;
+            set => @internal = value;
+        }
     }
 }

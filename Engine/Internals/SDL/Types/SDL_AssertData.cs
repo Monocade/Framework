@@ -6,18 +6,46 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_AssertData
     {
-        private SDL_Bool always_ignore;
+        public SDL_Bool Always_ignore
+        {
+            get => always_ignore;
+            set => always_ignore = value;
+        }
 
-        private uint trigger_count;
+        public uint Trigger_count
+        {
+            get => trigger_count;
+            set => trigger_count = value;
+        }
 
-        private byte* condition;
+        public byte* Condition
+        {
+            get => condition;
+            set => condition = value;
+        }
 
-        private byte* filename;
+        public byte* Filename
+        {
+            get => filename;
+            set => filename = value;
+        }
 
-        private int linenum;
+        public int Linenum
+        {
+            get => linenum;
+            set => linenum = value;
+        }
 
-        private byte* function;
+        public byte* Function
+        {
+            get => function;
+            set => function = value;
+        }
 
-        private SDL_AssertData* next;
+        public SDL_AssertData* Next
+        {
+            get => next;
+            set => next = value;
+        }
     }
 }

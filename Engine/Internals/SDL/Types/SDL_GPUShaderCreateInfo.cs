@@ -6,24 +6,64 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUShaderCreateInfo
     {
-        private nuint code_size;
+        public nuint Code_size
+        {
+            get => code_size;
+            set => code_size = value;
+        }
 
-        private byte* code;
+        public byte* Code
+        {
+            get => code;
+            set => code = value;
+        }
 
-        private byte* entrypoint;
+        public byte* Entrypoint
+        {
+            get => entrypoint;
+            set => entrypoint = value;
+        }
 
-        private uint format;
+        public uint Format
+        {
+            get => format;
+            set => format = value;
+        }
 
-        private SDL_GPUShaderStage stage;
+        public SDL_GPUShaderStage Stage
+        {
+            get => stage;
+            set => stage = value;
+        }
 
-        private uint num_samplers;
+        public uint Num_samplers
+        {
+            get => num_samplers;
+            set => num_samplers = value;
+        }
 
-        private uint num_storage_textures;
+        public uint Num_storage_textures
+        {
+            get => num_storage_textures;
+            set => num_storage_textures = value;
+        }
 
-        private uint num_storage_buffers;
+        public uint Num_storage_buffers
+        {
+            get => num_storage_buffers;
+            set => num_storage_buffers = value;
+        }
 
-        private uint num_uniform_buffers;
+        public uint Num_uniform_buffers
+        {
+            get => num_uniform_buffers;
+            set => num_uniform_buffers = value;
+        }
 
-        private uint props;
+        public uint Props
+        {
+            get => props;
+            set => props = value;
+        }
     }
 }

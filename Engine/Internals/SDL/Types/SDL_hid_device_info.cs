@@ -6,34 +6,94 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_hid_device_info
     {
-        private byte* path;
+        public byte* Path
+        {
+            get => path;
+            set => path = value;
+        }
 
-        private ushort vendor_id;
+        public ushort Vendor_id
+        {
+            get => vendor_id;
+            set => vendor_id = value;
+        }
 
-        private ushort product_id;
+        public ushort Product_id
+        {
+            get => product_id;
+            set => product_id = value;
+        }
 
-        private ushort* serial_number;
+        public ushort* Serial_number
+        {
+            get => serial_number;
+            set => serial_number = value;
+        }
 
-        private ushort release_number;
+        public ushort Release_number
+        {
+            get => release_number;
+            set => release_number = value;
+        }
 
-        private ushort* manufacturer_string;
+        public ushort* Manufacturer_string
+        {
+            get => manufacturer_string;
+            set => manufacturer_string = value;
+        }
 
-        private ushort* product_string;
+        public ushort* Product_string
+        {
+            get => product_string;
+            set => product_string = value;
+        }
 
-        private ushort usage_page;
+        public ushort Usage_page
+        {
+            get => usage_page;
+            set => usage_page = value;
+        }
 
-        private ushort usage;
+        public ushort Usage
+        {
+            get => usage;
+            set => usage = value;
+        }
 
-        private int interface_number;
+        public int Interface_number
+        {
+            get => interface_number;
+            set => interface_number = value;
+        }
 
-        private int interface_class;
+        public int Interface_class
+        {
+            get => interface_class;
+            set => interface_class = value;
+        }
 
-        private int interface_subclass;
+        public int Interface_subclass
+        {
+            get => interface_subclass;
+            set => interface_subclass = value;
+        }
 
-        private int interface_protocol;
+        public int Interface_protocol
+        {
+            get => interface_protocol;
+            set => interface_protocol = value;
+        }
 
-        private SDL_hid_bus_type bus_type;
+        public SDL_hid_bus_type Bus_type
+        {
+            get => bus_type;
+            set => bus_type = value;
+        }
 
-        private SDL_hid_device_info* next;
+        public SDL_hid_device_info* Next
+        {
+            get => next;
+            set => next = value;
+        }
     }
 }

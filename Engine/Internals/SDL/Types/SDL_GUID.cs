@@ -6,6 +6,10 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GUID
     {
-        private _data_e__FixedBuffer data;
+        public _data_e__FixedBuffer Data
+        {
+            get => data;
+            set => data = value;
+        }
     }
 }

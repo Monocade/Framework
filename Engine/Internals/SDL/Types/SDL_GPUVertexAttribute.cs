@@ -6,12 +6,28 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUVertexAttribute
     {
-        private uint location;
+        public uint Location
+        {
+            get => location;
+            set => location = value;
+        }
 
-        private uint buffer_slot;
+        public uint Buffer_slot
+        {
+            get => buffer_slot;
+            set => buffer_slot = value;
+        }
 
-        private SDL_GPUVertexElementFormat format;
+        public SDL_GPUVertexElementFormat Format
+        {
+            get => format;
+            set => format = value;
+        }
 
-        private uint offset;
+        public uint Offset
+        {
+            get => offset;
+            set => offset = value;
+        }
     }
 }

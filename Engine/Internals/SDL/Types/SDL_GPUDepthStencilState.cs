@@ -6,26 +6,70 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUDepthStencilState
     {
-        private SDL_GPUCompareOp compare_op;
+        public SDL_GPUCompareOp Compare_op
+        {
+            get => compare_op;
+            set => compare_op = value;
+        }
 
-        private SDL_GPUStencilOpState back_stencil_state;
+        public SDL_GPUStencilOpState Back_stencil_state
+        {
+            get => back_stencil_state;
+            set => back_stencil_state = value;
+        }
 
-        private SDL_GPUStencilOpState front_stencil_state;
+        public SDL_GPUStencilOpState Front_stencil_state
+        {
+            get => front_stencil_state;
+            set => front_stencil_state = value;
+        }
 
-        private byte compare_mask;
+        public byte Compare_mask
+        {
+            get => compare_mask;
+            set => compare_mask = value;
+        }
 
-        private byte write_mask;
+        public byte Write_mask
+        {
+            get => write_mask;
+            set => write_mask = value;
+        }
 
-        private SDL_Bool enable_depth_test;
+        public SDL_Bool Enable_depth_test
+        {
+            get => enable_depth_test;
+            set => enable_depth_test = value;
+        }
 
-        private SDL_Bool enable_depth_write;
+        public SDL_Bool Enable_depth_write
+        {
+            get => enable_depth_write;
+            set => enable_depth_write = value;
+        }
 
-        private SDL_Bool enable_stencil_test;
+        public SDL_Bool Enable_stencil_test
+        {
+            get => enable_stencil_test;
+            set => enable_stencil_test = value;
+        }
 
-        private byte padding1;
+        public byte Padding1
+        {
+            get => padding1;
+            set => padding1 = value;
+        }
 
-        private byte padding2;
+        public byte Padding2
+        {
+            get => padding2;
+            set => padding2 = value;
+        }
 
-        private byte padding3;
+        public byte Padding3
+        {
+            get => padding3;
+            set => padding3 = value;
+        }
     }
 }

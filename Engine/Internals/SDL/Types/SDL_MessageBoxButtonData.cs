@@ -6,10 +6,22 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_MessageBoxButtonData
     {
-        private uint flags;
+        public uint Flags
+        {
+            get => flags;
+            set => flags = value;
+        }
 
-        private int buttonID;
+        public int ButtonID
+        {
+            get => buttonID;
+            set => buttonID = value;
+        }
 
-        private byte* text;
+        public byte* Text
+        {
+            get => text;
+            set => text = value;
+        }
     }
 }

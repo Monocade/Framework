@@ -6,16 +6,40 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUMultisampleState
     {
-        private SDL_GPUSampleCount sample_count;
+        public SDL_GPUSampleCount Sample_count
+        {
+            get => sample_count;
+            set => sample_count = value;
+        }
 
-        private uint sample_mask;
+        public uint Sample_mask
+        {
+            get => sample_mask;
+            set => sample_mask = value;
+        }
 
-        private SDL_Bool enable_mask;
+        public SDL_Bool Enable_mask
+        {
+            get => enable_mask;
+            set => enable_mask = value;
+        }
 
-        private SDL_Bool enable_alpha_to_coverage;
+        public SDL_Bool Enable_alpha_to_coverage
+        {
+            get => enable_alpha_to_coverage;
+            set => enable_alpha_to_coverage = value;
+        }
 
-        private byte padding2;
+        public byte Padding2
+        {
+            get => padding2;
+            set => padding2 = value;
+        }
 
-        private byte padding3;
+        public byte Padding3
+        {
+            get => padding3;
+            set => padding3 = value;
+        }
     }
 }

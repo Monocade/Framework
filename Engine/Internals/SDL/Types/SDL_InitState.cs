@@ -6,10 +6,22 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_InitState
     {
-        private SDL_AtomicInt status;
+        public SDL_AtomicInt Status
+        {
+            get => status;
+            set => status = value;
+        }
 
-        private ulong thread;
+        public ulong Thread
+        {
+            get => thread;
+            set => thread = value;
+        }
 
-        private IntPtr reserved;
+        public IntPtr Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
     }
 }

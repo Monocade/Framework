@@ -6,14 +6,34 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUStorageBufferReadWriteBinding
     {
-        private SDL_GPUBuffer* buffer;
+        public SDL_GPUBuffer* Buffer
+        {
+            get => buffer;
+            set => buffer = value;
+        }
 
-        private SDL_Bool cycle;
+        public SDL_Bool Cycle
+        {
+            get => cycle;
+            set => cycle = value;
+        }
 
-        private byte padding1;
+        public byte Padding1
+        {
+            get => padding1;
+            set => padding1 = value;
+        }
 
-        private byte padding2;
+        public byte Padding2
+        {
+            get => padding2;
+            set => padding2 = value;
+        }
 
-        private byte padding3;
+        public byte Padding3
+        {
+            get => padding3;
+            set => padding3 = value;
+        }
     }
 }

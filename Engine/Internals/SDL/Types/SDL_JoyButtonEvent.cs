@@ -6,20 +6,52 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_JoyButtonEvent
     {
-        private SDL_EventType type;
+        public SDL_EventType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private uint reserved;
+        public uint Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
 
-        private ulong timestamp;
+        public ulong Timestamp
+        {
+            get => timestamp;
+            set => timestamp = value;
+        }
 
-        private uint which;
+        public uint Which
+        {
+            get => which;
+            set => which = value;
+        }
 
-        private byte button;
+        public byte Button
+        {
+            get => button;
+            set => button = value;
+        }
 
-        private SDL_Bool down;
+        public SDL_Bool Down
+        {
+            get => down;
+            set => down = value;
+        }
 
-        private byte padding1;
+        public byte Padding1
+        {
+            get => padding1;
+            set => padding1 = value;
+        }
 
-        private byte padding2;
+        public byte Padding2
+        {
+            get => padding2;
+            set => padding2 = value;
+        }
     }
 }

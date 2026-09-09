@@ -6,18 +6,46 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_MessageBoxData
     {
-        private uint flags;
+        public uint Flags
+        {
+            get => flags;
+            set => flags = value;
+        }
 
-        private SDL_Window* window;
+        public SDL_Window* Window
+        {
+            get => window;
+            set => window = value;
+        }
 
-        private byte* title;
+        public byte* Title
+        {
+            get => title;
+            set => title = value;
+        }
 
-        private byte* message;
+        public byte* Message
+        {
+            get => message;
+            set => message = value;
+        }
 
-        private int numbuttons;
+        public int Numbuttons
+        {
+            get => numbuttons;
+            set => numbuttons = value;
+        }
 
-        private SDL_MessageBoxButtonData* buttons;
+        public SDL_MessageBoxButtonData* Buttons
+        {
+            get => buttons;
+            set => buttons = value;
+        }
 
-        private SDL_MessageBoxColorScheme* colorScheme;
+        public SDL_MessageBoxColorScheme* ColorScheme
+        {
+            get => colorScheme;
+            set => colorScheme = value;
+        }
     }
 }

@@ -6,28 +6,76 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_StorageInterface
     {
-        private uint version;
+        public uint Version
+        {
+            get => version;
+            set => version = value;
+        }
 
-        private IntPtr close;
+        public IntPtr Close
+        {
+            get => close;
+            set => close = value;
+        }
 
-        private IntPtr ready;
+        public IntPtr Ready
+        {
+            get => ready;
+            set => ready = value;
+        }
 
-        private IntPtr enumerate;
+        public IntPtr Enumerate
+        {
+            get => enumerate;
+            set => enumerate = value;
+        }
 
-        private IntPtr info;
+        public IntPtr Info
+        {
+            get => info;
+            set => info = value;
+        }
 
-        private IntPtr read_file;
+        public IntPtr Read_file
+        {
+            get => read_file;
+            set => read_file = value;
+        }
 
-        private IntPtr write_file;
+        public IntPtr Write_file
+        {
+            get => write_file;
+            set => write_file = value;
+        }
 
-        private IntPtr mkdir;
+        public IntPtr Mkdir
+        {
+            get => mkdir;
+            set => mkdir = value;
+        }
 
-        private IntPtr remove;
+        public IntPtr Remove
+        {
+            get => remove;
+            set => remove = value;
+        }
 
-        private IntPtr rename;
+        public IntPtr Rename
+        {
+            get => rename;
+            set => rename = value;
+        }
 
-        private IntPtr copy;
+        public IntPtr Copy
+        {
+            get => copy;
+            set => copy = value;
+        }
 
-        private IntPtr space_remaining;
+        public IntPtr Space_remaining
+        {
+            get => space_remaining;
+            set => space_remaining = value;
+        }
     }
 }

@@ -6,6 +6,10 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_MessageBoxColorScheme
     {
-        private _colors_e__FixedBuffer colors;
+        public _colors_e__FixedBuffer Colors
+        {
+            get => colors;
+            set => colors = value;
+        }
     }
 }

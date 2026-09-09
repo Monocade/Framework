@@ -6,10 +6,22 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_Vertex
     {
-        private SDL_FPoint position;
+        public SDL_FPoint Position
+        {
+            get => position;
+            set => position = value;
+        }
 
-        private SDL_FColor color;
+        public SDL_FColor Color
+        {
+            get => color;
+            set => color = value;
+        }
 
-        private SDL_FPoint tex_coord;
+        public SDL_FPoint Tex_coord
+        {
+            get => tex_coord;
+            set => tex_coord = value;
+        }
     }
 }

@@ -6,12 +6,28 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_Rect
     {
-        private int x;
+        public int X
+        {
+            get => x;
+            set => x = value;
+        }
 
-        private int y;
+        public int Y
+        {
+            get => y;
+            set => y = value;
+        }
 
-        private int w;
+        public int W
+        {
+            get => w;
+            set => w = value;
+        }
 
-        private int h;
+        public int H
+        {
+            get => h;
+            set => h = value;
+        }
     }
 }

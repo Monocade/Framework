@@ -6,130 +6,256 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_Event
     {
-[FieldOffset(0)]
-        private uint type;
+        public uint Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_CommonEvent common;
+        public SDL_CommonEvent Common
+        {
+            get => common;
+            set => common = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_DisplayEvent display;
+        public SDL_DisplayEvent Display
+        {
+            get => display;
+            set => display = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_WindowEvent window;
+        public SDL_WindowEvent Window
+        {
+            get => window;
+            set => window = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_KeyboardDeviceEvent kdevice;
+        public SDL_KeyboardDeviceEvent Kdevice
+        {
+            get => kdevice;
+            set => kdevice = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_KeyboardEvent key;
+        public SDL_KeyboardEvent Key
+        {
+            get => key;
+            set => key = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_TextEditingEvent edit;
+        public SDL_TextEditingEvent Edit
+        {
+            get => edit;
+            set => edit = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_TextEditingCandidatesEvent edit_candidates;
+        public SDL_TextEditingCandidatesEvent Edit_candidates
+        {
+            get => edit_candidates;
+            set => edit_candidates = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_TextInputEvent text;
+        public SDL_TextInputEvent Text
+        {
+            get => text;
+            set => text = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_MouseDeviceEvent mdevice;
+        public SDL_MouseDeviceEvent Mdevice
+        {
+            get => mdevice;
+            set => mdevice = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_MouseMotionEvent motion;
+        public SDL_MouseMotionEvent Motion
+        {
+            get => motion;
+            set => motion = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_MouseButtonEvent button;
+        public SDL_MouseButtonEvent Button
+        {
+            get => button;
+            set => button = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_MouseWheelEvent wheel;
+        public SDL_MouseWheelEvent Wheel
+        {
+            get => wheel;
+            set => wheel = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_JoyDeviceEvent jdevice;
+        public SDL_JoyDeviceEvent Jdevice
+        {
+            get => jdevice;
+            set => jdevice = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_JoyAxisEvent jaxis;
+        public SDL_JoyAxisEvent Jaxis
+        {
+            get => jaxis;
+            set => jaxis = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_JoyBallEvent jball;
+        public SDL_JoyBallEvent Jball
+        {
+            get => jball;
+            set => jball = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_JoyHatEvent jhat;
+        public SDL_JoyHatEvent Jhat
+        {
+            get => jhat;
+            set => jhat = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_JoyButtonEvent jbutton;
+        public SDL_JoyButtonEvent Jbutton
+        {
+            get => jbutton;
+            set => jbutton = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_JoyBatteryEvent jbattery;
+        public SDL_JoyBatteryEvent Jbattery
+        {
+            get => jbattery;
+            set => jbattery = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_GamepadDeviceEvent gdevice;
+        public SDL_GamepadDeviceEvent Gdevice
+        {
+            get => gdevice;
+            set => gdevice = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_GamepadAxisEvent gaxis;
+        public SDL_GamepadAxisEvent Gaxis
+        {
+            get => gaxis;
+            set => gaxis = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_GamepadButtonEvent gbutton;
+        public SDL_GamepadButtonEvent Gbutton
+        {
+            get => gbutton;
+            set => gbutton = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_GamepadTouchpadEvent gtouchpad;
+        public SDL_GamepadTouchpadEvent Gtouchpad
+        {
+            get => gtouchpad;
+            set => gtouchpad = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_GamepadSensorEvent gsensor;
+        public SDL_GamepadSensorEvent Gsensor
+        {
+            get => gsensor;
+            set => gsensor = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_GamepadCapSenseEvent gcapsense;
+        public SDL_GamepadCapSenseEvent Gcapsense
+        {
+            get => gcapsense;
+            set => gcapsense = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_AudioDeviceEvent adevice;
+        public SDL_AudioDeviceEvent Adevice
+        {
+            get => adevice;
+            set => adevice = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_CameraDeviceEvent cdevice;
+        public SDL_CameraDeviceEvent Cdevice
+        {
+            get => cdevice;
+            set => cdevice = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_SensorEvent sensor;
+        public SDL_SensorEvent Sensor
+        {
+            get => sensor;
+            set => sensor = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_QuitEvent quit;
+        public SDL_QuitEvent Quit
+        {
+            get => quit;
+            set => quit = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_UserEvent user;
+        public SDL_UserEvent User
+        {
+            get => user;
+            set => user = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_TouchFingerEvent tfinger;
+        public SDL_TouchFingerEvent Tfinger
+        {
+            get => tfinger;
+            set => tfinger = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_PinchFingerEvent pinch;
+        public SDL_PinchFingerEvent Pinch
+        {
+            get => pinch;
+            set => pinch = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_PenProximityEvent pproximity;
+        public SDL_PenProximityEvent Pproximity
+        {
+            get => pproximity;
+            set => pproximity = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_PenTouchEvent ptouch;
+        public SDL_PenTouchEvent Ptouch
+        {
+            get => ptouch;
+            set => ptouch = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_PenMotionEvent pmotion;
+        public SDL_PenMotionEvent Pmotion
+        {
+            get => pmotion;
+            set => pmotion = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_PenButtonEvent pbutton;
+        public SDL_PenButtonEvent Pbutton
+        {
+            get => pbutton;
+            set => pbutton = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_PenAxisEvent paxis;
+        public SDL_PenAxisEvent Paxis
+        {
+            get => paxis;
+            set => paxis = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_RenderEvent render;
+        public SDL_RenderEvent Render
+        {
+            get => render;
+            set => render = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_DropEvent drop;
+        public SDL_DropEvent Drop
+        {
+            get => drop;
+            set => drop = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_ClipboardEvent clipboard;
+        public SDL_ClipboardEvent Clipboard
+        {
+            get => clipboard;
+            set => clipboard = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_NotificationEvent notification;
+        public SDL_NotificationEvent Notification
+        {
+            get => notification;
+            set => notification = value;
+        }
 
-        [FieldOffset(0)]
-        private _padding_e__FixedBuffer padding;
+        public _padding_e__FixedBuffer Padding
+        {
+            get => padding;
+            set => padding = value;
+        }
     }
 }

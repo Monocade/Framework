@@ -6,8 +6,16 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_DialogFileFilter
     {
-        private byte* name;
+        public byte* Name
+        {
+            get => name;
+            set => name = value;
+        }
 
-        private byte* pattern;
+        public byte* Pattern
+        {
+            get => pattern;
+            set => pattern = value;
+        }
     }
 }

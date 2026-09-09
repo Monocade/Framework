@@ -6,20 +6,52 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_Surface
     {
-        private uint flags;
+        public uint Flags
+        {
+            get => flags;
+            set => flags = value;
+        }
 
-        private SDL_PixelFormat format;
+        public SDL_PixelFormat Format
+        {
+            get => format;
+            set => format = value;
+        }
 
-        private int w;
+        public int W
+        {
+            get => w;
+            set => w = value;
+        }
 
-        private int h;
+        public int H
+        {
+            get => h;
+            set => h = value;
+        }
 
-        private int pitch;
+        public int Pitch
+        {
+            get => pitch;
+            set => pitch = value;
+        }
 
-        private IntPtr pixels;
+        public IntPtr Pixels
+        {
+            get => pixels;
+            set => pixels = value;
+        }
 
-        private int refcount;
+        public int Refcount
+        {
+            get => refcount;
+            set => refcount = value;
+        }
 
-        private IntPtr reserved;
+        public IntPtr Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
     }
 }

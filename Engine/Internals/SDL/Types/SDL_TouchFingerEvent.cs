@@ -6,26 +6,70 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_TouchFingerEvent
     {
-        private SDL_EventType type;
+        public SDL_EventType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private uint reserved;
+        public uint Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
 
-        private ulong timestamp;
+        public ulong Timestamp
+        {
+            get => timestamp;
+            set => timestamp = value;
+        }
 
-        private ulong touchID;
+        public ulong TouchID
+        {
+            get => touchID;
+            set => touchID = value;
+        }
 
-        private ulong fingerID;
+        public ulong FingerID
+        {
+            get => fingerID;
+            set => fingerID = value;
+        }
 
-        private float x;
+        public float X
+        {
+            get => x;
+            set => x = value;
+        }
 
-        private float y;
+        public float Y
+        {
+            get => y;
+            set => y = value;
+        }
 
-        private float dx;
+        public float Dx
+        {
+            get => dx;
+            set => dx = value;
+        }
 
-        private float dy;
+        public float Dy
+        {
+            get => dy;
+            set => dy = value;
+        }
 
-        private float pressure;
+        public float Pressure
+        {
+            get => pressure;
+            set => pressure = value;
+        }
 
-        private uint windowID;
+        public uint WindowID
+        {
+            get => windowID;
+            set => windowID = value;
+        }
     }
 }

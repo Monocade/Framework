@@ -6,22 +6,58 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_PinchFingerEvent
     {
-        private SDL_EventType type;
+        public SDL_EventType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private uint reserved;
+        public uint Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
 
-        private ulong timestamp;
+        public ulong Timestamp
+        {
+            get => timestamp;
+            set => timestamp = value;
+        }
 
-        private float scale;
+        public float Scale
+        {
+            get => scale;
+            set => scale = value;
+        }
 
-        private uint windowID;
+        public uint WindowID
+        {
+            get => windowID;
+            set => windowID = value;
+        }
 
-        private float span_x;
+        public float Span_x
+        {
+            get => span_x;
+            set => span_x = value;
+        }
 
-        private float span_y;
+        public float Span_y
+        {
+            get => span_y;
+            set => span_y = value;
+        }
 
-        private float focus_x;
+        public float Focus_x
+        {
+            get => focus_x;
+            set => focus_x = value;
+        }
 
-        private float focus_y;
+        public float Focus_y
+        {
+            get => focus_y;
+            set => focus_y = value;
+        }
     }
 }

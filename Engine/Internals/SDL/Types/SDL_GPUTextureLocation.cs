@@ -6,16 +6,40 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUTextureLocation
     {
-        private SDL_GPUTexture* texture;
+        public SDL_GPUTexture* Texture
+        {
+            get => texture;
+            set => texture = value;
+        }
 
-        private uint mip_level;
+        public uint Mip_level
+        {
+            get => mip_level;
+            set => mip_level = value;
+        }
 
-        private uint layer;
+        public uint Layer
+        {
+            get => layer;
+            set => layer = value;
+        }
 
-        private uint x;
+        public uint X
+        {
+            get => x;
+            set => x = value;
+        }
 
-        private uint y;
+        public uint Y
+        {
+            get => y;
+            set => y = value;
+        }
 
-        private uint z;
+        public uint Z
+        {
+            get => z;
+            set => z = value;
+        }
     }
 }

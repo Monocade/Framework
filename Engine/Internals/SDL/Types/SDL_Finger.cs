@@ -6,12 +6,28 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_Finger
     {
-        private ulong id;
+        public ulong Id
+        {
+            get => id;
+            set => id = value;
+        }
 
-        private float x;
+        public float X
+        {
+            get => x;
+            set => x = value;
+        }
 
-        private float y;
+        public float Y
+        {
+            get => y;
+            set => y = value;
+        }
 
-        private float pressure;
+        public float Pressure
+        {
+            get => pressure;
+            set => pressure = value;
+        }
     }
 }

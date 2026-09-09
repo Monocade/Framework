@@ -6,12 +6,28 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUIndirectDrawCommand
     {
-        private uint num_vertices;
+        public uint Num_vertices
+        {
+            get => num_vertices;
+            set => num_vertices = value;
+        }
 
-        private uint num_instances;
+        public uint Num_instances
+        {
+            get => num_instances;
+            set => num_instances = value;
+        }
 
-        private uint first_vertex;
+        public uint First_vertex
+        {
+            get => first_vertex;
+            set => first_vertex = value;
+        }
 
-        private uint first_instance;
+        public uint First_instance
+        {
+            get => first_instance;
+            set => first_instance = value;
+        }
     }
 }

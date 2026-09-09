@@ -6,16 +6,40 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_DisplayEvent
     {
-        private SDL_EventType type;
+        public SDL_EventType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private uint reserved;
+        public uint Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
 
-        private ulong timestamp;
+        public ulong Timestamp
+        {
+            get => timestamp;
+            set => timestamp = value;
+        }
 
-        private uint displayID;
+        public uint DisplayID
+        {
+            get => displayID;
+            set => displayID = value;
+        }
 
-        private int data1;
+        public int Data1
+        {
+            get => data1;
+            set => data1 = value;
+        }
 
-        private int data2;
+        public int Data2
+        {
+            get => data2;
+            set => data2 = value;
+        }
     }
 }

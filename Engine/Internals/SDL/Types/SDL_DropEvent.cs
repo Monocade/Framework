@@ -6,20 +6,52 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_DropEvent
     {
-        private SDL_EventType type;
+        public SDL_EventType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private uint reserved;
+        public uint Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
 
-        private ulong timestamp;
+        public ulong Timestamp
+        {
+            get => timestamp;
+            set => timestamp = value;
+        }
 
-        private uint windowID;
+        public uint WindowID
+        {
+            get => windowID;
+            set => windowID = value;
+        }
 
-        private float x;
+        public float X
+        {
+            get => x;
+            set => x = value;
+        }
 
-        private float y;
+        public float Y
+        {
+            get => y;
+            set => y = value;
+        }
 
-        private byte* source;
+        public byte* Source
+        {
+            get => source;
+            set => source = value;
+        }
 
-        private byte* data;
+        public byte* Data
+        {
+            get => data;
+            set => data = value;
+        }
     }
 }

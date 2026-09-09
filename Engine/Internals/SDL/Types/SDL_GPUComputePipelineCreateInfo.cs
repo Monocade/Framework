@@ -6,32 +6,88 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUComputePipelineCreateInfo
     {
-        private nuint code_size;
+        public nuint Code_size
+        {
+            get => code_size;
+            set => code_size = value;
+        }
 
-        private byte* code;
+        public byte* Code
+        {
+            get => code;
+            set => code = value;
+        }
 
-        private byte* entrypoint;
+        public byte* Entrypoint
+        {
+            get => entrypoint;
+            set => entrypoint = value;
+        }
 
-        private uint format;
+        public uint Format
+        {
+            get => format;
+            set => format = value;
+        }
 
-        private uint num_samplers;
+        public uint Num_samplers
+        {
+            get => num_samplers;
+            set => num_samplers = value;
+        }
 
-        private uint num_readonly_storage_textures;
+        public uint Num_readonly_storage_textures
+        {
+            get => num_readonly_storage_textures;
+            set => num_readonly_storage_textures = value;
+        }
 
-        private uint num_readonly_storage_buffers;
+        public uint Num_readonly_storage_buffers
+        {
+            get => num_readonly_storage_buffers;
+            set => num_readonly_storage_buffers = value;
+        }
 
-        private uint num_readwrite_storage_textures;
+        public uint Num_readwrite_storage_textures
+        {
+            get => num_readwrite_storage_textures;
+            set => num_readwrite_storage_textures = value;
+        }
 
-        private uint num_readwrite_storage_buffers;
+        public uint Num_readwrite_storage_buffers
+        {
+            get => num_readwrite_storage_buffers;
+            set => num_readwrite_storage_buffers = value;
+        }
 
-        private uint num_uniform_buffers;
+        public uint Num_uniform_buffers
+        {
+            get => num_uniform_buffers;
+            set => num_uniform_buffers = value;
+        }
 
-        private uint threadcount_x;
+        public uint Threadcount_x
+        {
+            get => threadcount_x;
+            set => threadcount_x = value;
+        }
 
-        private uint threadcount_y;
+        public uint Threadcount_y
+        {
+            get => threadcount_y;
+            set => threadcount_y = value;
+        }
 
-        private uint threadcount_z;
+        public uint Threadcount_z
+        {
+            get => threadcount_z;
+            set => threadcount_z = value;
+        }
 
-        private uint props;
+        public uint Props
+        {
+            get => props;
+            set => props = value;
+        }
     }
 }

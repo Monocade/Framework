@@ -6,22 +6,58 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUGraphicsPipelineCreateInfo
     {
-        private SDL_GPUShader* vertex_shader;
+        public SDL_GPUShader* Vertex_shader
+        {
+            get => vertex_shader;
+            set => vertex_shader = value;
+        }
 
-        private SDL_GPUShader* fragment_shader;
+        public SDL_GPUShader* Fragment_shader
+        {
+            get => fragment_shader;
+            set => fragment_shader = value;
+        }
 
-        private SDL_GPUVertexInputState vertex_input_state;
+        public SDL_GPUVertexInputState Vertex_input_state
+        {
+            get => vertex_input_state;
+            set => vertex_input_state = value;
+        }
 
-        private SDL_GPUPrimitiveType primitive_type;
+        public SDL_GPUPrimitiveType Primitive_type
+        {
+            get => primitive_type;
+            set => primitive_type = value;
+        }
 
-        private SDL_GPURasterizerState rasterizer_state;
+        public SDL_GPURasterizerState Rasterizer_state
+        {
+            get => rasterizer_state;
+            set => rasterizer_state = value;
+        }
 
-        private SDL_GPUMultisampleState multisample_state;
+        public SDL_GPUMultisampleState Multisample_state
+        {
+            get => multisample_state;
+            set => multisample_state = value;
+        }
 
-        private SDL_GPUDepthStencilState depth_stencil_state;
+        public SDL_GPUDepthStencilState Depth_stencil_state
+        {
+            get => depth_stencil_state;
+            set => depth_stencil_state = value;
+        }
 
-        private SDL_GPUGraphicsPipelineTargetInfo target_info;
+        public SDL_GPUGraphicsPipelineTargetInfo Target_info
+        {
+            get => target_info;
+            set => target_info = value;
+        }
 
-        private uint props;
+        public uint Props
+        {
+            get => props;
+            set => props = value;
+        }
     }
 }

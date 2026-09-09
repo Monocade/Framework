@@ -6,8 +6,16 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_VirtualJoystickTouchpadDesc
     {
-        private ushort nfingers;
+        public ushort Nfingers
+        {
+            get => nfingers;
+            set => nfingers = value;
+        }
 
-        private _padding_e__FixedBuffer padding;
+        public _padding_e__FixedBuffer Padding
+        {
+            get => padding;
+            set => padding = value;
+        }
     }
 }

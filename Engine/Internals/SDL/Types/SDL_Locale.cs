@@ -6,8 +6,16 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_Locale
     {
-        private byte* language;
+        public byte* Language
+        {
+            get => language;
+            set => language = value;
+        }
 
-        private byte* country;
+        public byte* Country
+        {
+            get => country;
+            set => country = value;
+        }
     }
 }

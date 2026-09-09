@@ -6,24 +6,64 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUDepthStencilTargetInfo
     {
-        private SDL_GPUTexture* texture;
+        public SDL_GPUTexture* Texture
+        {
+            get => texture;
+            set => texture = value;
+        }
 
-        private float clear_depth;
+        public float Clear_depth
+        {
+            get => clear_depth;
+            set => clear_depth = value;
+        }
 
-        private SDL_GPULoadOp load_op;
+        public SDL_GPULoadOp Load_op
+        {
+            get => load_op;
+            set => load_op = value;
+        }
 
-        private SDL_GPUStoreOp store_op;
+        public SDL_GPUStoreOp Store_op
+        {
+            get => store_op;
+            set => store_op = value;
+        }
 
-        private SDL_GPULoadOp stencil_load_op;
+        public SDL_GPULoadOp Stencil_load_op
+        {
+            get => stencil_load_op;
+            set => stencil_load_op = value;
+        }
 
-        private SDL_GPUStoreOp stencil_store_op;
+        public SDL_GPUStoreOp Stencil_store_op
+        {
+            get => stencil_store_op;
+            set => stencil_store_op = value;
+        }
 
-        private SDL_Bool cycle;
+        public SDL_Bool Cycle
+        {
+            get => cycle;
+            set => cycle = value;
+        }
 
-        private byte clear_stencil;
+        public byte Clear_stencil
+        {
+            get => clear_stencil;
+            set => clear_stencil = value;
+        }
 
-        private byte mip_level;
+        public byte Mip_level
+        {
+            get => mip_level;
+            set => mip_level = value;
+        }
 
-        private byte layer;
+        public byte Layer
+        {
+            get => layer;
+            set => layer = value;
+        }
     }
 }

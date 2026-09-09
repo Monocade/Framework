@@ -6,22 +6,58 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GamepadTouchpadEvent
     {
-        private SDL_EventType type;
+        public SDL_EventType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private uint reserved;
+        public uint Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
 
-        private ulong timestamp;
+        public ulong Timestamp
+        {
+            get => timestamp;
+            set => timestamp = value;
+        }
 
-        private uint which;
+        public uint Which
+        {
+            get => which;
+            set => which = value;
+        }
 
-        private int touchpad;
+        public int Touchpad
+        {
+            get => touchpad;
+            set => touchpad = value;
+        }
 
-        private int finger;
+        public int Finger
+        {
+            get => finger;
+            set => finger = value;
+        }
 
-        private float x;
+        public float X
+        {
+            get => x;
+            set => x = value;
+        }
 
-        private float y;
+        public float Y
+        {
+            get => y;
+            set => y = value;
+        }
 
-        private float pressure;
+        public float Pressure
+        {
+            get => pressure;
+            set => pressure = value;
+        }
     }
 }

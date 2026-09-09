@@ -6,14 +6,34 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_PathInfo
     {
-        private SDL_PathType type;
+        public SDL_PathType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private ulong size;
+        public ulong Size
+        {
+            get => size;
+            set => size = value;
+        }
 
-        private long create_time;
+        public long Create_time
+        {
+            get => create_time;
+            set => create_time = value;
+        }
 
-        private long modify_time;
+        public long Modify_time
+        {
+            get => modify_time;
+            set => modify_time = value;
+        }
 
-        private long access_time;
+        public long Access_time
+        {
+            get => access_time;
+            set => access_time = value;
+        }
     }
 }

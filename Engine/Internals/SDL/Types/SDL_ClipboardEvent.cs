@@ -6,16 +6,40 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_ClipboardEvent
     {
-        private SDL_EventType type;
+        public SDL_EventType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private uint reserved;
+        public uint Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
 
-        private ulong timestamp;
+        public ulong Timestamp
+        {
+            get => timestamp;
+            set => timestamp = value;
+        }
 
-        private SDL_Bool owner;
+        public SDL_Bool Owner
+        {
+            get => owner;
+            set => owner = value;
+        }
 
-        private int num_mime_types;
+        public int Num_mime_types
+        {
+            get => num_mime_types;
+            set => num_mime_types = value;
+        }
 
-        private byte** mime_types;
+        public byte** Mime_types
+        {
+            get => mime_types;
+            set => mime_types = value;
+        }
     }
 }

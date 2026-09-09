@@ -6,12 +6,28 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUVertexBufferDescription
     {
-        private uint slot;
+        public uint Slot
+        {
+            get => slot;
+            set => slot = value;
+        }
 
-        private uint pitch;
+        public uint Pitch
+        {
+            get => pitch;
+            set => pitch = value;
+        }
 
-        private SDL_GPUVertexInputRate input_rate;
+        public SDL_GPUVertexInputRate Input_rate
+        {
+            get => input_rate;
+            set => input_rate = value;
+        }
 
-        private uint instance_step_rate;
+        public uint Instance_step_rate
+        {
+            get => instance_step_rate;
+            set => instance_step_rate = value;
+        }
     }
 }

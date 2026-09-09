@@ -6,8 +6,16 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_VirtualJoystickSensorDesc
     {
-        private SDL_SensorType type;
+        public SDL_SensorType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private float rate;
+        public float Rate
+        {
+            get => rate;
+            set => rate = value;
+        }
     }
 }

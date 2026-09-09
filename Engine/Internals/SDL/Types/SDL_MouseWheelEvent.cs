@@ -6,28 +6,76 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_MouseWheelEvent
     {
-        private SDL_EventType type;
+        public SDL_EventType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private uint reserved;
+        public uint Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
 
-        private ulong timestamp;
+        public ulong Timestamp
+        {
+            get => timestamp;
+            set => timestamp = value;
+        }
 
-        private uint windowID;
+        public uint WindowID
+        {
+            get => windowID;
+            set => windowID = value;
+        }
 
-        private uint which;
+        public uint Which
+        {
+            get => which;
+            set => which = value;
+        }
 
-        private float x;
+        public float X
+        {
+            get => x;
+            set => x = value;
+        }
 
-        private float y;
+        public float Y
+        {
+            get => y;
+            set => y = value;
+        }
 
-        private SDL_MouseWheelDirection direction;
+        public SDL_MouseWheelDirection Direction
+        {
+            get => direction;
+            set => direction = value;
+        }
 
-        private float mouse_x;
+        public float Mouse_x
+        {
+            get => mouse_x;
+            set => mouse_x = value;
+        }
 
-        private float mouse_y;
+        public float Mouse_y
+        {
+            get => mouse_y;
+            set => mouse_y = value;
+        }
 
-        private int integer_x;
+        public int Integer_x
+        {
+            get => integer_x;
+            set => integer_x = value;
+        }
 
-        private int integer_y;
+        public int Integer_y
+        {
+            get => integer_y;
+            set => integer_y = value;
+        }
     }
 }

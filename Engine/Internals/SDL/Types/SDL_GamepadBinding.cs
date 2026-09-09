@@ -6,12 +6,121 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GamepadBinding
     {
-        private SDL_GamepadBindingType input_type;
+        public SDL_GamepadBindingType Input_type
+        {
+            get => input_type;
+            set => input_type = value;
+        }
 
-        private _input_e__Union input;
+        public _input_e__Union Input
+        {
+            get => input;
+            set => input = value;
+        }
 
-        private SDL_GamepadBindingType output_type;
+        public SDL_GamepadBindingType Output_type
+        {
+            get => output_type;
+            set => output_type = value;
+        }
 
-        private _output_e__Union output;
+        public _output_e__Union Output
+        {
+            get => output;
+            set => output = value;
+        }
+        
+        internal partial struct _input_e__Union
+        {
+            public int Button
+            {
+                get => button;
+                set => button = value;
+            }
+
+            public _axis_e__Struct Axis
+            {
+                get => axis;
+                set => axis = value;
+            }
+
+            public _hat_e__Struct Hat
+            {
+                get => hat;
+                set => hat = value;
+            }
+
+            internal partial struct _axis_e__Struct
+            {
+                public int Axis
+                {
+                    get => axis;
+                    set => axis = value;
+                }
+
+                public int Axis_min
+                {
+                    get => axis_min;
+                    set => axis_min = value;
+                }
+
+                public int Axis_max
+                {
+                    get => axis_max;
+                    set => axis_max = value;
+                }
+            }
+
+            internal partial struct _hat_e__Struct
+            {
+                public int Hat
+                {
+                    get => hat;
+                    set => hat = value;
+                }
+
+                public int Hat_mask
+                {
+                    get => hat_mask;
+                    set => hat_mask = value;
+                }
+            }
+        }
+
+        internal partial struct _output_e__Union
+        {
+            public SDL_GamepadButton Button
+            {
+                get => button;
+                set => button = value;
+            }
+
+            public _axis_e__Struct Axis
+            {
+                get => axis;
+                set => axis = value;
+            }
+
+            internal partial struct _axis_e__Struct
+            {
+                public SDL_GamepadAxis Axis
+                {
+                    get => axis;
+                    set => axis = value;
+                }
+
+                public int Axis_min
+                {
+                    get => axis_min;
+                    set => axis_min = value;
+                }
+
+                public int Axis_max
+                {
+                    get => axis_max;
+                    set => axis_max = value;
+                }
+            }
+        }
     }
 }

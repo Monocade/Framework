@@ -6,10 +6,22 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_MessageBoxColor
     {
-        private byte r;
+        public byte R
+        {
+            get => r;
+            set => r = value;
+        }
 
-        private byte g;
+        public byte G
+        {
+            get => g;
+            set => g = value;
+        }
 
-        private byte b;
+        public byte B
+        {
+            get => b;
+            set => b = value;
+        }
     }
 }

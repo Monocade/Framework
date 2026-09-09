@@ -6,16 +6,40 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_SensorEvent
     {
-        private SDL_EventType type;
+        public SDL_EventType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private uint reserved;
+        public uint Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
 
-        private ulong timestamp;
+        public ulong Timestamp
+        {
+            get => timestamp;
+            set => timestamp = value;
+        }
 
-        private uint which;
+        public uint Which
+        {
+            get => which;
+            set => which = value;
+        }
 
-        private _data_e__FixedBuffer data;
+        public _data_e__FixedBuffer Data
+        {
+            get => data;
+            set => data = value;
+        }
 
-        private ulong sensor_timestamp;
+        public ulong Sensor_timestamp
+        {
+            get => sensor_timestamp;
+            set => sensor_timestamp = value;
+        }
     }
 }

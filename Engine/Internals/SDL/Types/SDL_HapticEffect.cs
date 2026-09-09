@@ -6,25 +6,46 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_HapticEffect
     {
-        [FieldOffset(0)]
-        private ushort type;
+        public ushort Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_HapticConstant constant;
+        public SDL_HapticConstant Constant
+        {
+            get => constant;
+            set => constant = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_HapticPeriodic periodic;
+        public SDL_HapticPeriodic Periodic
+        {
+            get => periodic;
+            set => periodic = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_HapticCondition condition;
+        public SDL_HapticCondition Condition
+        {
+            get => condition;
+            set => condition = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_HapticRamp ramp;
+        public SDL_HapticRamp Ramp
+        {
+            get => ramp;
+            set => ramp = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_HapticLeftRight leftright;
+        public SDL_HapticLeftRight Leftright
+        {
+            get => leftright;
+            set => leftright = value;
+        }
 
-        [FieldOffset(0)]
-        private SDL_HapticCustom custom;
+        public SDL_HapticCustom Custom
+        {
+            get => custom;
+            set => custom = value;
+        }
     }
 }

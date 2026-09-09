@@ -6,13 +6,22 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_NotificationAction
     {
-        [FieldOffset(0)]
-        private SDL_NotificationActionType type;
+        public SDL_NotificationActionType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        [FieldOffset(0)]
-        private _button_e__Struct button;
+        public _button_e__Struct Button
+        {
+            get => button;
+            set => button = value;
+        }
 
-        [FieldOffset(0)]
-        private _padding_e__FixedBuffer padding;
+        public _padding_e__FixedBuffer Padding
+        {
+            get => padding;
+            set => padding = value;
+        }
     }
 }

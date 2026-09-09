@@ -6,12 +6,28 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_FColor
     {
-        private float r;
+        public float R
+        {
+            get => r;
+            set => r = value;
+        }
 
-        private float g;
+        public float G
+        {
+            get => g;
+            set => g = value;
+        }
 
-        private float b;
+        public float B
+        {
+            get => b;
+            set => b = value;
+        }
 
-        private float a;
+        public float A
+        {
+            get => a;
+            set => a = value;
+        }
     }
 }

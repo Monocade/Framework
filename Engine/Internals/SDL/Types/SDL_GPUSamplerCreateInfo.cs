@@ -6,36 +6,100 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUSamplerCreateInfo
     {
-        private SDL_GPUFilter min_filter;
+        public SDL_GPUFilter Min_filter
+        {
+            get => min_filter;
+            set => min_filter = value;
+        }
 
-        private SDL_GPUFilter mag_filter;
+        public SDL_GPUFilter Mag_filter
+        {
+            get => mag_filter;
+            set => mag_filter = value;
+        }
 
-        private SDL_GPUSamplerMipmapMode mipmap_mode;
+        public SDL_GPUSamplerMipmapMode Mipmap_mode
+        {
+            get => mipmap_mode;
+            set => mipmap_mode = value;
+        }
 
-        private SDL_GPUSamplerAddressMode address_mode_u;
+        public SDL_GPUSamplerAddressMode Address_mode_u
+        {
+            get => address_mode_u;
+            set => address_mode_u = value;
+        }
 
-        private SDL_GPUSamplerAddressMode address_mode_v;
+        public SDL_GPUSamplerAddressMode Address_mode_v
+        {
+            get => address_mode_v;
+            set => address_mode_v = value;
+        }
 
-        private SDL_GPUSamplerAddressMode address_mode_w;
+        public SDL_GPUSamplerAddressMode Address_mode_w
+        {
+            get => address_mode_w;
+            set => address_mode_w = value;
+        }
 
-        private float mip_lod_bias;
+        public float Mip_lod_bias
+        {
+            get => mip_lod_bias;
+            set => mip_lod_bias = value;
+        }
 
-        private float max_anisotropy;
+        public float Max_anisotropy
+        {
+            get => max_anisotropy;
+            set => max_anisotropy = value;
+        }
 
-        private SDL_GPUCompareOp compare_op;
+        public SDL_GPUCompareOp Compare_op
+        {
+            get => compare_op;
+            set => compare_op = value;
+        }
 
-        private float min_lod;
+        public float Min_lod
+        {
+            get => min_lod;
+            set => min_lod = value;
+        }
 
-        private float max_lod;
+        public float Max_lod
+        {
+            get => max_lod;
+            set => max_lod = value;
+        }
 
-        private SDL_Bool enable_anisotropy;
+        public SDL_Bool Enable_anisotropy
+        {
+            get => enable_anisotropy;
+            set => enable_anisotropy = value;
+        }
 
-        private SDL_Bool enable_compare;
+        public SDL_Bool Enable_compare
+        {
+            get => enable_compare;
+            set => enable_compare = value;
+        }
 
-        private byte padding1;
+        public byte Padding1
+        {
+            get => padding1;
+            set => padding1 = value;
+        }
 
-        private byte padding2;
+        public byte Padding2
+        {
+            get => padding2;
+            set => padding2 = value;
+        }
 
-        private uint props;
+        public uint Props
+        {
+            get => props;
+            set => props = value;
+        }
     }
 }

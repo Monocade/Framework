@@ -6,26 +6,70 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_KeyboardEvent
     {
-        private SDL_EventType type;
+        public SDL_EventType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private uint reserved;
+        public uint Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
 
-        private ulong timestamp;
+        public ulong Timestamp
+        {
+            get => timestamp;
+            set => timestamp = value;
+        }
 
-        private uint windowID;
+        public uint WindowID
+        {
+            get => windowID;
+            set => windowID = value;
+        }
 
-        private uint which;
+        public uint Which
+        {
+            get => which;
+            set => which = value;
+        }
 
-        private SDL_Scancode scancode;
+        public SDL_Scancode Scancode
+        {
+            get => scancode;
+            set => scancode = value;
+        }
 
-        private uint key;
+        public uint Key
+        {
+            get => key;
+            set => key = value;
+        }
 
-        private ushort mod;
+        public ushort Mod
+        {
+            get => mod;
+            set => mod = value;
+        }
 
-        private ushort raw;
+        public ushort Raw
+        {
+            get => raw;
+            set => raw = value;
+        }
 
-        private SDL_Bool down;
+        public SDL_Bool Down
+        {
+            get => down;
+            set => down = value;
+        }
 
-        private SDL_Bool repeat;
+        public SDL_Bool Repeat
+        {
+            get => repeat;
+            set => repeat = value;
+        }
     }
 }

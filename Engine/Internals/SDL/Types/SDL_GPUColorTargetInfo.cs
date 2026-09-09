@@ -6,30 +6,82 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUColorTargetInfo
     {
-        private SDL_GPUTexture* texture;
+        public SDL_GPUTexture* Texture
+        {
+            get => texture;
+            set => texture = value;
+        }
 
-        private uint mip_level;
+        public uint Mip_level
+        {
+            get => mip_level;
+            set => mip_level = value;
+        }
 
-        private uint layer_or_depth_plane;
+        public uint Layer_or_depth_plane
+        {
+            get => layer_or_depth_plane;
+            set => layer_or_depth_plane = value;
+        }
 
-        private SDL_FColor clear_color;
+        public SDL_FColor Clear_color
+        {
+            get => clear_color;
+            set => clear_color = value;
+        }
 
-        private SDL_GPULoadOp load_op;
+        public SDL_GPULoadOp Load_op
+        {
+            get => load_op;
+            set => load_op = value;
+        }
 
-        private SDL_GPUStoreOp store_op;
+        public SDL_GPUStoreOp Store_op
+        {
+            get => store_op;
+            set => store_op = value;
+        }
 
-        private SDL_GPUTexture* resolve_texture;
+        public SDL_GPUTexture* Resolve_texture
+        {
+            get => resolve_texture;
+            set => resolve_texture = value;
+        }
 
-        private uint resolve_mip_level;
+        public uint Resolve_mip_level
+        {
+            get => resolve_mip_level;
+            set => resolve_mip_level = value;
+        }
 
-        private uint resolve_layer;
+        public uint Resolve_layer
+        {
+            get => resolve_layer;
+            set => resolve_layer = value;
+        }
 
-        private SDL_Bool cycle;
+        public SDL_Bool Cycle
+        {
+            get => cycle;
+            set => cycle = value;
+        }
 
-        private SDL_Bool cycle_resolve_texture;
+        public SDL_Bool Cycle_resolve_texture
+        {
+            get => cycle_resolve_texture;
+            set => cycle_resolve_texture = value;
+        }
 
-        private byte padding1;
+        public byte Padding1
+        {
+            get => padding1;
+            set => padding1 = value;
+        }
 
-        private byte padding2;
+        public byte Padding2
+        {
+            get => padding2;
+            set => padding2 = value;
+        }
     }
 }

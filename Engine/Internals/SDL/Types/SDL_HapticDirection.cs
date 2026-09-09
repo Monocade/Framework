@@ -6,8 +6,16 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_HapticDirection
     {
-        private byte type;
+        public byte Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private _dir_e__FixedBuffer dir;
+        public _dir_e__FixedBuffer Dir
+        {
+            get => dir;
+            set => dir = value;
+        }
     }
 }

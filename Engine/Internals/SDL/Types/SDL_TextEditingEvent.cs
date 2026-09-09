@@ -6,18 +6,46 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_TextEditingEvent
     {
-        private SDL_EventType type;
+        public SDL_EventType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private uint reserved;
+        public uint Reserved
+        {
+            get => reserved;
+            set => reserved = value;
+        }
 
-        private ulong timestamp;
+        public ulong Timestamp
+        {
+            get => timestamp;
+            set => timestamp = value;
+        }
 
-        private uint windowID;
+        public uint WindowID
+        {
+            get => windowID;
+            set => windowID = value;
+        }
 
-        private byte* text;
+        public byte* Text
+        {
+            get => text;
+            set => text = value;
+        }
 
-        private int start;
+        public int Start
+        {
+            get => start;
+            set => start = value;
+        }
 
-        private int length;
+        public int Length
+        {
+            get => length;
+            set => length = value;
+        }
     }
 }

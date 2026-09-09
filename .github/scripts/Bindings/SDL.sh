@@ -133,6 +133,7 @@ find "$OUTPUTS" -type f -name "*.cs" -print0 | while IFS= read -r -d '' file; do
   sed -i -E 's/\bpublic\b/private/g' "$file"
   sed -i -E 's/\bprivate const\b/public const/g' "$file"
   sed -i -E 's/\bprivate partial\b/public partial/g' "$file"
+  sed -i -E 's/\bprivate static readonly\b/public static readonly/g' "$file"
   sed -E -i 's/(static extern [^ ]+ )([A-Za-z_][A-Za-z0-9_]*)\(/\1iSDL_\2(/g' "$file"
   sed -i -E 's/private static ReadOnlySpan<byte> ([A-Za-z0-9_]+) => "([^"]*)"u8;/public static string \1 => "\2";/' "$file"
   

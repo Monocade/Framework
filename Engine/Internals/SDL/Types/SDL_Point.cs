@@ -6,8 +6,16 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_Point
     {
-        private int x;
+        public int X
+        {
+            get => x;
+            set => x = value;
+        }
 
-        private int y;
+        public int Y
+        {
+            get => y;
+            set => y = value;
+        }
     }
 }

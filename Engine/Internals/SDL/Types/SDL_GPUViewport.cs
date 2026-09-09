@@ -6,16 +6,40 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUViewport
     {
-        private float x;
+        public float X
+        {
+            get => x;
+            set => x = value;
+        }
 
-        private float y;
+        public float Y
+        {
+            get => y;
+            set => y = value;
+        }
 
-        private float w;
+        public float W
+        {
+            get => w;
+            set => w = value;
+        }
 
-        private float h;
+        public float H
+        {
+            get => h;
+            set => h = value;
+        }
 
-        private float min_depth;
+        public float Min_depth
+        {
+            get => min_depth;
+            set => min_depth = value;
+        }
 
-        private float max_depth;
+        public float Max_depth
+        {
+            get => max_depth;
+            set => max_depth = value;
+        }
     }
 }

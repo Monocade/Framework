@@ -6,22 +6,58 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUTextureCreateInfo
     {
-        private SDL_GPUTextureType type;
+        public SDL_GPUTextureType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
-        private SDL_GPUTextureFormat format;
+        public SDL_GPUTextureFormat Format
+        {
+            get => format;
+            set => format = value;
+        }
 
-        private uint usage;
+        public uint Usage
+        {
+            get => usage;
+            set => usage = value;
+        }
 
-        private uint width;
+        public uint Width
+        {
+            get => width;
+            set => width = value;
+        }
 
-        private uint height;
+        public uint Height
+        {
+            get => height;
+            set => height = value;
+        }
 
-        private uint layer_count_or_depth;
+        public uint Layer_count_or_depth
+        {
+            get => layer_count_or_depth;
+            set => layer_count_or_depth = value;
+        }
 
-        private uint num_levels;
+        public uint Num_levels
+        {
+            get => num_levels;
+            set => num_levels = value;
+        }
 
-        private SDL_GPUSampleCount sample_count;
+        public SDL_GPUSampleCount Sample_count
+        {
+            get => sample_count;
+            set => sample_count = value;
+        }
 
-        private uint props;
+        public uint Props
+        {
+            get => props;
+            set => props = value;
+        }
     }
 }

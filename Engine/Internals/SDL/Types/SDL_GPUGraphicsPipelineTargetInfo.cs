@@ -6,18 +6,46 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUGraphicsPipelineTargetInfo
     {
-        private SDL_GPUColorTargetDescription* color_target_descriptions;
+        public SDL_GPUColorTargetDescription* Color_target_descriptions
+        {
+            get => color_target_descriptions;
+            set => color_target_descriptions = value;
+        }
 
-        private uint num_color_targets;
+        public uint Num_color_targets
+        {
+            get => num_color_targets;
+            set => num_color_targets = value;
+        }
 
-        private SDL_GPUTextureFormat depth_stencil_format;
+        public SDL_GPUTextureFormat Depth_stencil_format
+        {
+            get => depth_stencil_format;
+            set => depth_stencil_format = value;
+        }
 
-        private SDL_Bool has_depth_stencil_target;
+        public SDL_Bool Has_depth_stencil_target
+        {
+            get => has_depth_stencil_target;
+            set => has_depth_stencil_target = value;
+        }
 
-        private byte padding1;
+        public byte Padding1
+        {
+            get => padding1;
+            set => padding1 = value;
+        }
 
-        private byte padding2;
+        public byte Padding2
+        {
+            get => padding2;
+            set => padding2 = value;
+        }
 
-        private byte padding3;
+        public byte Padding3
+        {
+            get => padding3;
+            set => padding3 = value;
+        }
     }
 }

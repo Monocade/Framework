@@ -6,18 +6,46 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_IOStreamInterface
     {
-        private uint version;
+        public uint Version
+        {
+            get => version;
+            set => version = value;
+        }
 
-        private IntPtr size;
+        public IntPtr Size
+        {
+            get => size;
+            set => size = value;
+        }
 
-        private IntPtr seek;
+        public IntPtr Seek
+        {
+            get => seek;
+            set => seek = value;
+        }
 
-        private IntPtr read;
+        public IntPtr Read
+        {
+            get => read;
+            set => read = value;
+        }
 
-        private IntPtr write;
+        public IntPtr Write
+        {
+            get => write;
+            set => write = value;
+        }
 
-        private IntPtr flush;
+        public IntPtr Flush
+        {
+            get => flush;
+            set => flush = value;
+        }
 
-        private IntPtr close;
+        public IntPtr Close
+        {
+            get => close;
+            set => close = value;
+        }
     }
 }

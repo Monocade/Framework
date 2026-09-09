@@ -6,8 +6,16 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_alignment_test
     {
-        private byte a;
+        public byte A
+        {
+            get => a;
+            set => a = value;
+        }
 
-        private IntPtr b;
+        public IntPtr B
+        {
+            get => b;
+            set => b = value;
+        }
     }
 }
