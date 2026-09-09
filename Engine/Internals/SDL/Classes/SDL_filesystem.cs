@@ -15,7 +15,7 @@ namespace Engine.SDL3
             fixed (byte* ptr1 = SDL_StringToNative(org))
             fixed (byte* ptr2 = SDL_StringToNative(app))
             {
-                return SDL_NativeToString(iSDL_GetPrefPath(ptr1, ptr2));
+                return SDL_NativeToString(iSDL_GetPrefPath(ptr1, ptr2), free: true);
             }
         }
 
@@ -86,7 +86,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetCurrentDirectory()
         {
-            return SDL_NativeToString(iSDL_GetCurrentDirectory());
+            return SDL_NativeToString(iSDL_GetCurrentDirectory(), free: true);
         }
     }
 }

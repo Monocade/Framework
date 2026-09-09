@@ -15,7 +15,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetClipboardText()
         {
-            return SDL_NativeToString(iSDL_GetClipboardText(), true);
+            return SDL_NativeToString(iSDL_GetClipboardText(), free: true);
         }
 
         public static bool SDL_HasClipboardText()
@@ -33,7 +33,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetPrimarySelectionText()
         {
-            return SDL_NativeToString(iSDL_GetPrimarySelectionText(), true);
+            return SDL_NativeToString(iSDL_GetPrimarySelectionText(), free: true);
         }
 
         public static bool SDL_HasPrimarySelectionText()

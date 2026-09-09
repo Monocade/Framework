@@ -38,12 +38,12 @@ namespace Engine.SDL3
 
         public static string SDL_GetGamepadMappingForGUID(SDL_GUID guid)
         {
-            return SDL_NativeToString(iSDL_GetGamepadMappingForGUID(guid));
+            return SDL_NativeToString(iSDL_GetGamepadMappingForGUID(guid), free: true);
         }
 
         public static string SDL_GetGamepadMapping(SDL_Gamepad* gamepad)
         {
-            return SDL_NativeToString(iSDL_GetGamepadMapping(gamepad));
+            return SDL_NativeToString(iSDL_GetGamepadMapping(gamepad), free: true);
         }
 
         public static bool SDL_SetGamepadMapping(uint instance_id, string mapping)
@@ -116,7 +116,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetGamepadMappingForID(uint instance_id)
         {
-            return SDL_NativeToString(iSDL_GetGamepadMappingForID(instance_id));
+            return SDL_NativeToString(iSDL_GetGamepadMappingForID(instance_id), free: true);
         }
 
         public static SDL_Gamepad* SDL_OpenGamepad(uint instance_id)
