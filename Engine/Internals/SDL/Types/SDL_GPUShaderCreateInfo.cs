@@ -6,7 +6,7 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUShaderCreateInfo
     {
-        public nuint Code_size
+        public UIntPtr Code_size
         {
             get => code_size;
             set => code_size = value;

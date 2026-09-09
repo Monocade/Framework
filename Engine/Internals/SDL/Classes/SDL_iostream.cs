@@ -14,12 +14,12 @@ namespace Engine.SDL3
             }
         }
 
-        public static SDL_IOStream* SDL_IOFromMem(IntPtr mem, nuint size)
+        public static SDL_IOStream* SDL_IOFromMem(IntPtr mem, UIntPtr size)
         {
             return iSDL_IOFromMem(mem, size);
         }
 
-        public static SDL_IOStream* SDL_IOFromConstMem(IntPtr mem, nuint size)
+        public static SDL_IOStream* SDL_IOFromConstMem(IntPtr mem, UIntPtr size)
         {
             return iSDL_IOFromConstMem(mem, size);
         }
@@ -64,17 +64,17 @@ namespace Engine.SDL3
             return iSDL_TellIO(context);
         }
 
-        public static nuint SDL_ReadIO(SDL_IOStream* context, IntPtr ptr, nuint size)
+        public static UIntPtr SDL_ReadIO(SDL_IOStream* context, IntPtr ptr, UIntPtr size)
         {
             return iSDL_ReadIO(context, ptr, size);
         }
 
-        public static nuint SDL_WriteIO(SDL_IOStream* context, IntPtr ptr, nuint size)
+        public static UIntPtr SDL_WriteIO(SDL_IOStream* context, IntPtr ptr, UIntPtr size)
         {
             return iSDL_WriteIO(context, ptr, size);
         }
 
-        public static nuint SDL_IOprintf(SDL_IOStream* context, string fmt)
+        public static UIntPtr SDL_IOprintf(SDL_IOStream* context, string fmt)
         {
             fixed (byte* ptr1 = SDL_StringToNative(fmt))
             {
@@ -82,7 +82,7 @@ namespace Engine.SDL3
             }
         }
 
-        public static nuint SDL_IOvprintf(SDL_IOStream* context, string fmt, string ap)
+        public static UIntPtr SDL_IOvprintf(SDL_IOStream* context, string fmt, string ap)
         {
             fixed (byte* ptr1 = SDL_StringToNative(fmt))
             fixed (byte* ptr2 = SDL_StringToNative(ap))
@@ -113,12 +113,12 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_SaveFile_IO(SDL_IOStream* src, IntPtr data, nuint datasize, bool closeio)
+        public static bool SDL_SaveFile_IO(SDL_IOStream* src, IntPtr data, UIntPtr datasize, bool closeio)
         {
             return iSDL_SaveFile_IO(src, data, datasize, closeio);
         }
 
-        public static bool SDL_SaveFile(string file, IntPtr data, nuint datasize)
+        public static bool SDL_SaveFile(string file, IntPtr data, UIntPtr datasize)
         {
             fixed (byte* ptr1 = SDL_StringToNative(file))
             {

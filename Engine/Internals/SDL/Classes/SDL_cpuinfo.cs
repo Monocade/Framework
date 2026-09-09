@@ -95,7 +95,7 @@ namespace Engine.SDL3
             return iSDL_GetSystemRAM();
         }
 
-        public static nuint SDL_GetSIMDAlignment()
+        public static UIntPtr SDL_GetSIMDAlignment()
         {
             return iSDL_GetSIMDAlignment();
         }

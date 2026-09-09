@@ -54,7 +54,7 @@ namespace Engine.SDL3
         public static IntPtr SDL_GetClipboardData(string mime_type, out UIntPtr size)
         {
             fixed (byte* ptr1 = SDL_StringToNative(mime_type))
-            fixed (nuint* ptr2 = &size)
+            fixed (UIntPtr* ptr2 = &size)
             {
                 return iSDL_GetClipboardData(ptr1, ptr2);
             }
@@ -68,9 +68,9 @@ namespace Engine.SDL3
             }
         }
 
-        public static string[] SDL_GetClipboardMimeTypes(out nuint num_mime_types)
+        public static string[] SDL_GetClipboardMimeTypes(out UIntPtr num_mime_types)
         {
-            fixed (nuint* ptr = &num_mime_types)
+            fixed (UIntPtr* ptr = &num_mime_types)
             {
                 var count = checked((int)(*ptr));
                 {
