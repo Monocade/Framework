@@ -117,22 +117,23 @@ for file in "${FILES[@]}"; do
 done
 
 
-# Post process (order matters)
+# Post processing
 find "$OUTPUTS" -type f -name "*.cs" -print0 | while IFS= read -r -d '' file; do
   
-  # Hints & Properties
-  sed -i -E 's/public static ReadOnlySpan<byte> ([A-Za-z0-9_]+) => "([^"]*)"u8;/public static string \1 => "\2";/' "$file"
-
-  # Remove Attributes
+  # Info
+  echo "Post processing $file"
+  
+  # Remove
   sed -i -E '/\[return: NativeTypeName\("[^"]*"\)\]/d' "$file"
   sed -i -E 's/\[NativeTypeName\("[^"]*"\)\] //g' "$file"
   sed -i -E '/\[NativeTypeName.*\]/d' "$file"
-
-  # Remove Argslist
   sed -i -E 's/\, __arglist//g' "$file"
   
-  # Rebuild Methods
-  sed -i -E 's/public static extern/private static extern/g' "$file"
+  # Rebuild
+  sed -i -E 's/\bpublic\b/private/g' "$file"
+  sed -i -E 's/\bprivate const\b/public const/g' "$file"
+  sed -i -E 's/\bprivate partial\b/public partial/g' "$file"
   sed -E -i 's/(static extern [^ ]+ )([A-Za-z_][A-Za-z0-9_]*)\(/\1iSDL_\2(/g' "$file"
+  sed -i -E 's/private static ReadOnlySpan<byte> ([A-Za-z0-9_]+) => "([^"]*)"u8;/public static string \1 => "\2";/' "$file"
   
 done
