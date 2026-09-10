@@ -74,7 +74,7 @@ namespace Engine.SDL3
             {
                 var count = checked((int)(*ptr));
                 {
-                    return SDL_NativeToStringArray(iSDL_GetClipboardMimeTypes(ptr), count, out _);
+                    return SDL_NativeToArray(iSDL_GetClipboardMimeTypes(ptr), count, out _);
                 }
             }
         }

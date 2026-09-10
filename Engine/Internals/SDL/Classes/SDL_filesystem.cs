@@ -82,7 +82,7 @@ namespace Engine.SDL3
             {
                 int size = 0;
                 {
-                    return SDL_NativeToStringArray(iSDL_GlobDirectory(ptr1, ptr2, flags, &size), size, out count);
+                    return SDL_NativeToArray(iSDL_GlobDirectory(ptr1, ptr2, flags, &size), size, out count);
                 }
             }
         }

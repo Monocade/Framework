@@ -6,11 +6,6 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static byte[] SDL_StringToNative(string value)
-        {
-            return Encoding.UTF8.GetBytes((value ?? string.Empty) + '\0');
-        }
-        
         public static string SDL_NativeToString(byte* ptr, bool free = false)
         {
             if (ptr == null)
@@ -29,6 +24,11 @@ namespace Engine.SDL3
                     iSDL_free((IntPtr)ptr);
                 }
             }
+        }
+        
+        public static byte[] SDL_StringToNative(string value)
+        {
+            return Encoding.UTF8.GetBytes((value ?? string.Empty) + '\0');
         }
     }
 }

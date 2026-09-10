@@ -26,7 +26,9 @@ namespace Engine.SDL3
                 }
 
                 count = size;
-                return result;
+                {
+                    return result;
+                }
             }
             finally
             {
@@ -49,7 +51,9 @@ namespace Engine.SDL3
                 }
 
                 count = size;
-                return new ReadOnlySpan<T>(ptr, size).ToArray();
+                {
+                    return new ReadOnlySpan<T>(ptr, size).ToArray();
+                }
             }
             finally
             {
@@ -60,7 +64,7 @@ namespace Engine.SDL3
             }
         }
         
-        public static string[] SDL_NativeToStringArray(byte** ptr, int size, out int count, bool free = true)
+        public static string[] SDL_NativeToArray(byte** ptr, int size, out int count, bool free = true)
         {
             count = 0;
 
@@ -79,7 +83,9 @@ namespace Engine.SDL3
                 }
 
                 count = size;
-                return result;
+                {
+                    return result;
+                }
             }
             finally
             {
