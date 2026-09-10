@@ -48,7 +48,7 @@ namespace Engine.SDL3
             set => selected_candidate = value;
         }
 
-        public SDL_Bool Horizontal
+        public bool Horizontal
         {
             get => horizontal;
             set => horizontal = value;

@@ -42,13 +42,13 @@ namespace Engine.SDL3
             set => depth_bias_slope_factor = value;
         }
 
-        public SDL_Bool Enable_depth_bias
+        public bool Enable_depth_bias
         {
             get => enable_depth_bias;
             set => enable_depth_bias = value;
         }
 
-        public SDL_Bool Enable_depth_clip
+        public bool Enable_depth_clip
         {
             get => enable_depth_clip;
             set => enable_depth_clip = value;

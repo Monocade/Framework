@@ -24,7 +24,7 @@ namespace Engine.SDL3
             set => timestamp = value;
         }
 
-        public SDL_Bool Owner
+        public bool Owner
         {
             get => owner;
             set => owner = value;

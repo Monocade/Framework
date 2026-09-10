@@ -24,7 +24,7 @@ namespace Engine.SDL3
             set => depth_stencil_format = value;
         }
 
-        public SDL_Bool Has_depth_stencil_target
+        public bool Has_depth_stencil_target
         {
             get => has_depth_stencil_target;
             set => has_depth_stencil_target = value;

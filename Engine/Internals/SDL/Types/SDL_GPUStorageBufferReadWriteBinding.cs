@@ -12,7 +12,7 @@ namespace Engine.SDL3
             set => buffer = value;
         }
 
-        public SDL_Bool Cycle
+        public bool Cycle
         {
             get => cycle;
             set => cycle = value;

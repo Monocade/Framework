@@ -24,7 +24,7 @@ namespace Engine.SDL3
             set => layer = value;
         }
 
-        public SDL_Bool Cycle
+        public bool Cycle
         {
             get => cycle;
             set => cycle = value;

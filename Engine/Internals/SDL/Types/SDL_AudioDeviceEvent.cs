@@ -30,7 +30,7 @@ namespace Engine.SDL3
             set => which = value;
         }
 
-        public SDL_Bool Recording
+        public bool Recording
         {
             get => recording;
             set => recording = value;

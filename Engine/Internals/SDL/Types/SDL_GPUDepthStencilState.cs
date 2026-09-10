@@ -36,19 +36,19 @@ namespace Engine.SDL3
             set => write_mask = value;
         }
 
-        public SDL_Bool Enable_depth_test
+        public bool Enable_depth_test
         {
             get => enable_depth_test;
             set => enable_depth_test = value;
         }
 
-        public SDL_Bool Enable_depth_write
+        public bool Enable_depth_write
         {
             get => enable_depth_write;
             set => enable_depth_write = value;
         }
 
-        public SDL_Bool Enable_stencil_test
+        public bool Enable_stencil_test
         {
             get => enable_stencil_test;
             set => enable_stencil_test = value;

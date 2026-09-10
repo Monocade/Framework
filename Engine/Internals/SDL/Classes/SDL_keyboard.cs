@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using System;
+using System.Linq;
 
 namespace Engine.SDL3
 {
@@ -28,11 +29,20 @@ namespace Engine.SDL3
             return iSDL_GetKeyboardFocus();
         }
 
-        public static SDL_Bool[] SDL_GetKeyboardState(out int numkeys)
+        public static bool[] SDL_GetKeyboardState(out int numkeys)
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetKeyboardState(&size), size, out numkeys);
+                var result = SDL_NativeToArray(iSDL_GetKeyboardState(&size), size, out numkeys);
+                
+                var output = new bool[result.Length];
+
+                for (int i = 0; i < result.Length; i++)
+                {
+                    output[i] = result[i];
+                }
+
+                return output;
             }
         }
 

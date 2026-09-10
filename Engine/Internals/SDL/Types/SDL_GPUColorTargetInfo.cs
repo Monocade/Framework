@@ -60,13 +60,13 @@ namespace Engine.SDL3
             set => resolve_layer = value;
         }
 
-        public SDL_Bool Cycle
+        public bool Cycle
         {
             get => cycle;
             set => cycle = value;
         }
 
-        public SDL_Bool Cycle_resolve_texture
+        public bool Cycle_resolve_texture
         {
             get => cycle_resolve_texture;
             set => cycle_resolve_texture = value;

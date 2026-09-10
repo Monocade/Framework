@@ -54,13 +54,13 @@ namespace Engine.SDL3
             set => y = value;
         }
 
-        public SDL_Bool Eraser
+        public bool Eraser
         {
             get => eraser;
             set => eraser = value;
         }
 
-        public SDL_Bool Down
+        public bool Down
         {
             get => down;
             set => down = value;

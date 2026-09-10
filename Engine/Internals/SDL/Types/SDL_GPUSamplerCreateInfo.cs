@@ -72,13 +72,13 @@ namespace Engine.SDL3
             set => max_lod = value;
         }
 
-        public SDL_Bool Enable_anisotropy
+        public bool Enable_anisotropy
         {
             get => enable_anisotropy;
             set => enable_anisotropy = value;
         }
 
-        public SDL_Bool Enable_compare
+        public bool Enable_compare
         {
             get => enable_compare;
             set => enable_compare = value;

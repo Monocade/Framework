@@ -48,13 +48,13 @@ namespace Engine.SDL3
             set => color_write_mask = value;
         }
 
-        public SDL_Bool Enable_blend
+        public bool Enable_blend
         {
             get => enable_blend;
             set => enable_blend = value;
         }
 
-        public SDL_Bool Enable_color_write_mask
+        public bool Enable_color_write_mask
         {
             get => enable_color_write_mask;
             set => enable_color_write_mask = value;

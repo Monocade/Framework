@@ -18,13 +18,13 @@ namespace Engine.SDL3
             set => sample_mask = value;
         }
 
-        public SDL_Bool Enable_mask
+        public bool Enable_mask
         {
             get => enable_mask;
             set => enable_mask = value;
         }
 
-        public SDL_Bool Enable_alpha_to_coverage
+        public bool Enable_alpha_to_coverage
         {
             get => enable_alpha_to_coverage;
             set => enable_alpha_to_coverage = value;

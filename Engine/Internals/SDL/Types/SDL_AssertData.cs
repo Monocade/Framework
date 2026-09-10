@@ -6,7 +6,7 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_AssertData
     {
-        public SDL_Bool Always_ignore
+        public bool Always_ignore
         {
             get => always_ignore;
             set => always_ignore = value;

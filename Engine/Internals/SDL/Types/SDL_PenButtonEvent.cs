@@ -60,7 +60,7 @@ namespace Engine.SDL3
             set => button = value;
         }
 
-        public SDL_Bool Down
+        public bool Down
         {
             get => down;
             set => down = value;

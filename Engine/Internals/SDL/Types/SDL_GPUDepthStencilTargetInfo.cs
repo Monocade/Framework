@@ -42,7 +42,7 @@ namespace Engine.SDL3
             set => stencil_store_op = value;
         }
 
-        public SDL_Bool Cycle
+        public bool Cycle
         {
             get => cycle;
             set => cycle = value;

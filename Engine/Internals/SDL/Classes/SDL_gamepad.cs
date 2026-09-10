@@ -335,14 +335,18 @@ namespace Engine.SDL3
             return iSDL_GetNumGamepadTouchpadFingers(gamepad, touchpad);
         }
 
-        public static bool SDL_GetGamepadTouchpadFinger(SDL_Gamepad* gamepad, int touchpad, int finger, out SDL_Bool down, out float x, out float y, out float pressure)
+        public static bool SDL_GetGamepadTouchpadFinger(SDL_Gamepad* gamepad, int touchpad, int finger, out bool down, out float x, out float y, out float pressure)
         {
-            fixed (SDL_Bool* ptr1 = &down)
+            SDL_Bool ptr1 = default;
+            
             fixed (float* ptr2 = &x)
             fixed (float* ptr3 = &y)
             fixed (float* ptr4 = &pressure)
             {
-                return iSDL_GetGamepadTouchpadFinger(gamepad, touchpad, finger, ptr1, ptr2, ptr3, ptr4);
+                var result = iSDL_GetGamepadTouchpadFinger(gamepad, touchpad, finger, &ptr1, ptr2, ptr3, ptr4);
+                down = ptr1;
+                
+                return result;
             }
         }
 

@@ -42,7 +42,7 @@ namespace Engine.SDL3
             set => filter = value;
         }
 
-        public SDL_Bool Cycle
+        public bool Cycle
         {
             get => cycle;
             set => cycle = value;

@@ -60,13 +60,13 @@ namespace Engine.SDL3
             set => raw = value;
         }
 
-        public SDL_Bool Down
+        public bool Down
         {
             get => down;
             set => down = value;
         }
 
-        public SDL_Bool Repeat
+        public bool Repeat
         {
             get => repeat;
             set => repeat = value;
