@@ -251,11 +251,5 @@ namespace Engine.SDL3
             get => notification;
             set => notification = value;
         }
-
-        public _padding_e__FixedBuffer Padding
-        {
-            get => padding;
-            set => padding = value;
-        }
     }
 }

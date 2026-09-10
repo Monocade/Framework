@@ -36,34 +36,10 @@ namespace Engine.SDL3
             set => axis = value;
         }
 
-        public byte Padding1
-        {
-            get => padding1;
-            set => padding1 = value;
-        }
-
-        public byte Padding2
-        {
-            get => padding2;
-            set => padding2 = value;
-        }
-
-        public byte Padding3
-        {
-            get => padding3;
-            set => padding3 = value;
-        }
-
         public short Value
         {
             get => this.value;
             set => this.value = value;
-        }
-
-        public ushort Padding4
-        {
-            get => padding4;
-            set => padding4 = value;
         }
     }
 }

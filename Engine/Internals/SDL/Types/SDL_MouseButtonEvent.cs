@@ -54,12 +54,6 @@ namespace Engine.SDL3
             set => clicks = value;
         }
 
-        public byte Padding
-        {
-            get => padding;
-            set => padding = value;
-        }
-
         public float X
         {
             get => x;

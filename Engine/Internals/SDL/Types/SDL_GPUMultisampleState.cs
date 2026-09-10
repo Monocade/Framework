@@ -29,17 +29,5 @@ namespace Engine.SDL3
             get => enable_alpha_to_coverage;
             set => enable_alpha_to_coverage = value;
         }
-
-        public byte Padding2
-        {
-            get => padding2;
-            set => padding2 = value;
-        }
-
-        public byte Padding3
-        {
-            get => padding3;
-            set => padding3 = value;
-        }
     }
 }

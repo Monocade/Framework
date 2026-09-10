@@ -11,11 +11,5 @@ namespace Engine.SDL3
             get => nfingers;
             set => nfingers = value;
         }
-
-        public _padding_e__FixedBuffer Padding
-        {
-            get => padding;
-            set => padding = value;
-        }
     }
 }

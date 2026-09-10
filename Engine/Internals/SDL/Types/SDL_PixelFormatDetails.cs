@@ -24,12 +24,6 @@ namespace Engine.SDL3
             set => bytes_per_pixel = value;
         }
 
-        public _padding_e__FixedBuffer Padding
-        {
-            get => padding;
-            set => padding = value;
-        }
-
         public uint rmask
         {
             get => Rmask;

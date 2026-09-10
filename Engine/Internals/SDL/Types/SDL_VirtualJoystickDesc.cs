@@ -18,12 +18,6 @@ namespace Engine.SDL3
             set => type = value;
         }
 
-        public ushort Padding
-        {
-            get => padding;
-            set => padding = value;
-        }
-
         public ushort Vendor_id
         {
             get => vendor_id;
@@ -70,12 +64,6 @@ namespace Engine.SDL3
         {
             get => nsensors;
             set => nsensors = value;
-        }
-
-        public _padding2_e__FixedBuffer Padding2
-        {
-            get => padding2;
-            set => padding2 = value;
         }
 
         public uint Button_mask

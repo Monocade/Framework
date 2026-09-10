@@ -41,17 +41,5 @@ namespace Engine.SDL3
             get => this.value;
             set => this.value = value;
         }
-
-        public byte Padding1
-        {
-            get => padding1;
-            set => padding1 = value;
-        }
-
-        public byte Padding2
-        {
-            get => padding2;
-            set => padding2 = value;
-        }
     }
 }

@@ -29,23 +29,5 @@ namespace Engine.SDL3
             get => has_depth_stencil_target;
             set => has_depth_stencil_target = value;
         }
-
-        public byte Padding1
-        {
-            get => padding1;
-            set => padding1 = value;
-        }
-
-        public byte Padding2
-        {
-            get => padding2;
-            set => padding2 = value;
-        }
-
-        public byte Padding3
-        {
-            get => padding3;
-            set => padding3 = value;
-        }
     }
 }

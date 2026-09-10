@@ -17,11 +17,5 @@ namespace Engine.SDL3
             get => button;
             set => button = value;
         }
-
-        public _padding_e__FixedBuffer Padding
-        {
-            get => padding;
-            set => padding = value;
-        }
     }
 }
