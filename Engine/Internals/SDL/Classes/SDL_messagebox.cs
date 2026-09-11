@@ -13,12 +13,12 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_ShowSimpleMessageBox(uint flags, string title, string message, SDL_Window* window)
+        public static bool SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, string title, string message, SDL_Window* window)
         {
             fixed (byte* ptr1 = SDL_StringToNative(title))
             fixed (byte* ptr2 = SDL_StringToNative(message))
             {
-                return iSDL_ShowSimpleMessageBox(flags, ptr1, ptr2, window);
+                return iSDL_ShowSimpleMessageBox((uint)flags, ptr1, ptr2, window);
             }
         }
     }

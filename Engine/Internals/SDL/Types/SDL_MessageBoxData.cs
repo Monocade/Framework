@@ -6,10 +6,10 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_MessageBoxData
     {
-        public uint Flags
+        public SDL_MessageBoxFlags Flags
         {
-            get => flags;
-            set => flags = value;
+            get => (SDL_MessageBoxFlags)flags;
+            set => flags = (uint)value;
         }
 
         public SDL_Window* Window
