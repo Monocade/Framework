@@ -6,10 +6,10 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_Surface
     {
-        public uint Flags
+        public SDL_SurfaceFlags Flags
         {
-            get => flags;
-            set => flags = value;
+            get => (SDL_SurfaceFlags)flags;
+            set => flags = (uint)value;
         }
 
         public SDL_PixelFormat Format
