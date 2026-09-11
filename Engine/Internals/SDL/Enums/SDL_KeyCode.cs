@@ -5,7 +5,7 @@ using System;
 namespace Engine.SDL3
 {
     [Flags]
-    internal enum SDL_KeyCode : uint
+    internal enum SDL_Keycode : uint
     {
         SDLK_UNKNOWN = 0x00000000U,
         SDLK_RETURN = 0x0000000dU,

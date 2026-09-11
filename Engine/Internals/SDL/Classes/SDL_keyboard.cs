@@ -51,26 +51,26 @@ namespace Engine.SDL3
             iSDL_ResetKeyboard();
         }
 
-        public static ushort SDL_GetModState()
+        public static SDL_Keymod SDL_GetModState()
         {
-            return iSDL_GetModState();
+            return (SDL_Keymod)iSDL_GetModState();
         }
 
-        public static void SDL_SetModState(ushort modstate)
+        public static void SDL_SetModState(SDL_Keymod modstate)
         {
-            iSDL_SetModState(modstate);
+            iSDL_SetModState((ushort)modstate);
         }
 
-        public static SDL_KeyCode SDL_GetKeyFromScancode(SDL_Scancode scancode, ushort modstate, bool key_event)
+        public static SDL_Keycode SDL_GetKeyFromScancode(SDL_Scancode scancode, SDL_Keymod modstate, bool key_event)
         {
-            return (SDL_KeyCode)iSDL_GetKeyFromScancode(scancode, modstate, key_event);
+            return (SDL_Keycode)iSDL_GetKeyFromScancode(scancode, (ushort)modstate, key_event);
         }
 
-        public static SDL_Scancode SDL_GetScancodeFromKey(SDL_KeyCode key, ref ushort modstate)
+        public static SDL_Scancode SDL_GetScancodeFromKey(SDL_Keycode key, ref SDL_Keymod modstate)
         {
-            fixed (ushort* ptr1 = &modstate)
+            fixed (SDL_Keymod* ptr1 = &modstate)
             {
-                return iSDL_GetScancodeFromKey((uint)key, ptr1);
+                return iSDL_GetScancodeFromKey((uint)key, (ushort*)ptr1);
             }
         }
 
@@ -95,16 +95,16 @@ namespace Engine.SDL3
             }
         }
 
-        public static string SDL_GetKeyName(SDL_KeyCode key)
+        public static string SDL_GetKeyName(SDL_Keycode key)
         {
             return SDL_NativeToString(iSDL_GetKeyName((uint)key));
         }
 
-        public static SDL_KeyCode SDL_GetKeyFromName(string name)
+        public static SDL_Keycode SDL_GetKeyFromName(string name)
         {
             fixed (byte* ptr1 = SDL_StringToNative(name))
             {
-                return (SDL_KeyCode)iSDL_GetKeyFromName(ptr1);
+                return (SDL_Keycode)iSDL_GetKeyFromName(ptr1);
             }
         }
 

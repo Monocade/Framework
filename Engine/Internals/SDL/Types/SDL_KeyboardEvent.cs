@@ -42,16 +42,16 @@ namespace Engine.SDL3
             set => scancode = value;
         }
 
-        public SDL_KeyCode Key
+        public SDL_Keycode Key
         {
-            get => (SDL_KeyCode)key;
+            get => (SDL_Keycode)key;
             set => key = (uint)value;
         }
 
-        public ushort Mod
+        public SDL_Keymod Mod
         {
-            get => mod;
-            set => mod = value;
+            get => (SDL_Keymod)mod;
+            set => mod = (ushort)value;
         }
 
         public ushort Raw
