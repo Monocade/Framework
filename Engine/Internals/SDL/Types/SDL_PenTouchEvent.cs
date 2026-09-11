@@ -30,7 +30,7 @@ namespace Engine.SDL3
             set => windowID = value;
         }
 
-        public uint Which
+        public uint PenID
         {
             get => which;
             set => which = value;

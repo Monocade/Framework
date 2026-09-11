@@ -36,84 +36,84 @@ namespace Engine.SDL3
             }
         }
 
-        public static string SDL_GetAudioDeviceName(uint devid)
+        public static string SDL_GetAudioDeviceName(uint audioDeviceID)
         {
-            return SDL_NativeToString(iSDL_GetAudioDeviceName(devid));
+            return SDL_NativeToString(iSDL_GetAudioDeviceName(audioDeviceID));
         }
 
-        public static bool SDL_GetAudioDeviceFormat(uint devid, out SDL_AudioSpec spec, out int sample_frames)
+        public static bool SDL_GetAudioDeviceFormat(uint audioDeviceID, out SDL_AudioSpec spec, out int sample_frames)
         {
             fixed (SDL_AudioSpec* ptr1 = &spec)
             fixed (int* ptr2 = &sample_frames)
             {
-                return iSDL_GetAudioDeviceFormat(devid, ptr1, ptr2);
+                return iSDL_GetAudioDeviceFormat(audioDeviceID, ptr1, ptr2);
             }
         }
 
-        public static int[] SDL_GetAudioDeviceChannelMap(uint devid, out int count)
+        public static int[] SDL_GetAudioDeviceChannelMap(uint audioDeviceID, out int count)
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetAudioDeviceChannelMap(devid, &size), size, out count);
+                return SDL_NativeToArray(iSDL_GetAudioDeviceChannelMap(audioDeviceID, &size), size, out count);
             }
         }
 
-        public static uint SDL_OpenAudioDevice(uint devid, SDL_AudioSpec* spec)
+        public static uint SDL_OpenAudioDevice(uint audioDeviceID, SDL_AudioSpec* spec)
         {
-            return iSDL_OpenAudioDevice(devid, spec);
+            return iSDL_OpenAudioDevice(audioDeviceID, spec);
         }
 
-        public static bool SDL_IsAudioDevicePhysical(uint devid)
+        public static bool SDL_IsAudioDevicePhysical(uint audioDeviceID)
         {
-            return iSDL_IsAudioDevicePhysical(devid);
+            return iSDL_IsAudioDevicePhysical(audioDeviceID);
         }
 
-        public static bool SDL_IsAudioDevicePlayback(uint devid)
+        public static bool SDL_IsAudioDevicePlayback(uint audioDeviceID)
         {
-            return iSDL_IsAudioDevicePlayback(devid);
+            return iSDL_IsAudioDevicePlayback(audioDeviceID);
         }
 
-        public static bool SDL_PauseAudioDevice(uint devid)
+        public static bool SDL_PauseAudioDevice(uint audioDeviceID)
         {
-            return iSDL_PauseAudioDevice(devid);
+            return iSDL_PauseAudioDevice(audioDeviceID);
         }
 
-        public static bool SDL_ResumeAudioDevice(uint devid)
+        public static bool SDL_ResumeAudioDevice(uint audioDeviceID)
         {
-            return iSDL_ResumeAudioDevice(devid);
+            return iSDL_ResumeAudioDevice(audioDeviceID);
         }
 
-        public static bool SDL_AudioDevicePaused(uint devid)
+        public static bool SDL_AudioDevicePaused(uint audioDeviceID)
         {
-            return iSDL_AudioDevicePaused(devid);
+            return iSDL_AudioDevicePaused(audioDeviceID);
         }
 
-        public static float SDL_GetAudioDeviceGain(uint devid)
+        public static float SDL_GetAudioDeviceGain(uint audioDeviceID)
         {
-            return iSDL_GetAudioDeviceGain(devid);
+            return iSDL_GetAudioDeviceGain(audioDeviceID);
         }
 
-        public static bool SDL_SetAudioDeviceGain(uint devid, float gain)
+        public static bool SDL_SetAudioDeviceGain(uint audioDeviceID, float gain)
         {
-            return iSDL_SetAudioDeviceGain(devid, gain);
+            return iSDL_SetAudioDeviceGain(audioDeviceID, gain);
         }
 
-        public static void SDL_CloseAudioDevice(uint devid)
+        public static void SDL_CloseAudioDevice(uint audioDeviceID)
         {
-            iSDL_CloseAudioDevice(devid);
+            iSDL_CloseAudioDevice(audioDeviceID);
         }
 
-        public static bool SDL_BindAudioStreams(uint devid, SDL_AudioStream*[] streams, int num_streams)
+        public static bool SDL_BindAudioStreams(uint audioDeviceID, SDL_AudioStream*[] streams, int num_streams)
         {
             fixed (SDL_AudioStream** ptr1 = streams)
             {
-                return iSDL_BindAudioStreams(devid, ptr1, num_streams);
+                return iSDL_BindAudioStreams(audioDeviceID, ptr1, num_streams);
             }
         }
 
-        public static bool SDL_BindAudioStream(uint devid, SDL_AudioStream* stream)
+        public static bool SDL_BindAudioStream(uint audioDeviceID, SDL_AudioStream* stream)
         {
-            return iSDL_BindAudioStream(devid, stream);
+            return iSDL_BindAudioStream(audioDeviceID, stream);
         }
 
         public static void SDL_UnbindAudioStreams(SDL_AudioStream*[] streams, int num_streams)
@@ -293,14 +293,14 @@ namespace Engine.SDL3
             iSDL_DestroyAudioStream(stream);
         }
 
-        public static SDL_AudioStream* SDL_OpenAudioDeviceStream(uint devid, SDL_AudioSpec* spec, SDL_AudioStreamCallback callback, IntPtr userdata)
+        public static SDL_AudioStream* SDL_OpenAudioDeviceStream(uint audioDeviceID, SDL_AudioSpec* spec, SDL_AudioStreamCallback callback, IntPtr userdata)
         {
-            return iSDL_OpenAudioDeviceStream(devid, spec, Marshal.GetFunctionPointerForDelegate(callback), userdata);
+            return iSDL_OpenAudioDeviceStream(audioDeviceID, spec, Marshal.GetFunctionPointerForDelegate(callback), userdata);
         }
 
-        public static bool SDL_SetAudioPostmixCallback(uint devid, SDL_AudioPostmixCallback callback, IntPtr userdata)
+        public static bool SDL_SetAudioPostmixCallback(uint audioDeviceID, SDL_AudioPostmixCallback callback, IntPtr userdata)
         {
-            return iSDL_SetAudioPostmixCallback(devid, Marshal.GetFunctionPointerForDelegate(callback), userdata);
+            return iSDL_SetAudioPostmixCallback(audioDeviceID, Marshal.GetFunctionPointerForDelegate(callback), userdata);
         }
 
         public static bool SDL_LoadWAV_IO(SDL_IOStream* src, bool closeio, out SDL_AudioSpec spec, out IntPtr audio_buf, out uint audio_len)

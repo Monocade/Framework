@@ -24,7 +24,7 @@ namespace Engine.SDL3
             set => timestamp = value;
         }
 
-        public uint Which
+        public uint JoystickID
         {
             get => which;
             set => which = value;

@@ -28,27 +28,27 @@ namespace Engine.SDL3
             }
         }
 
-        public static SDL_CameraSpec*[] SDL_GetCameraSupportedFormats(uint instance_id, out int count)
+        public static SDL_CameraSpec*[] SDL_GetCameraSupportedFormats(uint cameraID, out int count)
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetCameraSupportedFormats(instance_id, &size), size, out count);
+                return SDL_NativeToArray(iSDL_GetCameraSupportedFormats(cameraID, &size), size, out count);
             }
         }
 
-        public static string SDL_GetCameraName(uint instance_id)
+        public static string SDL_GetCameraName(uint cameraID)
         {
-            return SDL_NativeToString(iSDL_GetCameraName(instance_id));
+            return SDL_NativeToString(iSDL_GetCameraName(cameraID));
         }
 
-        public static SDL_CameraPosition SDL_GetCameraPosition(uint instance_id)
+        public static SDL_CameraPosition SDL_GetCameraPosition(uint cameraID)
         {
-            return iSDL_GetCameraPosition(instance_id);
+            return iSDL_GetCameraPosition(cameraID);
         }
 
-        public static SDL_Camera* SDL_OpenCamera(uint instance_id, SDL_CameraSpec* spec)
+        public static SDL_Camera* SDL_OpenCamera(uint cameraID, SDL_CameraSpec* spec)
         {
-            return iSDL_OpenCamera(instance_id, spec);
+            return iSDL_OpenCamera(cameraID, spec);
         }
 
         public static SDL_CameraPermissionState SDL_GetCameraPermissionState(SDL_Camera* camera)

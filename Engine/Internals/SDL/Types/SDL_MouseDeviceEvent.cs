@@ -24,7 +24,7 @@ namespace Engine.SDL3
             set => timestamp = value;
         }
 
-        public uint Which
+        public uint MouseID
         {
             get => which;
             set => which = value;

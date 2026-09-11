@@ -24,13 +24,13 @@ namespace Engine.SDL3
             set => timestamp = value;
         }
 
-        public uint Which
+        public uint GamepadID
         {
             get => which;
             set => which = value;
         }
 
-        public byte Capsense
+        public byte CapSense
         {
             get => capsense;
             set => capsense = value;

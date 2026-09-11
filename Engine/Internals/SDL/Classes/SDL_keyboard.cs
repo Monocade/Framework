@@ -19,9 +19,9 @@ namespace Engine.SDL3
             }
         }
 
-        public static string SDL_GetKeyboardNameForID(uint instance_id)
+        public static string SDL_GetKeyboardNameForID(uint keyboardID)
         {
-            return SDL_NativeToString(iSDL_GetKeyboardNameForID(instance_id));
+            return SDL_NativeToString(iSDL_GetKeyboardNameForID(keyboardID));
         }
 
         public static SDL_Window* SDL_GetKeyboardFocus()

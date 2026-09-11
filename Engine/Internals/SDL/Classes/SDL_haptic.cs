@@ -13,19 +13,19 @@ namespace Engine.SDL3
             }
         }
 
-        public static string SDL_GetHapticNameForID(uint instance_id)
+        public static string SDL_GetHapticNameForID(uint hapticID)
         {
-            return SDL_NativeToString(iSDL_GetHapticNameForID(instance_id));
+            return SDL_NativeToString(iSDL_GetHapticNameForID(hapticID));
         }
 
-        public static SDL_Haptic* SDL_OpenHaptic(uint instance_id)
+        public static SDL_Haptic* SDL_OpenHaptic(uint hapticID)
         {
-            return iSDL_OpenHaptic(instance_id);
+            return iSDL_OpenHaptic(hapticID);
         }
 
-        public static SDL_Haptic* SDL_GetHapticFromID(uint instance_id)
+        public static SDL_Haptic* SDL_GetHapticFromID(uint hapticID)
         {
-            return iSDL_GetHapticFromID(instance_id);
+            return iSDL_GetHapticFromID(hapticID);
         }
 
         public static uint SDL_GetHapticID(SDL_Haptic* haptic)

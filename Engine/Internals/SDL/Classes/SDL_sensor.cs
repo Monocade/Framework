@@ -13,29 +13,29 @@ namespace Engine.SDL3
             }
         }
 
-        public static string SDL_GetSensorNameForID(uint instance_id)
+        public static string SDL_GetSensorNameForID(uint sensorID)
         {
-            return SDL_NativeToString(iSDL_GetSensorNameForID(instance_id));
+            return SDL_NativeToString(iSDL_GetSensorNameForID(sensorID));
         }
 
-        public static SDL_SensorType SDL_GetSensorTypeForID(uint instance_id)
+        public static SDL_SensorType SDL_GetSensorTypeForID(uint sensorID)
         {
-            return iSDL_GetSensorTypeForID(instance_id);
+            return iSDL_GetSensorTypeForID(sensorID);
         }
 
-        public static int SDL_GetSensorNonPortableTypeForID(uint instance_id)
+        public static int SDL_GetSensorNonPortableTypeForID(uint sensorID)
         {
-            return iSDL_GetSensorNonPortableTypeForID(instance_id);
+            return iSDL_GetSensorNonPortableTypeForID(sensorID);
         }
 
-        public static SDL_Sensor* SDL_OpenSensor(uint instance_id)
+        public static SDL_Sensor* SDL_OpenSensor(uint sensorID)
         {
-            return iSDL_OpenSensor(instance_id);
+            return iSDL_OpenSensor(sensorID);
         }
 
-        public static SDL_Sensor* SDL_GetSensorFromID(uint instance_id)
+        public static SDL_Sensor* SDL_GetSensorFromID(uint sensorID)
         {
-            return iSDL_GetSensorFromID(instance_id);
+            return iSDL_GetSensorFromID(sensorID);
         }
 
         public static uint SDL_GetSensorProperties(SDL_Sensor* sensor)

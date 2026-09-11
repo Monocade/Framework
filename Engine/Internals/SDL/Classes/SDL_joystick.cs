@@ -33,54 +33,54 @@ namespace Engine.SDL3
             }
         }
 
-        public static string SDL_GetJoystickNameForID(uint instance_id)
+        public static string SDL_GetJoystickNameForID(uint joystickID)
         {
-            return SDL_NativeToString(iSDL_GetJoystickNameForID(instance_id));
+            return SDL_NativeToString(iSDL_GetJoystickNameForID(joystickID));
         }
 
-        public static string SDL_GetJoystickPathForID(uint instance_id)
+        public static string SDL_GetJoystickPathForID(uint joystickID)
         {
-            return SDL_NativeToString(iSDL_GetJoystickPathForID(instance_id));
+            return SDL_NativeToString(iSDL_GetJoystickPathForID(joystickID));
         }
 
-        public static int SDL_GetJoystickPlayerIndexForID(uint instance_id)
+        public static int SDL_GetJoystickPlayerIndexForID(uint joystickID)
         {
-            return iSDL_GetJoystickPlayerIndexForID(instance_id);
+            return iSDL_GetJoystickPlayerIndexForID(joystickID);
         }
 
-        public static SDL_GUID SDL_GetJoystickGUIDForID(uint instance_id)
+        public static SDL_GUID SDL_GetJoystickGUIDForID(uint joystickID)
         {
-            return iSDL_GetJoystickGUIDForID(instance_id);
+            return iSDL_GetJoystickGUIDForID(joystickID);
         }
 
-        public static ushort SDL_GetJoystickVendorForID(uint instance_id)
+        public static ushort SDL_GetJoystickVendorForID(uint joystickID)
         {
-            return iSDL_GetJoystickVendorForID(instance_id);
+            return iSDL_GetJoystickVendorForID(joystickID);
         }
 
-        public static ushort SDL_GetJoystickProductForID(uint instance_id)
+        public static ushort SDL_GetJoystickProductForID(uint joystickID)
         {
-            return iSDL_GetJoystickProductForID(instance_id);
+            return iSDL_GetJoystickProductForID(joystickID);
         }
 
-        public static ushort SDL_GetJoystickProductVersionForID(uint instance_id)
+        public static ushort SDL_GetJoystickProductVersionForID(uint joystickID)
         {
-            return iSDL_GetJoystickProductVersionForID(instance_id);
+            return iSDL_GetJoystickProductVersionForID(joystickID);
         }
 
-        public static SDL_JoystickType SDL_GetJoystickTypeForID(uint instance_id)
+        public static SDL_JoystickType SDL_GetJoystickTypeForID(uint joystickID)
         {
-            return iSDL_GetJoystickTypeForID(instance_id);
+            return iSDL_GetJoystickTypeForID(joystickID);
         }
 
-        public static SDL_Joystick* SDL_OpenJoystick(uint instance_id)
+        public static SDL_Joystick* SDL_OpenJoystick(uint joystickID)
         {
-            return iSDL_OpenJoystick(instance_id);
+            return iSDL_OpenJoystick(joystickID);
         }
 
-        public static SDL_Joystick* SDL_GetJoystickFromID(uint instance_id)
+        public static SDL_Joystick* SDL_GetJoystickFromID(uint joystickID)
         {
-            return iSDL_GetJoystickFromID(instance_id);
+            return iSDL_GetJoystickFromID(joystickID);
         }
 
         public static SDL_Joystick* SDL_GetJoystickFromPlayerIndex(int player_index)
@@ -93,14 +93,14 @@ namespace Engine.SDL3
             return iSDL_AttachVirtualJoystick(desc);
         }
 
-        public static bool SDL_DetachVirtualJoystick(uint instance_id)
+        public static bool SDL_DetachVirtualJoystick(uint joystickID)
         {
-            return iSDL_DetachVirtualJoystick(instance_id);
+            return iSDL_DetachVirtualJoystick(joystickID);
         }
 
-        public static bool SDL_IsJoystickVirtual(uint instance_id)
+        public static bool SDL_IsJoystickVirtual(uint joystickID)
         {
-            return iSDL_IsJoystickVirtual(instance_id);
+            return iSDL_IsJoystickVirtual(joystickID);
         }
 
         public static bool SDL_SetJoystickVirtualAxis(SDL_Joystick* joystick, int axis, short value)

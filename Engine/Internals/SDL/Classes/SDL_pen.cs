@@ -5,9 +5,9 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_PenDeviceType SDL_GetPenDeviceType(uint instance_id)
+        public static SDL_PenDeviceType SDL_GetPenDeviceType(uint penID)
         {
-            return iSDL_GetPenDeviceType(instance_id);
+            return iSDL_GetPenDeviceType(penID);
         }
     }
 }

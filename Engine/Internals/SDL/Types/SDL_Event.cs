@@ -30,139 +30,139 @@ namespace Engine.SDL3
             set => window = value;
         }
 
-        public SDL_KeyboardDeviceEvent Kdevice
+        public SDL_KeyboardDeviceEvent KeyboardDevice
         {
             get => kdevice;
             set => kdevice = value;
         }
 
-        public SDL_KeyboardEvent Key
+        public SDL_KeyboardEvent Keyboard
         {
             get => key;
             set => key = value;
         }
 
-        public SDL_TextEditingEvent Edit
+        public SDL_TextEditingEvent TextEditing
         {
             get => edit;
             set => edit = value;
         }
 
-        public SDL_TextEditingCandidatesEvent Edit_candidates
+        public SDL_TextEditingCandidatesEvent TextEditingCandidates
         {
             get => edit_candidates;
             set => edit_candidates = value;
         }
 
-        public SDL_TextInputEvent Text
+        public SDL_TextInputEvent TextInput
         {
             get => text;
             set => text = value;
         }
 
-        public SDL_MouseDeviceEvent Mdevice
+        public SDL_MouseDeviceEvent MouseDevice
         {
             get => mdevice;
             set => mdevice = value;
         }
 
-        public SDL_MouseMotionEvent Motion
+        public SDL_MouseMotionEvent MouseMotion
         {
             get => motion;
             set => motion = value;
         }
 
-        public SDL_MouseButtonEvent Button
+        public SDL_MouseButtonEvent MouseButton
         {
             get => button;
             set => button = value;
         }
 
-        public SDL_MouseWheelEvent Wheel
+        public SDL_MouseWheelEvent MouseWheel
         {
             get => wheel;
             set => wheel = value;
         }
 
-        public SDL_JoyDeviceEvent Jdevice
+        public SDL_JoyDeviceEvent JoystickDevice
         {
             get => jdevice;
             set => jdevice = value;
         }
 
-        public SDL_JoyAxisEvent Jaxis
+        public SDL_JoyAxisEvent JoystickAxis
         {
             get => jaxis;
             set => jaxis = value;
         }
 
-        public SDL_JoyBallEvent Jball
+        public SDL_JoyBallEvent JoystickBall
         {
             get => jball;
             set => jball = value;
         }
 
-        public SDL_JoyHatEvent Jhat
+        public SDL_JoyHatEvent JoystickHat
         {
             get => jhat;
             set => jhat = value;
         }
 
-        public SDL_JoyButtonEvent Jbutton
+        public SDL_JoyButtonEvent JoystickButton
         {
             get => jbutton;
             set => jbutton = value;
         }
 
-        public SDL_JoyBatteryEvent Jbattery
+        public SDL_JoyBatteryEvent JoystickBattery
         {
             get => jbattery;
             set => jbattery = value;
         }
 
-        public SDL_GamepadDeviceEvent Gdevice
+        public SDL_GamepadDeviceEvent GamepadDevice
         {
             get => gdevice;
             set => gdevice = value;
         }
 
-        public SDL_GamepadAxisEvent Gaxis
+        public SDL_GamepadAxisEvent GamepadAxis
         {
             get => gaxis;
             set => gaxis = value;
         }
 
-        public SDL_GamepadButtonEvent Gbutton
+        public SDL_GamepadButtonEvent GamepadButton
         {
             get => gbutton;
             set => gbutton = value;
         }
 
-        public SDL_GamepadTouchpadEvent Gtouchpad
+        public SDL_GamepadTouchpadEvent GamepadTouchpad
         {
             get => gtouchpad;
             set => gtouchpad = value;
         }
 
-        public SDL_GamepadSensorEvent Gsensor
+        public SDL_GamepadSensorEvent GamepadSensor
         {
             get => gsensor;
             set => gsensor = value;
         }
 
-        public SDL_GamepadCapSenseEvent Gcapsense
+        public SDL_GamepadCapSenseEvent GampadCapSense
         {
             get => gcapsense;
             set => gcapsense = value;
         }
 
-        public SDL_AudioDeviceEvent Adevice
+        public SDL_AudioDeviceEvent AudioDevice
         {
             get => adevice;
             set => adevice = value;
         }
 
-        public SDL_CameraDeviceEvent Cdevice
+        public SDL_CameraDeviceEvent CameraDevice
         {
             get => cdevice;
             set => cdevice = value;
@@ -186,43 +186,43 @@ namespace Engine.SDL3
             set => user = value;
         }
 
-        public SDL_TouchFingerEvent Tfinger
+        public SDL_TouchFingerEvent TouchFinger
         {
             get => tfinger;
             set => tfinger = value;
         }
 
-        public SDL_PinchFingerEvent Pinch
+        public SDL_PinchFingerEvent PinchFinger
         {
             get => pinch;
             set => pinch = value;
         }
 
-        public SDL_PenProximityEvent Pproximity
+        public SDL_PenProximityEvent PenProximity
         {
             get => pproximity;
             set => pproximity = value;
         }
 
-        public SDL_PenTouchEvent Ptouch
+        public SDL_PenTouchEvent PenTouch
         {
             get => ptouch;
             set => ptouch = value;
         }
 
-        public SDL_PenMotionEvent Pmotion
+        public SDL_PenMotionEvent PenMotion
         {
             get => pmotion;
             set => pmotion = value;
         }
 
-        public SDL_PenButtonEvent Pbutton
+        public SDL_PenButtonEvent PenButton
         {
             get => pbutton;
             set => pbutton = value;
         }
 
-        public SDL_PenAxisEvent Paxis
+        public SDL_PenAxisEvent PenAxis
         {
             get => paxis;
             set => paxis = value;

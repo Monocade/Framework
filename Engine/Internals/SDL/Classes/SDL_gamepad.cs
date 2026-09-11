@@ -49,11 +49,11 @@ namespace Engine.SDL3
             return SDL_NativeToString(iSDL_GetGamepadMapping(gamepad), free: true);
         }
 
-        public static bool SDL_SetGamepadMapping(uint instance_id, string mapping)
+        public static bool SDL_SetGamepadMapping(uint gamepadID, string mapping)
         {
             fixed (byte* ptr1 = SDL_StringToNative(mapping))
             {
-                return iSDL_SetGamepadMapping(instance_id, ptr1);
+                return iSDL_SetGamepadMapping(gamepadID, ptr1);
             }
         }
 
@@ -70,69 +70,69 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_IsGamepad(uint instance_id)
+        public static bool SDL_IsGamepad(uint gamepadID)
         {
-            return iSDL_IsGamepad(instance_id);
+            return iSDL_IsGamepad(gamepadID);
         }
 
-        public static string SDL_GetGamepadNameForID(uint instance_id)
+        public static string SDL_GetGamepadNameForID(uint gamepadID)
         {
-            return SDL_NativeToString(iSDL_GetGamepadNameForID(instance_id));
+            return SDL_NativeToString(iSDL_GetGamepadNameForID(gamepadID));
         }
 
-        public static string SDL_GetGamepadPathForID(uint instance_id)
+        public static string SDL_GetGamepadPathForID(uint gamepadID)
         {
-            return SDL_NativeToString(iSDL_GetGamepadPathForID(instance_id));
+            return SDL_NativeToString(iSDL_GetGamepadPathForID(gamepadID));
         }
 
-        public static int SDL_GetGamepadPlayerIndexForID(uint instance_id)
+        public static int SDL_GetGamepadPlayerIndexForID(uint gamepadID)
         {
-            return iSDL_GetGamepadPlayerIndexForID(instance_id);
+            return iSDL_GetGamepadPlayerIndexForID(gamepadID);
         }
 
-        public static SDL_GUID SDL_GetGamepadGUIDForID(uint instance_id)
+        public static SDL_GUID SDL_GetGamepadGUIDForID(uint gamepadID)
         {
-            return iSDL_GetGamepadGUIDForID(instance_id);
+            return iSDL_GetGamepadGUIDForID(gamepadID);
         }
 
-        public static ushort SDL_GetGamepadVendorForID(uint instance_id)
+        public static ushort SDL_GetGamepadVendorForID(uint gamepadID)
         {
-            return iSDL_GetGamepadVendorForID(instance_id);
+            return iSDL_GetGamepadVendorForID(gamepadID);
         }
 
-        public static ushort SDL_GetGamepadProductForID(uint instance_id)
+        public static ushort SDL_GetGamepadProductForID(uint gamepadID)
         {
-            return iSDL_GetGamepadProductForID(instance_id);
+            return iSDL_GetGamepadProductForID(gamepadID);
         }
 
-        public static ushort SDL_GetGamepadProductVersionForID(uint instance_id)
+        public static ushort SDL_GetGamepadProductVersionForID(uint gamepadID)
         {
-            return iSDL_GetGamepadProductVersionForID(instance_id);
+            return iSDL_GetGamepadProductVersionForID(gamepadID);
         }
 
-        public static SDL_GamepadType SDL_GetGamepadTypeForID(uint instance_id)
+        public static SDL_GamepadType SDL_GetGamepadTypeForID(uint gamepadID)
         {
-            return iSDL_GetGamepadTypeForID(instance_id);
+            return iSDL_GetGamepadTypeForID(gamepadID);
         }
 
-        public static SDL_GamepadType SDL_GetRealGamepadTypeForID(uint instance_id)
+        public static SDL_GamepadType SDL_GetRealGamepadTypeForID(uint gamepadID)
         {
-            return iSDL_GetRealGamepadTypeForID(instance_id);
+            return iSDL_GetRealGamepadTypeForID(gamepadID);
         }
 
-        public static string SDL_GetGamepadMappingForID(uint instance_id)
+        public static string SDL_GetGamepadMappingForID(uint gamepadID)
         {
-            return SDL_NativeToString(iSDL_GetGamepadMappingForID(instance_id), free: true);
+            return SDL_NativeToString(iSDL_GetGamepadMappingForID(gamepadID), free: true);
         }
 
-        public static SDL_Gamepad* SDL_OpenGamepad(uint instance_id)
+        public static SDL_Gamepad* SDL_OpenGamepad(uint gamepadID)
         {
-            return iSDL_OpenGamepad(instance_id);
+            return iSDL_OpenGamepad(gamepadID);
         }
 
-        public static SDL_Gamepad* SDL_GetGamepadFromID(uint instance_id)
+        public static SDL_Gamepad* SDL_GetGamepadFromID(uint gamepadID)
         {
-            return iSDL_GetGamepadFromID(instance_id);
+            return iSDL_GetGamepadFromID(gamepadID);
         }
 
         public static SDL_Gamepad* SDL_GetGamepadFromPlayerIndex(int player_index)
