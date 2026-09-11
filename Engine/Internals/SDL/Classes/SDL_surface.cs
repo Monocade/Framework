@@ -217,16 +217,16 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_SetSurfaceBlendMode(SDL_Surface* surface, uint blendMode)
+        public static bool SDL_SetSurfaceBlendMode(SDL_Surface* surface, SDL_BlendMode blendMode)
         {
-            return iSDL_SetSurfaceBlendMode(surface, blendMode);
+            return iSDL_SetSurfaceBlendMode(surface, (uint)blendMode);
         }
 
-        public static bool SDL_GetSurfaceBlendMode(SDL_Surface* surface, out uint blendMode)
+        public static bool SDL_GetSurfaceBlendMode(SDL_Surface* surface, out SDL_BlendMode blendMode)
         {
-            fixed (uint* ptr1 = &blendMode)
+            fixed (SDL_BlendMode* ptr1 = &blendMode)
             {
-                return iSDL_GetSurfaceBlendMode(surface, ptr1);
+                return iSDL_GetSurfaceBlendMode(surface, (uint*)ptr1);
             }
         }
 

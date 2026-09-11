@@ -196,16 +196,16 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_SetTextureBlendMode(SDL_Texture* texture, uint blendMode)
+        public static bool SDL_SetTextureBlendMode(SDL_Texture* texture, SDL_BlendMode blendMode)
         {
-            return iSDL_SetTextureBlendMode(texture, blendMode);
+            return iSDL_SetTextureBlendMode(texture, (uint)blendMode);
         }
 
-        public static bool SDL_GetTextureBlendMode(SDL_Texture* texture, out uint blendMode)
+        public static bool SDL_GetTextureBlendMode(SDL_Texture* texture, out SDL_BlendMode blendMode)
         {
-            fixed (uint* ptr1 = &blendMode)
+            fixed (SDL_BlendMode* ptr1 = &blendMode)
             {
-                return iSDL_GetTextureBlendMode(texture, ptr1);
+                return iSDL_GetTextureBlendMode(texture, (uint*)ptr1);
             }
         }
 
@@ -418,16 +418,16 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_SetRenderDrawBlendMode(SDL_Renderer* renderer, uint blendMode)
+        public static bool SDL_SetRenderDrawBlendMode(SDL_Renderer* renderer, SDL_BlendMode blendMode)
         {
-            return iSDL_SetRenderDrawBlendMode(renderer, blendMode);
+            return iSDL_SetRenderDrawBlendMode(renderer, (uint)blendMode);
         }
 
-        public static bool SDL_GetRenderDrawBlendMode(SDL_Renderer* renderer, out uint blendMode)
+        public static bool SDL_GetRenderDrawBlendMode(SDL_Renderer* renderer, out SDL_BlendMode blendMode)
         {
-            fixed (uint* ptr1 = &blendMode)
+            fixed (SDL_BlendMode* ptr1 = &blendMode)
             {
-                return iSDL_GetRenderDrawBlendMode(renderer, ptr1);
+                return iSDL_GetRenderDrawBlendMode(renderer, (uint*)ptr1);
             }
         }
 
