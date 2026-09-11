@@ -64,11 +64,11 @@ namespace Engine.SDL3
             iSDL_RemoveTrayEntry(entry);
         }
 
-        public static SDL_TrayEntry* SDL_InsertTrayEntryAt(SDL_TrayMenu* menu, int pos, string label, uint flags)
+        public static SDL_TrayEntry* SDL_InsertTrayEntryAt(SDL_TrayMenu* menu, int pos, string label, SDL_TrayEntryFlags flags)
         {
             fixed (byte* ptr1 = SDL_StringToNative(label))
             {
-                return iSDL_InsertTrayEntryAt(menu, pos, ptr1, flags);
+                return iSDL_InsertTrayEntryAt(menu, pos, ptr1, (uint)flags);
             }
         }
 
