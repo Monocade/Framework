@@ -5,17 +5,17 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static bool SDL_TryLockSpinlock(IntPtr @lock)
+        public static bool SDL_TryLockSpinlock(ref int @lock)
         {
             return iSDL_TryLockSpinlock((int*)@lock);
         }
 
-        public static void SDL_LockSpinlock(IntPtr @lock)
+        public static void SDL_LockSpinlock(ref int @lock)
         {
             iSDL_LockSpinlock((int*)@lock);
         }
 
-        public static void SDL_UnlockSpinlock(IntPtr @lock)
+        public static void SDL_UnlockSpinlock(ref int @lock)
         {
             iSDL_UnlockSpinlock((int*)@lock);
         }
@@ -70,19 +70,28 @@ namespace Engine.SDL3
             return iSDL_AddAtomicU32(a, v);
         }
 
-        public static bool SDL_CompareAndSwapAtomicPointer(IntPtr* a, IntPtr oldval, IntPtr newval)
+        public static bool SDL_CompareAndSwapAtomicPointer(ref IntPtr a, IntPtr oldval, IntPtr newval)
         {
-            return iSDL_CompareAndSwapAtomicPointer(a, oldval, newval);
+            fixed (IntPtr* ptr1 = &a)
+            {
+                return iSDL_CompareAndSwapAtomicPointer(ptr1, oldval, newval);
+            }
         }
 
-        public static IntPtr SDL_SetAtomicPointer(IntPtr* a, IntPtr v)
+        public static IntPtr SDL_SetAtomicPointer(ref IntPtr a, IntPtr v)
         {
-            return iSDL_SetAtomicPointer(a, v);
+            fixed (IntPtr* ptr1 = &a)
+            {
+                return iSDL_SetAtomicPointer(ptr1, v);
+            }
         }
 
-        public static IntPtr SDL_GetAtomicPointer(IntPtr* a)
+        public static IntPtr SDL_GetAtomicPointer(ref IntPtr a)
         {
-            return iSDL_GetAtomicPointer(a);
+            fixed (IntPtr* ptr1 = &a)
+            {
+                return iSDL_GetAtomicPointer(ptr1);
+            }
         }
     }
 }
