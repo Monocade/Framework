@@ -18,10 +18,10 @@ namespace Engine.SDL3
             set => format = value;
         }
 
-        public uint Usage
+        public SDL_GPUTextureUsageFlags Usage
         {
-            get => usage;
-            set => usage = value;
+            get => (SDL_GPUTextureUsageFlags)usage;
+            set => usage = (uint)value;
         }
 
         public uint Width

@@ -529,9 +529,9 @@ namespace Engine.SDL3
             return iSDL_GPUTextureFormatTexelBlockSize(format);
         }
 
-        public static bool SDL_GPUTextureSupportsFormat(SDL_GPUDevice* device, SDL_GPUTextureFormat format, SDL_GPUTextureType type, uint usage)
+        public static bool SDL_GPUTextureSupportsFormat(SDL_GPUDevice* device, SDL_GPUTextureFormat format, SDL_GPUTextureType type, SDL_GPUTextureUsageFlags usage)
         {
-            return iSDL_GPUTextureSupportsFormat(device, format, type, usage);
+            return iSDL_GPUTextureSupportsFormat(device, format, type, (uint)usage);
         }
 
         public static bool SDL_GPUTextureSupportsSampleCount(SDL_GPUDevice* device, SDL_GPUTextureFormat format, SDL_GPUSampleCount sample_count)
