@@ -42,10 +42,10 @@ namespace Engine.SDL3
             set => scancode = value;
         }
 
-        public uint Key
+        public SDL_KeyCode Key
         {
-            get => key;
-            set => key = value;
+            get => (SDL_KeyCode)key;
+            set => key = (uint)value;
         }
 
         public ushort Mod

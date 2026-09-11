@@ -61,16 +61,16 @@ namespace Engine.SDL3
             iSDL_SetModState(modstate);
         }
 
-        public static uint SDL_GetKeyFromScancode(SDL_Scancode scancode, ushort modstate, bool key_event)
+        public static SDL_KeyCode SDL_GetKeyFromScancode(SDL_Scancode scancode, ushort modstate, bool key_event)
         {
-            return iSDL_GetKeyFromScancode(scancode, modstate, key_event);
+            return (SDL_KeyCode)iSDL_GetKeyFromScancode(scancode, modstate, key_event);
         }
 
-        public static SDL_Scancode SDL_GetScancodeFromKey(uint key, ref ushort modstate)
+        public static SDL_Scancode SDL_GetScancodeFromKey(SDL_KeyCode key, ref ushort modstate)
         {
             fixed (ushort* ptr1 = &modstate)
             {
-                return iSDL_GetScancodeFromKey(key, ptr1);
+                return iSDL_GetScancodeFromKey((uint)key, ptr1);
             }
         }
 
@@ -95,16 +95,16 @@ namespace Engine.SDL3
             }
         }
 
-        public static string SDL_GetKeyName(uint key)
+        public static string SDL_GetKeyName(SDL_KeyCode key)
         {
-            return SDL_NativeToString(iSDL_GetKeyName(key));
+            return SDL_NativeToString(iSDL_GetKeyName((uint)key));
         }
 
-        public static uint SDL_GetKeyFromName(string name)
+        public static SDL_KeyCode SDL_GetKeyFromName(string name)
         {
             fixed (byte* ptr1 = SDL_StringToNative(name))
             {
-                return iSDL_GetKeyFromName(ptr1);
+                return (SDL_KeyCode)iSDL_GetKeyFromName(ptr1);
             }
         }
 
