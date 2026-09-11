@@ -5,24 +5,24 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static bool SDL_Init(uint flags)
+        public static bool SDL_Init(SDL_InitFlags flags)
         {
-            return iSDL_Init(flags);
+            return iSDL_Init((uint)flags);
         }
 
-        public static bool SDL_InitSubSystem(uint flags)
+        public static bool SDL_InitSubSystem(SDL_InitFlags flags)
         {
-            return iSDL_InitSubSystem(flags);
+            return iSDL_InitSubSystem((uint)flags);
         }
 
-        public static void SDL_QuitSubSystem(uint flags)
+        public static void SDL_QuitSubSystem(SDL_InitFlags flags)
         {
-            iSDL_QuitSubSystem(flags);
+            iSDL_QuitSubSystem((uint)flags);
         }
 
-        public static uint SDL_WasInit(uint flags)
+        public static uint SDL_WasInit(SDL_InitFlags flags)
         {
-            return iSDL_WasInit(flags);
+            return iSDL_WasInit((uint)flags);
         }
 
         public static void SDL_Quit()
