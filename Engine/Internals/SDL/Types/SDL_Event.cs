@@ -6,10 +6,10 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_Event
     {
-        public uint Type
+        public SDL_EventType Type
         {
-            get => type;
-            set => type = value;
+            get => (SDL_EventType)type;
+            set => type = (uint)value;
         }
 
         public SDL_CommonEvent Common
