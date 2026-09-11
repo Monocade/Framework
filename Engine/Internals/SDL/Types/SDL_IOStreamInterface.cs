@@ -4,7 +4,7 @@ using System;
 
 namespace Engine.SDL3
 {
-    internal unsafe partial struct SDL_IOStreamInterface
+    internal partial struct SDL_IOStreamInterface
     {
         public uint Version
         {
@@ -12,40 +12,40 @@ namespace Engine.SDL3
             set => version = value;
         }
 
-        public IntPtr Size
+        public SDL_IOStreamSizeCallback Size
         {
-            get => size;
-            set => size = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_IOStreamSizeCallback>(size);
+            set => size = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr Seek
+        public SDL_IOStreamSeekCallback Seek
         {
-            get => seek;
-            set => seek = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_IOStreamSeekCallback>(seek);
+            set => seek = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr Read
+        public SDL_IOStreamReadCallback Read
         {
-            get => read;
-            set => read = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_IOStreamReadCallback>(read);
+            set => read = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr Write
+        public SDL_IOStreamWriteCallback Write
         {
-            get => write;
-            set => write = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_IOStreamWriteCallback>(write);
+            set => write = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr Flush
+        public SDL_IOStreamFlushCallback Flush
         {
-            get => flush;
-            set => flush = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_IOStreamFlushCallback>(flush);
+            set => flush = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr Close
+        public SDL_IOStreamCloseCallback Close
         {
-            get => close;
-            set => close = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_IOStreamCloseCallback>(close);
+            set => close = Marshal.GetFunctionPointerForDelegate(value);
         }
     }
 }

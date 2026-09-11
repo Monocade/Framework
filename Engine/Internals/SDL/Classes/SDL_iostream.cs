@@ -3,6 +3,25 @@ using System;
 
 namespace Engine.SDL3
 {
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate long SDL_IOStreamSizeCallback(void* userdata);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate long SDL_IOStreamSeekCallback(void* userdata, long offset, SDL_IOWhence whence);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate UIntPtr SDL_IOStreamReadCallback(void* userdata, void* ptr, UIntPtr size, SDL_IOStatus* status);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate UIntPtr SDL_IOStreamWriteCallback(void* userdata, void* ptr, UIntPtr size, SDL_IOStatus* status);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate bool SDL_IOStreamFlushCallback(void* userdata, SDL_IOStatus* status);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate bool SDL_IOStreamCloseCallback(void* userdata);
+    
+    
     internal static unsafe partial class SDL
     {
         public static SDL_IOStream* SDL_IOFromFile(string file, string mode)
