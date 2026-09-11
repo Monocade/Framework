@@ -42,10 +42,10 @@ namespace Engine.SDL3
             set => alpha_blend_op = value;
         }
 
-        public byte Color_write_mask
+        public SDL_GPUColorComponentFlags Color_write_mask
         {
-            get => color_write_mask;
-            set => color_write_mask = value;
+            get => (SDL_GPUColorComponentFlags)color_write_mask;
+            set => color_write_mask = (byte)value;
         }
 
         public bool Enable_blend
