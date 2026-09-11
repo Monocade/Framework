@@ -5,11 +5,11 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static bool SDL_GPUSupportsShaderFormats(uint format_flags, string name)
+        public static bool SDL_GPUSupportsShaderFormats(SDL_GPUShaderFormat format_flags, string name)
         {
             fixed (byte* ptr1 = SDL_StringToNative(name))
             {
-                return iSDL_GPUSupportsShaderFormats(format_flags, ptr1);
+                return iSDL_GPUSupportsShaderFormats((uint)format_flags, ptr1);
             }
         }
 
@@ -18,11 +18,11 @@ namespace Engine.SDL3
             return iSDL_GPUSupportsProperties(props);
         }
 
-        public static SDL_GPUDevice* SDL_CreateGPUDevice(uint format_flags, bool debug_mode, string name)
+        public static SDL_GPUDevice* SDL_CreateGPUDevice(SDL_GPUShaderFormat format_flags, bool debug_mode, string name)
         {
             fixed (byte* ptr1 = SDL_StringToNative(name))
             {
-                return iSDL_CreateGPUDevice(format_flags, debug_mode, ptr1);
+                return iSDL_CreateGPUDevice((uint)format_flags, debug_mode, ptr1);
             }
         }
 
@@ -51,9 +51,9 @@ namespace Engine.SDL3
             return SDL_NativeToString(iSDL_GetGPUDeviceDriver(device));
         }
 
-        public static uint SDL_GetGPUShaderFormats(SDL_GPUDevice* device)
+        public static SDL_GPUShaderFormat SDL_GetGPUShaderFormats(SDL_GPUDevice* device)
         {
-            return iSDL_GetGPUShaderFormats(device);
+            return (SDL_GPUShaderFormat)iSDL_GetGPUShaderFormats(device);
         }
 
         public static uint SDL_GetGPUDeviceProperties(SDL_GPUDevice* device)

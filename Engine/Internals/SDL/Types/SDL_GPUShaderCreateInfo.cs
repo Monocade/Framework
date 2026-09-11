@@ -24,10 +24,10 @@ namespace Engine.SDL3
             set => entrypoint = value;
         }
 
-        public uint Format
+        public SDL_GPUShaderFormat Format
         {
-            get => format;
-            set => format = value;
+            get => (SDL_GPUShaderFormat)format;
+            set => format = (uint)value;
         }
 
         public SDL_GPUShaderStage Stage
