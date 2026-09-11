@@ -28,30 +28,30 @@ namespace Engine.SDL3
             return iSDL_GetMouseFocus();
         }
 
-        public static uint SDL_GetMouseState(out float x, out float y)
+        public static SDL_MouseButtonFlags SDL_GetMouseState(out float x, out float y)
         {
             fixed (float* ptr1 = &x)
             fixed (float* ptr2 = &y)
             {
-                return iSDL_GetMouseState(ptr1, ptr2);
+                return (SDL_MouseButtonFlags)iSDL_GetMouseState(ptr1, ptr2);
             }
         }
 
-        public static uint SDL_GetGlobalMouseState(out float x, out float y)
+        public static SDL_MouseButtonFlags SDL_GetGlobalMouseState(out float x, out float y)
         {
             fixed (float* ptr1 = &x)
             fixed (float* ptr2 = &y)
             {
-                return iSDL_GetGlobalMouseState(ptr1, ptr2);
+                return (SDL_MouseButtonFlags)iSDL_GetGlobalMouseState(ptr1, ptr2);
             }
         }
 
-        public static uint SDL_GetRelativeMouseState(out float x, out float y)
+        public static SDL_MouseButtonFlags SDL_GetRelativeMouseState(out float x, out float y)
         {
             fixed (float* ptr1 = &x)
             fixed (float* ptr2 = &y)
             {
-                return iSDL_GetRelativeMouseState(ptr1, ptr2);
+                return (SDL_MouseButtonFlags)iSDL_GetRelativeMouseState(ptr1, ptr2);
             }
         }
 

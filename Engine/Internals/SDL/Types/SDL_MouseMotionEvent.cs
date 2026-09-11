@@ -36,10 +36,10 @@ namespace Engine.SDL3
             set => which = value;
         }
 
-        public uint State
+        public SDL_MouseButtonFlags State
         {
-            get => state;
-            set => state = value;
+            get => (SDL_MouseButtonFlags)state;
+            set => state = (uint)value;
         }
 
         public float X
