@@ -75,14 +75,14 @@ namespace Engine.SDL3
             }
         }
 
-        public static string[] SDL_GlobDirectory(string path, string pattern, uint flags, out int count)
+        public static string[] SDL_GlobDirectory(string path, string pattern, SDL_GlobFlags flags, out int count)
         {
             fixed (byte* ptr1 = SDL_StringToNative(path))
             fixed (byte* ptr2 = SDL_StringToNative(pattern))
             {
                 int size = 0;
                 {
-                    return SDL_NativeToArray(iSDL_GlobDirectory(ptr1, ptr2, flags, &size), size, out count);
+                    return SDL_NativeToArray(iSDL_GlobDirectory(ptr1, ptr2, (uint)flags, &size), size, out count);
                 }
             }
         }
