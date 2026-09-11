@@ -15,14 +15,14 @@ namespace Engine.SDL3
             return SDL_NativeToString(iSDL_GetRenderDriver(index));
         }
 
-        public static bool SDL_CreateWindowAndRenderer(string title, int width, int height, ulong window_flags, out SDL_Window* window, out SDL_Renderer* renderer)
+        public static bool SDL_CreateWindowAndRenderer(string title, int width, int height, SDL_WindowFlags window_flags, out SDL_Window* window, out SDL_Renderer* renderer)
         {
             fixed (byte* ptr1 = SDL_StringToNative(title))
             {
                 SDL_Window* ptr2 = null;
                 SDL_Renderer* ptr3 = null;
                 
-                var result = iSDL_CreateWindowAndRenderer(ptr1, width, height, window_flags, &ptr2, &ptr3);
+                var result = iSDL_CreateWindowAndRenderer(ptr1, width, height, (ulong)window_flags, &ptr2, &ptr3);
                 window = ptr2;
                 renderer = ptr3;
                 

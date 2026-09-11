@@ -161,17 +161,17 @@ namespace Engine.SDL3
             }
         }
 
-        public static SDL_Window* SDL_CreateWindow(string title, int w, int h, ulong flags)
+        public static SDL_Window* SDL_CreateWindow(string title, int w, int h, SDL_WindowFlags flags)
         {
             fixed (byte* ptr1 = SDL_StringToNative(title))
             {
-                return iSDL_CreateWindow(ptr1, w, h, flags);
+                return iSDL_CreateWindow(ptr1, w, h, (ulong)flags);
             }
         }
 
-        public static SDL_Window* SDL_CreatePopupWindow(SDL_Window* parent, int offset_x, int offset_y, int w, int h, ulong flags)
+        public static SDL_Window* SDL_CreatePopupWindow(SDL_Window* parent, int offset_x, int offset_y, int w, int h, SDL_WindowFlags flags)
         {
-            return iSDL_CreatePopupWindow(parent, offset_x, offset_y, w, h, flags);
+            return iSDL_CreatePopupWindow(parent, offset_x, offset_y, w, h, (ulong)flags);
         }
 
         public static SDL_Window* SDL_CreateWindowWithProperties(uint props)
@@ -199,9 +199,9 @@ namespace Engine.SDL3
             return iSDL_GetWindowProperties(window);
         }
 
-        public static ulong SDL_GetWindowFlags(SDL_Window* window)
+        public static SDL_WindowFlags SDL_GetWindowFlags(SDL_Window* window)
         {
-            return iSDL_GetWindowFlags(window);
+            return (SDL_WindowFlags)iSDL_GetWindowFlags(window);
         }
 
         public static bool SDL_SetWindowTitle(SDL_Window* window, string title)
