@@ -6,10 +6,10 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_HapticLeftRight
     {
-        public ushort Type
+        public SDL_HapticEffectType Type
         {
-            get => type;
-            set => type = value;
+            get => (SDL_HapticEffectType)type;
+            set => type = (ushort)value;
         }
 
         public uint Length
