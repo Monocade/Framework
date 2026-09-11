@@ -5,7 +5,7 @@ using System;
 namespace Engine.SDL3
 {
     [Flags]
-    internal enum SDL_HapticDirectionType : uint
+    internal enum SDL_HapticDirectionType : byte
     {
 	    SDL_HAPTIC_POLAR = 0,
 	    SDL_HAPTIC_CARTESIAN = 1,
