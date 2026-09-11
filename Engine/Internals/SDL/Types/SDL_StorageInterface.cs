@@ -12,70 +12,70 @@ namespace Engine.SDL3
             set => version = value;
         }
 
-        public IntPtr Close
+        public SDL_StorageCloseCallback Close
         {
-            get => close;
-            set => close = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_StorageCloseCallback>(close);
+            set => close = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr Ready
+        public SDL_StorageReadyCallback Ready
         {
-            get => ready;
-            set => ready = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_StorageReadyCallback>(ready);
+            set => ready = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr Enumerate
+        public SDL_StorageEnumerateCallback Enumerate
         {
-            get => enumerate;
-            set => enumerate = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_StorageEnumerateCallback>(enumerate);
+            set => enumerate = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr Info
+        public SDL_StorageInfoCallback Info
         {
-            get => info;
-            set => info = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_StorageInfoCallback>(info);
+            set => info = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr Read_file
+        public SDL_StorageReadFileCallback ReadFile
         {
-            get => read_file;
-            set => read_file = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_StorageReadFileCallback>(read_file);
+            set => read_file = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr Write_file
+        public SDL_StorageWriteFileCallback WriteFile
         {
-            get => write_file;
-            set => write_file = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_StorageWriteFileCallback>(write_file);
+            set => write_file = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr Mkdir
+        public SDL_StorageMkdirCallback Mkdir
         {
-            get => mkdir;
-            set => mkdir = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_StorageMkdirCallback>(mkdir);
+            set => mkdir = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr Remove
+        public SDL_StorageRemoveCallback Remove
         {
-            get => remove;
-            set => remove = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_StorageRemoveCallback>(remove);
+            set => remove = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr Rename
+        public SDL_StorageRenameCallback Rename
         {
-            get => rename;
-            set => rename = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_StorageRenameCallback>(rename);
+            set => rename = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr Copy
+        public SDL_StorageCopyCallback Copy
         {
-            get => copy;
-            set => copy = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_StorageCopyCallback>(copy);
+            set => copy = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr Space_remaining
+        public SDL_StorageSpaceRemainingCallback SpaceRemaining
         {
-            get => space_remaining;
-            set => space_remaining = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_StorageSpaceRemainingCallback>(space_remaining);
+            set => space_remaining = Marshal.GetFunctionPointerForDelegate(value);
         }
     }
 }

@@ -3,6 +3,40 @@ using System;
 
 namespace Engine.SDL3
 {
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate bool SDL_StorageCloseCallback(void* userdata);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate bool SDL_StorageReadyCallback(void* userdata);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate bool SDL_StorageEnumerateCallback(void* userdata, byte* path, SDL_EnumerateDirectoryCallback callback, void* callback_userdata);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate bool SDL_StorageInfoCallback(void* userdata, byte* path, SDL_PathInfo* info);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate bool SDL_StorageReadFileCallback(void* userdata, byte* path, void* destination, ulong length);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate bool SDL_StorageWriteFileCallback(void* userdata, byte* path, void* source, ulong length);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate bool SDL_StorageMkdirCallback(void* userdata, byte* path);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate bool SDL_StorageRemoveCallback(void* userdata, byte* path);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate bool SDL_StorageRenameCallback(void* userdata, byte* oldpath, byte* newpath);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate bool SDL_StorageCopyCallback(void* userdata, byte* oldpath, byte* newpath);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate ulong SDL_StorageSpaceRemainingCallback(void* userdata);
+    
+    
     internal static unsafe partial class SDL
     {
         public static SDL_Storage* SDL_OpenTitleStorage(string @override, uint props)
