@@ -6,7 +6,7 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_VirtualJoystickTouchpadDesc
     {
-        public ushort Nfingers
+        public ushort NumFingers
         {
             get => nfingers;
             set => nfingers = value;

@@ -18,7 +18,7 @@ namespace Engine.SDL3
             set => code = value;
         }
 
-        public byte* Entrypoint
+        public byte* EntryPoint
         {
             get => entrypoint;
             set => entrypoint = value;
@@ -66,19 +66,19 @@ namespace Engine.SDL3
             set => num_uniform_buffers = value;
         }
 
-        public uint ThreadcountX
+        public uint ThreadCountX
         {
             get => threadcount_x;
             set => threadcount_x = value;
         }
 
-        public uint ThreadcountY
+        public uint ThreadCountY
         {
             get => threadcount_y;
             set => threadcount_y = value;
         }
 
-        public uint ThreadcountZ
+        public uint ThreadCountZ
         {
             get => threadcount_z;
             set => threadcount_z = value;

@@ -30,7 +30,7 @@ namespace Engine.SDL3
             set => message = value;
         }
 
-        public int Numbuttons
+        public int NumButtons
         {
             get => numbuttons;
             set => numbuttons = value;

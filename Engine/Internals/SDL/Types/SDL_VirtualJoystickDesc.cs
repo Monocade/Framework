@@ -18,49 +18,49 @@ namespace Engine.SDL3
             set => type = value;
         }
 
-        public ushort VendorId
+        public ushort VendorID
         {
             get => vendor_id;
             set => vendor_id = value;
         }
 
-        public ushort ProductId
+        public ushort ProductID
         {
             get => product_id;
             set => product_id = value;
         }
 
-        public ushort Naxes
+        public ushort NumAxes
         {
             get => naxes;
             set => naxes = value;
         }
 
-        public ushort Nbuttons
+        public ushort NumButtons
         {
             get => nbuttons;
             set => nbuttons = value;
         }
 
-        public ushort Nballs
+        public ushort NumBalls
         {
             get => nballs;
             set => nballs = value;
         }
 
-        public ushort Nhats
+        public ushort NumHats
         {
             get => nhats;
             set => nhats = value;
         }
 
-        public ushort Ntouchpads
+        public ushort NumTouchpads
         {
             get => ntouchpads;
             set => ntouchpads = value;
         }
 
-        public ushort Nsensors
+        public ushort NumSensors
         {
             get => nsensors;
             set => nsensors = value;
@@ -102,49 +102,49 @@ namespace Engine.SDL3
             set => userdata = value;
         }
 
-        public IntPtr update
+        public IntPtr VirtualUpdate
         {
             get => Update;
             set => Update = value;
         }
 
-        public IntPtr setPlayerIndex
+        public IntPtr VirtualSetPlayerIndex
         {
             get => SetPlayerIndex;
             set => SetPlayerIndex = value;
         }
 
-        public IntPtr rumble
+        public IntPtr virtualRumble
         {
             get => Rumble;
             set => Rumble = value;
         }
 
-        public IntPtr rumbleTriggers
+        public IntPtr VirtualRumbleTriggers
         {
             get => RumbleTriggers;
             set => RumbleTriggers = value;
         }
 
-        public IntPtr setLED
+        public IntPtr VirtualSetLED
         {
             get => SetLED;
             set => SetLED = value;
         }
 
-        public IntPtr sendEffect
+        public IntPtr VirtualSendEffect
         {
             get => SendEffect;
             set => SendEffect = value;
         }
 
-        public IntPtr setSensorsEnabled
+        public IntPtr VirtualSetSensorsEnabled
         {
             get => SetSensorsEnabled;
             set => SetSensorsEnabled = value;
         }
 
-        public IntPtr cleanup
+        public IntPtr VirtualCleanup
         {
             get => Cleanup;
             set => Cleanup = value;

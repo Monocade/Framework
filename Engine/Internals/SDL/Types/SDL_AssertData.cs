@@ -30,7 +30,7 @@ namespace Engine.SDL3
             set => filename = value;
         }
 
-        public int Linenum
+        public int LineNumber
         {
             get => linenum;
             set => linenum = value;

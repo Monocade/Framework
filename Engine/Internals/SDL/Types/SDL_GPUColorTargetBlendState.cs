@@ -6,13 +6,13 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUColorTargetBlendState
     {
-        public SDL_GPUBlendFactor SrcColorBlendfactor
+        public SDL_GPUBlendFactor SrcColorBlendFactor
         {
             get => src_color_blendfactor;
             set => src_color_blendfactor = value;
         }
 
-        public SDL_GPUBlendFactor DstColorBlendfactor
+        public SDL_GPUBlendFactor DstColorBlendFactor
         {
             get => dst_color_blendfactor;
             set => dst_color_blendfactor = value;
@@ -24,13 +24,13 @@ namespace Engine.SDL3
             set => color_blend_op = value;
         }
 
-        public SDL_GPUBlendFactor SrcAlphaBlendfactor
+        public SDL_GPUBlendFactor SrcAlphaBlendFactor
         {
             get => src_alpha_blendfactor;
             set => src_alpha_blendfactor = value;
         }
 
-        public SDL_GPUBlendFactor DstAlphaBlendfactor
+        public SDL_GPUBlendFactor DstAlphaBlendFactor
         {
             get => dst_alpha_blendfactor;
             set => dst_alpha_blendfactor = value;
@@ -54,7 +54,7 @@ namespace Engine.SDL3
             set => enable_blend = value;
         }
 
-        public bool Enable_colorWriteMask
+        public bool EnableColorWriteMask
         {
             get => enable_color_write_mask;
             set => enable_color_write_mask = value;

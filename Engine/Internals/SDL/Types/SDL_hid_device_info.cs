@@ -12,13 +12,13 @@ namespace Engine.SDL3
             set => path = value;
         }
 
-        public ushort VendorId
+        public ushort VendorID
         {
             get => vendor_id;
             set => vendor_id = value;
         }
 
-        public ushort ProductId
+        public ushort ProductID
         {
             get => product_id;
             set => product_id = value;

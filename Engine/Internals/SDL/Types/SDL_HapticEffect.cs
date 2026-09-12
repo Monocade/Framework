@@ -36,7 +36,7 @@ namespace Engine.SDL3
             set => ramp = value;
         }
 
-        public SDL_HapticLeftRight Leftright
+        public SDL_HapticLeftRight LeftRight
         {
             get => leftright;
             set => leftright = value;

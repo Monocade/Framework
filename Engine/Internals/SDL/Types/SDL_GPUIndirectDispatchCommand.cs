@@ -6,19 +6,19 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUIndirectDispatchCommand
     {
-        public uint GroupcountX
+        public uint GroupCountX
         {
             get => groupcount_x;
             set => groupcount_x = value;
         }
 
-        public uint GroupcountY
+        public uint GroupCountY
         {
             get => groupcount_y;
             set => groupcount_y = value;
         }
 
-        public uint GroupcountZ
+        public uint GroupCountZ
         {
             get => groupcount_z;
             set => groupcount_z = value;

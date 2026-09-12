@@ -36,13 +36,13 @@ namespace Engine.SDL3
             set => ball = value;
         }
 
-        public short Xrel
+        public short XRelative
         {
             get => xrel;
             set => xrel = value;
         }
 
-        public short Yrel
+        public short YRelative
         {
             get => yrel;
             set => yrel = value;

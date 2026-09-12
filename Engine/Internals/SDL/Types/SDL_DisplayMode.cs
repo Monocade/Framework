@@ -54,7 +54,7 @@ namespace Engine.SDL3
             set => refresh_rate_denominator = value;
         }
 
-        public SDL_DisplayModeData* @Internal
+        public SDL_DisplayModeData* Internal
         {
             get => @internal;
             set => @internal = value;

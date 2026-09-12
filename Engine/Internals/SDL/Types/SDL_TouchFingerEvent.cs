@@ -48,13 +48,13 @@ namespace Engine.SDL3
             set => y = value;
         }
 
-        public float Dx
+        public float DeltaX
         {
             get => dx;
             set => dx = value;
         }
 
-        public float Dy
+        public float DeltaY
         {
             get => dy;
             set => dy = value;

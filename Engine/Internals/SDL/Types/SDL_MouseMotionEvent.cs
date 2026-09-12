@@ -54,13 +54,13 @@ namespace Engine.SDL3
             set => y = value;
         }
 
-        public float Xrel
+        public float XRelative
         {
             get => xrel;
             set => xrel = value;
         }
 
-        public float Yrel
+        public float YRelative
         {
             get => yrel;
             set => yrel = value;

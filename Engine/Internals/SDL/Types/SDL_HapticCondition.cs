@@ -54,13 +54,13 @@ namespace Engine.SDL3
             set => left_sat = value;
         }
 
-        public _right_coeff_e__FixedBuffer RightCoeff
+        public _right_coeff_e__FixedBuffer RightCoefficient
         {
             get => right_coeff;
             set => right_coeff = value;
         }
 
-        public _left_coeff_e__FixedBuffer LeftCoeff
+        public _left_coeff_e__FixedBuffer LeftCoefficient
         {
             get => left_coeff;
             set => left_coeff = value;

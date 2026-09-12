@@ -18,7 +18,7 @@ namespace Engine.SDL3
             set => code = value;
         }
 
-        public byte* Entrypoint
+        public byte* EntryPoint
         {
             get => entrypoint;
             set => entrypoint = value;

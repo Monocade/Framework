@@ -42,7 +42,7 @@ namespace Engine.SDL3
             set => second = value;
         }
 
-        public int Nanosecond
+        public int NanoSecond
         {
             get => nanosecond;
             set => nanosecond = value;
