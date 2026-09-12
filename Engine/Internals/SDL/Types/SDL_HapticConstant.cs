@@ -48,25 +48,25 @@ namespace Engine.SDL3
             set => level = value;
         }
 
-        public ushort Attack_length
+        public ushort AttackLength
         {
             get => attack_length;
             set => attack_length = value;
         }
 
-        public ushort Attack_level
+        public ushort AttackLevel
         {
             get => attack_level;
             set => attack_level = value;
         }
 
-        public ushort Fade_length
+        public ushort FadeLength
         {
             get => fade_length;
             set => fade_length = value;
         }
 
-        public ushort Fade_level
+        public ushort FadeLevel
         {
             get => fade_level;
             set => fade_level = value;

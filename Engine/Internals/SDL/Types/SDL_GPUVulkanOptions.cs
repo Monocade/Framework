@@ -6,43 +6,43 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUVulkanOptions
     {
-        public uint Vulkan_api_version
+        public uint VulkanApiVersion
         {
             get => vulkan_api_version;
             set => vulkan_api_version = value;
         }
 
-        public IntPtr Feature_list
+        public IntPtr FeatureList
         {
             get => feature_list;
             set => feature_list = value;
         }
 
-        public IntPtr Vulkan_10_physical_device_features
+        public IntPtr Vulkan10PhysicalDeviceFeatures
         {
             get => vulkan_10_physical_device_features;
             set => vulkan_10_physical_device_features = value;
         }
 
-        public uint Device_extension_count
+        public uint DeviceExtensionCount
         {
             get => device_extension_count;
             set => device_extension_count = value;
         }
 
-        public byte** Device_extension_names
+        public byte** DeviceExtensionNames
         {
             get => device_extension_names;
             set => device_extension_names = value;
         }
 
-        public uint Instance_extension_count
+        public uint InstanceExtensionCount
         {
             get => instance_extension_count;
             set => instance_extension_count = value;
         }
 
-        public byte** Instance_extension_names
+        public byte** InstanceExtensionNames
         {
             get => instance_extension_names;
             set => instance_extension_names = value;

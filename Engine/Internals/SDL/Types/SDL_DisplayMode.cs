@@ -30,25 +30,25 @@ namespace Engine.SDL3
             set => h = value;
         }
 
-        public float Pixel_density
+        public float PixelDensity
         {
             get => pixel_density;
             set => pixel_density = value;
         }
 
-        public float Refresh_rate
+        public float RefreshRate
         {
             get => refresh_rate;
             set => refresh_rate = value;
         }
 
-        public int Refresh_rate_numerator
+        public int RefreshRateNumerator
         {
             get => refresh_rate_numerator;
             set => refresh_rate_numerator = value;
         }
 
-        public int Refresh_rate_denominator
+        public int RefreshRateDenominator
         {
             get => refresh_rate_denominator;
             set => refresh_rate_denominator = value;

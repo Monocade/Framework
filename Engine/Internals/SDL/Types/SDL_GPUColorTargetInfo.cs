@@ -12,49 +12,49 @@ namespace Engine.SDL3
             set => texture = value;
         }
 
-        public uint Mip_level
+        public uint MipLevel
         {
             get => mip_level;
             set => mip_level = value;
         }
 
-        public uint Layer_or_depth_plane
+        public uint LayerOrDepthPlane
         {
             get => layer_or_depth_plane;
             set => layer_or_depth_plane = value;
         }
 
-        public SDL_FColor Clear_color
+        public SDL_FColor ClearColor
         {
             get => clear_color;
             set => clear_color = value;
         }
 
-        public SDL_GPULoadOp Load_op
+        public SDL_GPULoadOp LoadOp
         {
             get => load_op;
             set => load_op = value;
         }
 
-        public SDL_GPUStoreOp Store_op
+        public SDL_GPUStoreOp StoreOp
         {
             get => store_op;
             set => store_op = value;
         }
 
-        public SDL_GPUTexture* Resolve_texture
+        public SDL_GPUTexture* ResolveTexture
         {
             get => resolve_texture;
             set => resolve_texture = value;
         }
 
-        public uint Resolve_mip_level
+        public uint ResolveMipLevel
         {
             get => resolve_mip_level;
             set => resolve_mip_level = value;
         }
 
-        public uint Resolve_layer
+        public uint ResolveLayer
         {
             get => resolve_layer;
             set => resolve_layer = value;
@@ -66,7 +66,7 @@ namespace Engine.SDL3
             set => cycle = value;
         }
 
-        public bool Cycle_resolve_texture
+        public bool CycleResolveTexture
         {
             get => cycle_resolve_texture;
             set => cycle_resolve_texture = value;

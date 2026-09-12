@@ -18,19 +18,19 @@ namespace Engine.SDL3
             set => size = value;
         }
 
-        public long Create_time
+        public long CreateTime
         {
             get => create_time;
             set => create_time = value;
         }
 
-        public long Modify_time
+        public long ModifyTime
         {
             get => modify_time;
             set => modify_time = value;
         }
 
-        public long Access_time
+        public long AccessTime
         {
             get => access_time;
             set => access_time = value;

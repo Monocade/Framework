@@ -12,13 +12,13 @@ namespace Engine.SDL3
             set => texture = value;
         }
 
-        public uint Mip_level
+        public uint MipLevel
         {
             get => mip_level;
             set => mip_level = value;
         }
 
-        public uint Layer_or_depth_plane
+        public uint LayerOrDepthPlane
         {
             get => layer_or_depth_plane;
             set => layer_or_depth_plane = value;

@@ -18,13 +18,13 @@ namespace Engine.SDL3
             set => pitch = value;
         }
 
-        public SDL_GPUVertexInputRate Input_rate
+        public SDL_GPUVertexInputRate InputRate
         {
             get => input_rate;
             set => input_rate = value;
         }
 
-        public uint Instance_step_rate
+        public uint InstanceStepRate
         {
             get => instance_step_rate;
             set => instance_step_rate = value;

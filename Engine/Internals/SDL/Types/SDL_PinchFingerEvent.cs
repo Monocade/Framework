@@ -36,25 +36,25 @@ namespace Engine.SDL3
             set => windowID = value;
         }
 
-        public float Span_x
+        public float SpanX
         {
             get => span_x;
             set => span_x = value;
         }
 
-        public float Span_y
+        public float SpanY
         {
             get => span_y;
             set => span_y = value;
         }
 
-        public float Focus_x
+        public float FocusX
         {
             get => focus_x;
             set => focus_x = value;
         }
 
-        public float Focus_y
+        public float FocusY
         {
             get => focus_y;
             set => focus_y = value;

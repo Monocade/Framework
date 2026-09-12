@@ -6,43 +6,43 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPURenderStateCreateInfo
     {
-        public SDL_GPUShader* Fragment_shader
+        public SDL_GPUShader* FragmentShader
         {
             get => fragment_shader;
             set => fragment_shader = value;
         }
 
-        public int Num_sampler_bindings
+        public int NumSamplerBindings
         {
             get => num_sampler_bindings;
             set => num_sampler_bindings = value;
         }
 
-        public SDL_GPUTextureSamplerBinding* Sampler_bindings
+        public SDL_GPUTextureSamplerBinding* SamplerBindings
         {
             get => sampler_bindings;
             set => sampler_bindings = value;
         }
 
-        public int Num_storage_textures
+        public int NumStorageTextures
         {
             get => num_storage_textures;
             set => num_storage_textures = value;
         }
 
-        public SDL_GPUTexture** Storage_textures
+        public SDL_GPUTexture** StorageTextures
         {
             get => storage_textures;
             set => storage_textures = value;
         }
 
-        public int Num_storage_buffers
+        public int NumStorageBuffers
         {
             get => num_storage_buffers;
             set => num_storage_buffers = value;
         }
 
-        public SDL_GPUBuffer** Storage_buffers
+        public SDL_GPUBuffer** StorageBuffers
         {
             get => storage_buffers;
             set => storage_buffers = value;

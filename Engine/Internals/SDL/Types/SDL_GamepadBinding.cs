@@ -6,7 +6,7 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GamepadBinding
     {
-        public SDL_GamepadBindingType Input_type
+        public SDL_GamepadBindingType InputType
         {
             get => input_type;
             set => input_type = value;
@@ -18,7 +18,7 @@ namespace Engine.SDL3
             set => input = value;
         }
 
-        public SDL_GamepadBindingType Output_type
+        public SDL_GamepadBindingType OutputType
         {
             get => output_type;
             set => output_type = value;
@@ -58,13 +58,13 @@ namespace Engine.SDL3
                     set => axis = value;
                 }
 
-                public int Axis_min
+                public int AxisMin
                 {
                     get => axis_min;
                     set => axis_min = value;
                 }
 
-                public int Axis_max
+                public int AxisMax
                 {
                     get => axis_max;
                     set => axis_max = value;
@@ -79,7 +79,7 @@ namespace Engine.SDL3
                     set => hat = value;
                 }
 
-                public int Hat_mask
+                public int HatMask
                 {
                     get => hat_mask;
                     set => hat_mask = value;
@@ -109,13 +109,13 @@ namespace Engine.SDL3
                     set => axis = value;
                 }
 
-                public int Axis_min
+                public int AxisMin
                 {
                     get => axis_min;
                     set => axis_min = value;
                 }
 
-                public int Axis_max
+                public int AxisMax
                 {
                     get => axis_max;
                     set => axis_max = value;

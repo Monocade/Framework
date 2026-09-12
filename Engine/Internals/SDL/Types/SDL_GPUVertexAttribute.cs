@@ -12,7 +12,7 @@ namespace Engine.SDL3
             set => location = value;
         }
 
-        public uint Buffer_slot
+        public uint BufferSlot
         {
             get => buffer_slot;
             set => buffer_slot = value;

@@ -18,13 +18,13 @@ namespace Engine.SDL3
             set => type = value;
         }
 
-        public ushort Vendor_id
+        public ushort VendorId
         {
             get => vendor_id;
             set => vendor_id = value;
         }
 
-        public ushort Product_id
+        public ushort ProductId
         {
             get => product_id;
             set => product_id = value;
@@ -66,13 +66,13 @@ namespace Engine.SDL3
             set => nsensors = value;
         }
 
-        public uint Button_mask
+        public uint ButtonMask
         {
             get => button_mask;
             set => button_mask = value;
         }
 
-        public uint Axis_mask
+        public uint AxisMask
         {
             get => axis_mask;
             set => axis_mask = value;

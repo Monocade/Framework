@@ -6,31 +6,31 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUIndexedIndirectDrawCommand
     {
-        public uint Num_indices
+        public uint NumIndices
         {
             get => num_indices;
             set => num_indices = value;
         }
 
-        public uint Num_instances
+        public uint NumInstances
         {
             get => num_instances;
             set => num_instances = value;
         }
 
-        public uint First_index
+        public uint FirstIndex
         {
             get => first_index;
             set => first_index = value;
         }
 
-        public int Vertex_offset
+        public int VertexOffset
         {
             get => vertex_offset;
             set => vertex_offset = value;
         }
 
-        public uint First_instance
+        public uint FirstInstance
         {
             get => first_instance;
             set => first_instance = value;

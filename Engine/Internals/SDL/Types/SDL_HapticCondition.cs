@@ -42,25 +42,25 @@ namespace Engine.SDL3
             set => interval = value;
         }
 
-        public _right_sat_e__FixedBuffer Right_sat
+        public _right_sat_e__FixedBuffer RightSat
         {
             get => right_sat;
             set => right_sat = value;
         }
 
-        public _left_sat_e__FixedBuffer Left_sat
+        public _left_sat_e__FixedBuffer LeftSat
         {
             get => left_sat;
             set => left_sat = value;
         }
 
-        public _right_coeff_e__FixedBuffer Right_coeff
+        public _right_coeff_e__FixedBuffer RightCoeff
         {
             get => right_coeff;
             set => right_coeff = value;
         }
 
-        public _left_coeff_e__FixedBuffer Left_coeff
+        public _left_coeff_e__FixedBuffer LeftCoeff
         {
             get => left_coeff;
             set => left_coeff = value;

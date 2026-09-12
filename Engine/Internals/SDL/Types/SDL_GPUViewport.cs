@@ -30,13 +30,13 @@ namespace Engine.SDL3
             set => h = value;
         }
 
-        public float Min_depth
+        public float MinDepth
         {
             get => min_depth;
             set => min_depth = value;
         }
 
-        public float Max_depth
+        public float MaxDepth
         {
             get => max_depth;
             set => max_depth = value;

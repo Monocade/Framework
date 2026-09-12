@@ -36,13 +36,13 @@ namespace Engine.SDL3
             set => offset = value;
         }
 
-        public ulong Bytes_requested
+        public ulong BytesRequested
         {
             get => bytes_requested;
             set => bytes_requested = value;
         }
 
-        public ulong Bytes_transferred
+        public ulong BytesTransferred
         {
             get => bytes_transferred;
             set => bytes_transferred = value;

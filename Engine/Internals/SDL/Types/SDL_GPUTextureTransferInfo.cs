@@ -6,7 +6,7 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUTextureTransferInfo
     {
-        public SDL_GPUTransferBuffer* Transfer_buffer
+        public SDL_GPUTransferBuffer* TransferBuffer
         {
             get => transfer_buffer;
             set => transfer_buffer = value;
@@ -18,13 +18,13 @@ namespace Engine.SDL3
             set => offset = value;
         }
 
-        public uint Pixels_per_row
+        public uint PixelsPerRow
         {
             get => pixels_per_row;
             set => pixels_per_row = value;
         }
 
-        public uint Rows_per_layer
+        public uint RowsPerLayer
         {
             get => rows_per_layer;
             set => rows_per_layer = value;

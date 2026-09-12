@@ -30,13 +30,13 @@ namespace Engine.SDL3
             set => height = value;
         }
 
-        public int Framerate_numerator
+        public int FramerateNumerator
         {
             get => framerate_numerator;
             set => framerate_numerator = value;
         }
 
-        public int Framerate_denominator
+        public int FramerateDenominator
         {
             get => framerate_denominator;
             set => framerate_denominator = value;

@@ -6,25 +6,25 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUVertexInputState
     {
-        public SDL_GPUVertexBufferDescription* Vertex_buffer_descriptions
+        public SDL_GPUVertexBufferDescription* VertexBufferDescriptions
         {
             get => vertex_buffer_descriptions;
             set => vertex_buffer_descriptions = value;
         }
 
-        public uint Num_vertex_buffers
+        public uint NumVertexBuffers
         {
             get => num_vertex_buffers;
             set => num_vertex_buffers = value;
         }
 
-        public SDL_GPUVertexAttribute* Vertex_attributes
+        public SDL_GPUVertexAttribute* VertexAttributes
         {
             get => vertex_attributes;
             set => vertex_attributes = value;
         }
 
-        public uint Num_vertex_attributes
+        public uint NumVertexAttributes
         {
             get => num_vertex_attributes;
             set => num_vertex_attributes = value;

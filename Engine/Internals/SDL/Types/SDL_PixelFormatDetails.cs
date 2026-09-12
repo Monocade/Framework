@@ -12,85 +12,85 @@ namespace Engine.SDL3
             set => format = value;
         }
 
-        public byte Bits_per_pixel
+        public byte BitsPerPixel
         {
             get => bits_per_pixel;
             set => bits_per_pixel = value;
         }
 
-        public byte Bytes_per_pixel
+        public byte BytesPerPixel
         {
             get => bytes_per_pixel;
             set => bytes_per_pixel = value;
         }
 
-        public uint rmask
+        public uint RMask
         {
             get => Rmask;
             set => Rmask = value;
         }
 
-        public uint gmask
+        public uint GMask
         {
             get => Gmask;
             set => Gmask = value;
         }
 
-        public uint bmask
+        public uint BMask
         {
             get => Bmask;
             set => Bmask = value;
         }
 
-        public uint amask
+        public uint AMask
         {
             get => Amask;
             set => Amask = value;
         }
 
-        public byte rbits
+        public byte RBits
         {
             get => Rbits;
             set => Rbits = value;
         }
 
-        public byte gbits
+        public byte GBits
         {
             get => Gbits;
             set => Gbits = value;
         }
 
-        public byte bbits
+        public byte BBits
         {
             get => Bbits;
             set => Bbits = value;
         }
 
-        public byte abits
+        public byte ABits
         {
             get => Abits;
             set => Abits = value;
         }
 
-        public byte rshift
+        public byte RShift
         {
             get => Rshift;
             set => Rshift = value;
         }
 
-        public byte gshift
+        public byte GShift
         {
             get => Gshift;
             set => Gshift = value;
         }
 
-        public byte bshift
+        public byte BShift
         {
             get => Bshift;
             set => Bshift = value;
         }
 
-        public byte ashift
+        public byte AShift
         {
             get => Ashift;
             set => Ashift = value;

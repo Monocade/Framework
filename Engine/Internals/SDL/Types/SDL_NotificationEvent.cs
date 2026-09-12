@@ -30,7 +30,7 @@ namespace Engine.SDL3
             set => which = value;
         }
 
-        public byte* Action_id
+        public byte* ActionId
         {
             get => action_id;
             set => action_id = value;

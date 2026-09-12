@@ -36,13 +36,13 @@ namespace Engine.SDL3
             set => candidates = value;
         }
 
-        public int Num_candidates
+        public int NumCandidates
         {
             get => num_candidates;
             set => num_candidates = value;
         }
 
-        public int Selected_candidate
+        public int SelectedCandidate
         {
             get => selected_candidate;
             set => selected_candidate = value;

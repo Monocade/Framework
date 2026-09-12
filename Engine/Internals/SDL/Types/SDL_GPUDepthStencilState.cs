@@ -6,49 +6,49 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUDepthStencilState
     {
-        public SDL_GPUCompareOp Compare_op
+        public SDL_GPUCompareOp CompareOp
         {
             get => compare_op;
             set => compare_op = value;
         }
 
-        public SDL_GPUStencilOpState Back_stencil_state
+        public SDL_GPUStencilOpState BackStencilState
         {
             get => back_stencil_state;
             set => back_stencil_state = value;
         }
 
-        public SDL_GPUStencilOpState Front_stencil_state
+        public SDL_GPUStencilOpState FrontStencilState
         {
             get => front_stencil_state;
             set => front_stencil_state = value;
         }
 
-        public byte Compare_mask
+        public byte CompareMask
         {
             get => compare_mask;
             set => compare_mask = value;
         }
 
-        public byte Write_mask
+        public byte WriteMask
         {
             get => write_mask;
             set => write_mask = value;
         }
 
-        public bool Enable_depth_test
+        public bool EnableDepthTest
         {
             get => enable_depth_test;
             set => enable_depth_test = value;
         }
 
-        public bool Enable_depth_write
+        public bool EnableDepthWrite
         {
             get => enable_depth_write;
             set => enable_depth_write = value;
         }
 
-        public bool Enable_stencil_test
+        public bool EnableStencilTest
         {
             get => enable_stencil_test;
             set => enable_stencil_test = value;

@@ -6,13 +6,13 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_AssertData
     {
-        public bool Always_ignore
+        public bool AlwaysIgnore
         {
             get => always_ignore;
             set => always_ignore = value;
         }
 
-        public uint Trigger_count
+        public uint TriggerCount
         {
             get => trigger_count;
             set => trigger_count = value;

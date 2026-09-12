@@ -6,7 +6,7 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUTransferBufferLocation
     {
-        public SDL_GPUTransferBuffer* Transfer_buffer
+        public SDL_GPUTransferBuffer* TransferBuffer
         {
             get => transfer_buffer;
             set => transfer_buffer = value;

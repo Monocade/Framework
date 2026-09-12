@@ -18,19 +18,19 @@ namespace Engine.SDL3
             set => destination = value;
         }
 
-        public SDL_GPULoadOp Load_op
+        public SDL_GPULoadOp LoadOp
         {
             get => load_op;
             set => load_op = value;
         }
 
-        public SDL_FColor Clear_color
+        public SDL_FColor ClearColor
         {
             get => clear_color;
             set => clear_color = value;
         }
 
-        public SDL_FlipMode Flip_mode
+        public SDL_FlipMode FlipMode
         {
             get => flip_mode;
             set => flip_mode = value;

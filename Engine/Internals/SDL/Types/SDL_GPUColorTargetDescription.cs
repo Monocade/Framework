@@ -12,7 +12,7 @@ namespace Engine.SDL3
             set => format = value;
         }
 
-        public SDL_GPUColorTargetBlendState Blend_state
+        public SDL_GPUColorTargetBlendState BlendState
         {
             get => blend_state;
             set => blend_state = value;

@@ -30,13 +30,13 @@ namespace Engine.SDL3
             set => owner = value;
         }
 
-        public int Num_mime_types
+        public int NumMimeTypes
         {
             get => num_mime_types;
             set => num_mime_types = value;
         }
 
-        public byte** Mime_types
+        public byte** MimeTypes
         {
             get => mime_types;
             set => mime_types = value;

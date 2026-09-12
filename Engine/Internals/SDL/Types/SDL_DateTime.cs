@@ -48,13 +48,13 @@ namespace Engine.SDL3
             set => nanosecond = value;
         }
 
-        public int Day_of_week
+        public int DayOfWeek
         {
             get => day_of_week;
             set => day_of_week = value;
         }
 
-        public int Utc_offset
+        public int UtcOffset
         {
             get => utc_offset;
             set => utc_offset = value;

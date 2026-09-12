@@ -36,7 +36,7 @@ namespace Engine.SDL3
             set => which = value;
         }
 
-        public SDL_PenInputFlags Pen_state
+        public SDL_PenInputFlags PenState
         {
             get => (SDL_PenInputFlags)pen_state;
             set => pen_state = (uint)value;

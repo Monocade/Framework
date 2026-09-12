@@ -42,7 +42,7 @@ namespace Engine.SDL3
             set => data = value;
         }
 
-        public ulong Sensor_timestamp
+        public ulong SensorTimestamp
         {
             get => sensor_timestamp;
             set => sensor_timestamp = value;

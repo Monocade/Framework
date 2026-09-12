@@ -12,7 +12,7 @@ namespace Engine.SDL3
             set => texture = value;
         }
 
-        public uint Mip_level
+        public uint MipLevel
         {
             get => mip_level;
             set => mip_level = value;

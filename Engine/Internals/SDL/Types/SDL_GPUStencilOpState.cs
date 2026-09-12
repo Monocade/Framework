@@ -6,25 +6,25 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_GPUStencilOpState
     {
-        public SDL_GPUStencilOp Fail_op
+        public SDL_GPUStencilOp FailOp
         {
             get => fail_op;
             set => fail_op = value;
         }
 
-        public SDL_GPUStencilOp Pass_op
+        public SDL_GPUStencilOp PassOp
         {
             get => pass_op;
             set => pass_op = value;
         }
 
-        public SDL_GPUStencilOp Depth_fail_op
+        public SDL_GPUStencilOp DepthFailOp
         {
             get => depth_fail_op;
             set => depth_fail_op = value;
         }
 
-        public SDL_GPUCompareOp Compare_op
+        public SDL_GPUCompareOp CompareOp
         {
             get => compare_op;
             set => compare_op = value;

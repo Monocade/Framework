@@ -36,19 +36,19 @@ namespace Engine.SDL3
             set => height = value;
         }
 
-        public uint Layer_count_or_depth
+        public uint LayerCountOrDepth
         {
             get => layer_count_or_depth;
             set => layer_count_or_depth = value;
         }
 
-        public uint Num_levels
+        public uint NumLevels
         {
             get => num_levels;
             set => num_levels = value;
         }
 
-        public SDL_GPUSampleCount Sample_count
+        public SDL_GPUSampleCount SampleCount
         {
             get => sample_count;
             set => sample_count = value;

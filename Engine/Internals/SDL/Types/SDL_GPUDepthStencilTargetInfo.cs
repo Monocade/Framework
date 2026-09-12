@@ -12,31 +12,31 @@ namespace Engine.SDL3
             set => texture = value;
         }
 
-        public float Clear_depth
+        public float ClearDepth
         {
             get => clear_depth;
             set => clear_depth = value;
         }
 
-        public SDL_GPULoadOp Load_op
+        public SDL_GPULoadOp LoadOp
         {
             get => load_op;
             set => load_op = value;
         }
 
-        public SDL_GPUStoreOp Store_op
+        public SDL_GPUStoreOp StoreOp
         {
             get => store_op;
             set => store_op = value;
         }
 
-        public SDL_GPULoadOp Stencil_load_op
+        public SDL_GPULoadOp StencilLoadOp
         {
             get => stencil_load_op;
             set => stencil_load_op = value;
         }
 
-        public SDL_GPUStoreOp Stencil_store_op
+        public SDL_GPUStoreOp StencilStoreOp
         {
             get => stencil_store_op;
             set => stencil_store_op = value;
@@ -48,13 +48,13 @@ namespace Engine.SDL3
             set => cycle = value;
         }
 
-        public byte Clear_stencil
+        public byte ClearStencil
         {
             get => clear_stencil;
             set => clear_stencil = value;
         }
 
-        public byte Mip_level
+        public byte MipLevel
         {
             get => mip_level;
             set => mip_level = value;

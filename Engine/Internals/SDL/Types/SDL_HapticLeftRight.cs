@@ -18,13 +18,13 @@ namespace Engine.SDL3
             set => length = value;
         }
 
-        public ushort Large_magnitude
+        public ushort LargeMagnitude
         {
             get => large_magnitude;
             set => large_magnitude = value;
         }
 
-        public ushort Small_magnitude
+        public ushort SmallMagnitude
         {
             get => small_magnitude;
             set => small_magnitude = value;

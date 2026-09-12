@@ -18,7 +18,7 @@ namespace Engine.SDL3
             set => color = value;
         }
 
-        public SDL_FPoint Tex_coord
+        public SDL_FPoint TexCoord
         {
             get => tex_coord;
             set => tex_coord = value;

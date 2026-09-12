@@ -54,25 +54,25 @@ namespace Engine.SDL3
             set => direction = value;
         }
 
-        public float Mouse_x
+        public float MouseX
         {
             get => mouse_x;
             set => mouse_x = value;
         }
 
-        public float Mouse_y
+        public float MouseY
         {
             get => mouse_y;
             set => mouse_y = value;
         }
 
-        public int Integer_x
+        public int IntegerX
         {
             get => integer_x;
             set => integer_x = value;
         }
 
-        public int Integer_y
+        public int IntegerY
         {
             get => integer_y;
             set => integer_y = value;
