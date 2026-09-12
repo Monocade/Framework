@@ -5,9 +5,9 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static SDL_SharedObject* SDL_LoadObject(string sofile)
+        public static SDL_SharedObject* SDL_LoadObject(string soFile)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(sofile))
+            fixed (byte* ptr1 = SDL_StringToNative(soFile))
             {
                 return iSDL_LoadObject(ptr1);
             }

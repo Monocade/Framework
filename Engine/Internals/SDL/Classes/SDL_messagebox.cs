@@ -5,11 +5,11 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        public static bool SDL_ShowMessageBox(SDL_MessageBoxData* messageboxdata, out int buttonid)
+        public static bool SDL_ShowMessageBox(SDL_MessageBoxData* messageBoxData, out int buttonID)
         {
-            fixed (int* ptr1 = &buttonid)
+            fixed (int* ptr1 = &buttonID)
             {
-                return iSDL_ShowMessageBox(messageboxdata, ptr1);
+                return iSDL_ShowMessageBox(messageBoxData, ptr1);
             }
         }
 

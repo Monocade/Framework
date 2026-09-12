@@ -24,9 +24,9 @@ namespace Engine.SDL3
             return Marshal.GetDelegateForFunctionPointer<SDL_AssertionHandler>(iSDL_GetDefaultAssertionHandler());
         }
 
-        public static SDL_AssertionHandler SDL_GetAssertionHandler(out IntPtr puserdata)
+        public static SDL_AssertionHandler SDL_GetAssertionHandler(out IntPtr pUserData)
         {
-            fixed (IntPtr* ptr1 = &puserdata)
+            fixed (IntPtr* ptr1 = &pUserData)
             {
                 return Marshal.GetDelegateForFunctionPointer<SDL_AssertionHandler>(iSDL_GetAssertionHandler(ptr1));
             }

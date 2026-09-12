@@ -35,16 +35,16 @@ namespace Engine.SDL3
             return iSDL_IsMainThread();
         }
 
-        public static bool SDL_RunOnMainThread(SDL_MainThreadCallback callback, IntPtr userdata, bool wait_complete)
+        public static bool SDL_RunOnMainThread(SDL_MainThreadCallback callback, IntPtr userdata, bool waitComplete)
         {
-            return iSDL_RunOnMainThread(Marshal.GetFunctionPointerForDelegate(callback), userdata, wait_complete);
+            return iSDL_RunOnMainThread(Marshal.GetFunctionPointerForDelegate(callback), userdata, waitComplete);
         }
 
-        public static bool SDL_SetAppMetadata(string appname, string appversion, string appidentifier)
+        public static bool SDL_SetAppMetadata(string appName, string appVersion, string appIdentifier)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(appname))
-            fixed (byte* ptr2 = SDL_StringToNative(appversion))
-            fixed (byte* ptr3 = SDL_StringToNative(appidentifier))
+            fixed (byte* ptr1 = SDL_StringToNative(appName))
+            fixed (byte* ptr2 = SDL_StringToNative(appVersion))
+            fixed (byte* ptr3 = SDL_StringToNative(appIdentifier))
             {
                 return iSDL_SetAppMetadata(ptr1, ptr2, ptr3);
             }

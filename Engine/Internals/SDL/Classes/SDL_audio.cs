@@ -41,10 +41,10 @@ namespace Engine.SDL3
             return SDL_NativeToString(iSDL_GetAudioDeviceName(audioDeviceID));
         }
 
-        public static bool SDL_GetAudioDeviceFormat(uint audioDeviceID, out SDL_AudioSpec spec, out int sample_frames)
+        public static bool SDL_GetAudioDeviceFormat(uint audioDeviceID, out SDL_AudioSpec spec, out int sampleFrames)
         {
             fixed (SDL_AudioSpec* ptr1 = &spec)
-            fixed (int* ptr2 = &sample_frames)
+            fixed (int* ptr2 = &sampleFrames)
             {
                 return iSDL_GetAudioDeviceFormat(audioDeviceID, ptr1, ptr2);
             }
@@ -103,11 +103,11 @@ namespace Engine.SDL3
             iSDL_CloseAudioDevice(audioDeviceID);
         }
 
-        public static bool SDL_BindAudioStreams(uint audioDeviceID, SDL_AudioStream*[] streams, int num_streams)
+        public static bool SDL_BindAudioStreams(uint audioDeviceID, SDL_AudioStream*[] streams, int numStreams)
         {
             fixed (SDL_AudioStream** ptr1 = streams)
             {
-                return iSDL_BindAudioStreams(audioDeviceID, ptr1, num_streams);
+                return iSDL_BindAudioStreams(audioDeviceID, ptr1, numStreams);
             }
         }
 
@@ -116,11 +116,11 @@ namespace Engine.SDL3
             return iSDL_BindAudioStream(audioDeviceID, stream);
         }
 
-        public static void SDL_UnbindAudioStreams(SDL_AudioStream*[] streams, int num_streams)
+        public static void SDL_UnbindAudioStreams(SDL_AudioStream*[] streams, int numStreams)
         {
             fixed (SDL_AudioStream** ptr1 = streams)
             {
-                iSDL_UnbindAudioStreams(ptr1, num_streams);
+                iSDL_UnbindAudioStreams(ptr1, numStreams);
             }
         }
 
@@ -134,9 +134,9 @@ namespace Engine.SDL3
             return iSDL_GetAudioStreamDevice(stream);
         }
 
-        public static SDL_AudioStream* SDL_CreateAudioStream(SDL_AudioSpec* src_spec, SDL_AudioSpec* dst_spec)
+        public static SDL_AudioStream* SDL_CreateAudioStream(SDL_AudioSpec* srcSpec, SDL_AudioSpec* dstSpec)
         {
-            return iSDL_CreateAudioStream(src_spec, dst_spec);
+            return iSDL_CreateAudioStream(srcSpec, dstSpec);
         }
 
         public static uint SDL_GetAudioStreamProperties(SDL_AudioStream* stream)
@@ -144,18 +144,18 @@ namespace Engine.SDL3
             return iSDL_GetAudioStreamProperties(stream);
         }
 
-        public static bool SDL_GetAudioStreamFormat(SDL_AudioStream* stream, out SDL_AudioSpec src_spec, out SDL_AudioSpec dst_spec)
+        public static bool SDL_GetAudioStreamFormat(SDL_AudioStream* stream, out SDL_AudioSpec srcSpec, out SDL_AudioSpec dstSpec)
         {
-            fixed (SDL_AudioSpec* ptr1 = &src_spec)
-            fixed (SDL_AudioSpec* ptr2 = &dst_spec)
+            fixed (SDL_AudioSpec* ptr1 = &srcSpec)
+            fixed (SDL_AudioSpec* ptr2 = &dstSpec)
             {
                 return iSDL_GetAudioStreamFormat(stream, ptr1, ptr2);
             }
         }
 
-        public static bool SDL_SetAudioStreamFormat(SDL_AudioStream* stream, SDL_AudioSpec* src_spec, SDL_AudioSpec* dst_spec)
+        public static bool SDL_SetAudioStreamFormat(SDL_AudioStream* stream, SDL_AudioSpec* srcSpec, SDL_AudioSpec* dstSpec)
         {
-            return iSDL_SetAudioStreamFormat(stream, src_spec, dst_spec);
+            return iSDL_SetAudioStreamFormat(stream, srcSpec, dstSpec);
         }
 
         public static float SDL_GetAudioStreamFrequencyRatio(SDL_AudioStream* stream)
@@ -220,11 +220,11 @@ namespace Engine.SDL3
             return iSDL_PutAudioStreamDataNoCopy(stream, buf, len, Marshal.GetFunctionPointerForDelegate(callback), userdata);
         }
 
-        public static bool SDL_PutAudioStreamPlanarData(SDL_AudioStream* stream, IntPtr[] channel_buffers, int num_channels, int num_samples)
+        public static bool SDL_PutAudioStreamPlanarData(SDL_AudioStream* stream, IntPtr[] channelBuffers, int numChannels, int numSamples)
         {
-            fixed (IntPtr* ptr1 = channel_buffers)
+            fixed (IntPtr* ptr1 = channelBuffers)
             {
-                return iSDL_PutAudioStreamPlanarData(stream, ptr1, num_channels, num_samples);
+                return iSDL_PutAudioStreamPlanarData(stream, ptr1, numChannels, numSamples);
             }
         }
 
@@ -303,22 +303,22 @@ namespace Engine.SDL3
             return iSDL_SetAudioPostmixCallback(audioDeviceID, Marshal.GetFunctionPointerForDelegate(callback), userdata);
         }
 
-        public static bool SDL_LoadWAV_IO(SDL_IOStream* src, bool closeio, out SDL_AudioSpec spec, out IntPtr audio_buf, out uint audio_len)
+        public static bool SDL_LoadWAV_IO(SDL_IOStream* src, bool closeio, out SDL_AudioSpec spec, out IntPtr audioBuf, out uint audioLen)
         {
             fixed (SDL_AudioSpec* ptr1 = &spec)
-            fixed (IntPtr* ptr2 = &audio_buf)
-            fixed (uint* ptr3 = &audio_len)
+            fixed (IntPtr* ptr2 = &audioBuf)
+            fixed (uint* ptr3 = &audioLen)
             {
                 return iSDL_LoadWAV_IO(src, closeio, ptr1, (byte**)ptr2, ptr3);
             }
         }
 
-        public static bool SDL_LoadWAV(string path, out SDL_AudioSpec spec, out IntPtr audio_buf, out uint audio_len)
+        public static bool SDL_LoadWAV(string path, out SDL_AudioSpec spec, out IntPtr audioBuf, out uint audioLen)
         {
             fixed (byte* ptr1 = SDL_StringToNative(path))
             fixed (SDL_AudioSpec* ptr2 = &spec)
-            fixed (IntPtr* ptr3 = &audio_buf)
-            fixed (uint* ptr4 = &audio_len)
+            fixed (IntPtr* ptr3 = &audioBuf)
+            fixed (uint* ptr4 = &audioLen)
             {
                 return iSDL_LoadWAV(ptr1, ptr2, (byte**)ptr3, ptr4);
             }
@@ -329,12 +329,12 @@ namespace Engine.SDL3
             return iSDL_MixAudio((byte*)dst, (byte*)src, format, len, volume);
         }
 
-        public static bool SDL_ConvertAudioSamples(SDL_AudioSpec* src_spec, IntPtr src_data, int src_len, SDL_AudioSpec* dst_spec, out IntPtr dst_data, out int dst_len)
+        public static bool SDL_ConvertAudioSamples(SDL_AudioSpec* srcSpec, IntPtr srcData, int srcLen, SDL_AudioSpec* dstSpec, out IntPtr dstData, out int dstLen)
         {
-            fixed (IntPtr* ptr1 = &dst_data)
-            fixed (int* ptr2 = &dst_len)
+            fixed (IntPtr* ptr1 = &dstData)
+            fixed (int* ptr2 = &dstLen)
             {
-                return iSDL_ConvertAudioSamples(src_spec, (byte*)src_data, src_len, dst_spec, (byte**)ptr1, ptr2);
+                return iSDL_ConvertAudioSamples(srcSpec, (byte*)srcData, srcLen, dstSpec, (byte**)ptr1, ptr2);
             }
         }
 

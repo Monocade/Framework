@@ -41,9 +41,9 @@ namespace Engine.SDL3
             return iSDL_HasPrimarySelectionText();
         }
 
-        public static bool SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, IntPtr userdata, IntPtr mime_types, UIntPtr num_mime_types)
+        public static bool SDL_SetClipboardData(SDL_ClipboardDataCallback callback, SDL_ClipboardCleanupCallback cleanup, IntPtr userdata, IntPtr mimeTypes, UIntPtr numMimeTypes)
         {
-            return iSDL_SetClipboardData(Marshal.GetFunctionPointerForDelegate(callback), Marshal.GetFunctionPointerForDelegate(cleanup), userdata, (byte**)mime_types, num_mime_types);
+            return iSDL_SetClipboardData(Marshal.GetFunctionPointerForDelegate(callback), Marshal.GetFunctionPointerForDelegate(cleanup), userdata, (byte**)mimeTypes, numMimeTypes);
         }
 
         public static bool SDL_ClearClipboardData()
@@ -51,26 +51,26 @@ namespace Engine.SDL3
             return iSDL_ClearClipboardData();
         }
 
-        public static IntPtr SDL_GetClipboardData(string mime_type, out UIntPtr size)
+        public static IntPtr SDL_GetClipboardData(string mimeType, out UIntPtr size)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(mime_type))
+            fixed (byte* ptr1 = SDL_StringToNative(mimeType))
             fixed (UIntPtr* ptr2 = &size)
             {
                 return iSDL_GetClipboardData(ptr1, ptr2);
             }
         }
 
-        public static bool SDL_HasClipboardData(string mime_type)
+        public static bool SDL_HasClipboardData(string mimeType)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(mime_type))
+            fixed (byte* ptr1 = SDL_StringToNative(mimeType))
             {
                 return iSDL_HasClipboardData(ptr1);
             }
         }
 
-        public static string[] SDL_GetClipboardMimeTypes(out UIntPtr num_mime_types)
+        public static string[] SDL_GetClipboardMimeTypes(out UIntPtr numMimeTypes)
         {
-            fixed (UIntPtr* ptr = &num_mime_types)
+            fixed (UIntPtr* ptr = &numMimeTypes)
             {
                 var count = checked((int)(*ptr));
                 {

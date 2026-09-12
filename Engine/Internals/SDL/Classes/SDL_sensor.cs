@@ -63,13 +63,13 @@ namespace Engine.SDL3
             return iSDL_GetSensorID(sensor);
         }
 
-        public static bool SDL_GetSensorData(SDL_Sensor* sensor, out float[] data, int num_values)
+        public static bool SDL_GetSensorData(SDL_Sensor* sensor, out float[] data, int numValues)
         {
-            data = new float[num_values];
+            data = new float[numValues];
             {
                 fixed (float* ptr1 = data)
                 {
-                    return iSDL_GetSensorData(sensor, ptr1, num_values);
+                    return iSDL_GetSensorData(sensor, ptr1, numValues);
                 }
             }
         }

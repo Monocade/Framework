@@ -95,44 +95,44 @@ namespace Engine.SDL3
             }
         }
 
-        public static IntPtr SDL_GetPointerProperty(uint props, string name, IntPtr default_value)
+        public static IntPtr SDL_GetPointerProperty(uint props, string name, IntPtr defaultValue)
         {
             fixed (byte* ptr1 = SDL_StringToNative(name))
             {
-                return iSDL_GetPointerProperty(props, ptr1, default_value);
+                return iSDL_GetPointerProperty(props, ptr1, defaultValue);
             }
         }
 
-        public static string SDL_GetStringProperty(uint props, string name, string default_value)
+        public static string SDL_GetStringProperty(uint props, string name, string defaultValue)
         {
             fixed (byte* ptr1 = SDL_StringToNative(name))
-            fixed (byte* ptr2 = SDL_StringToNative(default_value))
+            fixed (byte* ptr2 = SDL_StringToNative(defaultValue))
             {
                 return SDL_NativeToString(iSDL_GetStringProperty(props, ptr1, ptr2));
             }
         }
 
-        public static long SDL_GetNumberProperty(uint props, string name, long default_value)
+        public static long SDL_GetNumberProperty(uint props, string name, long defaultValue)
         {
             fixed (byte* ptr1 = SDL_StringToNative(name))
             {
-                return iSDL_GetNumberProperty(props, ptr1, default_value);
+                return iSDL_GetNumberProperty(props, ptr1, defaultValue);
             }
         }
 
-        public static float SDL_GetFloatProperty(uint props, string name, float default_value)
+        public static float SDL_GetFloatProperty(uint props, string name, float defaultValue)
         {
             fixed (byte* ptr1 = SDL_StringToNative(name))
             {
-                return iSDL_GetFloatProperty(props, ptr1, default_value);
+                return iSDL_GetFloatProperty(props, ptr1, defaultValue);
             }
         }
 
-        public static bool SDL_GetBooleanProperty(uint props, string name, bool default_value)
+        public static bool SDL_GetBooleanProperty(uint props, string name, bool defaultValue)
         {
             fixed (byte* ptr1 = SDL_StringToNative(name))
             {
-                return iSDL_GetBooleanProperty(props, ptr1, default_value);
+                return iSDL_GetBooleanProperty(props, ptr1, defaultValue);
             }
         }
 

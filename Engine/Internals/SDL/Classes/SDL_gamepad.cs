@@ -135,9 +135,9 @@ namespace Engine.SDL3
             return iSDL_GetGamepadFromID(gamepadID);
         }
 
-        public static SDL_Gamepad* SDL_GetGamepadFromPlayerIndex(int player_index)
+        public static SDL_Gamepad* SDL_GetGamepadFromPlayerIndex(int playerIndex)
         {
-            return iSDL_GetGamepadFromPlayerIndex(player_index);
+            return iSDL_GetGamepadFromPlayerIndex(playerIndex);
         }
 
         public static uint SDL_GetGamepadProperties(SDL_Gamepad* gamepad)
@@ -175,9 +175,9 @@ namespace Engine.SDL3
             return iSDL_GetGamepadPlayerIndex(gamepad);
         }
 
-        public static bool SDL_SetGamepadPlayerIndex(SDL_Gamepad* gamepad, int player_index)
+        public static bool SDL_SetGamepadPlayerIndex(SDL_Gamepad* gamepad, int playerIndex)
         {
-            return iSDL_SetGamepadPlayerIndex(gamepad, player_index);
+            return iSDL_SetGamepadPlayerIndex(gamepad, playerIndex);
         }
 
         public static ushort SDL_GetGamepadVendor(SDL_Gamepad* gamepad)
@@ -370,13 +370,13 @@ namespace Engine.SDL3
             return iSDL_GetGamepadSensorDataRate(gamepad, type);
         }
 
-        public static bool SDL_GetGamepadSensorData(SDL_Gamepad* gamepad, SDL_SensorType type, out float[] data, int num_values)
+        public static bool SDL_GetGamepadSensorData(SDL_Gamepad* gamepad, SDL_SensorType type, out float[] data, int numValues)
         {
-            data = new float[num_values];
+            data = new float[numValues];
             {
                 fixed (float* ptr1 = data)
                 {
-                    return iSDL_GetGamepadSensorData(gamepad, type, ptr1, num_values);
+                    return iSDL_GetGamepadSensorData(gamepad, type, ptr1, numValues);
                 }
             }
         }
@@ -391,14 +391,14 @@ namespace Engine.SDL3
             return iSDL_GetGamepadCapSense(gamepad, type);
         }
 
-        public static bool SDL_RumbleGamepad(SDL_Gamepad* gamepad, ushort low_frequency_rumble, ushort high_frequency_rumble, uint duration_ms)
+        public static bool SDL_RumbleGamepad(SDL_Gamepad* gamepad, ushort lowFrequencyRumble, ushort highFrequencyRumble, uint durationMs)
         {
-            return iSDL_RumbleGamepad(gamepad, low_frequency_rumble, high_frequency_rumble, duration_ms);
+            return iSDL_RumbleGamepad(gamepad, lowFrequencyRumble, highFrequencyRumble, durationMs);
         }
 
-        public static bool SDL_RumbleGamepadTriggers(SDL_Gamepad* gamepad, ushort left_rumble, ushort right_rumble, uint duration_ms)
+        public static bool SDL_RumbleGamepadTriggers(SDL_Gamepad* gamepad, ushort leftRumble, ushort rightRumble, uint durationMs)
         {
-            return iSDL_RumbleGamepadTriggers(gamepad, left_rumble, right_rumble, duration_ms);
+            return iSDL_RumbleGamepadTriggers(gamepad, leftRumble, rightRumble, durationMs);
         }
 
         public static bool SDL_SetGamepadLED(SDL_Gamepad* gamepad, byte red, byte green, byte blue)

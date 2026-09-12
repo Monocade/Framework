@@ -20,9 +20,9 @@ namespace Engine.SDL3
             return iSDL_hid_device_change_count();
         }
 
-        public static SDL_hid_device_info* SDL_hid_enumerate(ushort vendor_id, ushort product_id)
+        public static SDL_hid_device_info* SDL_hid_enumerate(ushort vendorId, ushort productId)
         {
-            return iSDL_hid_enumerate(vendor_id, product_id);
+            return iSDL_hid_enumerate(vendorId, productId);
         }
 
         public static void SDL_hid_free_enumeration(SDL_hid_device_info* devs)
@@ -30,11 +30,11 @@ namespace Engine.SDL3
             iSDL_hid_free_enumeration(devs);
         }
 
-        public static SDL_hid_device* SDL_hid_open(ushort vendor_id, ushort product_id, string serial_number)
+        public static SDL_hid_device* SDL_hid_open(ushort vendorId, ushort productId, string serialNumber)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(serial_number))
+            fixed (byte* ptr1 = SDL_StringToNative(serialNumber))
             {
-                return iSDL_hid_open(vendor_id, product_id, (ushort*)ptr1);
+                return iSDL_hid_open(vendorId, productId, (ushort*)ptr1);
             }
         }
 
@@ -88,35 +88,35 @@ namespace Engine.SDL3
             return iSDL_hid_close(dev);
         }
 
-        public static int SDL_hid_get_manufacturer_string(SDL_hid_device* dev, string @string, UIntPtr maxlen)
+        public static int SDL_hid_get_manufacturer_string(SDL_hid_device* dev, string @string, UIntPtr maxLength)
         {
             fixed (byte* ptr1 = SDL_StringToNative(@string))
             {
-                return iSDL_hid_get_manufacturer_string(dev, (ushort*)ptr1, maxlen);
+                return iSDL_hid_get_manufacturer_string(dev, (ushort*)ptr1, maxLength);
             }
         }
 
-        public static int SDL_hid_get_product_string(SDL_hid_device* dev, string @string, UIntPtr maxlen)
+        public static int SDL_hid_get_product_string(SDL_hid_device* dev, string @string, UIntPtr maxLength)
         {
             fixed (byte* ptr1 = SDL_StringToNative(@string))
             {
-                return iSDL_hid_get_product_string(dev, (ushort*)ptr1, maxlen);
+                return iSDL_hid_get_product_string(dev, (ushort*)ptr1, maxLength);
             }
         }
 
-        public static int SDL_hid_get_serial_number_string(SDL_hid_device* dev, string @string, UIntPtr maxlen)
+        public static int SDL_hid_get_serial_number_string(SDL_hid_device* dev, string @string, UIntPtr maxLength)
         {
             fixed (byte* ptr1 = SDL_StringToNative(@string))
             {
-                return iSDL_hid_get_serial_number_string(dev, (ushort*)ptr1, maxlen);
+                return iSDL_hid_get_serial_number_string(dev, (ushort*)ptr1, maxLength);
             }
         }
 
-        public static int SDL_hid_get_indexed_string(SDL_hid_device* dev, int string_index, string @string, UIntPtr maxlen)
+        public static int SDL_hid_get_indexed_string(SDL_hid_device* dev, int stringIndex, string @string, UIntPtr maxLength)
         {
             fixed (byte* ptr1 = SDL_StringToNative(@string))
             {
-                return iSDL_hid_get_indexed_string(dev, string_index, (ushort*)ptr1, maxlen);
+                return iSDL_hid_get_indexed_string(dev, stringIndex, (ushort*)ptr1, maxLength);
             }
         }
 
@@ -125,9 +125,9 @@ namespace Engine.SDL3
             return iSDL_hid_get_device_info(dev);
         }
 
-        public static int SDL_hid_get_report_descriptor(SDL_hid_device* dev, IntPtr buf, UIntPtr buf_size)
+        public static int SDL_hid_get_report_descriptor(SDL_hid_device* dev, IntPtr buf, UIntPtr bufSize)
         {
-            return iSDL_hid_get_report_descriptor(dev, (byte*)buf, buf_size);
+            return iSDL_hid_get_report_descriptor(dev, (byte*)buf, bufSize);
         }
 
         public static void SDL_hid_ble_scan(bool active)

@@ -29,11 +29,11 @@ namespace Engine.SDL3
             return iSDL_GetKeyboardFocus();
         }
 
-        public static bool[] SDL_GetKeyboardState(out int numkeys)
+        public static bool[] SDL_GetKeyboardState(out int numKeys)
         {
             int size = 0;
             {
-                var result = SDL_NativeToArray(iSDL_GetKeyboardState(&size), size, out numkeys);
+                var result = SDL_NativeToArray(iSDL_GetKeyboardState(&size), size, out numKeys);
                 
                 var output = new bool[result.Length];
 
@@ -56,21 +56,21 @@ namespace Engine.SDL3
             return (SDL_Keymod)iSDL_GetModState();
         }
 
-        public static void SDL_SetModState(SDL_Keymod modstate)
+        public static void SDL_SetModState(SDL_Keymod keymod)
         {
-            iSDL_SetModState((ushort)modstate);
+            iSDL_SetModState((ushort)keymod);
         }
 
-        public static SDL_Keycode SDL_GetKeyFromScancode(SDL_Scancode scancode, SDL_Keymod modstate, bool key_event)
+        public static SDL_Keycode SDL_GetKeyFromScancode(SDL_Scancode scancode, SDL_Keymod keymod, bool keyEvent)
         {
-            return (SDL_Keycode)iSDL_GetKeyFromScancode(scancode, (ushort)modstate, key_event);
+            return (SDL_Keycode)iSDL_GetKeyFromScancode(scancode, (ushort)keymod, keyEvent);
         }
 
-        public static SDL_Scancode SDL_GetScancodeFromKey(SDL_Keycode key, ref SDL_Keymod modstate)
+        public static SDL_Scancode SDL_GetScancodeFromKey(SDL_Keycode keycode, ref SDL_Keymod keymod)
         {
-            fixed (SDL_Keymod* ptr1 = &modstate)
+            fixed (SDL_Keymod* ptr1 = &keymod)
             {
-                return iSDL_GetScancodeFromKey((uint)key, (ushort*)ptr1);
+                return iSDL_GetScancodeFromKey((uint)keycode, (ushort*)ptr1);
             }
         }
 
@@ -95,9 +95,9 @@ namespace Engine.SDL3
             }
         }
 
-        public static string SDL_GetKeyName(SDL_Keycode key)
+        public static string SDL_GetKeyName(SDL_Keycode keycode)
         {
-            return SDL_NativeToString(iSDL_GetKeyName((uint)key));
+            return SDL_NativeToString(iSDL_GetKeyName((uint)keycode));
         }
 
         public static SDL_Keycode SDL_GetKeyFromName(string name)

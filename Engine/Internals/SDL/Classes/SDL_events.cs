@@ -10,13 +10,13 @@ namespace Engine.SDL3
             iSDL_PumpEvents();
         }
 
-        public static int SDL_PeepEvents(out SDL_Event[] events, int numevents, SDL_EventAction action, uint minType, uint maxType)
+        public static int SDL_PeepEvents(out SDL_Event[] events, int numEvents, SDL_EventAction action, uint minType, uint maxType)
         {
-            events = new SDL_Event[numevents];
+            events = new SDL_Event[numEvents];
             {
                 fixed (SDL_Event* ptr1 = events)
                 {
-                    return iSDL_PeepEvents(ptr1, numevents, action, minType, maxType);
+                    return iSDL_PeepEvents(ptr1, numEvents, action, minType, maxType);
                 }
             }
         }
@@ -111,9 +111,9 @@ namespace Engine.SDL3
             return iSDL_EventEnabled(type);
         }
 
-        public static uint SDL_RegisterEvents(int numevents)
+        public static uint SDL_RegisterEvents(int numEvents)
         {
-            return iSDL_RegisterEvents(numevents);
+            return iSDL_RegisterEvents(numEvents);
         }
 
         public static SDL_Window* SDL_GetWindowFromEvent(SDL_Event* @event)
@@ -121,11 +121,11 @@ namespace Engine.SDL3
             return iSDL_GetWindowFromEvent(@event);
         }
 
-        public static int SDL_GetEventDescription(SDL_Event* @event, string buf, int buflen)
+        public static int SDL_GetEventDescription(SDL_Event* @event, string buffer, int bufferLength)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(buf))
+            fixed (byte* ptr1 = SDL_StringToNative(buffer))
             {
-                return iSDL_GetEventDescription(@event, ptr1, buflen);
+                return iSDL_GetEventDescription(@event, ptr1, bufferLength);
             }
         }
     }

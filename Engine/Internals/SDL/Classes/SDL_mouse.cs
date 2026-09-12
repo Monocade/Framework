@@ -85,21 +85,21 @@ namespace Engine.SDL3
             return iSDL_CaptureMouse(enabled);
         }
 
-        public static SDL_Cursor* SDL_CreateCursor(IntPtr data, IntPtr mask, int w, int h, int hot_x, int hot_y)
+        public static SDL_Cursor* SDL_CreateCursor(IntPtr data, IntPtr mask, int w, int h, int hotX, int hotY)
         {
-            return iSDL_CreateCursor((byte*)data, (byte*)mask, w, h, hot_x, hot_y);
+            return iSDL_CreateCursor((byte*)data, (byte*)mask, w, h, hotX, hotY);
         }
 
-        public static SDL_Cursor* SDL_CreateColorCursor(SDL_Surface* surface, int hot_x, int hot_y)
+        public static SDL_Cursor* SDL_CreateColorCursor(SDL_Surface* surface, int hotX, int hotY)
         {
-            return iSDL_CreateColorCursor(surface, hot_x, hot_y);
+            return iSDL_CreateColorCursor(surface, hotX, hotY);
         }
 
-        public static SDL_Cursor* SDL_CreateAnimatedCursor(SDL_CursorFrameInfo[] frames, int frame_count, int hot_x, int hot_y)
+        public static SDL_Cursor* SDL_CreateAnimatedCursor(SDL_CursorFrameInfo[] frames, int frameCount, int hotX, int hotY)
         {
             fixed (SDL_CursorFrameInfo* ptr1 = frames)
             {
-                return iSDL_CreateAnimatedCursor(ptr1, frame_count, hot_x, hot_y);
+                return iSDL_CreateAnimatedCursor(ptr1, frameCount, hotX, hotY);
             }
         }
 

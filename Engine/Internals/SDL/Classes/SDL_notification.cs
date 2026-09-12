@@ -15,13 +15,13 @@ namespace Engine.SDL3
             return iSDL_ShowNotificationWithProperties(props);
         }
 
-        public static uint SDL_ShowNotification(string title, string message, SDL_Surface* image, SDL_NotificationAction[] actions, int num_actions)
+        public static uint SDL_ShowNotification(string title, string message, SDL_Surface* image, SDL_NotificationAction[] actions, int numActions)
         {
             fixed (byte* ptr1 = SDL_StringToNative(title))
             fixed (byte* ptr2 = SDL_StringToNative(message))
             fixed (SDL_NotificationAction* ptr3 = actions)
             {
-                return iSDL_ShowNotification(ptr1, ptr2, image, ptr3, num_actions);
+                return iSDL_ShowNotification(ptr1, ptr2, image, ptr3, numActions);
             }
         }
 

@@ -123,9 +123,9 @@ namespace Engine.SDL3
             return iSDL_SetHapticGain(haptic, gain);
         }
 
-        public static bool SDL_SetHapticAutocenter(SDL_Haptic* haptic, int autocenter)
+        public static bool SDL_SetHapticAutocenter(SDL_Haptic* haptic, int autoCenter)
         {
-            return iSDL_SetHapticAutocenter(haptic, autocenter);
+            return iSDL_SetHapticAutocenter(haptic, autoCenter);
         }
 
         public static bool SDL_PauseHaptic(SDL_Haptic* haptic)

@@ -273,19 +273,19 @@ namespace Engine.SDL3
             return iSDL_ConvertSurfaceAndColorspace(surface, format, palette, colorspace, props);
         }
 
-        public static bool SDL_ConvertPixels(int width, int height, SDL_PixelFormat src_format, IntPtr src, int src_pitch, SDL_PixelFormat dst_format, IntPtr dst, int dst_pitch)
+        public static bool SDL_ConvertPixels(int width, int height, SDL_PixelFormat srcFormat, IntPtr src, int srcPitch, SDL_PixelFormat dstFormat, IntPtr dst, int dstPitch)
         {
-            return iSDL_ConvertPixels(width, height, src_format, src, src_pitch, dst_format, dst, dst_pitch);
+            return iSDL_ConvertPixels(width, height, srcFormat, src, srcPitch, dstFormat, dst, dstPitch);
         }
 
-        public static bool SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormat src_format, SDL_Colorspace src_colorspace, uint src_properties, IntPtr src, int src_pitch, SDL_PixelFormat dst_format, SDL_Colorspace dst_colorspace, uint dst_properties, IntPtr dst, int dst_pitch)
+        public static bool SDL_ConvertPixelsAndColorspace(int width, int height, SDL_PixelFormat srcFormat, SDL_Colorspace srcColorspace, uint srcProperties, IntPtr src, int srcPitch, SDL_PixelFormat dstFormat, SDL_Colorspace dstColorspace, uint dstProperties, IntPtr dst, int dstPitch)
         {
-            return iSDL_ConvertPixelsAndColorspace(width, height, src_format, src_colorspace, src_properties, src, src_pitch, dst_format, dst_colorspace, dst_properties, dst, dst_pitch);
+            return iSDL_ConvertPixelsAndColorspace(width, height, srcFormat, srcColorspace, srcProperties, src, srcPitch, dstFormat, dstColorspace, dstProperties, dst, dstPitch);
         }
 
-        public static bool SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormat src_format, IntPtr src, int src_pitch, SDL_PixelFormat dst_format, IntPtr dst, int dst_pitch, bool linear)
+        public static bool SDL_PremultiplyAlpha(int width, int height, SDL_PixelFormat srcFormat, IntPtr src, int srcPitch, SDL_PixelFormat dstFormat, IntPtr dst, int dstPitch, bool linear)
         {
-            return iSDL_PremultiplyAlpha(width, height, src_format, src, src_pitch, dst_format, dst, dst_pitch, linear);
+            return iSDL_PremultiplyAlpha(width, height, srcFormat, src, srcPitch, dstFormat, dst, dstPitch, linear);
         }
 
         public static bool SDL_PremultiplySurfaceAlpha(SDL_Surface* surface, bool linear)
@@ -311,44 +311,44 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_BlitSurface(SDL_Surface* src, SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect)
+        public static bool SDL_BlitSurface(SDL_Surface* src, SDL_Rect* srcRect, SDL_Surface* dst, SDL_Rect* dstRect)
         {
-            return iSDL_BlitSurface(src, srcrect, dst, dstrect);
+            return iSDL_BlitSurface(src, srcRect, dst, dstRect);
         }
 
-        public static bool SDL_BlitSurfaceUnchecked(SDL_Surface* src, SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect)
+        public static bool SDL_BlitSurfaceUnchecked(SDL_Surface* src, SDL_Rect* srcRect, SDL_Surface* dst, SDL_Rect* dstRect)
         {
-            return iSDL_BlitSurfaceUnchecked(src, srcrect, dst, dstrect);
+            return iSDL_BlitSurfaceUnchecked(src, srcRect, dst, dstRect);
         }
 
-        public static bool SDL_BlitSurfaceScaled(SDL_Surface* src, SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect, SDL_ScaleMode scaleMode)
+        public static bool SDL_BlitSurfaceScaled(SDL_Surface* src, SDL_Rect* srcRect, SDL_Surface* dst, SDL_Rect* dstRect, SDL_ScaleMode scaleMode)
         {
-            return iSDL_BlitSurfaceScaled(src, srcrect, dst, dstrect, scaleMode);
+            return iSDL_BlitSurfaceScaled(src, srcRect, dst, dstRect, scaleMode);
         }
 
-        public static bool SDL_BlitSurfaceUncheckedScaled(SDL_Surface* src, SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect, SDL_ScaleMode scaleMode)
+        public static bool SDL_BlitSurfaceUncheckedScaled(SDL_Surface* src, SDL_Rect* srcRect, SDL_Surface* dst, SDL_Rect* dstRect, SDL_ScaleMode scaleMode)
         {
-            return iSDL_BlitSurfaceUncheckedScaled(src, srcrect, dst, dstrect, scaleMode);
+            return iSDL_BlitSurfaceUncheckedScaled(src, srcRect, dst, dstRect, scaleMode);
         }
 
-        public static bool SDL_StretchSurface(SDL_Surface* src, SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect, SDL_ScaleMode scaleMode)
+        public static bool SDL_StretchSurface(SDL_Surface* src, SDL_Rect* srcRect, SDL_Surface* dst, SDL_Rect* dstRect, SDL_ScaleMode scaleMode)
         {
-            return iSDL_StretchSurface(src, srcrect, dst, dstrect, scaleMode);
+            return iSDL_StretchSurface(src, srcRect, dst, dstRect, scaleMode);
         }
 
-        public static bool SDL_BlitSurfaceTiled(SDL_Surface* src, SDL_Rect* srcrect, SDL_Surface* dst, SDL_Rect* dstrect)
+        public static bool SDL_BlitSurfaceTiled(SDL_Surface* src, SDL_Rect* srcRect, SDL_Surface* dst, SDL_Rect* dstRect)
         {
-            return iSDL_BlitSurfaceTiled(src, srcrect, dst, dstrect);
+            return iSDL_BlitSurfaceTiled(src, srcRect, dst, dstRect);
         }
 
-        public static bool SDL_BlitSurfaceTiledWithScale(SDL_Surface* src, SDL_Rect* srcrect, float scale, SDL_ScaleMode scaleMode, SDL_Surface* dst, SDL_Rect* dstrect)
+        public static bool SDL_BlitSurfaceTiledWithScale(SDL_Surface* src, SDL_Rect* srcRect, float scale, SDL_ScaleMode scaleMode, SDL_Surface* dst, SDL_Rect* dstRect)
         {
-            return iSDL_BlitSurfaceTiledWithScale(src, srcrect, scale, scaleMode, dst, dstrect);
+            return iSDL_BlitSurfaceTiledWithScale(src, srcRect, scale, scaleMode, dst, dstRect);
         }
 
-        public static bool SDL_BlitSurface9Grid(SDL_Surface* src, SDL_Rect* srcrect, int left_width, int right_width, int top_height, int bottom_height, float scale, SDL_ScaleMode scaleMode, SDL_Surface* dst, SDL_Rect* dstrect)
+        public static bool SDL_BlitSurface9Grid(SDL_Surface* src, SDL_Rect* srcRect, int leftWidth, int rightWidth, int topHeight, int bottomHeight, float scale, SDL_ScaleMode scaleMode, SDL_Surface* dst, SDL_Rect* dstRect)
         {
-            return iSDL_BlitSurface9Grid(src, srcrect, left_width, right_width, top_height, bottom_height, scale, scaleMode, dst, dstrect);
+            return iSDL_BlitSurface9Grid(src, srcRect, leftWidth, rightWidth, topHeight, bottomHeight, scale, scaleMode, dst, dstRect);
         }
 
         public static uint SDL_MapSurfaceRGB(SDL_Surface* surface, byte r, byte g, byte b)

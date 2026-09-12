@@ -65,9 +65,9 @@ namespace Engine.SDL3
             iSDL_DestroyRWLock(rwlock);
         }
 
-        public static SDL_Semaphore* SDL_CreateSemaphore(uint initial_value)
+        public static SDL_Semaphore* SDL_CreateSemaphore(uint initialValue)
         {
-            return iSDL_CreateSemaphore(initial_value);
+            return iSDL_CreateSemaphore(initialValue);
         }
 
         public static void SDL_DestroySemaphore(SDL_Semaphore* sem)

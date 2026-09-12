@@ -44,11 +44,11 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_GetHintBoolean(string name, bool default_value)
+        public static bool SDL_GetHintBoolean(string name, bool defaultValue)
         {
             fixed (byte* ptr1 = SDL_StringToNative(name))
             {
-                return iSDL_GetHintBoolean(ptr1, default_value);
+                return iSDL_GetHintBoolean(ptr1, defaultValue);
             }
         }
 

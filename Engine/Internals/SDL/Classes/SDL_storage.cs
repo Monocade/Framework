@@ -10,7 +10,7 @@ namespace Engine.SDL3
     internal unsafe delegate bool SDL_StorageReadyCallback(void* userdata);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal unsafe delegate bool SDL_StorageEnumerateCallback(void* userdata, byte* path, SDL_EnumerateDirectoryCallback callback, void* callback_userdata);
+    internal unsafe delegate bool SDL_StorageEnumerateCallback(void* userdata, byte* path, SDL_EnumerateDirectoryCallback callback, void* callbackUserdata);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal unsafe delegate bool SDL_StorageInfoCallback(void* userdata, byte* path, SDL_PathInfo* info);
@@ -28,10 +28,10 @@ namespace Engine.SDL3
     internal unsafe delegate bool SDL_StorageRemoveCallback(void* userdata, byte* path);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal unsafe delegate bool SDL_StorageRenameCallback(void* userdata, byte* oldpath, byte* newpath);
+    internal unsafe delegate bool SDL_StorageRenameCallback(void* userdata, byte* oldPath, byte* newPath);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    internal unsafe delegate bool SDL_StorageCopyCallback(void* userdata, byte* oldpath, byte* newpath);
+    internal unsafe delegate bool SDL_StorageCopyCallback(void* userdata, byte* oldPath, byte* newPath);
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     internal unsafe delegate ulong SDL_StorageSpaceRemainingCallback(void* userdata);
@@ -64,9 +64,9 @@ namespace Engine.SDL3
             }
         }
 
-        public static SDL_Storage* SDL_OpenStorage(SDL_StorageInterface* iface, IntPtr userdata)
+        public static SDL_Storage* SDL_OpenStorage(SDL_StorageInterface* @interface, IntPtr userdata)
         {
-            return iSDL_OpenStorage(iface, userdata);
+            return iSDL_OpenStorage(@interface, userdata);
         }
 
         public static bool SDL_CloseStorage(SDL_Storage* storage)
@@ -128,19 +128,19 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_RenameStoragePath(SDL_Storage* storage, string oldpath, string newpath)
+        public static bool SDL_RenameStoragePath(SDL_Storage* storage, string oldPath, string newPath)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(oldpath))
-            fixed (byte* ptr2 = SDL_StringToNative(newpath))
+            fixed (byte* ptr1 = SDL_StringToNative(oldPath))
+            fixed (byte* ptr2 = SDL_StringToNative(newPath))
             {
                 return iSDL_RenameStoragePath(storage, ptr1, ptr2);
             }
         }
 
-        public static bool SDL_CopyStorageFile(SDL_Storage* storage, string oldpath, string newpath)
+        public static bool SDL_CopyStorageFile(SDL_Storage* storage, string oldPath, string newPath)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(oldpath))
-            fixed (byte* ptr2 = SDL_StringToNative(newpath))
+            fixed (byte* ptr1 = SDL_StringToNative(oldPath))
+            fixed (byte* ptr2 = SDL_StringToNative(newPath))
             {
                 return iSDL_CopyStorageFile(storage, ptr1, ptr2);
             }

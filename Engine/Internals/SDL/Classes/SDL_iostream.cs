@@ -48,9 +48,9 @@ namespace Engine.SDL3
             return iSDL_IOFromDynamicMem();
         }
 
-        public static SDL_IOStream* SDL_OpenIO(SDL_IOStreamInterface* iface, IntPtr userdata)
+        public static SDL_IOStream* SDL_OpenIO(SDL_IOStreamInterface* @interface, IntPtr userdata)
         {
-            return iSDL_OpenIO(iface, userdata);
+            return iSDL_OpenIO(@interface, userdata);
         }
 
         public static bool SDL_CloseIO(SDL_IOStream* context)
@@ -115,33 +115,33 @@ namespace Engine.SDL3
             return iSDL_FlushIO(context);
         }
 
-        public static IntPtr SDL_LoadFile_IO(SDL_IOStream* src, out UIntPtr datasize, bool closeio)
+        public static IntPtr SDL_LoadFile_IO(SDL_IOStream* src, out UIntPtr dataSize, bool closeio)
         {
-            fixed (UIntPtr* ptr1 = &datasize)
+            fixed (UIntPtr* ptr1 = &dataSize)
             {
                 return iSDL_LoadFile_IO(src, ptr1, closeio);
             }
         }
 
-        public static IntPtr SDL_LoadFile(string file, out UIntPtr datasize)
+        public static IntPtr SDL_LoadFile(string file, out UIntPtr dataSize)
         {
             fixed (byte* ptr1 = SDL_StringToNative(file))
-            fixed (UIntPtr* ptr2 = &datasize)
+            fixed (UIntPtr* ptr2 = &dataSize)
             {
                 return iSDL_LoadFile(ptr1, ptr2);
             }
         }
 
-        public static bool SDL_SaveFile_IO(SDL_IOStream* src, IntPtr data, UIntPtr datasize, bool closeio)
+        public static bool SDL_SaveFile_IO(SDL_IOStream* src, IntPtr data, UIntPtr dataSize, bool closeio)
         {
-            return iSDL_SaveFile_IO(src, data, datasize, closeio);
+            return iSDL_SaveFile_IO(src, data, dataSize, closeio);
         }
 
-        public static bool SDL_SaveFile(string file, IntPtr data, UIntPtr datasize)
+        public static bool SDL_SaveFile(string file, IntPtr data, UIntPtr dataSize)
         {
             fixed (byte* ptr1 = SDL_StringToNative(file))
             {
-                return iSDL_SaveFile(ptr1, data, datasize);
+                return iSDL_SaveFile(ptr1, data, dataSize);
             }
         }
 

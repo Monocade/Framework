@@ -15,14 +15,14 @@ namespace Engine.SDL3
             return SDL_NativeToString(iSDL_GetRenderDriver(index));
         }
 
-        public static bool SDL_CreateWindowAndRenderer(string title, int width, int height, SDL_WindowFlags window_flags, out SDL_Window* window, out SDL_Renderer* renderer)
+        public static bool SDL_CreateWindowAndRenderer(string title, int width, int height, SDL_WindowFlags windowFlags, out SDL_Window* window, out SDL_Renderer* renderer)
         {
             fixed (byte* ptr1 = SDL_StringToNative(title))
             {
                 SDL_Window* ptr2 = null;
                 SDL_Renderer* ptr3 = null;
                 
-                var result = iSDL_CreateWindowAndRenderer(ptr1, width, height, (ulong)window_flags, &ptr2, &ptr3);
+                var result = iSDL_CreateWindowAndRenderer(ptr1, width, height, (ulong)windowFlags, &ptr2, &ptr3);
                 window = ptr2;
                 renderer = ptr3;
                 
@@ -227,14 +227,14 @@ namespace Engine.SDL3
             return iSDL_UpdateTexture(texture, rect, pixels, pitch);
         }
 
-        public static bool SDL_UpdateYUVTexture(SDL_Texture* texture, SDL_Rect* rect, IntPtr Yplane, int Ypitch, IntPtr Uplane, int Upitch, IntPtr Vplane, int Vpitch)
+        public static bool SDL_UpdateYUVTexture(SDL_Texture* texture, SDL_Rect* rect, IntPtr YPlane, int YPitch, IntPtr UPlane, int UPitch, IntPtr VPlane, int VPitch)
         {
-            return iSDL_UpdateYUVTexture(texture, rect, (byte*)Yplane, Ypitch, (byte*)Uplane, Upitch, (byte*)Vplane, Vpitch);
+            return iSDL_UpdateYUVTexture(texture, rect, (byte*)YPlane, YPitch, (byte*)UPlane, UPitch, (byte*)VPlane, VPitch);
         }
 
-        public static bool SDL_UpdateNVTexture(SDL_Texture* texture, SDL_Rect* rect, IntPtr Yplane, int Ypitch, IntPtr UVplane, int UVpitch)
+        public static bool SDL_UpdateNVTexture(SDL_Texture* texture, SDL_Rect* rect, IntPtr YPlane, int YPitch, IntPtr UVPlane, int UVPitch)
         {
-            return iSDL_UpdateNVTexture(texture, rect, (byte*)Yplane, Ypitch, (byte*)UVplane, UVpitch);
+            return iSDL_UpdateNVTexture(texture, rect, (byte*)YPlane, YPitch, (byte*)UVPlane, UVPitch);
         }
 
         public static bool SDL_LockTexture(SDL_Texture* texture, SDL_Rect* rect, out IntPtr pixels, out int pitch)
@@ -292,19 +292,19 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_RenderCoordinatesFromWindow(SDL_Renderer* renderer, float window_x, float window_y, out float x, out float y)
+        public static bool SDL_RenderCoordinatesFromWindow(SDL_Renderer* renderer, float windowX, float windowY, out float x, out float y)
         {
             fixed (float* ptr1 = &x)
             fixed (float* ptr2 = &y)
             {
-                return iSDL_RenderCoordinatesFromWindow(renderer, window_x, window_y, ptr1, ptr2);
+                return iSDL_RenderCoordinatesFromWindow(renderer, windowX, windowY, ptr1, ptr2);
             }
         }
 
-        public static bool SDL_RenderCoordinatesToWindow(SDL_Renderer* renderer, float x, float y, out float window_x, out float window_y)
+        public static bool SDL_RenderCoordinatesToWindow(SDL_Renderer* renderer, float x, float y, out float windowX, out float windowY)
         {
-            fixed (float* ptr1 = &window_x)
-            fixed (float* ptr2 = &window_y)
+            fixed (float* ptr1 = &windowX)
+            fixed (float* ptr2 = &windowY)
             {
                 return iSDL_RenderCoordinatesToWindow(renderer, x, y, ptr1, ptr2);
             }
@@ -488,65 +488,65 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_RenderTexture(SDL_Renderer* renderer, SDL_Texture* texture, SDL_FRect* srcrect, SDL_FRect* dstrect)
+        public static bool SDL_RenderTexture(SDL_Renderer* renderer, SDL_Texture* texture, SDL_FRect* srcRect, SDL_FRect* dstRect)
         {
-            return iSDL_RenderTexture(renderer, texture, srcrect, dstrect);
+            return iSDL_RenderTexture(renderer, texture, srcRect, dstRect);
         }
 
-        public static bool SDL_RenderTextureRotated(SDL_Renderer* renderer, SDL_Texture* texture, SDL_FRect* srcrect, SDL_FRect* dstrect, double angle, SDL_FPoint* center, SDL_FlipMode flip)
+        public static bool SDL_RenderTextureRotated(SDL_Renderer* renderer, SDL_Texture* texture, SDL_FRect* srcRect, SDL_FRect* dstRect, double angle, SDL_FPoint* center, SDL_FlipMode flip)
         {
-            return iSDL_RenderTextureRotated(renderer, texture, srcrect, dstrect, angle, center, flip);
+            return iSDL_RenderTextureRotated(renderer, texture, srcRect, dstRect, angle, center, flip);
         }
 
-        public static bool SDL_RenderTextureAffine(SDL_Renderer* renderer, SDL_Texture* texture, SDL_FRect* srcrect, SDL_FPoint* origin, SDL_FPoint* right, SDL_FPoint* down)
+        public static bool SDL_RenderTextureAffine(SDL_Renderer* renderer, SDL_Texture* texture, SDL_FRect* srcRect, SDL_FPoint* origin, SDL_FPoint* right, SDL_FPoint* down)
         {
-            return iSDL_RenderTextureAffine(renderer, texture, srcrect, origin, right, down);
+            return iSDL_RenderTextureAffine(renderer, texture, srcRect, origin, right, down);
         }
 
-        public static bool SDL_RenderTextureTiled(SDL_Renderer* renderer, SDL_Texture* texture, SDL_FRect* srcrect, float scale, SDL_FRect* dstrect)
+        public static bool SDL_RenderTextureTiled(SDL_Renderer* renderer, SDL_Texture* texture, SDL_FRect* srcRect, float scale, SDL_FRect* dstRect)
         {
-            return iSDL_RenderTextureTiled(renderer, texture, srcrect, scale, dstrect);
+            return iSDL_RenderTextureTiled(renderer, texture, srcRect, scale, dstRect);
         }
 
-        public static bool SDL_RenderTexture9Grid(SDL_Renderer* renderer, SDL_Texture* texture, SDL_FRect* srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, SDL_FRect* dstrect)
+        public static bool SDL_RenderTexture9Grid(SDL_Renderer* renderer, SDL_Texture* texture, SDL_FRect* srcRect, float leftWidth, float rightWidth, float topHeight, float bottomHeight, float scale, SDL_FRect* dstRect)
         {
-            return iSDL_RenderTexture9Grid(renderer, texture, srcrect, left_width, right_width, top_height, bottom_height, scale, dstrect);
+            return iSDL_RenderTexture9Grid(renderer, texture, srcRect, leftWidth, rightWidth, topHeight, bottomHeight, scale, dstRect);
         }
 
-        public static bool SDL_RenderTexture9GridTiled(SDL_Renderer* renderer, SDL_Texture* texture, SDL_FRect* srcrect, float left_width, float right_width, float top_height, float bottom_height, float scale, SDL_FRect* dstrect, float tileScale)
+        public static bool SDL_RenderTexture9GridTiled(SDL_Renderer* renderer, SDL_Texture* texture, SDL_FRect* srcRect, float leftWidth, float rightWidth, float topHeight, float bottomHeight, float scale, SDL_FRect* dstRect, float tileScale)
         {
-            return iSDL_RenderTexture9GridTiled(renderer, texture, srcrect, left_width, right_width, top_height, bottom_height, scale, dstrect, tileScale);
+            return iSDL_RenderTexture9GridTiled(renderer, texture, srcRect, leftWidth, rightWidth, topHeight, bottomHeight, scale, dstRect, tileScale);
         }
 
-        public static bool SDL_RenderGeometry(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Vertex[] vertices, int num_vertices, int[] indices, int num_indices)
+        public static bool SDL_RenderGeometry(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Vertex[] vertices, int numVertices, int[] indices, int numIndices)
         {
             fixed (SDL_Vertex* ptr1 = vertices)
             fixed (int* ptr2 = indices)
             {
-                return iSDL_RenderGeometry(renderer, texture, ptr1, num_vertices, ptr2, num_indices);
+                return iSDL_RenderGeometry(renderer, texture, ptr1, numVertices, ptr2, numIndices);
             }
         }
 
-        public static bool SDL_RenderGeometryRaw(SDL_Renderer* renderer, SDL_Texture* texture, float[] positions, int position_stride, SDL_FColor[] colors, int color_stride, float[] uvs, int uv_stride, int num_vertices, int[] indices, int num_indices)
+        public static bool SDL_RenderGeometryRaw(SDL_Renderer* renderer, SDL_Texture* texture, float[] positions, int positionStride, SDL_FColor[] colors, int colorStride, float[] uvs, int uvStride, int numVertices, int[] indices, int numIndices)
         {
             fixed (float* ptr1 = positions)
             fixed (SDL_FColor* ptr2 = colors)
             fixed (float* ptr3 = uvs)
             fixed (int* ptr4 = indices)
             {
-                return iSDL_RenderGeometryRaw(renderer, texture, ptr1, position_stride, ptr2, color_stride, ptr3, uv_stride, num_vertices, (IntPtr)ptr4, num_indices, sizeof(int));
+                return iSDL_RenderGeometryRaw(renderer, texture, ptr1, positionStride, ptr2, colorStride, ptr3, uvStride, numVertices, (IntPtr)ptr4, numIndices, sizeof(int));
             }
         }
 
-        public static bool SDL_SetRenderTextureAddressMode(SDL_Renderer* renderer, SDL_TextureAddressMode u_mode, SDL_TextureAddressMode v_mode)
+        public static bool SDL_SetRenderTextureAddressMode(SDL_Renderer* renderer, SDL_TextureAddressMode uMode, SDL_TextureAddressMode vMode)
         {
-            return iSDL_SetRenderTextureAddressMode(renderer, u_mode, v_mode);
+            return iSDL_SetRenderTextureAddressMode(renderer, uMode, vMode);
         }
 
-        public static bool SDL_GetRenderTextureAddressMode(SDL_Renderer* renderer, out SDL_TextureAddressMode u_mode, out SDL_TextureAddressMode v_mode)
+        public static bool SDL_GetRenderTextureAddressMode(SDL_Renderer* renderer, out SDL_TextureAddressMode uMode, out SDL_TextureAddressMode vMode)
         {
-            fixed (SDL_TextureAddressMode* ptr1 = &u_mode)
-            fixed (SDL_TextureAddressMode* ptr2 = &v_mode)
+            fixed (SDL_TextureAddressMode* ptr1 = &uMode)
+            fixed (SDL_TextureAddressMode* ptr2 = &vMode)
             {
                 return iSDL_GetRenderTextureAddressMode(renderer, ptr1, ptr2);
             }
@@ -587,9 +587,9 @@ namespace Engine.SDL3
             return iSDL_GetRenderMetalCommandEncoder(renderer);
         }
 
-        public static bool SDL_AddVulkanRenderSemaphores(SDL_Renderer* renderer, uint wait_stage_mask, long wait_semaphore, long signal_semaphore)
+        public static bool SDL_AddVulkanRenderSemaphores(SDL_Renderer* renderer, uint waitStageMask, long waitSemaphore, long signalSemaphore)
         {
-            return iSDL_AddVulkanRenderSemaphores(renderer, wait_stage_mask, wait_semaphore, signal_semaphore);
+            return iSDL_AddVulkanRenderSemaphores(renderer, waitStageMask, waitSemaphore, signalSemaphore);
         }
 
         public static bool SDL_SetRenderVSync(SDL_Renderer* renderer, int vsync)
@@ -621,51 +621,51 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_SetDefaultTextureScaleMode(SDL_Renderer* renderer, SDL_ScaleMode scale_mode)
+        public static bool SDL_SetDefaultTextureScaleMode(SDL_Renderer* renderer, SDL_ScaleMode scaleMode)
         {
-            return iSDL_SetDefaultTextureScaleMode(renderer, scale_mode);
+            return iSDL_SetDefaultTextureScaleMode(renderer, scaleMode);
         }
 
-        public static bool SDL_GetDefaultTextureScaleMode(SDL_Renderer* renderer, out SDL_ScaleMode scale_mode)
+        public static bool SDL_GetDefaultTextureScaleMode(SDL_Renderer* renderer, out SDL_ScaleMode scaleMode)
         {
-            fixed (SDL_ScaleMode* ptr1 = &scale_mode)
+            fixed (SDL_ScaleMode* ptr1 = &scaleMode)
             {
                 return iSDL_GetDefaultTextureScaleMode(renderer, ptr1);
             }
         }
 
-        public static SDL_GPURenderState* SDL_CreateGPURenderState(SDL_Renderer* renderer, SDL_GPURenderStateCreateInfo* createinfo)
+        public static SDL_GPURenderState* SDL_CreateGPURenderState(SDL_Renderer* renderer, SDL_GPURenderStateCreateInfo* createInfo)
         {
-            return iSDL_CreateGPURenderState(renderer, createinfo);
+            return iSDL_CreateGPURenderState(renderer, createInfo);
         }
 
-        public static bool SDL_SetGPURenderStateSamplerBindings(SDL_GPURenderState* state, int num_sampler_bindings, SDL_GPUTextureSamplerBinding[] sampler_bindings)
+        public static bool SDL_SetGPURenderStateSamplerBindings(SDL_GPURenderState* state, int numSamplerBindings, SDL_GPUTextureSamplerBinding[] samplerBindings)
         {
-            fixed (SDL_GPUTextureSamplerBinding* ptr1 = sampler_bindings)
+            fixed (SDL_GPUTextureSamplerBinding* ptr1 = samplerBindings)
             {
-                return iSDL_SetGPURenderStateSamplerBindings(state, num_sampler_bindings, ptr1);
+                return iSDL_SetGPURenderStateSamplerBindings(state, numSamplerBindings, ptr1);
             }
         }
 
-        public static bool SDL_SetGPURenderStateStorageTextures(SDL_GPURenderState* state, int num_storage_textures, SDL_GPUTexture*[] storage_textures)
+        public static bool SDL_SetGPURenderStateStorageTextures(SDL_GPURenderState* state, int numStorageTextures, SDL_GPUTexture*[] storageTextures)
         {
-            fixed (SDL_GPUTexture** ptr1 = storage_textures)
+            fixed (SDL_GPUTexture** ptr1 = storageTextures)
             {
-                return iSDL_SetGPURenderStateStorageTextures(state, num_storage_textures, ptr1);
+                return iSDL_SetGPURenderStateStorageTextures(state, numStorageTextures, ptr1);
             }
         }
 
-        public static bool SDL_SetGPURenderStateStorageBuffers(SDL_GPURenderState* state, int num_storage_buffers, SDL_GPUBuffer*[] storage_buffers)
+        public static bool SDL_SetGPURenderStateStorageBuffers(SDL_GPURenderState* state, int numStorageBuffers, SDL_GPUBuffer*[] storageBuffers)
         {
-            fixed (SDL_GPUBuffer** ptr1 = storage_buffers)
+            fixed (SDL_GPUBuffer** ptr1 = storageBuffers)
             {
-                return iSDL_SetGPURenderStateStorageBuffers(state, num_storage_buffers, ptr1);
+                return iSDL_SetGPURenderStateStorageBuffers(state, numStorageBuffers, ptr1);
             }
         }
 
-        public static bool SDL_SetGPURenderStateFragmentUniforms(SDL_GPURenderState* state, uint slot_index, IntPtr data, uint length)
+        public static bool SDL_SetGPURenderStateFragmentUniforms(SDL_GPURenderState* state, uint slotIndex, IntPtr data, uint length)
         {
-            return iSDL_SetGPURenderStateFragmentUniforms(state, slot_index, data, length);
+            return iSDL_SetGPURenderStateFragmentUniforms(state, slotIndex, data, length);
         }
 
         public static bool SDL_SetGPURenderState(SDL_Renderer* renderer, SDL_GPURenderState* state)

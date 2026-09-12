@@ -20,16 +20,16 @@ namespace Engine.SDL3
             return iSDL_RunApp(argc, (byte**)argv, Marshal.GetFunctionPointerForDelegate(mainFunction), reserved);
         }
 
-        public static int SDL_EnterAppMainCallbacks(int argc, IntPtr argv, SDL_AppInit_func appinit, SDL_AppInit_func appiter, SDL_AppEvent_func appevent, SDL_AppQuit_func appquit)
+        public static int SDL_EnterAppMainCallbacks(int argc, IntPtr argv, SDL_AppInit_func appInit, SDL_AppInit_func appIterate, SDL_AppEvent_func appEvent, SDL_AppQuit_func appQuit)
         {
             return iSDL_EnterAppMainCallbacks
             (
                 argc, 
                 (byte**)argv, 
-                Marshal.GetFunctionPointerForDelegate(appinit),
-                Marshal.GetFunctionPointerForDelegate(appiter), 
-                Marshal.GetFunctionPointerForDelegate(appevent), 
-                Marshal.GetFunctionPointerForDelegate(appquit)
+                Marshal.GetFunctionPointerForDelegate(appInit),
+                Marshal.GetFunctionPointerForDelegate(appIterate), 
+                Marshal.GetFunctionPointerForDelegate(appEvent), 
+                Marshal.GetFunctionPointerForDelegate(appQuit)
             );
         }
 

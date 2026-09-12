@@ -30,9 +30,9 @@ namespace Engine.SDL3
             iSDL_MemoryBarrierAcquireFunction();
         }
 
-        public static bool SDL_CompareAndSwapAtomicInt(SDL_AtomicInt* a, int oldval, int newval)
+        public static bool SDL_CompareAndSwapAtomicInt(SDL_AtomicInt* a, int oldValue, int newValue)
         {
-            return iSDL_CompareAndSwapAtomicInt(a, oldval, newval);
+            return iSDL_CompareAndSwapAtomicInt(a, oldValue, newValue);
         }
 
         public static int SDL_SetAtomicInt(SDL_AtomicInt* a, int v)
@@ -50,9 +50,9 @@ namespace Engine.SDL3
             return iSDL_AddAtomicInt(a, v);
         }
 
-        public static bool SDL_CompareAndSwapAtomicU32(SDL_AtomicU32* a, uint oldval, uint newval)
+        public static bool SDL_CompareAndSwapAtomicU32(SDL_AtomicU32* a, uint oldValue, uint newValue)
         {
-            return iSDL_CompareAndSwapAtomicU32(a, oldval, newval);
+            return iSDL_CompareAndSwapAtomicU32(a, oldValue, newValue);
         }
 
         public static uint SDL_SetAtomicU32(SDL_AtomicU32* a, uint v)
@@ -70,11 +70,11 @@ namespace Engine.SDL3
             return iSDL_AddAtomicU32(a, v);
         }
 
-        public static bool SDL_CompareAndSwapAtomicPointer(ref IntPtr a, IntPtr oldval, IntPtr newval)
+        public static bool SDL_CompareAndSwapAtomicPointer(ref IntPtr a, IntPtr oldValue, IntPtr newValue)
         {
             fixed (IntPtr* ptr1 = &a)
             {
-                return iSDL_CompareAndSwapAtomicPointer(ptr1, oldval, newval);
+                return iSDL_CompareAndSwapAtomicPointer(ptr1, oldValue, newValue);
             }
         }
 

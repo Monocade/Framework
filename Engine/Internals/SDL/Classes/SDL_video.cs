@@ -87,11 +87,11 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_GetClosestFullscreenDisplayMode(uint displayID, int w, int h, float refresh_rate, bool include_high_density_modes, out SDL_DisplayMode closest)
+        public static bool SDL_GetClosestFullscreenDisplayMode(uint displayID, int w, int h, float refreshRate, bool includeHighDensityModes, out SDL_DisplayMode closest)
         {
             fixed (SDL_DisplayMode* ptr1 = &closest)
             {
-                return iSDL_GetClosestFullscreenDisplayMode(displayID, w, h, refresh_rate, include_high_density_modes, ptr1);
+                return iSDL_GetClosestFullscreenDisplayMode(displayID, w, h, refreshRate, includeHighDensityModes, ptr1);
             }
         }
 
@@ -169,9 +169,9 @@ namespace Engine.SDL3
             }
         }
 
-        public static SDL_Window* SDL_CreatePopupWindow(SDL_Window* parent, int offset_x, int offset_y, int w, int h, SDL_WindowFlags flags)
+        public static SDL_Window* SDL_CreatePopupWindow(SDL_Window* parent, int offsetX, int offsetY, int w, int h, SDL_WindowFlags flags)
         {
-            return iSDL_CreatePopupWindow(parent, offset_x, offset_y, w, h, (ulong)flags);
+            return iSDL_CreatePopupWindow(parent, offsetX, offsetY, w, h, (ulong)flags);
         }
 
         public static SDL_Window* SDL_CreateWindowWithProperties(uint props)
@@ -258,15 +258,15 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_SetWindowAspectRatio(SDL_Window* window, float min_aspect, float max_aspect)
+        public static bool SDL_SetWindowAspectRatio(SDL_Window* window, float minAspect, float maxAspect)
         {
-            return iSDL_SetWindowAspectRatio(window, min_aspect, max_aspect);
+            return iSDL_SetWindowAspectRatio(window, minAspect, maxAspect);
         }
 
-        public static bool SDL_GetWindowAspectRatio(SDL_Window* window, out float min_aspect, out float max_aspect)
+        public static bool SDL_GetWindowAspectRatio(SDL_Window* window, out float minAspect, out float maxAspect)
         {
-            fixed (float* ptr1 = &min_aspect)
-            fixed (float* ptr2 = &max_aspect)
+            fixed (float* ptr1 = &minAspect)
+            fixed (float* ptr2 = &maxAspect)
             {
                 return iSDL_GetWindowAspectRatio(window, ptr1, ptr2);
             }
@@ -292,9 +292,9 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_SetWindowMinimumSize(SDL_Window* window, int min_w, int min_h)
+        public static bool SDL_SetWindowMinimumSize(SDL_Window* window, int minW, int minH)
         {
-            return iSDL_SetWindowMinimumSize(window, min_w, min_h);
+            return iSDL_SetWindowMinimumSize(window, minW, minH);
         }
 
         public static bool SDL_GetWindowMinimumSize(SDL_Window* window, out int w, out int h)
@@ -306,9 +306,9 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_SetWindowMaximumSize(SDL_Window* window, int max_w, int max_h)
+        public static bool SDL_SetWindowMaximumSize(SDL_Window* window, int maxW, int maxH)
         {
-            return iSDL_SetWindowMaximumSize(window, max_w, max_h);
+            return iSDL_SetWindowMaximumSize(window, maxW, maxH);
         }
 
         public static bool SDL_GetWindowMaximumSize(SDL_Window* window, out int w, out int h)
@@ -330,9 +330,9 @@ namespace Engine.SDL3
             return iSDL_SetWindowResizable(window, resizable);
         }
 
-        public static bool SDL_SetWindowAlwaysOnTop(SDL_Window* window, bool on_top)
+        public static bool SDL_SetWindowAlwaysOnTop(SDL_Window* window, bool onTop)
         {
-            return iSDL_SetWindowAlwaysOnTop(window, on_top);
+            return iSDL_SetWindowAlwaysOnTop(window, onTop);
         }
 
         public static bool SDL_SetWindowFillDocument(SDL_Window* window, bool fill)
@@ -408,11 +408,11 @@ namespace Engine.SDL3
             return iSDL_UpdateWindowSurface(window);
         }
 
-        public static bool SDL_UpdateWindowSurfaceRects(SDL_Window* window, SDL_Rect[] rects, int numrects)
+        public static bool SDL_UpdateWindowSurfaceRects(SDL_Window* window, SDL_Rect[] rects, int numRects)
         {
             fixed (SDL_Rect* ptr1 = rects)
             {
-                return iSDL_UpdateWindowSurfaceRects(window, ptr1, numrects);
+                return iSDL_UpdateWindowSurfaceRects(window, ptr1, numRects);
             }
         }
 
@@ -486,9 +486,9 @@ namespace Engine.SDL3
             return iSDL_ShowWindowSystemMenu(window, x, y);
         }
 
-        public static bool SDL_SetWindowHitTest(SDL_Window* window, SDL_HitTest callback, IntPtr callback_data)
+        public static bool SDL_SetWindowHitTest(SDL_Window* window, SDL_HitTest callback, IntPtr callbackData)
         {
-            return iSDL_SetWindowHitTest(window, Marshal.GetFunctionPointerForDelegate(callback), callback_data);
+            return iSDL_SetWindowHitTest(window, Marshal.GetFunctionPointerForDelegate(callback), callbackData);
         }
 
         public static bool SDL_SetWindowShape(SDL_Window* window, SDL_Surface* shape)

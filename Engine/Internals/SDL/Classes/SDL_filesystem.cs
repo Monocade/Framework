@@ -48,19 +48,19 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_RenamePath(string oldpath, string newpath)
+        public static bool SDL_RenamePath(string oldPath, string newPath)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(oldpath))
-            fixed (byte* ptr2 = SDL_StringToNative(newpath))
+            fixed (byte* ptr1 = SDL_StringToNative(oldPath))
+            fixed (byte* ptr2 = SDL_StringToNative(newPath))
             {
                 return iSDL_RenamePath(ptr1, ptr2);
             }
         }
 
-        public static bool SDL_CopyFile(string oldpath, string newpath)
+        public static bool SDL_CopyFile(string oldPath, string newPath)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(oldpath))
-            fixed (byte* ptr2 = SDL_StringToNative(newpath))
+            fixed (byte* ptr1 = SDL_StringToNative(oldPath))
+            fixed (byte* ptr2 = SDL_StringToNative(newPath))
             {
                 return iSDL_CopyFile(ptr1, ptr2);
             }

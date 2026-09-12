@@ -108,9 +108,9 @@ namespace Engine.SDL3
             return iSDL_GetJoystickFromID(joystickID);
         }
 
-        public static SDL_Joystick* SDL_GetJoystickFromPlayerIndex(int player_index)
+        public static SDL_Joystick* SDL_GetJoystickFromPlayerIndex(int playerIndex)
         {
-            return iSDL_GetJoystickFromPlayerIndex(player_index);
+            return iSDL_GetJoystickFromPlayerIndex(playerIndex);
         }
 
         public static uint SDL_AttachVirtualJoystick(SDL_VirtualJoystickDesc* desc)
@@ -133,9 +133,9 @@ namespace Engine.SDL3
             return iSDL_SetJoystickVirtualAxis(joystick, axis, value);
         }
 
-        public static bool SDL_SetJoystickVirtualBall(SDL_Joystick* joystick, int ball, short xrel, short yrel)
+        public static bool SDL_SetJoystickVirtualBall(SDL_Joystick* joystick, int ball, short xRelative, short yRelative)
         {
-            return iSDL_SetJoystickVirtualBall(joystick, ball, xrel, yrel);
+            return iSDL_SetJoystickVirtualBall(joystick, ball, xRelative, yRelative);
         }
 
         public static bool SDL_SetJoystickVirtualButton(SDL_Joystick* joystick, int button, bool down)
@@ -153,13 +153,13 @@ namespace Engine.SDL3
             return iSDL_SetJoystickVirtualTouchpad(joystick, touchpad, finger, down, x, y, pressure);
         }
 
-        public static bool SDL_SendJoystickVirtualSensorData(SDL_Joystick* joystick, SDL_SensorType type, ulong sensor_timestamp, out float[] data, int num_values)
+        public static bool SDL_SendJoystickVirtualSensorData(SDL_Joystick* joystick, SDL_SensorType type, ulong sensorTimestamp, out float[] data, int numValues)
         {
-            data = new float[num_values];
+            data = new float[numValues];
             {
                 fixed (float* ptr1 = data)
                 {
-                    return iSDL_SendJoystickVirtualSensorData(joystick, type, sensor_timestamp, ptr1, num_values);
+                    return iSDL_SendJoystickVirtualSensorData(joystick, type, sensorTimestamp, ptr1, numValues);
                 }
             }
         }
@@ -184,9 +184,9 @@ namespace Engine.SDL3
             return iSDL_GetJoystickPlayerIndex(joystick);
         }
 
-        public static bool SDL_SetJoystickPlayerIndex(SDL_Joystick* joystick, int player_index)
+        public static bool SDL_SetJoystickPlayerIndex(SDL_Joystick* joystick, int playerIndex)
         {
-            return iSDL_SetJoystickPlayerIndex(joystick, player_index);
+            return iSDL_SetJoystickPlayerIndex(joystick, playerIndex);
         }
 
         public static SDL_GUID SDL_GetJoystickGUID(SDL_Joystick* joystick)
@@ -332,25 +332,25 @@ namespace Engine.SDL3
             return iSDL_GetJoystickSensorDataRate(joystick, type);
         }
 
-        public static bool SDL_GetJoystickSensorData(SDL_Joystick* joystick, SDL_SensorType type, out float[] data, int num_values)
+        public static bool SDL_GetJoystickSensorData(SDL_Joystick* joystick, SDL_SensorType type, out float[] data, int numValues)
         {
-            data = new float[num_values];
+            data = new float[numValues];
             {
                 fixed (float* ptr1 = data)
                 {
-                    return iSDL_GetJoystickSensorData(joystick, type, ptr1, num_values);
+                    return iSDL_GetJoystickSensorData(joystick, type, ptr1, numValues);
                 }
             }
         }
 
-        public static bool SDL_RumbleJoystick(SDL_Joystick* joystick, ushort low_frequency_rumble, ushort high_frequency_rumble, uint duration_ms)
+        public static bool SDL_RumbleJoystick(SDL_Joystick* joystick, ushort lowFrequencyRumble, ushort highFrequencyRumble, uint durationMs)
         {
-            return iSDL_RumbleJoystick(joystick, low_frequency_rumble, high_frequency_rumble, duration_ms);
+            return iSDL_RumbleJoystick(joystick, lowFrequencyRumble, highFrequencyRumble, durationMs);
         }
 
-        public static bool SDL_RumbleJoystickTriggers(SDL_Joystick* joystick, ushort left_rumble, ushort right_rumble, uint duration_ms)
+        public static bool SDL_RumbleJoystickTriggers(SDL_Joystick* joystick, ushort leftRumble, ushort rightRumble, uint durationMs)
         {
-            return iSDL_RumbleJoystickTriggers(joystick, left_rumble, right_rumble, duration_ms);
+            return iSDL_RumbleJoystickTriggers(joystick, leftRumble, rightRumble, durationMs);
         }
 
         public static bool SDL_SetJoystickLED(SDL_Joystick* joystick, byte red, byte green, byte blue)
