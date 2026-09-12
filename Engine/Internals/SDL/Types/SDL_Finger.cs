@@ -6,7 +6,7 @@ namespace Engine.SDL3
 {
     internal unsafe partial struct SDL_Finger
     {
-        public ulong Id
+        public ulong ID
         {
             get => id;
             set => id = value;
