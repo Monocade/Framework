@@ -102,52 +102,52 @@ namespace Engine.SDL3
             set => userdata = value;
         }
 
-        public IntPtr VirtualUpdate
+        public SDL_UpdateDelegate JoystickUpdate
         {
-            get => Update;
-            set => Update = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_UpdateDelegate>(Update);
+            set => Update = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr VirtualSetPlayerIndex
+        public SDL_SetPlayerIndexDelegate JoystickSetPlayerIndex
         {
-            get => SetPlayerIndex;
-            set => SetPlayerIndex = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_SetPlayerIndexDelegate>(SetPlayerIndex);
+            set => SetPlayerIndex = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr virtualRumble
+        public SDL_RumbleDelegate JoystickRumble
         {
-            get => Rumble;
-            set => Rumble = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_RumbleDelegate>(Rumble);
+            set => Rumble = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr VirtualRumbleTriggers
+        public SDL_RumbleTriggersDelegate JoystickRumbleTriggers
         {
-            get => RumbleTriggers;
-            set => RumbleTriggers = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_RumbleTriggersDelegate>(RumbleTriggers);
+            set => RumbleTriggers = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr VirtualSetLED
+        public SDL_SetLEDDelegate JoystickSetLED
         {
-            get => SetLED;
-            set => SetLED = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_SetLEDDelegate>(SetLED);
+            set => SetLED = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr VirtualSendEffect
+        public SDL_SendEffectDelegate JoystickSendEffect
         {
-            get => SendEffect;
-            set => SendEffect = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_SendEffectDelegate>(SendEffect);
+            set => SendEffect = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr VirtualSetSensorsEnabled
+        public SDL_SetSensorsEnabledDelegate JoystickSetSensorsEnabled
         {
-            get => SetSensorsEnabled;
-            set => SetSensorsEnabled = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_SetSensorsEnabledDelegate>(SetSensorsEnabled);
+            set => SetSensorsEnabled = Marshal.GetFunctionPointerForDelegate(value);
         }
 
-        public IntPtr VirtualCleanup
+        public SDL_CleanupDelegate JoystickCleanup
         {
-            get => Cleanup;
-            set => Cleanup = value;
+            get => Marshal.GetDelegateForFunctionPointer<SDL_CleanupDelegate>(Cleanup);
+            set => Cleanup = Marshal.GetFunctionPointerForDelegate(value);
         }
     }
 }

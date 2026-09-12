@@ -3,6 +3,31 @@ using System;
 
 namespace Engine.SDL3
 {
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate void SDL_UpdateDelegate(void* userdata);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate void SDL_SetPlayerIndexDelegate(void* userdata, int playerIndex);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate bool SDL_RumbleDelegate(void* userdata, ushort lowFrequencyRumble, ushort highFrequencyRumble);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate bool SDL_RumbleTriggersDelegate(void* userdata, ushort leftRumble, ushort rightRumble);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate bool SDL_SetLEDDelegate(void* userdata, byte red, byte green, byte blue);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate bool SDL_SendEffectDelegate(void* userdata, void* data, int size);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate bool SDL_SetSensorsEnabledDelegate(void* userdata, bool enabled);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    internal unsafe delegate void SDL_CleanupDelegate(void* userdata);
+    
+
     internal static unsafe partial class SDL
     {
         public static void SDL_LockJoysticks()
