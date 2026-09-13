@@ -1,28 +1,46 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System;
 
 namespace Engine
 {
-    // Core
-    public class App
+    // App
+    public abstract unsafe class App
     {
         public bool IsRunning { get; private set; }
         
+        private SDL_Window* window;
         
-        public void Run()
+        
+        protected App()
         {
             if (!IsRunning)
             {
                 IsRunning = true;
                 {
-                    Platform.Provider.Bootstrap.Run();
-                    Platform.Provider.Example.Run();
+                    Bootstrap.Execute(this);
                 }
             }
         }
 
-        internal void Main()
+        internal void Init()
         {
-            Console.WriteLine("Main");
+            window = SDL_CreateWindow("Title", 600, 400, SDL_WindowFlags.SDL_WINDOW_HIGH_PIXEL_DENSITY);
+        }
+
+        internal void Main(Queue<SDL_Event> events)
+        {
+            while (events.TryDequeue(out var e))
+            {
+                if (e.Type == SDL_EventType.SDL_EVENT_QUIT)
+                {
+                    Exit();
+                    {
+                        return;
+                    }
+                }
+            }
+            
+            // Update
         }
 
         internal void Exit()
@@ -30,6 +48,8 @@ namespace Engine
             if (IsRunning)
             {
                 IsRunning = false;
+                
+                // Quit
             }
         }
     }
