@@ -3,7 +3,7 @@
 namespace Engine
 {
     // Core
-    public class Core
+    public class App
     {
         public bool IsRunning { get; private set; }
         

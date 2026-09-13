@@ -1,10 +1,9 @@
 ﻿using Engine;
 
-namespace App
+namespace Application
 {
-    public class Game : Core
+    public class Game : App
     {
         
     }
 }
-
