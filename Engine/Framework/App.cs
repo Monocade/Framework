@@ -3,24 +3,18 @@ using System;
 
 namespace Engine
 {
-    public abstract unsafe class App : Bootstrap
+    public abstract class App : Bootstrap
     {
-        private SDL_Window* window;
-
-        
         internal override void Init()
         {
-            window = SDL_CreateWindow("Title", 600, 400, SDL_WindowFlags.SDL_WINDOW_HIGH_PIXEL_DENSITY);
+            Console.WriteLine("Init");
         }
 
         internal override void Main(Queue<SDL_Event> events)
         {
             while (events.TryDequeue(out var e))
             {
-                if (e.Type == SDL_EventType.SDL_EVENT_QUIT)
-                {
-                    SDL_Quit();
-                }
+                Console.WriteLine($"Event: {e.Type}");
             }
             
             Console.WriteLine("Main");
@@ -28,7 +22,7 @@ namespace Engine
 
         internal override void Quit()
         {
-            Console.WriteLine("Exit");
+            Console.WriteLine("Quit");
         }
     }
 }

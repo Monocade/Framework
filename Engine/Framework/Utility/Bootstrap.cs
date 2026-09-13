@@ -13,13 +13,6 @@ namespace Engine
 
         protected Bootstrap()
         {
-            Execute();
-        }
-
-        protected internal void Execute()
-        {
-            Platform.Provider.Bootstrap.Run();
-            
             SDL_Init(SDL_InitFlags.SDL_INIT_EVERYTHING);
             {
                 SDL_SetMainReady();
@@ -57,7 +50,7 @@ namespace Engine
                 return SDL_AppResult.SDL_APP_CONTINUE;
             }
         }
-
+        
         private SDL_AppResult AppIterate(IntPtr state)
         {
             Main(Events);
@@ -69,6 +62,9 @@ namespace Engine
         private void AppQuit(IntPtr state, SDL_AppResult result)
         {
             Quit();
+            {
+                SDL_Quit();
+            }
         }
     }
 }
