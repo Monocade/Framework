@@ -3,32 +3,31 @@ using System;
 
 namespace Engine
 {
-    internal static unsafe class Bootstrap
+    public abstract unsafe class Bootstrap
     {
-        private static readonly Queue<SDL_Event> Events = new Queue<SDL_Event>();
-        private static readonly SDL_AppIterate_func AppIterate = Iterate;
-        private static readonly SDL_AppEvent_func AppEvent = Event;
-        private static readonly SDL_AppInit_func AppInit = Init;
-        private static readonly SDL_AppQuit_func AppQuit = Quit;
-        private static readonly SDL_main_func AppMain = Main;
-        private static App App;
-        
-        
-        internal static void Execute(App app)
+        internal readonly Queue<SDL_Event> Events = new Queue<SDL_Event>();
+        internal abstract void Main(Queue<SDL_Event> events);
+        internal abstract void Init();
+        internal abstract void Quit();
+
+
+        protected Bootstrap()
         {
-            App = app;
+            Execute();
+        }
+
+        protected internal void Execute()
+        {
+            SDL_Init(SDL_InitFlags.SDL_INIT_EVERYTHING);
             {
-                SDL_Init(SDL_InitFlags.SDL_INIT_EVERYTHING);
+                SDL_SetMainReady();
                 {
-                    SDL_SetMainReady();
-                    {
-                        SDL_RunApp(0, IntPtr.Zero, AppMain, IntPtr.Zero);
-                    }
+                    SDL_RunApp(0, IntPtr.Zero, AppMain, IntPtr.Zero);
                 }
             }
         }
 
-        private static int Main(int argc, byte** argv)
+        private int AppMain(int argc, byte** argv)
         {
             SDL_EnterAppMainCallbacks(argc, (IntPtr)argv, AppInit, AppIterate, AppEvent, AppQuit);
             {
@@ -36,19 +35,19 @@ namespace Engine
             }
         }
 
-        private static SDL_AppResult Init(IntPtr* state, int argc, byte** argv)
+        private SDL_AppResult AppInit(IntPtr* state, int argc, byte** argv)
         {
-            App.Init();
+            Init();
             {
                 return SDL_AppResult.SDL_APP_CONTINUE;
             }
         }
-
-        private static SDL_AppResult Iterate(IntPtr state)
+        
+        private SDL_AppResult AppEvent(IntPtr state, SDL_Event* e)
         {
-            App.Main(Events);
+            Events.Enqueue(*e);
             {
-                if (!App.IsRunning)
+                if (e->Type == SDL_EventType.SDL_EVENT_QUIT)
                 {
                     return SDL_AppResult.SDL_APP_SUCCESS;
                 }
@@ -56,21 +55,18 @@ namespace Engine
                 return SDL_AppResult.SDL_APP_CONTINUE;
             }
         }
-        
-        private static SDL_AppResult Event(IntPtr state, SDL_Event* e)
+
+        private SDL_AppResult AppIterate(IntPtr state)
         {
-            Events.Enqueue(*e);
+            Main(Events);
             {
                 return SDL_AppResult.SDL_APP_CONTINUE;
             }
         }
         
-        private static void Quit(IntPtr state, SDL_AppResult result)
+        private void AppQuit(IntPtr state, SDL_AppResult result)
         {
-            App.Exit();
-            {
-                SDL_Quit();
-            }
+            Quit();
         }
     }
 }
