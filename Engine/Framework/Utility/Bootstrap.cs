@@ -18,6 +18,8 @@ namespace Engine
 
         protected internal void Execute()
         {
+            Platform.Provider.Bootstrap.Run();
+            
             SDL_Init(SDL_InitFlags.SDL_INIT_EVERYTHING);
             {
                 SDL_SetMainReady();
