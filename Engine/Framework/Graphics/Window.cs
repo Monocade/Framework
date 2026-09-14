@@ -5,14 +5,60 @@ namespace Engine
     // Window
     public sealed unsafe partial class Window(App app) : Module(app)
     {
-        internal static SDL_Window* handle;
+        internal static SDL_Window* handle
+        {
+            get; private set;
+        }
+        
+        public Action OnFullscreenEnter;
+        public Action OnFullscreenExit;
+        public Action OnMouseEnter;
+        public Action OnMouseExit;
+        public Action OnFocusLost;
+        public Action OnFocusGain;
+        public Action OnMaximize;
+        public Action OnMinimize;
+        public Action OnRestore;
+        public Action OnResize;
+        public Action OnMoved;
+        public Action OnShow;
+        public Action OnHide;
 
 
         internal override void Initialize()
         {
             base.Initialize();
             {
-                handle = SDL_CreateWindow("Framework", 600, 400, SDL_WindowFlags.SDL_WINDOW_HIDDEN);
+                var flags = SDL_WindowFlags.SDL_WINDOW_HIDDEN | SDL_WindowFlags.SDL_WINDOW_HIGH_PIXEL_DENSITY;
+                {
+                    handle = SDL_CreateWindow("Framework", 600, 400, flags);
+                }
+            }
+        }
+
+        internal override void Event(SDL_Event e)
+        {
+            base.Event(e);
+            {
+                var action = e.Type switch
+                {
+                    SDL_EventType.SDL_EVENT_WINDOW_ENTER_FULLSCREEN => OnFullscreenEnter,
+                    SDL_EventType.SDL_EVENT_WINDOW_LEAVE_FULLSCREEN => OnFullscreenExit,
+                    SDL_EventType.SDL_EVENT_WINDOW_FOCUS_LOST => OnFocusLost,
+                    SDL_EventType.SDL_EVENT_WINDOW_FOCUS_GAINED => OnFocusGain,
+                    SDL_EventType.SDL_EVENT_WINDOW_MOUSE_ENTER => OnMouseEnter,
+                    SDL_EventType.SDL_EVENT_WINDOW_MOUSE_LEAVE => OnMouseExit,
+                    SDL_EventType.SDL_EVENT_WINDOW_MAXIMIZED => OnMaximize,
+                    SDL_EventType.SDL_EVENT_WINDOW_MINIMIZED => OnMinimize,
+                    SDL_EventType.SDL_EVENT_WINDOW_RESTORED => OnRestore,
+                    SDL_EventType.SDL_EVENT_WINDOW_RESIZED => OnResize,
+                    SDL_EventType.SDL_EVENT_WINDOW_MOVED => OnMoved,
+                    SDL_EventType.SDL_EVENT_WINDOW_SHOWN => OnShow,
+                    SDL_EventType.SDL_EVENT_WINDOW_HIDDEN => OnHide,
+                    _ => null
+                };
+
+                action?.Invoke();
             }
         }
 
@@ -207,32 +253,32 @@ namespace Engine
             }
         }
         
-        public void Restore()
+        public static void Restore()
         {
             SDL_RestoreWindow(handle);
         }
         
-        public void Minimize()
+        public static void Minimize()
         {
             SDL_MinimizeWindow(handle);
         }
         
-        public void Maximize()
+        public static void Maximize()
         {
             SDL_MaximizeWindow(handle);
         }
         
-        public void Focus()
+        public static void Focus()
         {
             SDL_RaiseWindow(handle);
         }
         
-        public void Hide()
+        public static void Hide()
         {
             SDL_HideWindow(handle);
         }
 
-        public void Show()
+        public static void Show()
         {
             SDL_ShowWindow(handle);
         }

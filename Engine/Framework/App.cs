@@ -19,7 +19,7 @@ namespace Engine
             {
                 Initialize();
                 {
-                    window.Show();
+                    Window.Show();
                 }
             }
         }
