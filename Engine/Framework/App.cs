@@ -18,6 +18,9 @@ namespace Engine
             var window = new Window(this);
             {
                 Initialize();
+                {
+                    window.Show();
+                }
             }
         }
 

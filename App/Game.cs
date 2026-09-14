@@ -9,7 +9,15 @@ namespace Application
         {
             base.Initialize();
             {
-                Console.WriteLine("Game Init");
+                Window.Title = "Hello";
+            }
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            {
+                
             }
         }
 
