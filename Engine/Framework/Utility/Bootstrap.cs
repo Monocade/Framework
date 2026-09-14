@@ -5,10 +5,11 @@ namespace Engine
 {
     public abstract unsafe class Bootstrap
     {
-        internal readonly Queue<SDL_Event> Events = new Queue<SDL_Event>();
-        internal abstract void Main(Queue<SDL_Event> events);
-        internal abstract void Init();
-        internal abstract void Quit();
+        internal readonly Queue<SDL_Event> MainEvents = new Queue<SDL_Event>();
+        
+        internal abstract void MainInitialize();
+        internal abstract void MainUpdate();
+        internal abstract void MainQuit();
 
 
         protected Bootstrap()
@@ -32,7 +33,7 @@ namespace Engine
 
         private SDL_AppResult AppInit(IntPtr* state, int argc, byte** argv)
         {
-            Init();
+            MainInitialize();
             {
                 return SDL_AppResult.SDL_APP_CONTINUE;
             }
@@ -40,7 +41,7 @@ namespace Engine
         
         private SDL_AppResult AppEvent(IntPtr state, SDL_Event* e)
         {
-            Events.Enqueue(*e);
+            MainEvents.Enqueue(*e);
             {
                 if (e->Type == SDL_EventType.SDL_EVENT_QUIT)
                 {
@@ -53,7 +54,7 @@ namespace Engine
         
         private SDL_AppResult AppIterate(IntPtr state)
         {
-            Main(Events);
+            MainUpdate();
             {
                 return SDL_AppResult.SDL_APP_CONTINUE;
             }
@@ -61,7 +62,7 @@ namespace Engine
         
         private void AppQuit(IntPtr state, SDL_AppResult result)
         {
-            Quit();
+            MainQuit();
             {
                 SDL_Quit();
             }

@@ -3,26 +3,61 @@ using System;
 
 namespace Engine
 {
-    public abstract class App : Bootstrap
+    // App
+    public abstract partial class App : Bootstrap
     {
-        internal override void Init()
+        internal event Action<SDL_Event> OnEvent;
+        internal event Action OnInitialize;
+        internal event Action OnUpdate;
+        internal event Action OnRender;
+        internal event Action OnQuit;
+        
+
+        internal override void MainInitialize()
         {
-            Console.WriteLine("Init");
+            var window = new Window(this);
+            {
+                Initialize();
+            }
         }
 
-        internal override void Main(Queue<SDL_Event> events)
+        internal override void MainUpdate()
         {
-            while (events.TryDequeue(out var e))
+            while (MainEvents.TryDequeue(out var e))
             {
-                Console.WriteLine($"Event: {e.Type}");
+                OnEvent?.Invoke(e);
             }
             
-            Console.WriteLine("Main");
+            Update();
+            Render();
         }
 
-        internal override void Quit()
+        internal override void MainQuit()
         {
-            Console.WriteLine("Quit");
+            Quit();
+        }
+    }
+
+    public abstract partial class App
+    {
+        public virtual void Initialize()
+        {
+            OnInitialize?.Invoke();
+        }
+        
+        public virtual void Update()
+        {
+            OnUpdate?.Invoke();
+        }
+        
+        public virtual void Render()
+        {
+            OnRender?.Invoke();
+        }
+        
+        public virtual void Quit()
+        {
+            OnQuit?.Invoke();
         }
     }
 }
