@@ -4,15 +4,15 @@ namespace Engine
 {
     public struct Vector3
     {
-        public float x;
-        public float y;
-        public float z;
+        public float X;
+        public float Y;
+        public float Z;
 
         public Vector3(float x, float y, float z)
         {
-            this.x = x;
-            this.y = y;
-            this.z = z;
+            this.X = x;
+            this.Y = y;
+            this.Z = z;
         }
     }
 }

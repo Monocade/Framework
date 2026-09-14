@@ -4,17 +4,17 @@ namespace Engine
 {
     public struct Quaternion
     {
-        public float x;
-        public float y;
-        public float z;
-        public float w;
+        public float X;
+        public float Y;
+        public float Z;
+        public float W;
 
         public Quaternion(float x, float y, float z, float w)
         {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-            this.w = w;
+            this.X = x;
+            this.Y = y;
+            this.Z = z;
+            this.W = w;
         }
     }
 }

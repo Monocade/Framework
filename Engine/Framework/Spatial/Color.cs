@@ -4,17 +4,17 @@ namespace Engine
 {
     public struct Color
     {
-        public float r;
-        public float g;
-        public float b;
-        public float a;
+        public float R;
+        public float G;
+        public float B;
+        public float A;
 
         public Color(float r, float g, float b, float a)
         {
-            this.r = r;
-            this.g = g;
-            this.b = b;
-            this.a = a;
+            this.R = r;
+            this.G = g;
+            this.B = b;
+            this.A = a;
         }
     }
 }

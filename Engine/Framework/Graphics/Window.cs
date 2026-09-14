@@ -69,7 +69,7 @@ namespace Engine
         
         public static Vector2 Size
         {
-            set => SDL_SetWindowSize(handle, (int)value.x, (int)value.y);
+            set => SDL_SetWindowSize(handle, (int)value.X, (int)value.Y);
             get
             {
                 SDL_GetWindowSize(handle, out var w, out var h);
@@ -81,7 +81,7 @@ namespace Engine
         
         public static Vector2 MinSize
         {
-            set => SDL_SetWindowMinimumSize(handle, (int)value.x, (int)value.y);
+            set => SDL_SetWindowMinimumSize(handle, (int)value.X, (int)value.Y);
             get
             {
                 SDL_GetWindowMinimumSize(handle, out var w, out var h);
@@ -93,7 +93,7 @@ namespace Engine
         
         public static Vector2 MaxSize
         {
-            set => SDL_SetWindowMaximumSize(handle, (int)value.x, (int)value.y);
+            set => SDL_SetWindowMaximumSize(handle, (int)value.X, (int)value.Y);
             get
             {
                 SDL_GetWindowMaximumSize(handle, out var w, out var h);
@@ -105,7 +105,7 @@ namespace Engine
         
         public static Vector2 Position
         {
-            set => SDL_SetWindowPosition(handle, (int)value.x, (int)value.y);
+            set => SDL_SetWindowPosition(handle, (int)value.X, (int)value.Y);
             get
             {
                 SDL_GetWindowPosition(handle, out var x, out var y);
@@ -117,7 +117,7 @@ namespace Engine
         
         public static Vector2 AspectRatio
         {
-            set => SDL_SetWindowAspectRatio(handle, (int)value.x, (int)value.y);
+            set => SDL_SetWindowAspectRatio(handle, (int)value.X, (int)value.Y);
             get
             {
                 SDL_GetWindowAspectRatio(handle, out var w, out var h);

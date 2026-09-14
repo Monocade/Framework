@@ -4,10 +4,10 @@ namespace Engine
 {
     public struct Matrix4x4
     {
-        public float m11, m12, m13, m14;
-        public float m21, m22, m23, m24;
-        public float m31, m32, m33, m34;
-        public float m41, m42, m43, m44;
+        public float M11, M12, M13, M14;
+        public float M21, M22, M23, M24;
+        public float M31, M32, M33, M34;
+        public float M41, M42, M43, M44;
         
         public Matrix4x4
         (
@@ -16,10 +16,10 @@ namespace Engine
             float m31, float m32, float m33, float m34,
             float m41, float m42, float m43, float m44)
         {
-            this.m11 = m11; this.m12 = m12; this.m13 = m13; this.m14 = m14;
-            this.m21 = m21; this.m22 = m22; this.m23 = m23; this.m24 = m24;
-            this.m31 = m31; this.m32 = m32; this.m33 = m33; this.m34 = m34;
-            this.m41 = m41; this.m42 = m42; this.m43 = m43; this.m44 = m44;
+            this.M11 = m11; this.M12 = m12; this.M13 = m13; this.M14 = m14;
+            this.M21 = m21; this.M22 = m22; this.M23 = m23; this.M24 = m24;
+            this.M31 = m31; this.M32 = m32; this.M33 = m33; this.M34 = m34;
+            this.M41 = m41; this.M42 = m42; this.M43 = m43; this.M44 = m44;
         }
     }
 }

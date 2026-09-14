@@ -4,17 +4,17 @@ namespace Engine
 {
     public struct Rect
     {
-        public float x;
-        public float y;
-        public float w;
-        public float h;
+        public float X;
+        public float Y;
+        public float W;
+        public float H;
 
         public Rect(float x, float y, float w, float h)
         {
-            this.x = x;
-            this.y = y;
-            this.w = w;
-            this.h = h;
+            this.X = x;
+            this.Y = y;
+            this.W = w;
+            this.H = h;
         }
     }
 }
