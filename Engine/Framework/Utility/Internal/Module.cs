@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System;
+﻿using System;
 
 namespace Engine
 {
-    public abstract class Module
+    public abstract class Module : IDisposable
     {
         private readonly App App;
         
@@ -17,6 +15,7 @@ namespace Engine
                 App.OnRender += Render;
                 App.OnEvent += Event;
                 App.OnQuit += Quit;
+                App.OnQuit += Dispose;
             }
         }
         
@@ -28,13 +27,17 @@ namespace Engine
         
         internal virtual void Render() { }
         
-        internal virtual void Quit()
+        internal virtual void Quit() { }
+        
+        
+        public void Dispose()
         {
             App.OnInitialize -= Initialize;
             App.OnUpdate -= Update;
             App.OnRender -= Render;
             App.OnEvent -= Event;
             App.OnQuit -= Quit;
+            App.OnQuit -= Dispose;
         }
     }
 }

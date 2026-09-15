@@ -21,12 +21,6 @@ namespace Engine
         {
             Handle = handle;
         }
-
-        ~Storage()
-        {
-            Dispose();
-        }
-        
         
         public void Dispose()
         {
