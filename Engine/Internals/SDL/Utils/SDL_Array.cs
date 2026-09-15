@@ -95,5 +95,32 @@ namespace Engine.SDL3
                 }
             }
         }
+        
+        public static string[] SDL_NativeToArray(byte** ptr, bool free = true)
+        {
+            try
+            {
+                if (ptr == null)
+                {
+                    return [];
+                }
+
+                var result = new List<string>();
+                
+                for (int i = 0; ptr[i] != null; i++)
+                {
+                    result.Add(SDL_NativeToString(ptr[i]));
+                }
+
+                return result.ToArray();
+            }
+            finally
+            {
+                if (free && ptr != null)
+                {
+                    iSDL_free((IntPtr)ptr);
+                }
+            }
+        }
     }
 }

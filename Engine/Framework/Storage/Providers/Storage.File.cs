@@ -2,8 +2,8 @@
 
 namespace Engine
 {
-    // User Storage Provider
-    internal sealed unsafe class UserStorageContainer(SDL_Storage* handle) : StorageContainer(handle)
+    // File Storage Provider
+    internal sealed unsafe class FileStorage(SDL_Storage* handle) : Storage(handle)
     {
         public override bool IsReady => SDL_StorageReady(Handle);
         

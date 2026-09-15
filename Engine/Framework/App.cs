@@ -16,7 +16,7 @@ namespace Engine
         internal override void MainInitialize()
         {
             var window = new Window(this);
-            var storage = new Storage(this);
+            var storage = new FileSystem(this);
             {
                 Initialize();
                 {

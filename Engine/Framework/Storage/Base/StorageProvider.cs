@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-    public enum StorageType
+    public enum StorageProvider
     {
         Title,
         User,

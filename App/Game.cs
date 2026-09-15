@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.Threading;
 using Engine;
 
 namespace Application
@@ -11,8 +9,13 @@ namespace Application
         {
             base.Initialize();
             {
-                
+                FileSystem.StorageAPI.StorageOpen()
             }
+        }
+
+        private void Callback(string file)
+        {
+            Console.WriteLine(file);
         }
 
         public override void Update()
