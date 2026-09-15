@@ -10,14 +10,14 @@ namespace Engine.SDL3
             iSDL_SetLogPriorities(priority);
         }
 
-        public static void SDL_SetLogPriority(int category, SDL_LogPriority priority)
+        public static void SDL_SetLogPriority(SDL_LogCategory category, SDL_LogPriority priority)
         {
-            iSDL_SetLogPriority(category, priority);
+            iSDL_SetLogPriority((int)category, priority);
         }
 
-        public static SDL_LogPriority SDL_GetLogPriority(int category)
+        public static SDL_LogPriority SDL_GetLogPriority(SDL_LogCategory category)
         {
-            return iSDL_GetLogPriority(category);
+            return iSDL_GetLogPriority((int)category);
         }
 
         public static void SDL_ResetLogPriorities()
@@ -41,76 +41,76 @@ namespace Engine.SDL3
             }
         }
 
-        public static void SDL_LogTrace(int category, string fmt)
+        public static void SDL_LogTrace(SDL_LogCategory category, string fmt)
         {
             fixed (byte* ptr1 = SDL_StringToNative(fmt))
             {
-                iSDL_LogTrace(category, ptr1);
+                iSDL_LogTrace((int)category, ptr1);
             }
         }
 
-        public static void SDL_LogVerbose(int category, string fmt)
+        public static void SDL_LogVerbose(SDL_LogCategory category, string fmt)
         {
             fixed (byte* ptr1 = SDL_StringToNative(fmt))
             {
-                iSDL_LogVerbose(category, ptr1);
+                iSDL_LogVerbose((int)category, ptr1);
             }
         }
 
-        public static void SDL_LogDebug(int category, string fmt)
+        public static void SDL_LogDebug(SDL_LogCategory category, string fmt)
         {
             fixed (byte* ptr1 = SDL_StringToNative(fmt))
             {
-                iSDL_LogDebug(category, ptr1);
+                iSDL_LogDebug((int)category, ptr1);
             }
         }
 
-        public static void SDL_LogInfo(int category, string fmt)
+        public static void SDL_LogInfo(SDL_LogCategory category, string fmt)
         {
             fixed (byte* ptr1 = SDL_StringToNative(fmt))
             {
-                iSDL_LogInfo(category, ptr1);
+                iSDL_LogInfo((int)category, ptr1);
             }
         }
 
-        public static void SDL_LogWarn(int category, string fmt)
+        public static void SDL_LogWarn(SDL_LogCategory category, string fmt)
         {
             fixed (byte* ptr1 = SDL_StringToNative(fmt))
             {
-                iSDL_LogWarn(category, ptr1);
+                iSDL_LogWarn((int)category, ptr1);
             }
         }
 
-        public static void SDL_LogError(int category, string fmt)
+        public static void SDL_LogError(SDL_LogCategory category, string fmt)
         {
             fixed (byte* ptr1 = SDL_StringToNative(fmt))
             {
-                iSDL_LogError(category, ptr1);
+                iSDL_LogError((int)category, ptr1);
             }
         }
 
-        public static void SDL_LogCritical(int category, string fmt)
+        public static void SDL_LogCritical(SDL_LogCategory category, string fmt)
         {
             fixed (byte* ptr1 = SDL_StringToNative(fmt))
             {
-                iSDL_LogCritical(category, ptr1);
+                iSDL_LogCritical((int)category, ptr1);
             }
         }
 
-        public static void SDL_LogMessage(int category, SDL_LogPriority priority, string fmt)
+        public static void SDL_LogMessage(SDL_LogCategory category, SDL_LogPriority priority, string fmt)
         {
             fixed (byte* ptr1 = SDL_StringToNative(fmt))
             {
-                iSDL_LogMessage(category, priority, ptr1);
+                iSDL_LogMessage((int)category, priority, ptr1);
             }
         }
 
-        public static void SDL_LogMessageV(int category, SDL_LogPriority priority, string fmt, string ap)
+        public static void SDL_LogMessageV(SDL_LogCategory category, SDL_LogPriority priority, string fmt, string ap)
         {
             fixed (byte* ptr1 = SDL_StringToNative(fmt))
             fixed (byte* ptr2 = SDL_StringToNative(ap))
             {
-                iSDL_LogMessageV(category, priority, ptr1, ptr2);
+                iSDL_LogMessageV((int)category, priority, ptr1, ptr2);
             }
         }
 
