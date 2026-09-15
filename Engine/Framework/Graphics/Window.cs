@@ -2,8 +2,17 @@
 
 namespace Engine
 {
+    // Constructor
+    public sealed partial class Window : Module
+    {
+        internal Window(App app) : base(app)
+        {
+            // Constructor
+        }
+    }
+
     // Window
-    public sealed unsafe partial class Window(App app) : Module(app)
+    public unsafe partial class Window
     {
         internal static SDL_Window* handle
         {
