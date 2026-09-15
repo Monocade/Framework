@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Threading;
 using Engine;
 
@@ -10,17 +11,13 @@ namespace Application
         {
             base.Initialize();
             {
-                var storage = Storage.Open(StorageType.User, "MyFile");
-                
-                Console.WriteLine(storage.IsReady);
+                var storage = Storage.Open(StorageType.User, "lloyd");
 
-                while (!storage.IsReady)
-                {
-                    Console.WriteLine("Waiting");
-                    Thread.Sleep(100);
-                }
-                
-                Console.WriteLine(storage.IsReady);
+                var input = Encoding.UTF8.GetBytes("Hello from SDL!");
+                Storage.FileWrite(storage, "MyFile.txt", input);
+
+                var output = Storage.FileRead(storage, "MyFile.txt");
+                Console.WriteLine(Encoding.UTF8.GetString(output));
             }
         }
 
@@ -36,7 +33,7 @@ namespace Application
         {
             base.Quit();
             {
-                Console.WriteLine("Game Quit");
+                
             }
         }
     }

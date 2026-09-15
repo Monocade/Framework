@@ -88,19 +88,24 @@ namespace Engine.SDL3
             }
         }
 
-        public static bool SDL_ReadStorageFile(SDL_Storage* storage, string path, IntPtr destination, ulong length)
+        public static bool SDL_ReadStorageFile(SDL_Storage* storage, string path, out byte[] buffer, ulong length)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(path))
+            buffer = new byte[length];
             {
-                return iSDL_ReadStorageFile(storage, ptr1, destination, length);
+                fixed (byte* ptr1 = SDL_StringToNative(path))
+                fixed (byte* ptr2 = buffer)
+                {
+                    return iSDL_ReadStorageFile(storage, ptr1, (IntPtr)ptr2, length);
+                }
             }
         }
 
-        public static bool SDL_WriteStorageFile(SDL_Storage* storage, string path, IntPtr source, ulong length)
+        public static bool SDL_WriteStorageFile(SDL_Storage* storage, string path, byte[] buffer, ulong length)
         {
             fixed (byte* ptr1 = SDL_StringToNative(path))
+            fixed (byte* ptr2 = buffer)
             {
-                return iSDL_WriteStorageFile(storage, ptr1, source, length);
+                return iSDL_WriteStorageFile(storage, ptr1, (IntPtr)ptr2, length);
             }
         }
 
