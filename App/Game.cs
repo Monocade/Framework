@@ -9,13 +9,8 @@ namespace Application
         {
             base.Initialize();
             {
-                FileSystem.StorageAPI.StorageOpen()
+                
             }
-        }
-
-        private void Callback(string file)
-        {
-            Console.WriteLine(file);
         }
 
         public override void Update()
