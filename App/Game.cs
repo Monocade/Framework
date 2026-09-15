@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Engine;
 
 namespace Application
@@ -9,7 +10,17 @@ namespace Application
         {
             base.Initialize();
             {
-                Window.Title = "Hello";
+                var storage = Storage.Open(StorageType.User, "MyFile");
+                
+                Console.WriteLine(storage.IsReady);
+
+                while (!storage.IsReady)
+                {
+                    Console.WriteLine("Waiting");
+                    Thread.Sleep(100);
+                }
+                
+                Console.WriteLine(storage.IsReady);
             }
         }
 
