@@ -27,7 +27,7 @@ namespace Engine
 
         internal override void MainUpdate()
         {
-            while (MainEvents.TryDequeue(out var e))
+            while (AppEvents.TryDequeue(out var e))
             {
                 OnEvent?.Invoke(e);
             }
