@@ -7,21 +7,16 @@ namespace Engine.SDL3
     {
         public static IntPtr SDL_CreateCallback<T>(T value) where T : class
         {
-            var handle = GCHandle.Alloc(value);
-            var ptr = GCHandle.ToIntPtr(handle);
-
-            return ptr;
+            return GCHandle.ToIntPtr(GCHandle.Alloc(value));
         }
 
-        public static T SDL_FreeCallback<T>(nint handle) where T : class
+        public static T SDL_FreeCallback<T>(IntPtr handle) where T : class
         {
             var gcHandle = GCHandle.FromIntPtr(handle);
 
             try
             {
-                var value = gcHandle.Target as T;
-
-                return value;
+                return gcHandle.Target as T;
             }
             finally
             {
