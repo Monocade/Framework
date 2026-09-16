@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Engine
 {
@@ -21,7 +23,7 @@ namespace Engine
     // Storage API
     public unsafe partial class FileSystem
     {
-        public static Storage StorageOpen(StorageProvider provider, string name = null)
+        public static Storage OpenStorage(StorageProvider provider, string name = null)
         {
             name = Normalize(name);
             {
@@ -59,7 +61,7 @@ namespace Engine
             }
         }
 
-        public static void StorageClose(Storage storage)
+        public static void CloseStorage(Storage storage)
         {
             if (storage != null)
             {
@@ -71,12 +73,28 @@ namespace Engine
     // Dialog API
     public unsafe partial class FileSystem
     {
-        public delegate void DialogCallbacks(string[] contents);
+        public delegate void DialogCallbackContents(DialogResult result, string[] data);
         
-        public delegate void DialogCallback(string content);
+        public delegate void DialogCallbackContent(DialogResult result, string data);
         
         
-        public static void DialogOpenFile(DialogCallbacks callback, string path)
+        public static void OpenFileDialog(DialogCallbackContents callback, string path)
+        {
+            path = Normalize(path);
+            {
+                void Callback(IntPtr userdata, byte** fileList, int filter)
+                {
+                    var files = SDL_NativeToArray(fileList, false);
+                    {
+                        callback(fileList == null ? DialogResult.Failed : files.Length == 0 ? DialogResult.Cancelled : DialogResult.Success, files);
+                    }
+                }
+
+                SDL_ShowOpenFileDialog(Callback, IntPtr.Zero, Window.handle, null, 0, path, true);
+            }
+        }
+        
+        public static void OpenFileDialog(DialogCallbackContent callback, string path)
         {
             path = Normalize(path);
             {
@@ -86,7 +104,7 @@ namespace Engine
                     {
                         if (files.Length > 0)
                         {
-                            callback(files);
+                            callback(fileList == null ? DialogResult.Failed : files.Length == 0 ? DialogResult.Cancelled : DialogResult.Success, files.FirstOrDefault() ?? string.Empty);
                         }
                     }
                 }
@@ -95,7 +113,7 @@ namespace Engine
             }
         }
         
-        public static void DialogOpenFile(DialogCallback callback, string path)
+        public static void OpenFolderDialog(DialogCallbackContents callback, string path)
         {
             path = Normalize(path);
             {
@@ -105,26 +123,7 @@ namespace Engine
                     {
                         if (files.Length > 0)
                         {
-                            callback(files[0]);
-                        }
-                    }
-                }
-
-                SDL_ShowOpenFileDialog(Callback, IntPtr.Zero, Window.handle, null, 0, path, true);
-            }
-        }
-        
-        public static void DialogOpenFolder(DialogCallbacks callback, string path)
-        {
-            path = Normalize(path);
-            {
-                void Callback(IntPtr userdata, byte** fileList, int filter)
-                {
-                    var files = SDL_NativeToArray(fileList, false);
-                    {
-                        if (files.Length > 0)
-                        {
-                            callback(files);
+                            callback(fileList == null ? DialogResult.Failed : files.Length == 0 ? DialogResult.Cancelled : DialogResult.Success, files);
                         }
                     }
                 }
@@ -133,7 +132,7 @@ namespace Engine
             }
         }
         
-        public static void DialogOpenFolder(DialogCallback callback, string path)
+        public static void OpenFolderDialog(DialogCallbackContent callback, string path)
         {
             path = Normalize(path);
             {
@@ -143,7 +142,7 @@ namespace Engine
                     {
                         if (files.Length > 0)
                         {
-                            callback(files[0]);
+                            callback(fileList == null ? DialogResult.Failed : files.Length == 0 ? DialogResult.Cancelled : DialogResult.Success, files.FirstOrDefault() ?? string.Empty);
                         }
                     }
                 }
@@ -152,7 +151,7 @@ namespace Engine
             }
         }
         
-        public static void DialogSaveFile(DialogCallback callback, string path)
+        public static void OpenSaveDialog(DialogCallbackContent callback, string path)
         {
             path = Normalize(path);
             {
@@ -162,7 +161,7 @@ namespace Engine
                     {
                         if (files.Length > 0)
                         {
-                            callback(files[0]);
+                            callback(fileList == null ? DialogResult.Failed : files.Length == 0 ? DialogResult.Cancelled : DialogResult.Success, files.FirstOrDefault() ?? string.Empty);
                         }
                     }
                 }
