@@ -78,15 +78,15 @@ namespace Engine
         public delegate void DialogCallbackContent(DialogResult result, string data);
         
         
-        public static void OpenFileDialog(DialogCallbackContents callback, string path)
+        public static void OpenFilesDialog(DialogCallbackContents callback, string path)
         {
             path = Normalize(path);
             {
                 void Callback(IntPtr userdata, byte** fileList, int filter)
                 {
-                    var files = SDL_NativeToArray(fileList, false);
+                    var files = SDL_NativeToArray(fileList, out int count, false);
                     {
-                        callback(fileList == null ? DialogResult.Failed : files.Length == 0 ? DialogResult.Cancelled : DialogResult.Success, files);
+                        callback(fileList == null ? DialogResult.Failed : count == 0 ? DialogResult.Cancelled : DialogResult.Success, files);
                     }
                 }
 
@@ -100,12 +100,9 @@ namespace Engine
             {
                 void Callback(IntPtr userdata, byte** fileList, int filter)
                 {
-                    var files = SDL_NativeToArray(fileList, false);
+                    var files = SDL_NativeToArray(fileList, out int count, false);
                     {
-                        if (files.Length > 0)
-                        {
-                            callback(fileList == null ? DialogResult.Failed : files.Length == 0 ? DialogResult.Cancelled : DialogResult.Success, files.FirstOrDefault() ?? string.Empty);
-                        }
+                        callback(fileList == null ? DialogResult.Failed : count == 0 ? DialogResult.Cancelled : DialogResult.Success, files.FirstOrDefault() ?? string.Empty);
                     }
                 }
 
@@ -113,18 +110,15 @@ namespace Engine
             }
         }
         
-        public static void OpenFolderDialog(DialogCallbackContents callback, string path)
+        public static void OpenFoldersDialog(DialogCallbackContents callback, string path)
         {
             path = Normalize(path);
             {
                 void Callback(IntPtr userdata, byte** fileList, int filter)
                 {
-                    var files = SDL_NativeToArray(fileList, false);
+                    var files = SDL_NativeToArray(fileList, out int count, false);
                     {
-                        if (files.Length > 0)
-                        {
-                            callback(fileList == null ? DialogResult.Failed : files.Length == 0 ? DialogResult.Cancelled : DialogResult.Success, files);
-                        }
+                        callback(fileList == null ? DialogResult.Failed : count == 0 ? DialogResult.Cancelled : DialogResult.Success, files);
                     }
                 }
 
@@ -138,12 +132,9 @@ namespace Engine
             {
                 void Callback(IntPtr userdata, byte** fileList, int filter)
                 {
-                    var files = SDL_NativeToArray(fileList, false);
+                    var files = SDL_NativeToArray(fileList, out int count, false);
                     {
-                        if (files.Length > 0)
-                        {
-                            callback(fileList == null ? DialogResult.Failed : files.Length == 0 ? DialogResult.Cancelled : DialogResult.Success, files.FirstOrDefault() ?? string.Empty);
-                        }
+                        callback(fileList == null ? DialogResult.Failed : count == 0 ? DialogResult.Cancelled : DialogResult.Success, files.FirstOrDefault() ?? string.Empty);
                     }
                 }
 
@@ -157,12 +148,9 @@ namespace Engine
             {
                 void Callback(IntPtr userdata, byte** fileList, int filter)
                 {
-                    var files = SDL_NativeToArray(fileList, false);
+                    var files = SDL_NativeToArray(fileList, out int count, false);
                     {
-                        if (files.Length > 0)
-                        {
-                            callback(fileList == null ? DialogResult.Failed : files.Length == 0 ? DialogResult.Cancelled : DialogResult.Success, files.FirstOrDefault() ?? string.Empty);
-                        }
+                        callback(fileList == null ? DialogResult.Failed : count == 0 ? DialogResult.Cancelled : DialogResult.Success, files.FirstOrDefault() ?? string.Empty);
                     }
                 }
 

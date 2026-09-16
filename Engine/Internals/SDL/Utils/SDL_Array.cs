@@ -64,6 +64,7 @@ namespace Engine.SDL3
             }
         }
         
+        
         public static string[] SDL_NativeToArray(byte** ptr, int size, out int count, bool free = true)
         {
             count = 0;
@@ -96,10 +97,12 @@ namespace Engine.SDL3
             }
         }
         
-        public static string[] SDL_NativeToArray(byte** ptr, bool free = true)
+        public static string[] SDL_NativeToArray(byte** ptr, out int count, bool free = true)
         {
             try
             {
+                count = 0;
+                
                 if (ptr == null)
                 {
                     return [];
@@ -112,7 +115,10 @@ namespace Engine.SDL3
                     result.Add(SDL_NativeToString(ptr[i]));
                 }
 
-                return result.ToArray();
+                count = result.Count;
+                {
+                    return result.ToArray();
+                }
             }
             finally
             {
