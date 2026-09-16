@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Engine
 {
@@ -73,88 +71,73 @@ namespace Engine
     // Dialog API
     public unsafe partial class FileSystem
     {
-        public delegate void DialogCallbackContents(DialogResult result, string[] data);
-        
-        public delegate void DialogCallbackContent(DialogResult result, string data);
+        public delegate void DialogCallback(DialogResult result, string[] contents);
         
         
-        public static void OpenFilesDialog(DialogCallbackContents callback, string path)
+        private static void DialogCallbackHandler(IntPtr ptr, byte** fileList, int filter)
         {
-            path = Normalize(path);
+            var files = SDL_NativeToArray(fileList, out var count, false);
             {
-                void Callback(IntPtr userdata, byte** fileList, int filter)
+                var callback = SDL_FreeCallback<DialogCallback>(ptr);
                 {
-                    var files = SDL_NativeToArray(fileList, out int count, false);
-                    {
-                        callback(fileList == null ? DialogResult.Failed : count == 0 ? DialogResult.Cancelled : DialogResult.Success, files);
-                    }
+                    callback?.Invoke(fileList == null ? DialogResult.Failed : count == 0 ? DialogResult.Cancelled : DialogResult.Success, files);
                 }
-
-                SDL_ShowOpenFileDialog(Callback, IntPtr.Zero, Window.handle, null, 0, path, true);
             }
         }
         
-        public static void OpenFileDialog(DialogCallbackContent callback, string path)
+        
+        public static void OpenFilesDialog(DialogCallback callback, string path)
         {
             path = Normalize(path);
             {
-                void Callback(IntPtr userdata, byte** fileList, int filter)
+                var ptr = SDL_CreateCallback(callback);
                 {
-                    var files = SDL_NativeToArray(fileList, out int count, false);
-                    {
-                        callback(fileList == null ? DialogResult.Failed : count == 0 ? DialogResult.Cancelled : DialogResult.Success, files.FirstOrDefault() ?? string.Empty);
-                    }
+                    SDL_ShowOpenFileDialog(DialogCallbackHandler, ptr, Window.handle, null, 0, path, true);
                 }
-
-                SDL_ShowOpenFileDialog(Callback, IntPtr.Zero, Window.handle, null, 0, path, true);
             }
         }
         
-        public static void OpenFoldersDialog(DialogCallbackContents callback, string path)
+        public static void OpenFileDialog(DialogCallback callback, string path)
         {
             path = Normalize(path);
             {
-                void Callback(IntPtr userdata, byte** fileList, int filter)
+                var ptr = SDL_CreateCallback(callback);
                 {
-                    var files = SDL_NativeToArray(fileList, out int count, false);
-                    {
-                        callback(fileList == null ? DialogResult.Failed : count == 0 ? DialogResult.Cancelled : DialogResult.Success, files);
-                    }
+                    SDL_ShowOpenFileDialog(DialogCallbackHandler, ptr, Window.handle, null, 0, path, true);
                 }
-
-                SDL_ShowOpenFolderDialog(Callback, IntPtr.Zero, Window.handle, path, true);
             }
         }
         
-        public static void OpenFolderDialog(DialogCallbackContent callback, string path)
+        public static void OpenFoldersDialog(DialogCallback callback, string path)
         {
             path = Normalize(path);
             {
-                void Callback(IntPtr userdata, byte** fileList, int filter)
+                var ptr = SDL_CreateCallback(callback);
                 {
-                    var files = SDL_NativeToArray(fileList, out int count, false);
-                    {
-                        callback(fileList == null ? DialogResult.Failed : count == 0 ? DialogResult.Cancelled : DialogResult.Success, files.FirstOrDefault() ?? string.Empty);
-                    }
+                    SDL_ShowOpenFolderDialog(DialogCallbackHandler, ptr, Window.handle, path, true);
                 }
-
-                SDL_ShowOpenFolderDialog(Callback, IntPtr.Zero, Window.handle, path, false);
             }
         }
         
-        public static void OpenSaveDialog(DialogCallbackContent callback, string path)
+        public static void OpenFolderDialog(DialogCallback callback, string path)
         {
             path = Normalize(path);
             {
-                void Callback(IntPtr userdata, byte** fileList, int filter)
+                var ptr = SDL_CreateCallback(callback);
                 {
-                    var files = SDL_NativeToArray(fileList, out int count, false);
-                    {
-                        callback(fileList == null ? DialogResult.Failed : count == 0 ? DialogResult.Cancelled : DialogResult.Success, files.FirstOrDefault() ?? string.Empty);
-                    }
+                    SDL_ShowOpenFolderDialog(DialogCallbackHandler, ptr, Window.handle, path, false);
                 }
-
-                SDL_ShowSaveFileDialog(Callback, IntPtr.Zero, Window.handle, null, 0, path);
+            }
+        }
+        
+        public static void OpenSaveDialog(DialogCallback callback, string path)
+        {
+            path = Normalize(path);
+            {
+                var ptr = SDL_CreateCallback(callback);
+                {
+                    SDL_ShowSaveFileDialog(DialogCallbackHandler, ptr, Window.handle, null, 0, path);
+                }
             }
         }
     }

@@ -9,7 +9,7 @@ namespace Application
         {
             base.Initialize();
             {
-                FileSystem.OpenFileDialog(DialogCallbackMultiple, FileSystem.BasePath);
+                FileSystem.OpenFilesDialog(DialogCallbackMultiple, FileSystem.BasePath);
             }
         }
 
