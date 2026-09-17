@@ -54,7 +54,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetJoysticks(&size), size, out count);
+                var joysticksPtr = iSDL_GetJoysticks(&size);
+                {
+                    var result = Native.NativeToArray(joysticksPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)joysticksPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 

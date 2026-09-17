@@ -24,7 +24,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetCameras(&size), size, out count);
+                var camerasPtr = iSDL_GetCameras(&size);
+                {
+                    var result = Native.NativeToArray(camerasPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)camerasPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 

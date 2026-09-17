@@ -9,7 +9,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetSensors(&size), size, out count);
+                var sensorsPtr = iSDL_GetSensors(&size);
+                {
+                    var result = Native.NativeToArray(sensorsPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)sensorsPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 

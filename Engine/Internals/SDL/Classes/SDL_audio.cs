@@ -24,7 +24,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetAudioPlaybackDevices(&size), size, out count);
+                var audioPlaybackDevicesPtr = iSDL_GetAudioPlaybackDevices(&size);
+                {
+                    var result = Native.NativeToArray(audioPlaybackDevicesPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)audioPlaybackDevicesPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 
@@ -32,7 +39,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetAudioRecordingDevices(&size), size, out count);
+                var audioRecordingDevicesPtr = iSDL_GetAudioRecordingDevices(&size);
+                {
+                    var result = Native.NativeToArray(audioRecordingDevicesPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)audioRecordingDevicesPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 
@@ -54,7 +68,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetAudioDeviceChannelMap(audioDeviceID, &size), size, out count);
+                var audioDeviceChannelMapPtr = iSDL_GetAudioDeviceChannelMap(audioDeviceID, &size);
+                {
+                    var result = Native.NativeToArray(audioDeviceChannelMapPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)audioDeviceChannelMapPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 
@@ -182,7 +203,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetAudioStreamInputChannelMap(stream, &size), size, out count);
+                var audioStreamInputChannelMapPtr = iSDL_GetAudioStreamInputChannelMap(stream, &size);
+                {
+                    var result = Native.NativeToArray(audioStreamInputChannelMapPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)audioStreamInputChannelMapPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 
@@ -190,7 +218,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetAudioStreamOutputChannelMap(stream, &size), size, out count);
+                var audioStreamOutputChannelMapPtr = iSDL_GetAudioStreamOutputChannelMap(stream, &size);
+                {
+                    var result = Native.NativeToArray(audioStreamOutputChannelMapPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)audioStreamOutputChannelMapPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 

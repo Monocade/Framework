@@ -14,7 +14,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetMice(&size), size, out count);
+                var micePtr = iSDL_GetMice(&size);
+                {
+                    var result = Native.NativeToArray(micePtr, size, out count);
+                    {
+                        Native.Free((IntPtr)micePtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 

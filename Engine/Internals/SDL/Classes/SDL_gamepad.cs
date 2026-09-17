@@ -99,7 +99,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetGamepads(&size), size, out count);
+                var gamepadsPtr = iSDL_GetGamepads(&size);
+                {
+                    var result = Native.NativeToArray(gamepadsPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)gamepadsPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 

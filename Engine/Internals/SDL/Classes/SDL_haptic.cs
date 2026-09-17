@@ -9,7 +9,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetHaptics(&size), size, out count);
+                var hapticsPtr = iSDL_GetHaptics(&size);
+                {
+                    var result = Native.NativeToArray(hapticsPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)hapticsPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 

@@ -29,7 +29,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetDisplays(&size), size, out count);
+                var displaysPtr = iSDL_GetDisplays(&size);
+                {
+                    var result = Native.NativeToArray(displaysPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)displaysPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 

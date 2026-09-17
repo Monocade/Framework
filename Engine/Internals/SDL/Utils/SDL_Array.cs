@@ -38,30 +38,5 @@ namespace Engine.SDL3
                 }
             }
         }
-        
-        public static T[] SDL_NativeToArray<T>(T* ptr, int size, out int count, bool free = true) where T : unmanaged
-        {
-            count = 0;
-
-            try
-            {
-                if (ptr == null || size <= 0)
-                {
-                    return [];
-                }
-
-                count = size;
-                {
-                    return new ReadOnlySpan<T>(ptr, size).ToArray();
-                }
-            }
-            finally
-            {
-                if (free && ptr != null)
-                {
-                    iSDL_free((IntPtr)ptr);
-                }
-            }
-        }
     }
 }

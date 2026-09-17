@@ -15,7 +15,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetKeyboards(&size), size, out count);
+                var keyboardsPtr = iSDL_GetKeyboards(&size);
+                {
+                    var result = Native.NativeToArray(keyboardsPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)keyboardsPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 
@@ -33,16 +40,19 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                var result = SDL_NativeToArray(iSDL_GetKeyboardState(&size), size, out numKeys);
-                
-                var output = new bool[result.Length];
-
-                for (int i = 0; i < result.Length; i++)
+                var keyboardStatePtr = iSDL_GetKeyboardState(&size);
+                var result = Native.NativeToArray(keyboardStatePtr, size, out numKeys);
                 {
-                    output[i] = result[i];
-                }
+                    var output = new bool[result.Length];
 
-                return output;
+                    for (int i = 0; i < result.Length; i++)
+                    {
+                        output[i] = result[i];
+                    }
+
+                    Native.Free((IntPtr)keyboardStatePtr, SDL_NativeProvider);
+                    return output;
+                }
             }
         }
 

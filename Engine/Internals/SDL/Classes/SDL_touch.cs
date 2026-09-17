@@ -9,7 +9,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetTouchDevices(&size), size, out count);
+                var touchDevicesPtr = iSDL_GetTouchDevices(&size);
+                {
+                    var result = Native.NativeToArray(touchDevicesPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)touchDevicesPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 

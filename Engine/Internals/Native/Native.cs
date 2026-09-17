@@ -30,8 +30,10 @@ namespace Engine
             }
         }
         
-        public static T[] NativeToArray<T>(T* ptr, int size) where T : unmanaged
+        public static T[] NativeToArray<T>(T* ptr, int size, out int count) where T : unmanaged
         {
+            count = 0;
+            
             if (ptr == null || size <= 0)
             {
                 return [];
@@ -44,7 +46,10 @@ namespace Engine
                 result[i] = ptr[i];
             }
 
-            return result;
+            count = size;
+            {
+                return result;
+            }
         }
         
         public static string[] NativeToStringArray(IntPtr ptr, int size, out int count)
