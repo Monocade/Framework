@@ -20,7 +20,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetMouseNameForID(uint mouseID)
         {
-            return SDL_NativeToString(iSDL_GetMouseNameForID(mouseID));
+            return Native.NativeToString((IntPtr)iSDL_GetMouseNameForID(mouseID));
         }
 
         public static SDL_Window* SDL_GetMouseFocus()

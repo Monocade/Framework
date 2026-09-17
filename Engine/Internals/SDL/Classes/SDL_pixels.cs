@@ -7,7 +7,7 @@ namespace Engine.SDL3
     {
         public static string SDL_GetPixelFormatName(SDL_PixelFormat format)
         {
-            return SDL_NativeToString(iSDL_GetPixelFormatName(format));
+            return Native.NativeToString((IntPtr)iSDL_GetPixelFormatName(format));
         }
 
         public static bool SDL_GetMasksForPixelFormat(SDL_PixelFormat format, out int bpp, out uint RMask, out uint GMask, out uint BMask, out uint AMask)

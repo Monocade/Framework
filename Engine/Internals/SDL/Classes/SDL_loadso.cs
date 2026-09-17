@@ -7,17 +7,25 @@ namespace Engine.SDL3
     {
         public static SDL_SharedObject* SDL_LoadObject(string soFile)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(soFile))
+            var soFilePtr = Native.StringToNative(soFile, SDL_NativeProvider);
             {
-                return iSDL_LoadObject(ptr1);
+                var result = iSDL_LoadObject((byte*)soFilePtr);
+                {
+                    Native.Free(soFilePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static IntPtr SDL_LoadFunction(SDL_SharedObject* handle, string name)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_LoadFunction(handle, ptr1);
+                var result = iSDL_LoadFunction(handle, (byte*)namePtr);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 

@@ -32,115 +32,173 @@ namespace Engine.SDL3
 
         public static bool SDL_SetPointerPropertyWithCleanup(uint props, string name, IntPtr value, SDL_CleanupPropertyCallback cleanup, IntPtr userdata)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_SetPointerPropertyWithCleanup(props, ptr1, value, Marshal.GetFunctionPointerForDelegate(cleanup), userdata);
+                var result = iSDL_SetPointerPropertyWithCleanup(props, (byte*)namePtr, value, Marshal.GetFunctionPointerForDelegate(cleanup), userdata);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static bool SDL_SetPointerProperty(uint props, string name, IntPtr value)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_SetPointerProperty(props, ptr1, value);
+                var result = iSDL_SetPointerProperty(props, (byte*)namePtr, value);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static bool SDL_SetStringProperty(uint props, string name, string value)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
-            fixed (byte* ptr2 = SDL_StringToNative(value))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
+            var valuePtr = Native.StringToNative(value, SDL_NativeProvider);
             {
-                return iSDL_SetStringProperty(props, ptr1, ptr2);
+                var result = iSDL_SetStringProperty(props, (byte*)namePtr, (byte*)valuePtr);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    Native.Free(valuePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static bool SDL_SetNumberProperty(uint props, string name, long value)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_SetNumberProperty(props, ptr1, value);
+                var result = iSDL_SetNumberProperty(props, (byte*)namePtr, value);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static bool SDL_SetFloatProperty(uint props, string name, float value)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_SetFloatProperty(props, ptr1, value);
+                var result = iSDL_SetFloatProperty(props, (byte*)namePtr, value);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static bool SDL_SetBooleanProperty(uint props, string name, bool value)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_SetBooleanProperty(props, ptr1, value);
+                var result = iSDL_SetBooleanProperty(props, (byte*)namePtr, value);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static bool SDL_HasProperty(uint props, string name)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_HasProperty(props, ptr1);
+                var result = iSDL_HasProperty(props, (byte*)namePtr);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static SDL_PropertyType SDL_GetPropertyType(uint props, string name)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_GetPropertyType(props, ptr1);
+                var result = iSDL_GetPropertyType(props, (byte*)namePtr);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static IntPtr SDL_GetPointerProperty(uint props, string name, IntPtr defaultValue)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_GetPointerProperty(props, ptr1, defaultValue);
+                var result = iSDL_GetPointerProperty(props, (byte*)namePtr, defaultValue);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static string SDL_GetStringProperty(uint props, string name, string defaultValue)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
-            fixed (byte* ptr2 = SDL_StringToNative(defaultValue))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
+            var defaultValuePtr = Native.StringToNative(defaultValue, SDL_NativeProvider);
             {
-                return SDL_NativeToString(iSDL_GetStringProperty(props, ptr1, ptr2));
+                var result = Native.NativeToString((IntPtr)iSDL_GetStringProperty(props, (byte*)namePtr, (byte*)defaultValuePtr));
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    Native.Free(defaultValuePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static long SDL_GetNumberProperty(uint props, string name, long defaultValue)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_GetNumberProperty(props, ptr1, defaultValue);
+                var result = iSDL_GetNumberProperty(props, (byte*)namePtr, defaultValue);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static float SDL_GetFloatProperty(uint props, string name, float defaultValue)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_GetFloatProperty(props, ptr1, defaultValue);
+                var result = iSDL_GetFloatProperty(props, (byte*)namePtr, defaultValue);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static bool SDL_GetBooleanProperty(uint props, string name, bool defaultValue)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_GetBooleanProperty(props, ptr1, defaultValue);
+                var result = iSDL_GetBooleanProperty(props, (byte*)namePtr, defaultValue);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static bool SDL_ClearProperty(uint props, string name)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_ClearProperty(props, ptr1);
+                var result = iSDL_ClearProperty(props, (byte*)namePtr);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 

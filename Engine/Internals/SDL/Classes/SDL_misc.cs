@@ -7,9 +7,13 @@ namespace Engine.SDL3
     {
         public static bool SDL_OpenURL(string url)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(url))
+            var urlPtr = Native.StringToNative(url, SDL_NativeProvider);
             {
-                return iSDL_OpenURL(ptr1);
+                var result = iSDL_OpenURL((byte*)urlPtr);
+                {
+                    Native.Free(urlPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
     }

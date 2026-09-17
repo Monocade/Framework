@@ -17,11 +17,17 @@ namespace Engine.SDL3
 
         public static uint SDL_ShowNotification(string title, string message, SDL_Surface* image, SDL_NotificationAction[] actions, int numActions)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(title))
-            fixed (byte* ptr2 = SDL_StringToNative(message))
+            var titlePtr = Native.StringToNative(title, SDL_NativeProvider);
+            var messagePtr = Native.StringToNative(message, SDL_NativeProvider);
+                
             fixed (SDL_NotificationAction* ptr3 = actions)
             {
-                return iSDL_ShowNotification(ptr1, ptr2, image, ptr3, numActions);
+                var result = iSDL_ShowNotification((byte*)titlePtr, (byte*)messagePtr, image, ptr3, numActions);
+                {
+                    Native.Free(titlePtr, SDL_NativeProvider);
+                    Native.Free(messagePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 

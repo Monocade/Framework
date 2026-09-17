@@ -21,7 +21,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetKeyboardNameForID(uint keyboardID)
         {
-            return SDL_NativeToString(iSDL_GetKeyboardNameForID(keyboardID));
+            return Native.NativeToString((IntPtr)iSDL_GetKeyboardNameForID(keyboardID));
         }
 
         public static SDL_Window* SDL_GetKeyboardFocus()
@@ -76,35 +76,47 @@ namespace Engine.SDL3
 
         public static bool SDL_SetScancodeName(SDL_Scancode scancode, string name)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_SetScancodeName(scancode, ptr1);
+                var result = iSDL_SetScancodeName(scancode, (byte*)namePtr);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static string SDL_GetScancodeName(SDL_Scancode scancode)
         {
-            return SDL_NativeToString(iSDL_GetScancodeName(scancode));
+            return Native.NativeToString((IntPtr)iSDL_GetScancodeName(scancode));
         }
 
         public static SDL_Scancode SDL_GetScancodeFromName(string name)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_GetScancodeFromName(ptr1);
+                var result = iSDL_GetScancodeFromName((byte*)namePtr);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static string SDL_GetKeyName(SDL_Keycode keycode)
         {
-            return SDL_NativeToString(iSDL_GetKeyName((uint)keycode));
+            return Native.NativeToString((IntPtr)iSDL_GetKeyName((uint)keycode));
         }
 
         public static SDL_Keycode SDL_GetKeyFromName(string name)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return (SDL_Keycode)iSDL_GetKeyFromName(ptr1);
+                var result = (SDL_Keycode)iSDL_GetKeyFromName((byte*)namePtr);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 

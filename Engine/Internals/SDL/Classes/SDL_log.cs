@@ -27,90 +27,125 @@ namespace Engine.SDL3
 
         public static bool SDL_SetLogPriorityPrefix(SDL_LogPriority priority, string prefix)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(prefix))
+            var prefixPtr = Native.StringToNative(prefix, SDL_NativeProvider);
             {
-                return iSDL_SetLogPriorityPrefix(priority, ptr1);
+                var result = iSDL_SetLogPriorityPrefix(priority, (byte*)prefixPtr);
+                {
+                    Native.Free(prefixPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static void SDL_Log(string fmt)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            var fmtPtr = Native.StringToNative(fmt, SDL_NativeProvider);
             {
-                iSDL_Log(ptr1);
+                iSDL_Log((byte*)fmtPtr);
+                {
+                    Native.Free(fmtPtr, SDL_NativeProvider);
+                }
             }
         }
 
         public static void SDL_LogTrace(SDL_LogCategory category, string fmt)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            var fmtPtr = Native.StringToNative(fmt, SDL_NativeProvider);
             {
-                iSDL_LogTrace((int)category, ptr1);
+                iSDL_LogTrace((int)category, (byte*)fmtPtr);
+                {
+                    Native.Free(fmtPtr, SDL_NativeProvider);
+                }
             }
         }
 
         public static void SDL_LogVerbose(SDL_LogCategory category, string fmt)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            var fmtPtr = Native.StringToNative(fmt, SDL_NativeProvider);
             {
-                iSDL_LogVerbose((int)category, ptr1);
+                iSDL_LogVerbose((int)category, (byte*)fmtPtr);
+                {
+                    Native.Free(fmtPtr, SDL_NativeProvider);
+                }
             }
         }
 
         public static void SDL_LogDebug(SDL_LogCategory category, string fmt)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            var fmtPtr = Native.StringToNative(fmt, SDL_NativeProvider);
             {
-                iSDL_LogDebug((int)category, ptr1);
+                iSDL_LogDebug((int)category, (byte*)fmtPtr);
+                {
+                    Native.Free(fmtPtr, SDL_NativeProvider);
+                }
             }
         }
 
         public static void SDL_LogInfo(SDL_LogCategory category, string fmt)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            var fmtPtr = Native.StringToNative(fmt, SDL_NativeProvider);
             {
-                iSDL_LogInfo((int)category, ptr1);
+                iSDL_LogInfo((int)category, (byte*)fmtPtr);
+                {
+                    Native.Free(fmtPtr, SDL_NativeProvider);
+                }
             }
         }
 
         public static void SDL_LogWarn(SDL_LogCategory category, string fmt)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            var fmtPtr = Native.StringToNative(fmt, SDL_NativeProvider);
             {
-                iSDL_LogWarn((int)category, ptr1);
+                iSDL_LogWarn((int)category, (byte*)fmtPtr);
+                {
+                    Native.Free(fmtPtr, SDL_NativeProvider);
+                }
             }
         }
 
         public static void SDL_LogError(SDL_LogCategory category, string fmt)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            var fmtPtr = Native.StringToNative(fmt, SDL_NativeProvider);
             {
-                iSDL_LogError((int)category, ptr1);
+                iSDL_LogError((int)category, (byte*)fmtPtr);
+                {
+                    Native.Free(fmtPtr, SDL_NativeProvider);
+                }
             }
         }
 
         public static void SDL_LogCritical(SDL_LogCategory category, string fmt)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            var fmtPtr = Native.StringToNative(fmt, SDL_NativeProvider);
             {
-                iSDL_LogCritical((int)category, ptr1);
+                iSDL_LogCritical((int)category, (byte*)fmtPtr);
+                {
+                    Native.Free(fmtPtr, SDL_NativeProvider);
+                }
             }
         }
 
         public static void SDL_LogMessage(SDL_LogCategory category, SDL_LogPriority priority, string fmt)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            var fmtPtr = Native.StringToNative(fmt, SDL_NativeProvider);
             {
-                iSDL_LogMessage((int)category, priority, ptr1);
+                iSDL_LogMessage((int)category, priority, (byte*)fmtPtr);
+                {
+                    Native.Free(fmtPtr, SDL_NativeProvider);
+                }
             }
         }
 
         public static void SDL_LogMessageV(SDL_LogCategory category, SDL_LogPriority priority, string fmt, string ap)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(fmt))
-            fixed (byte* ptr2 = SDL_StringToNative(ap))
+            var fmtPtr = Native.StringToNative(fmt, SDL_NativeProvider);
+            var apPtr = Native.StringToNative(ap, SDL_NativeProvider);
             {
-                iSDL_LogMessageV((int)category, priority, ptr1, ptr2);
+                iSDL_LogMessageV((int)category, priority, (byte*)fmtPtr, (byte*)apPtr);
+                {
+                    Native.Free(fmtPtr, SDL_NativeProvider);
+                    Native.Free(apPtr, SDL_NativeProvider);
+                }
             }
         }
 

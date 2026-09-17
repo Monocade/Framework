@@ -7,7 +7,7 @@ namespace Engine.SDL3
     {
         public static SDL_Platform SDL_GetPlatform()
         {
-            var platform = SDL_NativeToString(iSDL_GetPlatform()).ToUpper().Replace(" ", "");
+            var platform = Native.NativeToString((IntPtr)iSDL_GetPlatform()).ToUpper().Replace(" ", "");
             {
                 return platform switch
                 {

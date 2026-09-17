@@ -60,12 +60,12 @@ namespace Engine.SDL3
 
         public static string SDL_GetJoystickNameForID(uint joystickID)
         {
-            return SDL_NativeToString(iSDL_GetJoystickNameForID(joystickID));
+            return Native.NativeToString((IntPtr)iSDL_GetJoystickNameForID(joystickID));
         }
 
         public static string SDL_GetJoystickPathForID(uint joystickID)
         {
-            return SDL_NativeToString(iSDL_GetJoystickPathForID(joystickID));
+            return Native.NativeToString((IntPtr)iSDL_GetJoystickPathForID(joystickID));
         }
 
         public static int SDL_GetJoystickPlayerIndexForID(uint joystickID)
@@ -171,12 +171,12 @@ namespace Engine.SDL3
 
         public static string SDL_GetJoystickName(SDL_Joystick* joystick)
         {
-            return SDL_NativeToString(iSDL_GetJoystickName(joystick));
+            return Native.NativeToString((IntPtr)iSDL_GetJoystickName(joystick));
         }
 
         public static string SDL_GetJoystickPath(SDL_Joystick* joystick)
         {
-            return SDL_NativeToString(iSDL_GetJoystickPath(joystick));
+            return Native.NativeToString((IntPtr)iSDL_GetJoystickPath(joystick));
         }
 
         public static int SDL_GetJoystickPlayerIndex(SDL_Joystick* joystick)
@@ -216,7 +216,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetJoystickSerial(SDL_Joystick* joystick)
         {
-            return SDL_NativeToString(iSDL_GetJoystickSerial(joystick));
+            return Native.NativeToString((IntPtr)iSDL_GetJoystickSerial(joystick));
         }
 
         public static SDL_JoystickType SDL_GetJoystickType(SDL_Joystick* joystick)

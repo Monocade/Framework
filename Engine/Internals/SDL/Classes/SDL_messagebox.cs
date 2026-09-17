@@ -15,10 +15,15 @@ namespace Engine.SDL3
 
         public static bool SDL_ShowSimpleMessageBox(SDL_MessageBoxFlags flags, string title, string message, SDL_Window* window)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(title))
-            fixed (byte* ptr2 = SDL_StringToNative(message))
+            var titlePtr = Native.StringToNative(title, SDL_NativeProvider);
+            var messagePtr = Native.StringToNative(message, SDL_NativeProvider);
             {
-                return iSDL_ShowSimpleMessageBox((uint)flags, ptr1, ptr2, window);
+                var result = iSDL_ShowSimpleMessageBox((uint)flags, (byte*)titlePtr, (byte*)messagePtr, window);
+                {
+                    Native.Free(titlePtr, SDL_NativeProvider);
+                    Native.Free(messagePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
     }
