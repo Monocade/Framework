@@ -14,7 +14,7 @@ namespace Engine
     // Window
     public unsafe partial class Window
     {
-        internal static SDL_Window* handle
+        internal static SDL_Window* Handle
         {
             get; private set;
         }
@@ -40,7 +40,7 @@ namespace Engine
             {
                 var flags = SDL_WindowFlags.SDL_WINDOW_HIDDEN | SDL_WindowFlags.SDL_WINDOW_HIGH_PIXEL_DENSITY;
                 {
-                    handle = SDL_CreateWindow("Framework", 600, 400, flags);
+                    Handle = SDL_CreateWindow("Framework", 600, 400, flags);
                 }
             }
         }
@@ -75,9 +75,9 @@ namespace Engine
         {
             base.Quit();
             {
-                if (handle != null)
+                if (Handle != null)
                 {
-                    SDL_DestroyWindow(handle);
+                    SDL_DestroyWindow(Handle);
                 }
             }
         }
@@ -88,10 +88,10 @@ namespace Engine
     {
         public static string Title
         {
-            set => SDL_SetWindowTitle(handle, value);
+            set => SDL_SetWindowTitle(Handle, value);
             get
             {
-                var name = SDL_GetWindowTitle(handle);
+                var name = SDL_GetWindowTitle(Handle);
                 {
                     return name;
                 }
@@ -100,10 +100,10 @@ namespace Engine
         
         public static int Width
         {
-            set => SDL_SetWindowSize(handle, value, Height);
+            set => SDL_SetWindowSize(Handle, value, Height);
             get
             {
-                SDL_GetWindowSize(handle, out var w, out _);
+                SDL_GetWindowSize(Handle, out var w, out _);
                 {
                     return w;
                 }
@@ -112,10 +112,10 @@ namespace Engine
         
         public static int Height
         {
-            set => SDL_SetWindowSize(handle, Width, value);
+            set => SDL_SetWindowSize(Handle, Width, value);
             get
             {
-                SDL_GetWindowSize(handle, out _, out var h);
+                SDL_GetWindowSize(Handle, out _, out var h);
                 {
                     return h;
                 }
@@ -124,10 +124,10 @@ namespace Engine
         
         public static Vector2 Size
         {
-            set => SDL_SetWindowSize(handle, (int)value.X, (int)value.Y);
+            set => SDL_SetWindowSize(Handle, (int)value.X, (int)value.Y);
             get
             {
-                SDL_GetWindowSize(handle, out var w, out var h);
+                SDL_GetWindowSize(Handle, out var w, out var h);
                 {
                     return new Vector2(w, h);
                 }
@@ -136,10 +136,10 @@ namespace Engine
         
         public static Vector2 MinSize
         {
-            set => SDL_SetWindowMinimumSize(handle, (int)value.X, (int)value.Y);
+            set => SDL_SetWindowMinimumSize(Handle, (int)value.X, (int)value.Y);
             get
             {
-                SDL_GetWindowMinimumSize(handle, out var w, out var h);
+                SDL_GetWindowMinimumSize(Handle, out var w, out var h);
                 {
                     return new Vector2(w, h);
                 }
@@ -148,10 +148,10 @@ namespace Engine
         
         public static Vector2 MaxSize
         {
-            set => SDL_SetWindowMaximumSize(handle, (int)value.X, (int)value.Y);
+            set => SDL_SetWindowMaximumSize(Handle, (int)value.X, (int)value.Y);
             get
             {
-                SDL_GetWindowMaximumSize(handle, out var w, out var h);
+                SDL_GetWindowMaximumSize(Handle, out var w, out var h);
                 {
                     return new Vector2(w, h);
                 }
@@ -160,10 +160,10 @@ namespace Engine
         
         public static Vector2 Position
         {
-            set => SDL_SetWindowPosition(handle, (int)value.X, (int)value.Y);
+            set => SDL_SetWindowPosition(Handle, (int)value.X, (int)value.Y);
             get
             {
-                SDL_GetWindowPosition(handle, out var x, out var y);
+                SDL_GetWindowPosition(Handle, out var x, out var y);
                 {
                     return new Vector2(x, y);
                 }
@@ -172,10 +172,10 @@ namespace Engine
         
         public static Vector2 AspectRatio
         {
-            set => SDL_SetWindowAspectRatio(handle, (int)value.X, (int)value.Y);
+            set => SDL_SetWindowAspectRatio(Handle, (int)value.X, (int)value.Y);
             get
             {
-                SDL_GetWindowAspectRatio(handle, out var w, out var h);
+                SDL_GetWindowAspectRatio(Handle, out var w, out var h);
                 {
                     return new Vector2(w, h);
                 }
@@ -184,10 +184,10 @@ namespace Engine
         
         public static bool Fullscreen
         {
-            set => SDL_SetWindowFullscreen(handle, value);
+            set => SDL_SetWindowFullscreen(Handle, value);
             get
             {
-                var flags = SDL_GetWindowFlags(handle);
+                var flags = SDL_GetWindowFlags(Handle);
                 {
                     return (flags & SDL_WindowFlags.SDL_WINDOW_FULLSCREEN) != 0;
                 }
@@ -196,10 +196,10 @@ namespace Engine
         
         public static bool Resizable
         {
-            set => SDL_SetWindowResizable(handle, value);
+            set => SDL_SetWindowResizable(Handle, value);
             get
             {
-                var flags = SDL_GetWindowFlags(handle);
+                var flags = SDL_GetWindowFlags(Handle);
                 {
                     return (flags & SDL_WindowFlags.SDL_WINDOW_RESIZABLE) != 0;
                 }
@@ -208,10 +208,10 @@ namespace Engine
         
         public static bool Focusable
         {
-            set => SDL_SetWindowFocusable(handle, value);
+            set => SDL_SetWindowFocusable(Handle, value);
             get
             {
-                var flags = SDL_GetWindowFlags(handle);
+                var flags = SDL_GetWindowFlags(Handle);
                 {
                     return (flags & SDL_WindowFlags.SDL_WINDOW_NOT_FOCUSABLE) == 0;
                 }
@@ -224,16 +224,16 @@ namespace Engine
             {
                 if (value)
                 {
-                    SDL_MinimizeWindow(handle);
+                    SDL_MinimizeWindow(Handle);
                 }
                 else
                 {
-                    SDL_RestoreWindow(handle);
+                    SDL_RestoreWindow(Handle);
                 }
             }
             get
             {
-                var flags = SDL_GetWindowFlags(handle);
+                var flags = SDL_GetWindowFlags(Handle);
                 {
                     return (flags & SDL_WindowFlags.SDL_WINDOW_MINIMIZED) != 0;
                 }
@@ -246,16 +246,16 @@ namespace Engine
             {
                 if (value)
                 {
-                    SDL_MaximizeWindow(handle);
+                    SDL_MaximizeWindow(Handle);
                 }
                 else
                 {
-                    SDL_RestoreWindow(handle);
+                    SDL_RestoreWindow(Handle);
                 }
             }
             get
             {
-                var flags = SDL_GetWindowFlags(handle);
+                var flags = SDL_GetWindowFlags(Handle);
                 {
                     return (flags & SDL_WindowFlags.SDL_WINDOW_MAXIMIZED) != 0;
                 }
@@ -264,32 +264,32 @@ namespace Engine
         
         public static void Restore()
         {
-            SDL_RestoreWindow(handle);
+            SDL_RestoreWindow(Handle);
         }
         
         public static void Minimize()
         {
-            SDL_MinimizeWindow(handle);
+            SDL_MinimizeWindow(Handle);
         }
         
         public static void Maximize()
         {
-            SDL_MaximizeWindow(handle);
+            SDL_MaximizeWindow(Handle);
         }
         
         public static void Focus()
         {
-            SDL_RaiseWindow(handle);
+            SDL_RaiseWindow(Handle);
         }
         
         public static void Hide()
         {
-            SDL_HideWindow(handle);
+            SDL_HideWindow(Handle);
         }
 
         public static void Show()
         {
-            SDL_ShowWindow(handle);
+            SDL_ShowWindow(Handle);
         }
     }
 }

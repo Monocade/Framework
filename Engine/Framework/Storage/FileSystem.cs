@@ -102,17 +102,17 @@ namespace Engine
             {
                 case DialogMode.OpenFile:
                 {
-                    SDL_ShowOpenFileDialog(DialogCallbackHandler, nativeContext, Window.handle, nativeFilters, nativeFilters.Length, path, multiple);
+                    SDL_ShowOpenFileDialog(DialogCallbackHandler, nativeContext, Window.Handle, nativeFilters, nativeFilters.Length, path, multiple);
                     break;
                 }
                 case DialogMode.SaveFile:
                 {
-                    SDL_ShowSaveFileDialog(DialogCallbackHandler, nativeContext, Window.handle, nativeFilters, nativeFilters.Length, path);
+                    SDL_ShowSaveFileDialog(DialogCallbackHandler, nativeContext, Window.Handle, nativeFilters, nativeFilters.Length, path);
                     break;
                 }
                 case DialogMode.OpenFolder:
                 {
-                    SDL_ShowOpenFolderDialog(DialogCallbackHandler, nativeContext, Window.handle, path, multiple);
+                    SDL_ShowOpenFolderDialog(DialogCallbackHandler, nativeContext, Window.Handle, path, multiple);
                     break;
                 }
             }
