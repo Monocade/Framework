@@ -7,27 +7,27 @@ namespace Engine
     // String
     internal static unsafe partial class Native
     {
-        public static string NativeToString(byte* ptr, NativeProvider provider, bool free = false)
+        internal static string NativeToString(IntPtr ptr, NativeProvider provider = null, bool free = false)
         {
             try
             {
-                if (ptr == null)
+                if (ptr == IntPtr.Zero)
                 {
                     return string.Empty;
                 }
 
-                return Marshal.PtrToStringUTF8((IntPtr)ptr) ?? string.Empty;
+                return Marshal.PtrToStringUTF8(ptr) ?? string.Empty;
             }
             finally
             {
-                if (ptr != null && provider != null && free)
+                if (ptr != IntPtr.Zero && provider != null && free)
                 {
-                    Free((IntPtr)ptr, provider);
+                    Free(ptr, provider);
                 }
             }
         }
 
-        internal static byte* StringToNative(string value, NativeProvider provider)
+        internal static IntPtr StringToNative(string value, NativeProvider provider)
         {
             value ??= string.Empty;
             int byteCount = Encoding.UTF8.GetByteCount(value);
@@ -37,10 +37,10 @@ namespace Engine
             {
                 throw new OutOfMemoryException();
             }
-
+                
             Encoding.UTF8.GetBytes(value, new Span<byte>(ptr, byteCount));
             ptr[byteCount] = 0;
-            return ptr;
+            return (IntPtr)ptr;
         }
     }
     
