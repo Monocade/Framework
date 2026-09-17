@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-    public sealed class IOSExample : ExampleProvider
+    internal sealed class IOSExample : ExampleProvider
     {
         public override void Run()
         {

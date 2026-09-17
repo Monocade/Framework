@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-    public abstract class ExampleProvider
+    internal abstract class ExampleProvider
     {
         public abstract void Run();
     }

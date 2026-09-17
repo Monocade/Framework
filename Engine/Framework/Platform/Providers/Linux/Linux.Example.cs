@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-    public sealed class LinuxExample : ExampleProvider
+    internal sealed class LinuxExample : ExampleProvider
     {
         public override void Run()
         {

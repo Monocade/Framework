@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-    public sealed class WindowsExample : ExampleProvider
+    internal sealed class WindowsExample : ExampleProvider
     {
         public override void Run()
         {

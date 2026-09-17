@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-    public sealed class AndroidExample : ExampleProvider
+    internal sealed class AndroidExample : ExampleProvider
     {
         public override void Run()
         {

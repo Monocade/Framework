@@ -3,12 +3,9 @@
 namespace Engine
 {
     // Platform
-    public static class Platform
+    public static partial class Platform
     {
-        public static Platforms GetPlatform() => (Platforms)SDL_GetPlatform();
-        
-        public static PlatformProvider Provider { get; private set; }
-
+        internal static PlatformProvider Provider { get; private set; }
         
         static Platform()
         {
@@ -22,6 +19,35 @@ namespace Engine
 
                 _ => throw new Exception($"Unsupported platform: {GetPlatform()}")
             };
+        }
+    }
+
+    // API
+    public static partial class Platform
+    {
+        public static Platforms GetPlatform()
+        {
+            return (Platforms)SDL_GetPlatform();
+        }
+
+        public static bool IsDesktop()
+        {
+            return !IsMobile() && !IsMobile() && !IsTV();
+        }
+
+        public static bool IsMobile()
+        {
+            return SDL_IsPhone();
+        }
+
+        public static bool IsTablet()
+        {
+            return SDL_IsTablet();
+        }
+
+        public static bool IsTV()
+        {
+            return SDL_IsTV();
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-    public abstract class PlatformProvider
+    internal abstract class PlatformProvider
     {
         public abstract ExampleProvider Example { get; }
     }

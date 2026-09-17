@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-    public sealed class Mac : PlatformProvider
+    internal sealed class Mac : PlatformProvider
     {
         public override ExampleProvider Example { get; } = new MacExample();
     }
