@@ -73,72 +73,84 @@ namespace Engine
     {
         public delegate void DialogCallback(DialogResult result, string[] contents);
         
+
+        private static void DialogHandler(string path, DialogCallback callback, DialogFilter[] filters, DialogMode mode, bool multiple)
+        {
+            var nativeFilters = new SDL_DialogFileFilter[filters?.Length ?? 0];
+
+            for (int i = 0; i < nativeFilters.Length; i++)
+            {
+                nativeFilters[i] = new SDL_DialogFileFilter()
+                {
+                    Name = (byte*)Native.StringToNative(filters?[i].Name, SDL_NativeProvider),
+                    Pattern = (byte*)Native.StringToNative(filters?[i].Pattern, SDL_NativeProvider),
+                };
+            }
+
+            var context = Native.ObjectToNative
+            (
+                new DialogContext
+                (
+                    path,
+                    callback,
+                    nativeFilters,
+                    mode
+                )
+            );
+            
+            switch (mode)
+            {
+                case DialogMode.OpenFile:
+                {
+                    SDL_ShowOpenFileDialog(DialogCallbackHandler, context, Window.handle, nativeFilters, nativeFilters.Length, path, multiple);
+                    break;
+                }
+                case DialogMode.SaveFile:
+                {
+                    SDL_ShowSaveFileDialog(DialogCallbackHandler, context, Window.handle, nativeFilters, nativeFilters.Length, path);
+                    break;
+                }
+                case DialogMode.OpenFolder:
+                {
+                    SDL_ShowOpenFolderDialog(DialogCallbackHandler, context, Window.handle, path, multiple);
+                    break;
+                }
+            }
+        }
         
-        private static void DialogCallbackHandler(IntPtr ptr, byte** fileList, int filter)
+        private static void DialogCallbackHandler(IntPtr nativeContext, byte** fileList, int filter)
         {
             var files = Native.NativeToStringArray((IntPtr)fileList, out var count);
             {
-                var callback = Native.NativeToCallback<DialogCallback>(ptr);
+                var context = Native.NativeToObject<DialogContext>(nativeContext);
                 {
-                    callback?.Invoke(fileList == null ? DialogResult.Failed : count == 0 ? DialogResult.Cancelled : DialogResult.Success, files);
+                    var result = fileList == null ? DialogResult.Failed : count == 0 ? DialogResult.Cancelled : DialogResult.Success;
+                    {
+                        context.Callback?.Invoke(result, files);
+                    }
+                }
+                
+                foreach (var nativeFilter in context.NativeFilters)
+                {
+                    Native.Free((IntPtr)nativeFilter.Name, SDL_NativeProvider);
+                    Native.Free((IntPtr)nativeFilter.Pattern, SDL_NativeProvider);
                 }
             }
         }
         
-        
-        public static void OpenFilesDialog(DialogCallback callback, string path)
+        public static void OpenFolderDialog(string path, DialogCallback callback, DialogFilter[] filters = null, bool multiple = false)
         {
-            path = Normalize(path);
-            {
-                var ptr = Native.CallbackToNative(callback);
-                {
-                    SDL_ShowOpenFileDialog(DialogCallbackHandler, ptr, Window.handle, null, 0, path, true);
-                }
-            }
+            DialogHandler(path, callback, filters, DialogMode.OpenFolder, multiple);
         }
         
-        public static void OpenFileDialog(DialogCallback callback, string path)
+        public static void OpenFileDialog(string path, DialogCallback callback, DialogFilter[] filters = null, bool multiple = false)
         {
-            path = Normalize(path);
-            {
-                var ptr = Native.CallbackToNative(callback);
-                {
-                    SDL_ShowOpenFileDialog(DialogCallbackHandler, ptr, Window.handle, null, 0, path, true);
-                }
-            }
+            DialogHandler(path, callback, filters, DialogMode.OpenFile, multiple);
         }
         
-        public static void OpenFoldersDialog(DialogCallback callback, string path)
+        public static void OpenSaveDialog(string path, DialogCallback callback, DialogFilter[] filters = null)
         {
-            path = Normalize(path);
-            {
-                var ptr = Native.CallbackToNative(callback);
-                {
-                    SDL_ShowOpenFolderDialog(DialogCallbackHandler, ptr, Window.handle, path, true);
-                }
-            }
-        }
-        
-        public static void OpenFolderDialog(DialogCallback callback, string path)
-        {
-            path = Normalize(path);
-            {
-                var ptr = Native.CallbackToNative(callback);
-                {
-                    SDL_ShowOpenFolderDialog(DialogCallbackHandler, ptr, Window.handle, path, false);
-                }
-            }
-        }
-        
-        public static void OpenSaveDialog(DialogCallback callback, string path)
-        {
-            path = Normalize(path);
-            {
-                var ptr = Native.CallbackToNative(callback);
-                {
-                    SDL_ShowSaveFileDialog(DialogCallbackHandler, ptr, Window.handle, null, 0, path);
-                }
-            }
+            DialogHandler(path, callback, filters, DialogMode.SaveFile, false);
         }
     }
     

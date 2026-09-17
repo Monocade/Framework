@@ -156,6 +156,46 @@ namespace Engine
     // String Array
     internal static unsafe partial class Native
     {
+        public static IntPtr StringArrayToNative(string[] array, NativeProvider provider)
+        {
+            if (array == null || array.Length == 0)
+            {
+                return IntPtr.Zero;
+            }
+
+            var data = (byte**)provider.Allocate((nuint)((array.Length + 1) * sizeof(byte*)));
+
+            if (data == null)
+            {
+                throw new OutOfMemoryException();
+            }
+
+            try
+            {
+                for (int i = 0; i < array.Length; i++)
+                {
+                    data[i] = (byte*)StringToNative(array[i], provider);
+                }
+
+                data[array.Length] = null;
+
+                return (IntPtr)data;
+            }
+            catch
+            {
+                for (int i = 0; i < array.Length; i++)
+                {
+                    if (data[i] != null)
+                    {
+                        Free((IntPtr)data[i], provider);
+                    }
+                }
+
+                Free((IntPtr)data, provider);
+                throw;
+            }
+        }
+        
         public static string[] NativeToStringArray(IntPtr ptr, int size, out int count)
         {
             count = 0;
@@ -209,51 +249,13 @@ namespace Engine
     // String
     internal static unsafe partial class Native
     {
-        public static IntPtr StringArrayToNative(string[] array, NativeProvider provider)
-        {
-            if (array == null || array.Length == 0)
-            {
-                return IntPtr.Zero;
-            }
-
-            var data = (byte**)provider.Allocate((nuint)((array.Length + 1) * sizeof(byte*)));
-
-            if (data == null)
-            {
-                throw new OutOfMemoryException();
-            }
-
-            try
-            {
-                for (int i = 0; i < array.Length; i++)
-                {
-                    data[i] = (byte*)StringToNative(array[i], provider);
-                }
-
-                data[array.Length] = null;
-
-                return (IntPtr)data;
-            }
-            catch
-            {
-                for (int i = 0; i < array.Length; i++)
-                {
-                    if (data[i] != null)
-                    {
-                        Free((IntPtr)data[i], provider);
-                    }
-                }
-
-                Free((IntPtr)data, provider);
-                throw;
-            }
-        }
-        
         public static IntPtr StringToNative(string value, NativeProvider provider)
         {
             value ??= string.Empty;
             int byteCount = Encoding.UTF8.GetByteCount(value);
             byte* ptr = (byte*)provider.Allocate((nuint)(byteCount + 1));
+            
+            Console.WriteLine($"ALLOC: {(IntPtr)ptr}");
 
             if (ptr == null)
             {
@@ -277,21 +279,21 @@ namespace Engine
         }
     }
     
-    // Callback
+    // Objects
     internal static partial class Native
     {
-        public static IntPtr CallbackToNative<T>(T value) where T : class
+        public static IntPtr ObjectToNative<T>(T value)
         {
             return GCHandle.ToIntPtr(GCHandle.Alloc(value));
         }
-        
-        public static T NativeToCallback<T>(IntPtr ptr) where T : class
+
+        public static T NativeToObject<T>(IntPtr ptr)
         {
             var handle = GCHandle.FromIntPtr(ptr);
 
             try
             {
-                return handle.Target as T;
+                return (T)handle.Target!;
             }
             finally
             {
@@ -305,6 +307,7 @@ namespace Engine
     {
         public static void Free(IntPtr ptr, NativeProvider provider)
         {
+            Console.WriteLine($"FREE: {ptr}");
             provider?.Free(ptr);
         }
     }

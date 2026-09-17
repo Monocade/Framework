@@ -9,23 +9,17 @@ namespace Application
         {
             base.Initialize();
             {
-                
+                FileSystem.OpenFileDialog(FileSystem.BasePath, DialogCallbackMultiple, [new DialogFilter { Name = "Dlls", Pattern = "dll" }], false);
             }
         }
 
-        public override void Update()
+        private void DialogCallbackMultiple(DialogResult result, string[] contents)
         {
-            base.Update();
-            {
-                
-            }
-        }
+            Console.WriteLine(result);
 
-        public override void Quit()
-        {
-            base.Quit();
+            foreach (var file in contents)
             {
-                
+                Console.WriteLine(file);
             }
         }
     }
