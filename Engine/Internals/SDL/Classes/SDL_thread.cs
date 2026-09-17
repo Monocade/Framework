@@ -7,9 +7,13 @@ namespace Engine.SDL3
     {
         public static SDL_Thread* SDL_CreateThreadRuntime(IntPtr fn, string name, IntPtr data, IntPtr pfnBeginThread, IntPtr pfnEndThread)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_CreateThreadRuntime(fn, ptr1, data, pfnBeginThread, pfnEndThread);
+                var result = iSDL_CreateThreadRuntime(fn, (byte*)namePtr, data, pfnBeginThread, pfnEndThread);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -20,7 +24,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetThreadName(SDL_Thread* thread)
         {
-            return SDL_NativeToString(iSDL_GetThreadName(thread));
+            return Native.NativeToString((IntPtr)iSDL_GetThreadName(thread));
         }
 
         public static ulong SDL_GetCurrentThreadID()

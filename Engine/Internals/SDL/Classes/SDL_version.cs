@@ -12,7 +12,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetRevision()
         {
-            return SDL_NativeToString(iSDL_GetRevision());
+            return Native.NativeToString((IntPtr)iSDL_GetRevision());
         }
     }
 }

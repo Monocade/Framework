@@ -32,7 +32,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetDeviceFormFactorName(SDL_FormFactor formFactor)
         {
-            return SDL_NativeToString(iSDL_GetDeviceFormFactorName(formFactor));
+            return Native.NativeToString((IntPtr)iSDL_GetDeviceFormFactorName(formFactor));
         }
 
         public static SDL_Sandbox SDL_GetSandbox()

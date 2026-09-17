@@ -30,6 +30,11 @@ namespace Engine.SDL3
             var modePtr = Native.StringToNative(mode, SDL_NativeProvider);
             {
                 var result = iSDL_IOFromFile((byte*)filePtr, (byte*)modePtr);
+                {
+                    Native.Free(filePtr, SDL_NativeProvider);
+                    Native.Free(modePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 

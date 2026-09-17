@@ -41,26 +41,39 @@ namespace Engine.SDL3
     {
         public static SDL_Storage* SDL_OpenTitleStorage(string @override, uint props)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(@override))
+            var @overridePtr = Native.StringToNative(@override, SDL_NativeProvider);
             {
-                return iSDL_OpenTitleStorage(@ptr1, props);
+                var result = iSDL_OpenTitleStorage((byte*)overridePtr, props);
+                {
+                    Native.Free(@overridePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static SDL_Storage* SDL_OpenUserStorage(string org, string app, uint props)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(org))
-            fixed (byte* ptr2 = SDL_StringToNative(app))
+            var orgPtr = Native.StringToNative(org, SDL_NativeProvider);
+            var appPtr = Native.StringToNative(app, SDL_NativeProvider);
             {
-                return iSDL_OpenUserStorage(ptr1, ptr2, props);
+                var result = iSDL_OpenUserStorage((byte*)orgPtr, (byte*)appPtr, props);
+                {
+                    Native.Free(orgPtr, SDL_NativeProvider);
+                    Native.Free(appPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static SDL_Storage* SDL_OpenFileStorage(string path)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(path))
+            var pathPtr = Native.StringToNative(path, SDL_NativeProvider);
             {
-                return iSDL_OpenFileStorage(ptr1);
+                var result = iSDL_OpenFileStorage((byte*)pathPtr);
+                {
+                    Native.Free(pathPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -81,10 +94,15 @@ namespace Engine.SDL3
 
         public static bool SDL_GetStorageFileSize(SDL_Storage* storage, string path, out ulong length)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(path))
+            var pathPtr = Native.StringToNative(path, SDL_NativeProvider);
+            
             fixed (ulong* ptr2 = &length)
             {
-                return iSDL_GetStorageFileSize(storage, ptr1, ptr2);
+                var result = iSDL_GetStorageFileSize(storage, (byte*)pathPtr, ptr2);
+                {
+                    Native.Free(pathPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -92,71 +110,108 @@ namespace Engine.SDL3
         {
             buffer = new byte[length];
             {
-                fixed (byte* ptr1 = SDL_StringToNative(path))
+                var pathPtr = Native.StringToNative(path, SDL_NativeProvider);
+                
                 fixed (byte* ptr2 = buffer)
                 {
-                    return iSDL_ReadStorageFile(storage, ptr1, (IntPtr)ptr2, length);
+                    var result = iSDL_ReadStorageFile(storage, (byte*)pathPtr, (IntPtr)ptr2, length);
+                    {
+                        Native.Free(pathPtr, SDL_NativeProvider);
+                        return result;
+                    }
                 }
             }
         }
 
         public static bool SDL_WriteStorageFile(SDL_Storage* storage, string path, byte[] buffer, ulong length)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(path))
+            var pathPtr = Native.StringToNative(path, SDL_NativeProvider);
+            
             fixed (byte* ptr2 = buffer)
             {
-                return iSDL_WriteStorageFile(storage, ptr1, (IntPtr)ptr2, length);
+                var result = iSDL_WriteStorageFile(storage, (byte*)pathPtr, (IntPtr)ptr2, length);
+                {
+                    Native.Free(pathPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static bool SDL_CreateStorageDirectory(SDL_Storage* storage, string path)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(path))
+            var pathPtr = Native.StringToNative(path, SDL_NativeProvider);
             {
-                return iSDL_CreateStorageDirectory(storage, ptr1);
+                var result = iSDL_CreateStorageDirectory(storage, (byte*)pathPtr);
+                {
+                    Native.Free(pathPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static bool SDL_EnumerateStorageDirectory(SDL_Storage* storage, string path, SDL_EnumerateDirectoryCallback callback, IntPtr userdata)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(path))
+            var pathPtr = Native.StringToNative(path, SDL_NativeProvider);
             {
-                return iSDL_EnumerateStorageDirectory(storage, ptr1, Marshal.GetFunctionPointerForDelegate(callback), userdata);
+                var result = iSDL_EnumerateStorageDirectory(storage, (byte*)pathPtr, Marshal.GetFunctionPointerForDelegate(callback), userdata);
+                {
+                    Native.Free(pathPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static bool SDL_RemoveStoragePath(SDL_Storage* storage, string path)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(path))
+            var pathPtr = Native.StringToNative(path, SDL_NativeProvider);
             {
-                return iSDL_RemoveStoragePath(storage, ptr1);
+                var result = iSDL_RemoveStoragePath(storage, (byte*)pathPtr);
+                {
+                    Native.Free(pathPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static bool SDL_RenameStoragePath(SDL_Storage* storage, string oldPath, string newPath)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(oldPath))
-            fixed (byte* ptr2 = SDL_StringToNative(newPath))
+            var oldPathPtr = Native.StringToNative(oldPath, SDL_NativeProvider);
+            var newPathPtr = Native.StringToNative(newPath, SDL_NativeProvider);
             {
-                return iSDL_RenameStoragePath(storage, ptr1, ptr2);
+                var result = iSDL_RenameStoragePath(storage, (byte*)oldPathPtr, (byte*)newPathPtr);
+                {
+                    Native.Free(oldPathPtr, SDL_NativeProvider);
+                    Native.Free(newPathPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static bool SDL_CopyStorageFile(SDL_Storage* storage, string oldPath, string newPath)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(oldPath))
-            fixed (byte* ptr2 = SDL_StringToNative(newPath))
+            var oldPathPtr = Native.StringToNative(oldPath, SDL_NativeProvider);
+            var newPathPtr = Native.StringToNative(newPath, SDL_NativeProvider);
             {
-                return iSDL_CopyStorageFile(storage, ptr1, ptr2);
+                var result = iSDL_CopyStorageFile(storage, (byte*)oldPathPtr, (byte*)newPathPtr);
+                {
+                    Native.Free(oldPathPtr, SDL_NativeProvider);
+                    Native.Free(newPathPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static bool SDL_GetStoragePathInfo(SDL_Storage* storage, string path, out SDL_PathInfo info)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(path))
+            var pathPtr = Native.StringToNative(path, SDL_NativeProvider);
+            
             fixed (SDL_PathInfo* ptr2 = &info)
             {
-                return iSDL_GetStoragePathInfo(storage, ptr1, ptr2);
+                var result = iSDL_GetStoragePathInfo(storage, (byte*)pathPtr, ptr2);
+                {
+                    Native.Free(pathPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -167,12 +222,17 @@ namespace Engine.SDL3
 
         public static string[] SDL_GlobStorageDirectory(SDL_Storage* storage, string path, string pattern, SDL_GlobFlags flags, out int count)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(path))
-            fixed (byte* ptr2 = SDL_StringToNative(pattern))
+            var pathPtr = Native.StringToNative(path, SDL_NativeProvider);
+            var patternPtr = Native.StringToNative(pattern, SDL_NativeProvider);
             {
                 int size = 0;
                 {
-                    return SDL_NativeToArray(iSDL_GlobStorageDirectory(storage, ptr1, ptr2, (uint)flags, &size), size, out count);
+                    var result = SDL_NativeToArray(iSDL_GlobStorageDirectory(storage, (byte*)pathPtr, (byte*)patternPtr, (uint)flags, &size), size, out count);
+                    {
+                        Native.Free(pathPtr, SDL_NativeProvider);
+                        Native.Free(patternPtr, SDL_NativeProvider);
+                        return result;
+                    }
                 }
             }
         }

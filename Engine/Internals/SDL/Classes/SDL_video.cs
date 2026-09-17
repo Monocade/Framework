@@ -12,12 +12,12 @@ namespace Engine.SDL3
 
         public static string SDL_GetVideoDriver(int index)
         {
-            return SDL_NativeToString(iSDL_GetVideoDriver(index));
+            return Native.NativeToString((IntPtr)iSDL_GetVideoDriver(index));
         }
 
         public static string SDL_GetCurrentVideoDriver()
         {
-            return SDL_NativeToString(iSDL_GetCurrentVideoDriver());
+            return Native.NativeToString((IntPtr)iSDL_GetCurrentVideoDriver());
         }
 
         public static SDL_SystemTheme SDL_GetSystemTheme()
@@ -45,7 +45,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetDisplayName(uint displayID)
         {
-            return SDL_NativeToString(iSDL_GetDisplayName(displayID));
+            return Native.NativeToString((IntPtr)iSDL_GetDisplayName(displayID));
         }
 
         public static bool SDL_GetDisplayBounds(uint displayID, out SDL_Rect rect)
@@ -163,9 +163,13 @@ namespace Engine.SDL3
 
         public static SDL_Window* SDL_CreateWindow(string title, int w, int h, SDL_WindowFlags flags)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(title))
+            var titlePtr = Native.StringToNative(title, SDL_NativeProvider);
             {
-                return iSDL_CreateWindow(ptr1, w, h, (ulong)flags);
+                var result = iSDL_CreateWindow((byte*)titlePtr, w, h, (ulong)flags);
+                {
+                    Native.Free(titlePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -206,15 +210,19 @@ namespace Engine.SDL3
 
         public static bool SDL_SetWindowTitle(SDL_Window* window, string title)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(title))
+            var titlePtr = Native.StringToNative(title, SDL_NativeProvider);
             {
-                return iSDL_SetWindowTitle(window, ptr1);
+                var result = iSDL_SetWindowTitle(window, (byte*)titlePtr);
+                {
+                    Native.Free(titlePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static string SDL_GetWindowTitle(SDL_Window* window)
         {
-            return SDL_NativeToString(iSDL_GetWindowTitle(window));
+            return Native.NativeToString((IntPtr)iSDL_GetWindowTitle(window));
         }
 
         public static bool SDL_SetWindowIcon(SDL_Window* window, SDL_Surface* icon)
@@ -543,25 +551,37 @@ namespace Engine.SDL3
 
         public static bool SDL_GL_LoadLibrary(string path)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(path))
+            var pathPtr = Native.StringToNative(path, SDL_NativeProvider);
             {
-                return iSDL_GL_LoadLibrary(ptr1);
+                var result = iSDL_GL_LoadLibrary((byte*)pathPtr);
+                {
+                    Native.Free(pathPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static IntPtr SDL_GL_GetProcAddress(string proc)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(proc))
+            var procPtr = Native.StringToNative(proc, SDL_NativeProvider);
             {
-                return iSDL_GL_GetProcAddress(ptr1);
+                var result = iSDL_GL_GetProcAddress((byte*)procPtr);
+                {
+                    Native.Free(procPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static IntPtr SDL_EGL_GetProcAddress(string proc)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(proc))
+            var procPtr = Native.StringToNative(proc, SDL_NativeProvider);
             {
-                return iSDL_EGL_GetProcAddress(ptr1);
+                var result = iSDL_EGL_GetProcAddress((byte*)procPtr);
+                {
+                    Native.Free(procPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -572,9 +592,13 @@ namespace Engine.SDL3
 
         public static bool SDL_GL_ExtensionSupported(string extension)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(extension))
+            var extensionPtr = Native.StringToNative(extension, SDL_NativeProvider);
             {
-                return iSDL_GL_ExtensionSupported(ptr1);
+                var result = iSDL_GL_ExtensionSupported((byte*)extensionPtr);
+                {
+                    Native.Free(extensionPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 

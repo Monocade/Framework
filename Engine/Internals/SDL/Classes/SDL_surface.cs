@@ -90,9 +90,13 @@ namespace Engine.SDL3
 
         public static SDL_Surface* SDL_LoadSurface(string file)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(file))
+            var filePtr = Native.StringToNative(file, SDL_NativeProvider);
             {
-                return iSDL_LoadSurface(ptr1);
+                var result = iSDL_LoadSurface((byte*)filePtr);
+                {
+                    Native.Free(filePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -103,9 +107,13 @@ namespace Engine.SDL3
 
         public static SDL_Surface* SDL_LoadBMP(string file)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(file))
+            var filePtr = Native.StringToNative(file, SDL_NativeProvider);
             {
-                return iSDL_LoadBMP(ptr1);
+                var result = iSDL_LoadBMP((byte*)filePtr);
+                {
+                    Native.Free(filePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -116,9 +124,13 @@ namespace Engine.SDL3
 
         public static bool SDL_SaveBMP(SDL_Surface* surface, string file)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(file))
+            var filePtr = Native.StringToNative(file, SDL_NativeProvider);
             {
-                return iSDL_SaveBMP(surface, ptr1);
+                var result = iSDL_SaveBMP(surface, (byte*)filePtr);
+                {
+                    Native.Free(filePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -129,9 +141,13 @@ namespace Engine.SDL3
 
         public static SDL_Surface* SDL_LoadPNG(string file)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(file))
+            var filePtr = Native.StringToNative(file, SDL_NativeProvider);
             {
-                return iSDL_LoadPNG(ptr1);
+                var result = iSDL_LoadPNG((byte*)filePtr);
+                {
+                    Native.Free(filePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -142,9 +158,13 @@ namespace Engine.SDL3
 
         public static bool SDL_SavePNG(SDL_Surface* surface, string file)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(file))
+            var filePtr = Native.StringToNative(file, SDL_NativeProvider);
             {
-                return iSDL_SavePNG(surface, ptr1);
+                var result = iSDL_SavePNG(surface, (byte*)filePtr);
+                {
+                    Native.Free(filePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -155,9 +175,13 @@ namespace Engine.SDL3
 
         public static SDL_Surface* SDL_LoadJPG(string file)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(file))
+            var filePtr = Native.StringToNative(file, SDL_NativeProvider);
             {
-                return iSDL_LoadJPG(ptr1);
+                var result = iSDL_LoadJPG((byte*)filePtr);
+                {
+                    Native.Free(filePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 

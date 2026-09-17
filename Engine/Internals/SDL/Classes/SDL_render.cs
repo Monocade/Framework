@@ -12,29 +12,35 @@ namespace Engine.SDL3
 
         public static string SDL_GetRenderDriver(int index)
         {
-            return SDL_NativeToString(iSDL_GetRenderDriver(index));
+            return Native.NativeToString((IntPtr)iSDL_GetRenderDriver(index));
         }
 
         public static bool SDL_CreateWindowAndRenderer(string title, int width, int height, SDL_WindowFlags windowFlags, out SDL_Window* window, out SDL_Renderer* renderer)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(title))
+            var titlePtr = Native.StringToNative(title, SDL_NativeProvider);
             {
                 SDL_Window* ptr2 = null;
                 SDL_Renderer* ptr3 = null;
                 
-                var result = iSDL_CreateWindowAndRenderer(ptr1, width, height, (ulong)windowFlags, &ptr2, &ptr3);
-                window = ptr2;
-                renderer = ptr3;
-                
-                return result;
+                var result = iSDL_CreateWindowAndRenderer((byte*)titlePtr, width, height, (ulong)windowFlags, &ptr2, &ptr3);
+                {
+                    Native.Free(titlePtr, SDL_NativeProvider);
+                    renderer = ptr3;
+                    window = ptr2;
+                    return result;
+                }
             }
         }
 
         public static SDL_Renderer* SDL_CreateRenderer(SDL_Window* window, string name)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_CreateRenderer(window, ptr1);
+                var result = iSDL_CreateRenderer(window, (byte*)namePtr);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -70,7 +76,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetRendererName(SDL_Renderer* renderer)
         {
-            return SDL_NativeToString(iSDL_GetRendererName(renderer));
+            return Native.NativeToString((IntPtr)iSDL_GetRendererName(renderer));
         }
 
         public static uint SDL_GetRendererProperties(SDL_Renderer* renderer)
@@ -607,17 +613,25 @@ namespace Engine.SDL3
 
         public static bool SDL_RenderDebugText(SDL_Renderer* renderer, float x, float y, string str)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(str))
+            var strPtr = Native.StringToNative(str, SDL_NativeProvider);
             {
-                return iSDL_RenderDebugText(renderer, x, y, ptr1);
+                var result = iSDL_RenderDebugText(renderer, x, y, (byte*)strPtr);
+                {
+                    Native.Free(strPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static bool SDL_RenderDebugTextFormat(SDL_Renderer* renderer, float x, float y, string fmt)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            var fmtPtr = Native.StringToNative(fmt, SDL_NativeProvider);
             {
-                return iSDL_RenderDebugTextFormat(renderer, x, y, ptr1);
+                var result = iSDL_RenderDebugTextFormat(renderer, x, y, (byte*)fmtPtr);
+                {
+                    Native.Free(fmtPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 

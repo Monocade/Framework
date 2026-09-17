@@ -15,7 +15,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetSensorNameForID(uint sensorID)
         {
-            return SDL_NativeToString(iSDL_GetSensorNameForID(sensorID));
+            return Native.NativeToString((IntPtr)iSDL_GetSensorNameForID(sensorID));
         }
 
         public static SDL_SensorType SDL_GetSensorTypeForID(uint sensorID)
@@ -45,7 +45,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetSensorName(SDL_Sensor* sensor)
         {
-            return SDL_NativeToString(iSDL_GetSensorName(sensor));
+            return Native.NativeToString((IntPtr)iSDL_GetSensorName(sensor));
         }
 
         public static SDL_SensorType SDL_GetSensorType(SDL_Sensor* sensor)

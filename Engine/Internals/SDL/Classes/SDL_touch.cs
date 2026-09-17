@@ -15,7 +15,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetTouchDeviceName(ulong touchID)
         {
-            return SDL_NativeToString(iSDL_GetTouchDeviceName(touchID));
+            return Native.NativeToString((IntPtr)iSDL_GetTouchDeviceName(touchID));
         }
 
         public static SDL_TouchDeviceType SDL_GetTouchDeviceType(ulong touchID)

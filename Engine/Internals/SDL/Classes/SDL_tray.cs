@@ -7,9 +7,13 @@ namespace Engine.SDL3
     {
         public static SDL_Tray* SDL_CreateTray(SDL_Surface* icon, string tooltip)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(tooltip))
+            var tooltipPtr = Native.StringToNative(tooltip, SDL_NativeProvider);
             {
-                return iSDL_CreateTray(icon, ptr1);
+                var result = iSDL_CreateTray(icon, (byte*)tooltipPtr);
+                {
+                    Native.Free(tooltipPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -25,9 +29,12 @@ namespace Engine.SDL3
 
         public static void SDL_SetTrayTooltip(SDL_Tray* tray, string tooltip)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(tooltip))
+            var tooltipPtr = Native.StringToNative(tooltip, SDL_NativeProvider);
             {
-                iSDL_SetTrayTooltip(tray, ptr1);
+                iSDL_SetTrayTooltip(tray, (byte*)tooltipPtr);
+                {
+                    Native.Free(tooltipPtr, SDL_NativeProvider);
+                }
             }
         }
 
@@ -66,23 +73,30 @@ namespace Engine.SDL3
 
         public static SDL_TrayEntry* SDL_InsertTrayEntryAt(SDL_TrayMenu* menu, int pos, string label, SDL_TrayEntryFlags flags)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(label))
+            var labelPtr = Native.StringToNative(label, SDL_NativeProvider);
             {
-                return iSDL_InsertTrayEntryAt(menu, pos, ptr1, (uint)flags);
+                var result = iSDL_InsertTrayEntryAt(menu, pos, (byte*)labelPtr, (uint)flags);
+                {
+                    Native.Free(labelPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static void SDL_SetTrayEntryLabel(SDL_TrayEntry* entry, string label)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(label))
+            var labelPtr = Native.StringToNative(label, SDL_NativeProvider);
             {
-                iSDL_SetTrayEntryLabel(entry, ptr1);
+                iSDL_SetTrayEntryLabel(entry, (byte*)labelPtr);
+                {
+                    Native.Free(labelPtr, SDL_NativeProvider);
+                }
             }
         }
 
         public static string SDL_GetTrayEntryLabel(SDL_TrayEntry* entry)
         {
-            return SDL_NativeToString(iSDL_GetTrayEntryLabel(entry));
+            return Native.NativeToString((IntPtr)iSDL_GetTrayEntryLabel(entry));
         }
 
         public static void SDL_SetTrayEntryChecked(SDL_TrayEntry* entry, bool @checked)
