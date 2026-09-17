@@ -32,7 +32,7 @@ namespace Engine
 
         public static bool IsDesktop()
         {
-            return !IsMobile() && !IsMobile() && !IsTV();
+            return !IsMobile() && !IsTablet() && !IsTV();
         }
 
         public static bool IsMobile()
