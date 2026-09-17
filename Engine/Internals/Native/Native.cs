@@ -5,9 +5,35 @@ using System;
 
 namespace Engine
 {
-    // Arrays
+    // T* Array
     internal static unsafe partial class Native
     {
+        public static T** ArrayToNative<T>(T*[] array, NativeProvider provider) where T : unmanaged
+        {
+            if (array == null || array.Length == 0)
+            {
+                return null;
+            }
+
+            var count = array.Length;
+
+            var ptr = (T**)provider.Allocate((nuint)((count + 1) * sizeof(T*)));
+
+            if (ptr == null)
+            {
+                throw new OutOfMemoryException();
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                ptr[i] = array[i];
+            }
+
+            ptr[count] = null;
+
+            return ptr;
+        }
+
         public static T*[] NativeToArray<T>(T** ptr, int size, out int count) where T : unmanaged
         {
             count = 0;
@@ -29,11 +55,61 @@ namespace Engine
                 return result;
             }
         }
+
+        public static T*[] NativeToArray<T>(T** ptr, out int count) where T : unmanaged
+        {
+            count = 0;
+
+            if (ptr == null)
+            {
+                return [];
+            }
+
+            while (ptr[count] != null)
+            {
+                count++;
+            }
+
+            var result = new T*[count];
+
+            for (int i = 0; i < count; i++)
+            {
+                result[i] = ptr[i];
+            }
+
+            return result;
+        }
+    }
+    
+    // T Array
+    internal static unsafe partial class Native
+    {
+        public static T* ArrayToNative<T>(T[] array, NativeProvider provider) where T : unmanaged
+        {
+            if (array == null || array.Length == 0)
+            {
+                return null;
+            }
+
+            var ptr = (T*)provider.Allocate((nuint)(array.Length * sizeof(T)));
+
+            if (ptr == null)
+            {
+                throw new OutOfMemoryException();
+            }
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                ptr[i] = array[i];
+            }
+
+            return ptr;
+        }
         
         public static T[] NativeToArray<T>(T* ptr, int size, out int count) where T : unmanaged
         {
             count = 0;
-            
+
             if (ptr == null || size <= 0)
             {
                 return [];
@@ -51,7 +127,35 @@ namespace Engine
                 return result;
             }
         }
-        
+
+        public static T[] NativeToArray<T>(T* ptr, out int count) where T : unmanaged
+        {
+            count = 0;
+
+            if (ptr == null)
+            {
+                return [];
+            }
+
+            while (!EqualityComparer<T>.Default.Equals(ptr[count], default))
+            {
+                count++;
+            }
+
+            var result = new T[count];
+
+            for (int i = 0; i < count; i++)
+            {
+                result[i] = ptr[i];
+            }
+
+            return result;
+        }
+    }
+    
+    // String Array
+    internal static unsafe partial class Native
+    {
         public static string[] NativeToStringArray(IntPtr ptr, int size, out int count)
         {
             count = 0;
@@ -80,29 +184,72 @@ namespace Engine
             count = 0;
 
             var data = (byte**)ptr;
+
             if (data == null)
             {
                 return [];
             }
 
-            var result = new List<string>();
-                
-            for (int i = 0; data[i] != null; i++)
+            while (data[count] != null)
             {
-                result.Add(NativeToString((IntPtr)data[i]));
+                count++;
             }
 
-            count = result.Count;
+            var result = new string[count];
+
+            for (int i = 0; i < count; i++)
             {
-                return result.ToArray();
+                result[i] = NativeToString((IntPtr)data[i]);
             }
+
+            return result;
         }
     }
 
     // String
     internal static unsafe partial class Native
     {
-        internal static IntPtr StringToNative(string value, NativeProvider provider)
+        public static IntPtr StringArrayToNative(string[] array, NativeProvider provider)
+        {
+            if (array == null || array.Length == 0)
+            {
+                return IntPtr.Zero;
+            }
+
+            var data = (byte**)provider.Allocate((nuint)((array.Length + 1) * sizeof(byte*)));
+
+            if (data == null)
+            {
+                throw new OutOfMemoryException();
+            }
+
+            try
+            {
+                for (int i = 0; i < array.Length; i++)
+                {
+                    data[i] = (byte*)StringToNative(array[i], provider);
+                }
+
+                data[array.Length] = null;
+
+                return (IntPtr)data;
+            }
+            catch
+            {
+                for (int i = 0; i < array.Length; i++)
+                {
+                    if (data[i] != null)
+                    {
+                        Free((IntPtr)data[i], provider);
+                    }
+                }
+
+                Free((IntPtr)data, provider);
+                throw;
+            }
+        }
+        
+        public static IntPtr StringToNative(string value, NativeProvider provider)
         {
             value ??= string.Empty;
             int byteCount = Encoding.UTF8.GetByteCount(value);
@@ -119,7 +266,7 @@ namespace Engine
             return (IntPtr)ptr;
         }
         
-        internal static string NativeToString(IntPtr ptr)
+        public static string NativeToString(IntPtr ptr)
         {
             if (ptr == IntPtr.Zero)
             {
