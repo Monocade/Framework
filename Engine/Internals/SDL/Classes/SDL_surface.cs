@@ -64,7 +64,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetSurfaceImages(surface, &size), size, out count);
+                var surfaceImagesPtr = iSDL_GetSurfaceImages(surface, &size);
+                {
+                    var result = Native.NativeToArray(surfaceImagesPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)surfaceImagesPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 

@@ -34,7 +34,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetTouchFingers(touchID, &size), size, out count);
+                var touchFingersPtr = iSDL_GetTouchFingers(touchID, &size);
+                {
+                    var result = Native.NativeToArray(touchFingersPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)touchFingersPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
     }

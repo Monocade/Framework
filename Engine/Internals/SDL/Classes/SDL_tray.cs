@@ -62,7 +62,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetTrayEntries(menu, &size), size, out count);
+                var trayEntriesPtr = iSDL_GetTrayEntries(menu, &size);
+                {
+                    var result = Native.NativeToArray(trayEntriesPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)trayEntriesPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 

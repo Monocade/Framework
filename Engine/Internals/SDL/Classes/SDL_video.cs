@@ -90,7 +90,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetFullscreenDisplayModes(displayID, &size), size, out count);
+                var fullscreenDisplayModesPtr = iSDL_GetFullscreenDisplayModes(displayID, &size);
+                {
+                    var result = Native.NativeToArray(fullscreenDisplayModesPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)fullscreenDisplayModesPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 
@@ -164,7 +171,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetWindows(&size), size, out count);
+                var windowsPtr = iSDL_GetWindows(&size);
+                {
+                    var result = Native.NativeToArray(windowsPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)windowsPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 

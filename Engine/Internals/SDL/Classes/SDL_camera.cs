@@ -39,7 +39,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetCameraSupportedFormats(cameraID, &size), size, out count);
+                var cameraSupportedFormatsPtr = iSDL_GetCameraSupportedFormats(cameraID, &size);
+                {
+                    var result = Native.NativeToArray(cameraSupportedFormatsPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)cameraSupportedFormatsPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 

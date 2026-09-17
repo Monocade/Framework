@@ -294,7 +294,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetGamepadBindings(gamepad, &size), size, out count);
+                var gamepadBindingsPtr = iSDL_GetGamepadBindings(gamepad, &size);
+                {
+                    var result = Native.NativeToArray(gamepadBindingsPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)gamepadBindingsPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 

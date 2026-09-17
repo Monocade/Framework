@@ -9,7 +9,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetPreferredLocales(&size), size, out count);
+                var preferredLocalesPtr = iSDL_GetPreferredLocales(&size);
+                {
+                    var result = Native.NativeToArray(preferredLocalesPtr, size, out count);
+                    {
+                        Native.Free((IntPtr)preferredLocalesPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
     }
