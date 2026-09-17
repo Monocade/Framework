@@ -15,8 +15,11 @@ namespace Engine.SDL3
             var orgPtr = Native.StringToNative(org, SDL_NativeProvider);
             var appPtr = Native.StringToNative(app, SDL_NativeProvider);
             {
-                var result = Native.NativeToString((IntPtr)iSDL_GetPrefPath((byte*)orgPtr, (byte*)appPtr), freeProvider: SDL_NativeProvider);
+                var prefPathPtr = (IntPtr)iSDL_GetPrefPath((byte*)orgPtr, (byte*)appPtr);
+                
+                var result = Native.NativeToString(prefPathPtr);
                 {
+                    Native.Free(prefPathPtr, SDL_NativeProvider);
                     Native.Free(orgPtr, SDL_NativeProvider);
                     Native.Free(appPtr, SDL_NativeProvider);
                     return result;
@@ -126,7 +129,14 @@ namespace Engine.SDL3
 
         public static string SDL_GetCurrentDirectory()
         {
-            return Native.NativeToString((IntPtr)iSDL_GetCurrentDirectory(), freeProvider: SDL_NativeProvider);
+            var currentDirectoryPtr = (IntPtr)iSDL_GetCurrentDirectory();
+            {
+                var result = Native.NativeToString(currentDirectoryPtr);
+                {
+                    Native.Free(currentDirectoryPtr, SDL_NativeProvider);
+                    return result;
+                }
+            }
         }
     }
 }

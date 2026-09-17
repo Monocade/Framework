@@ -19,7 +19,14 @@ namespace Engine.SDL3
 
         public static string SDL_GetClipboardText()
         {
-            return Native.NativeToString((IntPtr)iSDL_GetClipboardText(), freeProvider: SDL_NativeProvider);
+            var clipboardTextPtr = (IntPtr)iSDL_GetClipboardText();
+            {
+                var result = Native.NativeToString(clipboardTextPtr);
+                {
+                    Native.Free(clipboardTextPtr, SDL_NativeProvider);
+                    return result;
+                }
+            }
         }
 
         public static bool SDL_HasClipboardText()
@@ -41,7 +48,14 @@ namespace Engine.SDL3
 
         public static string SDL_GetPrimarySelectionText()
         {
-            return Native.NativeToString((IntPtr)iSDL_GetPrimarySelectionText(), freeProvider: SDL_NativeProvider);
+            var primarySelectionTextPtr = (IntPtr)iSDL_GetPrimarySelectionText();
+            {
+                var result = Native.NativeToString(primarySelectionTextPtr);
+                {
+                    Native.Free(primarySelectionTextPtr, SDL_NativeProvider);
+                    return result;
+                }
+            }
         }
 
         public static bool SDL_HasPrimarySelectionText()

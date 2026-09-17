@@ -49,12 +49,26 @@ namespace Engine.SDL3
 
         public static string SDL_GetGamepadMappingForGUID(SDL_GUID guid)
         {
-            return Native.NativeToString((IntPtr)iSDL_GetGamepadMappingForGUID(guid), freeProvider: SDL_NativeProvider);
+            var gamepadMappingForGUIDPtr = (IntPtr)iSDL_GetGamepadMappingForGUID(guid);
+            {
+                var result = Native.NativeToString(gamepadMappingForGUIDPtr);
+                {
+                    Native.Free(gamepadMappingForGUIDPtr, SDL_NativeProvider);
+                    return result;
+                }
+            }
         }
 
         public static string SDL_GetGamepadMapping(SDL_Gamepad* gamepad)
         {
-            return Native.NativeToString((IntPtr)iSDL_GetGamepadMapping(gamepad), freeProvider: SDL_NativeProvider);
+            var gamepadMappingPtr = (IntPtr)iSDL_GetGamepadMapping(gamepad);
+            {
+                var result = Native.NativeToString(gamepadMappingPtr);
+                {
+                    Native.Free(gamepadMappingPtr, SDL_NativeProvider);
+                    return result;
+                }
+            }
         }
 
         public static bool SDL_SetGamepadMapping(uint gamepadID, string mapping)
@@ -134,7 +148,14 @@ namespace Engine.SDL3
 
         public static string SDL_GetGamepadMappingForID(uint gamepadID)
         {
-            return Native.NativeToString((IntPtr)iSDL_GetGamepadMappingForID(gamepadID), freeProvider: SDL_NativeProvider);
+            var gamepadMappingForIDPtr = (IntPtr)iSDL_GetGamepadMappingForID(gamepadID);
+            {
+                var result = Native.NativeToString(gamepadMappingForIDPtr);
+                {
+                    Native.Free(gamepadMappingForIDPtr, SDL_NativeProvider);
+                    return result;
+                }
+            }
         }
 
         public static SDL_Gamepad* SDL_OpenGamepad(uint gamepadID)

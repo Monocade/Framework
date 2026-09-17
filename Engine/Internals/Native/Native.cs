@@ -1,11 +1,171 @@
 ﻿using System.Runtime.InteropServices;
+using System.Collections.Generic;
 using System.Text;
 using System;
 
 namespace Engine
 {
-    // Callback
+    // Arrays
     internal static unsafe partial class Native
+    {
+        public static T*[] NativeToArray<T>(T** ptr, int size, out int count, NativeProvider freeProvider = null) where T : unmanaged
+        {
+            count = 0;
+
+            try
+            {
+                if (ptr == null || size <= 0)
+                {
+                    return [];
+                }
+
+                var result = new T*[size];
+
+                for (int i = 0; i < size; i++)
+                {
+                    result[i] = ptr[i];
+                }
+
+                count = size;
+                {
+                    return result;
+                }
+            }
+            finally
+            {
+                if (freeProvider != null && ptr != null)
+                {
+                    Free((IntPtr)ptr, freeProvider);
+                }
+            }
+        }
+        
+        public static T[] NativeToArray<T>(T* ptr, int size, out int count, NativeProvider freeProvider = null) where T : unmanaged
+        {
+            count = 0;
+
+            try
+            {
+                if (ptr == null || size <= 0)
+                {
+                    return [];
+                }
+
+                count = size;
+                {
+                    return new ReadOnlySpan<T>(ptr, size).ToArray();
+                }
+            }
+            finally
+            {
+                if (freeProvider != null && ptr != null)
+                {
+                    Free((IntPtr)ptr, freeProvider);
+                }
+            }
+        }
+        
+        
+        public static string[] NativeToArray(IntPtr ptr, int size, out int count, NativeProvider freeProvider = null)
+        {
+            count = 0;
+
+            try
+            {
+                var data = (byte**)ptr;
+                if (data == null || size <= 0)
+                {
+                    return [];
+                }
+
+                var result = new string[size];
+
+                for (int i = 0; i < size; i++)
+                {
+                    result[i] = NativeToString((IntPtr)data[i]);
+                }
+
+                count = size;
+                {
+                    return result;
+                }
+            }
+            finally
+            {
+                if (freeProvider != null)
+                {
+                    Free(ptr, freeProvider);
+                }
+            }
+        }
+        
+        public static string[] NativeToArray(IntPtr ptr, out int count, NativeProvider freeProvider = null)
+        {
+            try
+            {
+                count = 0;
+
+                var data = (byte**)ptr;
+                if (data == null)
+                {
+                    return [];
+                }
+
+                var result = new List<string>();
+                
+                for (int i = 0; data[i] != null; i++)
+                {
+                    result.Add(NativeToString((IntPtr)data[i]));
+                }
+
+                count = result.Count;
+                {
+                    return result.ToArray();
+                }
+            }
+            finally
+            {
+                if (freeProvider != null)
+                {
+                    Free(ptr, freeProvider);
+                }
+            }
+        }
+    }
+
+    // String
+    internal static unsafe partial class Native
+    {
+        internal static IntPtr StringToNative(string value, NativeProvider provider)
+        {
+            value ??= string.Empty;
+            int byteCount = Encoding.UTF8.GetByteCount(value);
+            byte* ptr = (byte*)provider.Allocate((nuint)(byteCount + 1));
+
+            if (ptr == null)
+            {
+                throw new OutOfMemoryException();
+            }
+                
+            Encoding.UTF8.GetBytes(value, new Span<byte>(ptr, byteCount));
+            ptr[byteCount] = 0;
+            
+            return (IntPtr)ptr;
+        }
+        
+        internal static string NativeToString(IntPtr ptr)
+        {
+            if (ptr == IntPtr.Zero)
+            {
+                return string.Empty;
+            }
+
+            return Marshal.PtrToStringUTF8(ptr) ?? string.Empty;
+        }
+    }
+    
+    // Callback
+    internal static partial class Native
     {
         public static IntPtr CallbackToNative<T>(T value) where T : class
         {
@@ -26,56 +186,13 @@ namespace Engine
             }
         }
     }
-
-    // String
-    internal static unsafe partial class Native
-    {
-        internal static string NativeToString(IntPtr ptr, NativeProvider freeProvider = null)
-        {
-            try
-            {
-                if (ptr == IntPtr.Zero)
-                {
-                    return string.Empty;
-                }
-
-                return Marshal.PtrToStringUTF8(ptr) ?? string.Empty;
-            }
-            finally
-            {
-                if (ptr != IntPtr.Zero && freeProvider != null)
-                {
-                    Free(ptr, freeProvider);
-                }
-            }
-        }
-
-        internal static IntPtr StringToNative(string value, NativeProvider provider)
-        {
-            value ??= string.Empty;
-            int byteCount = Encoding.UTF8.GetByteCount(value);
-            byte* ptr = (byte*)provider.Allocate((nuint)(byteCount + 1));
-
-            if (ptr == null)
-            {
-                throw new OutOfMemoryException();
-            }
-                
-            Encoding.UTF8.GetBytes(value, new Span<byte>(ptr, byteCount));
-            ptr[byteCount] = 0;
-            return (IntPtr)ptr;
-        }
-    }
     
     // Free
-    internal static unsafe partial class Native
+    internal static partial class Native
     {
         public static void Free(IntPtr ptr, NativeProvider provider)
         {
-            if (provider != null)
-            {
-                provider?.Free(ptr);
-            }
+            provider?.Free(ptr);
         }
     }
 }
