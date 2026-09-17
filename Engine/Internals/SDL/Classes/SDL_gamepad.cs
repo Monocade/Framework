@@ -43,7 +43,14 @@ namespace Engine.SDL3
         {
             int size = 0;
             {
-                return SDL_NativeToArray(iSDL_GetGamepadMappings(&size), size, out count);
+                var gamepadMappingPtr = (IntPtr)iSDL_GetGamepadMappings(&size);
+                {
+                    var result = Native.NativeToStringArray(gamepadMappingPtr, size, out count);
+                    {
+                        Native.Free(gamepadMappingPtr, SDL_NativeProvider);
+                        return result;
+                    }
+                }
             }
         }
 

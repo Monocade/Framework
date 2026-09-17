@@ -105,7 +105,14 @@ namespace Engine.SDL3
             {
                 var count = checked((int)(*ptr));
                 {
-                    return SDL_NativeToArray(iSDL_GetClipboardMimeTypes(ptr), count, out _);
+                    var mimeTypesPtr = (IntPtr)iSDL_GetClipboardMimeTypes(ptr);
+                    {
+                        var result = Native.NativeToStringArray(mimeTypesPtr, count, out _);
+                        {
+                            Native.Free(mimeTypesPtr, SDL_NativeProvider);
+                            return result;
+                        }
+                    }
                 }
             }
         }

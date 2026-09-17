@@ -76,7 +76,7 @@ namespace Engine
         
         private static void DialogCallbackHandler(IntPtr ptr, byte** fileList, int filter)
         {
-            var files = SDL_NativeToArray(fileList, out var count, false);
+            var files = Native.NativeToStringArray((IntPtr)fileList, out var count);
             {
                 var callback = Native.NativeToCallback<DialogCallback>(ptr);
                 {

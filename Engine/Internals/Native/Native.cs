@@ -8,127 +8,88 @@ namespace Engine
     // Arrays
     internal static unsafe partial class Native
     {
-        public static T*[] NativeToArray<T>(T** ptr, int size, out int count, NativeProvider freeProvider = null) where T : unmanaged
+        public static T*[] NativeToArray<T>(T** ptr, int size, out int count) where T : unmanaged
         {
             count = 0;
 
-            try
+            if (ptr == null || size <= 0)
             {
-                if (ptr == null || size <= 0)
-                {
-                    return [];
-                }
-
-                var result = new T*[size];
-
-                for (int i = 0; i < size; i++)
-                {
-                    result[i] = ptr[i];
-                }
-
-                count = size;
-                {
-                    return result;
-                }
+                return [];
             }
-            finally
+
+            var result = new T*[size];
+
+            for (int i = 0; i < size; i++)
             {
-                if (freeProvider != null && ptr != null)
-                {
-                    Free((IntPtr)ptr, freeProvider);
-                }
+                result[i] = ptr[i];
+            }
+
+            count = size;
+            {
+                return result;
             }
         }
         
-        public static T[] NativeToArray<T>(T* ptr, int size, out int count, NativeProvider freeProvider = null) where T : unmanaged
+        public static T[] NativeToArray<T>(T* ptr, int size) where T : unmanaged
+        {
+            if (ptr == null || size <= 0)
+            {
+                return [];
+            }
+
+            var result = new T[size];
+
+            for (int i = 0; i < size; i++)
+            {
+                result[i] = ptr[i];
+            }
+
+            return result;
+        }
+        
+        public static string[] NativeToStringArray(IntPtr ptr, int size, out int count)
         {
             count = 0;
 
-            try
+            var data = (byte**)ptr;
+            if (data == null || size <= 0)
             {
-                if (ptr == null || size <= 0)
-                {
-                    return [];
-                }
-
-                count = size;
-                {
-                    return new ReadOnlySpan<T>(ptr, size).ToArray();
-                }
+                return [];
             }
-            finally
+
+            var result = new string[size];
+
+            for (int i = 0; i < size; i++)
             {
-                if (freeProvider != null && ptr != null)
-                {
-                    Free((IntPtr)ptr, freeProvider);
-                }
+                result[i] = NativeToString((IntPtr)data[i]);
+            }
+
+            count = size;
+            {
+                return result;
             }
         }
         
-        
-        public static string[] NativeToArray(IntPtr ptr, int size, out int count, NativeProvider freeProvider = null)
+        public static string[] NativeToStringArray(IntPtr ptr, out int count)
         {
             count = 0;
 
-            try
+            var data = (byte**)ptr;
+            if (data == null)
             {
-                var data = (byte**)ptr;
-                if (data == null || size <= 0)
-                {
-                    return [];
-                }
-
-                var result = new string[size];
-
-                for (int i = 0; i < size; i++)
-                {
-                    result[i] = NativeToString((IntPtr)data[i]);
-                }
-
-                count = size;
-                {
-                    return result;
-                }
+                return [];
             }
-            finally
-            {
-                if (freeProvider != null)
-                {
-                    Free(ptr, freeProvider);
-                }
-            }
-        }
-        
-        public static string[] NativeToArray(IntPtr ptr, out int count, NativeProvider freeProvider = null)
-        {
-            try
-            {
-                count = 0;
 
-                var data = (byte**)ptr;
-                if (data == null)
-                {
-                    return [];
-                }
-
-                var result = new List<string>();
+            var result = new List<string>();
                 
-                for (int i = 0; data[i] != null; i++)
-                {
-                    result.Add(NativeToString((IntPtr)data[i]));
-                }
-
-                count = result.Count;
-                {
-                    return result.ToArray();
-                }
-            }
-            finally
+            for (int i = 0; data[i] != null; i++)
             {
-                if (freeProvider != null)
-                {
-                    Free(ptr, freeProvider);
-                }
+                result.Add(NativeToString((IntPtr)data[i]));
+            }
+
+            count = result.Count;
+            {
+                return result.ToArray();
             }
         }
     }

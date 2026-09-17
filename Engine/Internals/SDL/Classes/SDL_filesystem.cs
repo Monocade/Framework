@@ -117,10 +117,13 @@ namespace Engine.SDL3
             {
                 int size = 0;
                 {
-                    var result = SDL_NativeToArray(iSDL_GlobDirectory((byte*)pathPtr, (byte*)patternPtr, (uint)flags, &size), size, out count);
+                    var globDirectoryPtr = (IntPtr)iSDL_GlobDirectory((byte*)pathPtr, (byte*)patternPtr, (uint)flags, &size);
+                    
+                    var result = Native.NativeToStringArray(globDirectoryPtr, size, out count);
                     {
                         Native.Free(pathPtr, SDL_NativeProvider);
                         Native.Free(patternPtr, SDL_NativeProvider);
+                        Native.Free(globDirectoryPtr, SDL_NativeProvider);
                         return result;
                     }
                 }
