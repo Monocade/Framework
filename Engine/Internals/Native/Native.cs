@@ -7,11 +7,31 @@ namespace Engine
     // String
     internal static unsafe partial class Native
     {
-        public static byte* StringToNative(string value, NativeProvider provider)
+        public static string NativeToString(byte* ptr, NativeProvider provider, bool free = false)
+        {
+            try
+            {
+                if (ptr == null)
+                {
+                    return string.Empty;
+                }
+
+                return Marshal.PtrToStringUTF8((IntPtr)ptr) ?? string.Empty;
+            }
+            finally
+            {
+                if (ptr != null && provider != null && free)
+                {
+                    Free((IntPtr)ptr, provider);
+                }
+            }
+        }
+
+        internal static byte* StringToNative(string value, NativeProvider provider)
         {
             value ??= string.Empty;
             int byteCount = Encoding.UTF8.GetByteCount(value);
-            byte* ptr = provider.Allocate((nuint)(byteCount + 1));
+            byte* ptr = (byte*)provider.Allocate((nuint)(byteCount + 1));
 
             if (ptr == null)
             {
@@ -22,24 +42,16 @@ namespace Engine
             ptr[byteCount] = 0;
             return ptr;
         }
-
-        public static string NativeToString(byte* ptr, NativeProvider provider = null)
+    }
+    
+    // Free
+    internal static unsafe partial class Native
+    {
+        public static void Free(IntPtr ptr, NativeProvider provider)
         {
-            try
+            if (provider != null)
             {
-                if (ptr == null)
-                {
-                    return string.Empty;
-                }
-                
-                return Marshal.PtrToStringUTF8((IntPtr)ptr) ?? string.Empty;
-            }
-            finally
-            {
-                if (ptr != null && provider != null)
-                {
-                    provider?.Free(ptr);
-                }
+                provider?.Free(ptr);
             }
         }
     }

@@ -7,6 +7,6 @@ namespace Engine.SDL3
 {
     internal static unsafe partial class SDL
     {
-        internal static readonly NativeProvider SDL_NativeProvider = new SDL_NativeProvider();
+        public static readonly NativeProvider NativeProvider = new SDLNativeProvider();
     }
 }
