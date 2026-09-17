@@ -6,17 +6,13 @@ namespace Engine
     // App
     public abstract partial class App : Bootstrap
     {
-        internal event Action<SDL_Event> OnEvent;
-        internal event Action OnInitialize;
-        internal event Action OnUpdate;
-        internal event Action OnRender;
-        internal event Action OnQuit;
-        
+        private FileSystem fileSystem;
+        private Window window;
 
         internal override void MainInitialize()
         {
-            var fileSystem = new FileSystem(this);
-            var window = new Window(this);
+            fileSystem = new FileSystem(this);
+            window = new Window(this);
             {
                 Initialize();
                 {
@@ -44,6 +40,12 @@ namespace Engine
 
     public abstract partial class App
     {
+        internal event Action<SDL_Event> OnEvent;
+        internal event Action OnInitialize;
+        internal event Action OnUpdate;
+        internal event Action OnRender;
+        internal event Action OnQuit;
+        
         public virtual void Initialize()
         {
             OnInitialize?.Invoke();
