@@ -12,12 +12,12 @@ namespace Engine.SDL3
 
         public static string SDL_GetAudioDriver(int index)
         {
-            return SDL_NativeToString(iSDL_GetAudioDriver(index));
+            return Native.NativeToString((IntPtr)iSDL_GetAudioDriver(index));
         }
 
         public static string SDL_GetCurrentAudioDriver()
         {
-            return SDL_NativeToString(iSDL_GetCurrentAudioDriver());
+            return Native.NativeToString((IntPtr)iSDL_GetCurrentAudioDriver());
         }
 
         public static uint[] SDL_GetAudioPlaybackDevices(out int count)
@@ -38,7 +38,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetAudioDeviceName(uint audioDeviceID)
         {
-            return SDL_NativeToString(iSDL_GetAudioDeviceName(audioDeviceID));
+            return Native.NativeToString((IntPtr)iSDL_GetAudioDeviceName(audioDeviceID));
         }
 
         public static bool SDL_GetAudioDeviceFormat(uint audioDeviceID, out SDL_AudioSpec spec, out int sampleFrames)
@@ -315,12 +315,17 @@ namespace Engine.SDL3
 
         public static bool SDL_LoadWAV(string path, out SDL_AudioSpec spec, out IntPtr audioBuf, out uint audioLen)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(path))
+            var pathPtr = Native.StringToNative(path, SDL_NativeProvider);
+            
             fixed (SDL_AudioSpec* ptr2 = &spec)
             fixed (IntPtr* ptr3 = &audioBuf)
             fixed (uint* ptr4 = &audioLen)
             {
-                return iSDL_LoadWAV(ptr1, ptr2, (byte**)ptr3, ptr4);
+                var result = iSDL_LoadWAV((byte*)pathPtr, ptr2, (byte**)ptr3, ptr4);
+                {
+                    Native.Free(pathPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -340,7 +345,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetAudioFormatName(SDL_AudioFormat format)
         {
-            return SDL_NativeToString(iSDL_GetAudioFormatName(format));
+            return Native.NativeToString((IntPtr)iSDL_GetAudioFormatName(format));
         }
 
         public static int SDL_GetSilenceValueForFormat(SDL_AudioFormat format)

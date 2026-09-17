@@ -7,10 +7,15 @@ namespace Engine.SDL3
     {
         public static SDL_AssertState SDL_ReportAssertion(SDL_AssertData* data, string func, string file, int line)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(func))
-            fixed (byte* ptr2 = SDL_StringToNative(file))
+            var funcPtr = Native.StringToNative(func, SDL_NativeProvider);
+            var filePtr = Native.StringToNative(file, SDL_NativeProvider);
             {
-                return iSDL_ReportAssertion(data, ptr1, ptr2, line);
+                var result = iSDL_ReportAssertion(data, (byte*)funcPtr, (byte*)filePtr, line);
+                {
+                    Native.Free(funcPtr, SDL_NativeProvider);
+                    Native.Free(filePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 

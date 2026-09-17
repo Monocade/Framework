@@ -80,7 +80,7 @@ namespace Engine.SDL3
 
                 for (int i = 0; i < size; i++)
                 {
-                    result[i] = SDL_NativeToString(ptr[i]);
+                    result[i] = SDL_NativeToStringTemp(ptr[i]);
                 }
 
                 count = size;
@@ -112,7 +112,7 @@ namespace Engine.SDL3
                 
                 for (int i = 0; ptr[i] != null; i++)
                 {
-                    result.Add(SDL_NativeToString(ptr[i]));
+                    result.Add(SDL_NativeToStringTemp(ptr[i]));
                 }
 
                 count = result.Count;
@@ -127,6 +127,31 @@ namespace Engine.SDL3
                     iSDL_free((IntPtr)ptr);
                 }
             }
+        }
+        
+        public static string SDL_NativeToStringTemp(byte* ptr, bool free = false)
+        {
+            if (ptr == null)
+            {
+                return string.Empty;
+            }
+
+            try
+            {
+                return Marshal.PtrToStringUTF8((IntPtr)ptr) ?? string.Empty;
+            }
+            finally
+            {
+                if (free)
+                {
+                    iSDL_free((IntPtr)ptr);
+                }
+            }
+        }
+        
+        public static byte[] SDL_StringToNativeTemp(string value)
+        {
+            return Encoding.UTF8.GetBytes((value ?? string.Empty) + '\0');
         }
     }
 }

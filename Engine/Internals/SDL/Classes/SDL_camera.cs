@@ -12,12 +12,12 @@ namespace Engine.SDL3
 
         public static string SDL_GetCameraDriver(int index)
         {
-            return SDL_NativeToString(iSDL_GetCameraDriver(index));
+            return Native.NativeToString((IntPtr)iSDL_GetCameraDriver(index));
         }
 
         public static string SDL_GetCurrentCameraDriver()
         {
-            return SDL_NativeToString(iSDL_GetCurrentCameraDriver());
+            return Native.NativeToString((IntPtr)iSDL_GetCurrentCameraDriver());
         }
 
         public static uint[] SDL_GetCameras(out int count)
@@ -38,7 +38,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetCameraName(uint cameraID)
         {
-            return SDL_NativeToString(iSDL_GetCameraName(cameraID));
+            return Native.NativeToString((IntPtr)iSDL_GetCameraName(cameraID));
         }
 
         public static SDL_CameraPosition SDL_GetCameraPosition(uint cameraID)

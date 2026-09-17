@@ -7,7 +7,7 @@ namespace Engine
     // String
     internal static unsafe partial class Native
     {
-        internal static string NativeToString(IntPtr ptr, NativeProvider provider = null, bool free = false)
+        internal static string NativeToString(IntPtr ptr, NativeProvider freeProvider = null)
         {
             try
             {
@@ -20,9 +20,9 @@ namespace Engine
             }
             finally
             {
-                if (ptr != IntPtr.Zero && provider != null && free)
+                if (ptr != IntPtr.Zero && freeProvider != null)
                 {
-                    Free(ptr, provider);
+                    Free(ptr, freeProvider);
                 }
             }
         }

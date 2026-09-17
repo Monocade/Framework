@@ -7,15 +7,19 @@ namespace Engine.SDL3
     {
         public static bool SDL_SetClipboardText(string text)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(text))
+            var textPtr = Native.StringToNative(text, SDL_NativeProvider);
             {
-                return iSDL_SetClipboardText(ptr1);
+                var result = iSDL_SetClipboardText((byte*)textPtr);
+                {
+                    Native.Free(textPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static string SDL_GetClipboardText()
         {
-            return SDL_NativeToString(iSDL_GetClipboardText(), free: true);
+            return Native.NativeToString((IntPtr)iSDL_GetClipboardText(), freeProvider: SDL_NativeProvider);
         }
 
         public static bool SDL_HasClipboardText()
@@ -25,15 +29,19 @@ namespace Engine.SDL3
 
         public static bool SDL_SetPrimarySelectionText(string text)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(text))
+            var textPtr = Native.StringToNative(text, SDL_NativeProvider);
             {
-                return iSDL_SetPrimarySelectionText(ptr1);
+                var result = iSDL_SetPrimarySelectionText((byte*)textPtr);
+                {
+                    Native.Free(textPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static string SDL_GetPrimarySelectionText()
         {
-            return SDL_NativeToString(iSDL_GetPrimarySelectionText(), free: true);
+            return Native.NativeToString((IntPtr)iSDL_GetPrimarySelectionText(), freeProvider: SDL_NativeProvider);
         }
 
         public static bool SDL_HasPrimarySelectionText()
@@ -53,18 +61,27 @@ namespace Engine.SDL3
 
         public static IntPtr SDL_GetClipboardData(string mimeType, out UIntPtr size)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(mimeType))
+            var mimeTypePtr = Native.StringToNative(mimeType, SDL_NativeProvider);
+            
             fixed (UIntPtr* ptr2 = &size)
             {
-                return iSDL_GetClipboardData(ptr1, ptr2);
+                var result = iSDL_GetClipboardData((byte*)mimeTypePtr, ptr2);
+                {
+                    Native.Free(mimeTypePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static bool SDL_HasClipboardData(string mimeType)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(mimeType))
+            var mimeTypePtr = Native.StringToNative(mimeType, SDL_NativeProvider);
             {
-                return iSDL_HasClipboardData(ptr1);
+                var result = iSDL_HasClipboardData((byte*)mimeTypePtr);
+                {
+                    Native.Free(mimeTypePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 

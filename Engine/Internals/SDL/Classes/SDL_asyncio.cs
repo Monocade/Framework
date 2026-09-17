@@ -7,10 +7,15 @@ namespace Engine.SDL3
     {
         public static SDL_AsyncIO* SDL_AsyncIOFromFile(string file, string mode)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(file))
-            fixed (byte* ptr2 = SDL_StringToNative(mode))
+            var filePtr = Native.StringToNative(file, SDL_NativeProvider);
+            var modePtr = Native.StringToNative(mode, SDL_NativeProvider);
             {
-                return iSDL_AsyncIOFromFile(ptr1, ptr2);
+                var result = iSDL_AsyncIOFromFile((byte*)filePtr, (byte*)modePtr);
+                {
+                    Native.Free(filePtr, SDL_NativeProvider);
+                    Native.Free(modePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -67,9 +72,13 @@ namespace Engine.SDL3
 
         public static bool SDL_LoadFileAsync(string file, SDL_AsyncIOQueue* queue, IntPtr userdata)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(file))
+            var filePtr = Native.StringToNative(file, SDL_NativeProvider);
             {
-                return iSDL_LoadFileAsync(ptr1, queue, userdata);
+                var result = iSDL_LoadFileAsync((byte*)filePtr, queue, userdata);
+                {
+                    Native.Free(filePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
     }
