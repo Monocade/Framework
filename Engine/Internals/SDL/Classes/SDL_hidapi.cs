@@ -32,9 +32,13 @@ namespace Engine.SDL3
 
         public static SDL_hid_device* SDL_hid_open(ushort vendorId, ushort productId, string serialNumber)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(serialNumber))
+            var serialNumberPtr = Native.StringToNative(serialNumber, SDL_NativeProvider);
             {
-                return iSDL_hid_open(vendorId, productId, (ushort*)ptr1);
+                var result = iSDL_hid_open(vendorId, productId, (ushort*)serialNumberPtr);
+                {
+                    Native.Free(serialNumberPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -90,33 +94,49 @@ namespace Engine.SDL3
 
         public static int SDL_hid_get_manufacturer_string(SDL_hid_device* dev, string @string, UIntPtr maxLength)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(@string))
+            var @stringPtr = Native.StringToNative(@string, SDL_NativeProvider);
             {
-                return iSDL_hid_get_manufacturer_string(dev, (ushort*)ptr1, maxLength);
+                var result = iSDL_hid_get_manufacturer_string(dev, (ushort*)@stringPtr, maxLength);
+                {
+                    Native.Free(@stringPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static int SDL_hid_get_product_string(SDL_hid_device* dev, string @string, UIntPtr maxLength)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(@string))
+            var @stringPtr = Native.StringToNative(@string, SDL_NativeProvider);
             {
-                return iSDL_hid_get_product_string(dev, (ushort*)ptr1, maxLength);
+                var result = iSDL_hid_get_product_string(dev, (ushort*)@stringPtr, maxLength);
+                {
+                    Native.Free(@stringPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static int SDL_hid_get_serial_number_string(SDL_hid_device* dev, string @string, UIntPtr maxLength)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(@string))
+            var @stringPtr = Native.StringToNative(@string, SDL_NativeProvider);
             {
-                return iSDL_hid_get_serial_number_string(dev, (ushort*)ptr1, maxLength);
+                var result = iSDL_hid_get_serial_number_string(dev, (ushort*)stringPtr, maxLength);
+                {
+                    Native.Free(stringPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static int SDL_hid_get_indexed_string(SDL_hid_device* dev, int stringIndex, string @string, UIntPtr maxLength)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(@string))
+            var @stringPtr = Native.StringToNative(@string, SDL_NativeProvider);
             {
-                return iSDL_hid_get_indexed_string(dev, stringIndex, (ushort*)ptr1, maxLength);
+                var result = iSDL_hid_get_indexed_string(dev, stringIndex, (ushort*)stringPtr, maxLength);
+                {
+                    Native.Free(stringPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 

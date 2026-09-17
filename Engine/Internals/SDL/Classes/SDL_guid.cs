@@ -7,17 +7,24 @@ namespace Engine.SDL3
     {
         public static void SDL_GUIDToString(SDL_GUID guid, string pszGUID, int cbGUID)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(pszGUID))
+            var pszGUIDPtr = Native.StringToNative(pszGUID, SDL_NativeProvider);
             {
-                iSDL_GUIDToString(guid, ptr1, cbGUID);
+                iSDL_GUIDToString(guid, (byte*)pszGUIDPtr, cbGUID);
+                {
+                    Native.Free(pszGUIDPtr, SDL_NativeProvider);
+                }
             }
         }
 
         public static SDL_GUID SDL_StringToGUID(string pchGUID)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(pchGUID))
+            var pchGUIDPtr = Native.StringToNative(pchGUID, SDL_NativeProvider);
             {
-                return iSDL_StringToGUID(ptr1);
+                var result = iSDL_StringToGUID((byte*)pchGUIDPtr);
+                {
+                    Native.Free(pchGUIDPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
     }

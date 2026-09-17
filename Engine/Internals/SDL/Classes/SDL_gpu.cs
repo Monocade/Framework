@@ -7,9 +7,13 @@ namespace Engine.SDL3
     {
         public static bool SDL_GPUSupportsShaderFormats(SDL_GPUShaderFormat formatFlags, string name)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_GPUSupportsShaderFormats((uint)formatFlags, ptr1);
+                var result = iSDL_GPUSupportsShaderFormats((uint)formatFlags, (byte*)namePtr);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -20,9 +24,13 @@ namespace Engine.SDL3
 
         public static SDL_GPUDevice* SDL_CreateGPUDevice(SDL_GPUShaderFormat formatFlags, bool debugMode, string name)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return iSDL_CreateGPUDevice((uint)formatFlags, debugMode, ptr1);
+                var result = iSDL_CreateGPUDevice((uint)formatFlags, debugMode, (byte*)namePtr);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -43,12 +51,12 @@ namespace Engine.SDL3
 
         public static string SDL_GetGPUDriver(int index)
         {
-            return SDL_NativeToString(iSDL_GetGPUDriver(index));
+            return Native.NativeToString((IntPtr)iSDL_GetGPUDriver(index));
         }
 
         public static string SDL_GetGPUDeviceDriver(SDL_GPUDevice* device)
         {
-            return SDL_NativeToString(iSDL_GetGPUDeviceDriver(device));
+            return Native.NativeToString((IntPtr)iSDL_GetGPUDeviceDriver(device));
         }
 
         public static SDL_GPUShaderFormat SDL_GetGPUShaderFormats(SDL_GPUDevice* device)
@@ -98,33 +106,45 @@ namespace Engine.SDL3
 
         public static void SDL_SetGPUBufferName(SDL_GPUDevice* device, SDL_GPUBuffer* buffer, string text)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(text))
+            var textPtr = Native.StringToNative(text, SDL_NativeProvider);
             {
-                iSDL_SetGPUBufferName(device, buffer, ptr1);
+                iSDL_SetGPUBufferName(device, buffer, (byte*)textPtr);
+                {
+                    Native.Free(textPtr, SDL_NativeProvider);
+                }
             }
         }
 
         public static void SDL_SetGPUTextureName(SDL_GPUDevice* device, SDL_GPUTexture* texture, string text)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(text))
+            var textPtr = Native.StringToNative(text, SDL_NativeProvider);
             {
-                iSDL_SetGPUTextureName(device, texture, ptr1);
+                iSDL_SetGPUTextureName(device, texture, (byte*)textPtr);
+                {
+                    Native.Free(textPtr, SDL_NativeProvider);
+                }
             }
         }
 
         public static void SDL_InsertGPUDebugLabel(SDL_GPUCommandBuffer* commandBuffer, string text)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(text))
+            var textPtr = Native.StringToNative(text, SDL_NativeProvider);
             {
-                iSDL_InsertGPUDebugLabel(commandBuffer, ptr1);
+                iSDL_InsertGPUDebugLabel(commandBuffer, (byte*)textPtr);
+                {
+                    Native.Free(textPtr, SDL_NativeProvider);
+                }
             }
         }
 
         public static void SDL_PushGPUDebugGroup(SDL_GPUCommandBuffer* commandBuffer, string name)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                iSDL_PushGPUDebugGroup(commandBuffer, ptr1);
+                iSDL_PushGPUDebugGroup(commandBuffer, (byte*)namePtr);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                }
             }
         }
 

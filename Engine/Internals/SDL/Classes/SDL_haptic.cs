@@ -15,7 +15,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetHapticNameForID(uint hapticID)
         {
-            return SDL_NativeToString(iSDL_GetHapticNameForID(hapticID));
+            return Native.NativeToString((IntPtr)iSDL_GetHapticNameForID(hapticID));
         }
 
         public static SDL_Haptic* SDL_OpenHaptic(uint hapticID)
@@ -35,7 +35,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetHapticName(SDL_Haptic* haptic)
         {
-            return SDL_NativeToString(iSDL_GetHapticName(haptic));
+            return Native.NativeToString((IntPtr)iSDL_GetHapticName(haptic));
         }
 
         public static bool SDL_IsMouseHaptic()

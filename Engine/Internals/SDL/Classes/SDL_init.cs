@@ -42,28 +42,43 @@ namespace Engine.SDL3
 
         public static bool SDL_SetAppMetadata(string appName, string appVersion, string appIdentifier)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(appName))
-            fixed (byte* ptr2 = SDL_StringToNative(appVersion))
-            fixed (byte* ptr3 = SDL_StringToNative(appIdentifier))
+            var appNamePtr = Native.StringToNative(appName, SDL_NativeProvider);
+            var appVersionPtr = Native.StringToNative(appVersion, SDL_NativeProvider);
+            var appIdentifierPtr = Native.StringToNative(appIdentifier, SDL_NativeProvider);
             {
-                return iSDL_SetAppMetadata(ptr1, ptr2, ptr3);
+                var result = iSDL_SetAppMetadata((byte*)appNamePtr, (byte*)appVersionPtr, (byte*)appIdentifierPtr);
+                {
+                    Native.Free(appNamePtr, SDL_NativeProvider);
+                    Native.Free(appVersionPtr, SDL_NativeProvider);
+                    Native.Free(appIdentifierPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static bool SDL_SetAppMetadataProperty(string name, string value)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
-            fixed (byte* ptr2 = SDL_StringToNative(value))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
+            var valuePtr = Native.StringToNative(value, SDL_NativeProvider);
             {
-                return iSDL_SetAppMetadataProperty(ptr1, ptr2);
+                var result = iSDL_SetAppMetadataProperty((byte*)namePtr, (byte*)valuePtr);
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    Native.Free(valuePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static string SDL_GetAppMetadataProperty(string name)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(name))
+            var namePtr = Native.StringToNative(name, SDL_NativeProvider);
             {
-                return SDL_NativeToString(iSDL_GetAppMetadataProperty(ptr1));
+                var result = Native.NativeToString((IntPtr)iSDL_GetAppMetadataProperty((byte*)namePtr));
+                {
+                    Native.Free(namePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
     }

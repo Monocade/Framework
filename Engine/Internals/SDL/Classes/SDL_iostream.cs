@@ -26,10 +26,10 @@ namespace Engine.SDL3
     {
         public static SDL_IOStream* SDL_IOFromFile(string file, string mode)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(file))
-            fixed (byte* ptr2 = SDL_StringToNative(mode))
+            var filePtr = Native.StringToNative(file, SDL_NativeProvider);
+            var modePtr = Native.StringToNative(mode, SDL_NativeProvider);
             {
-                return iSDL_IOFromFile(ptr1, ptr2);
+                var result = iSDL_IOFromFile((byte*)filePtr, (byte*)modePtr);
             }
         }
 
@@ -95,18 +95,27 @@ namespace Engine.SDL3
 
         public static UIntPtr SDL_IOprintf(SDL_IOStream* context, string fmt)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(fmt))
+            var fmtPtr = Native.StringToNative(fmt, SDL_NativeProvider);
             {
-                return iSDL_IOprintf(context, ptr1);
+                var result = iSDL_IOprintf(context, (byte*)fmtPtr);
+                {
+                    Native.Free(fmtPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static UIntPtr SDL_IOvprintf(SDL_IOStream* context, string fmt, string ap)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(fmt))
-            fixed (byte* ptr2 = SDL_StringToNative(ap))
+            var fmtPtr = Native.StringToNative(fmt, SDL_NativeProvider);
+            var apPtr = Native.StringToNative(ap, SDL_NativeProvider);
             {
-                return iSDL_IOvprintf(context, ptr1, ptr2);
+                var result = iSDL_IOvprintf(context, (byte*)fmtPtr, (byte*)apPtr);
+                {
+                    Native.Free(fmtPtr, SDL_NativeProvider);
+                    Native.Free(apPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -125,10 +134,15 @@ namespace Engine.SDL3
 
         public static IntPtr SDL_LoadFile(string file, out UIntPtr dataSize)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(file))
+            var filePtr = Native.StringToNative(file, SDL_NativeProvider);
+                
             fixed (UIntPtr* ptr2 = &dataSize)
             {
-                return iSDL_LoadFile(ptr1, ptr2);
+                var result = iSDL_LoadFile((byte*)filePtr, ptr2);
+                {
+                    Native.Free(filePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -139,9 +153,13 @@ namespace Engine.SDL3
 
         public static bool SDL_SaveFile(string file, IntPtr data, UIntPtr dataSize)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(file))
+            var filePtr = Native.StringToNative(file, SDL_NativeProvider);
             {
-                return iSDL_SaveFile(ptr1, data, dataSize);
+                var result = iSDL_SaveFile((byte*)filePtr, data, dataSize);
+                {
+                    Native.Free(filePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 

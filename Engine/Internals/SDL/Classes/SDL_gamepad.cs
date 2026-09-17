@@ -7,9 +7,13 @@ namespace Engine.SDL3
     {
         public static int SDL_AddGamepadMapping(string mapping)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(mapping))
+            var mappingPtr = Native.StringToNative(mapping, SDL_NativeProvider);
             {
-                return iSDL_AddGamepadMapping(ptr1);
+                var result = iSDL_AddGamepadMapping((byte*)mappingPtr);
+                {
+                    Native.Free(mappingPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -20,9 +24,13 @@ namespace Engine.SDL3
 
         public static int SDL_AddGamepadMappingsFromFile(string file)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(file))
+            var filePtr = Native.StringToNative(file, SDL_NativeProvider);
             {
-                return iSDL_AddGamepadMappingsFromFile(ptr1);
+                var result = iSDL_AddGamepadMappingsFromFile((byte*)filePtr);
+                {
+                    Native.Free(filePtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -41,19 +49,23 @@ namespace Engine.SDL3
 
         public static string SDL_GetGamepadMappingForGUID(SDL_GUID guid)
         {
-            return SDL_NativeToString(iSDL_GetGamepadMappingForGUID(guid), free: true);
+            return Native.NativeToString((IntPtr)iSDL_GetGamepadMappingForGUID(guid), freeProvider: SDL_NativeProvider);
         }
 
         public static string SDL_GetGamepadMapping(SDL_Gamepad* gamepad)
         {
-            return SDL_NativeToString(iSDL_GetGamepadMapping(gamepad), free: true);
+            return Native.NativeToString((IntPtr)iSDL_GetGamepadMapping(gamepad), freeProvider: SDL_NativeProvider);
         }
 
         public static bool SDL_SetGamepadMapping(uint gamepadID, string mapping)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(mapping))
+            var mappingPtr = Native.StringToNative(mapping, SDL_NativeProvider);
             {
-                return iSDL_SetGamepadMapping(gamepadID, ptr1);
+                var result = iSDL_SetGamepadMapping(gamepadID, (byte*)mappingPtr);
+                {
+                    Native.Free(mappingPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
@@ -77,12 +89,12 @@ namespace Engine.SDL3
 
         public static string SDL_GetGamepadNameForID(uint gamepadID)
         {
-            return SDL_NativeToString(iSDL_GetGamepadNameForID(gamepadID));
+            return Native.NativeToString((IntPtr)iSDL_GetGamepadNameForID(gamepadID));
         }
 
         public static string SDL_GetGamepadPathForID(uint gamepadID)
         {
-            return SDL_NativeToString(iSDL_GetGamepadPathForID(gamepadID));
+            return Native.NativeToString((IntPtr)iSDL_GetGamepadPathForID(gamepadID));
         }
 
         public static int SDL_GetGamepadPlayerIndexForID(uint gamepadID)
@@ -122,7 +134,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetGamepadMappingForID(uint gamepadID)
         {
-            return SDL_NativeToString(iSDL_GetGamepadMappingForID(gamepadID), free: true);
+            return Native.NativeToString((IntPtr)iSDL_GetGamepadMappingForID(gamepadID), freeProvider: SDL_NativeProvider);
         }
 
         public static SDL_Gamepad* SDL_OpenGamepad(uint gamepadID)
@@ -152,12 +164,12 @@ namespace Engine.SDL3
 
         public static string SDL_GetGamepadName(SDL_Gamepad* gamepad)
         {
-            return SDL_NativeToString(iSDL_GetGamepadName(gamepad));
+            return Native.NativeToString((IntPtr)iSDL_GetGamepadName(gamepad));
         }
 
         public static string SDL_GetGamepadPath(SDL_Gamepad* gamepad)
         {
-            return SDL_NativeToString(iSDL_GetGamepadPath(gamepad));
+            return Native.NativeToString((IntPtr)iSDL_GetGamepadPath(gamepad));
         }
 
         public static SDL_GamepadType SDL_GetGamepadType(SDL_Gamepad* gamepad)
@@ -202,7 +214,7 @@ namespace Engine.SDL3
 
         public static string SDL_GetGamepadSerial(SDL_Gamepad* gamepad)
         {
-            return SDL_NativeToString(iSDL_GetGamepadSerial(gamepad));
+            return Native.NativeToString((IntPtr)iSDL_GetGamepadSerial(gamepad));
         }
 
         public static ulong SDL_GetGamepadSteamHandle(SDL_Gamepad* gamepad)
@@ -258,28 +270,36 @@ namespace Engine.SDL3
 
         public static SDL_GamepadType SDL_GetGamepadTypeFromString(string str)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(str))
+            var strPtr = Native.StringToNative(str, SDL_NativeProvider);
             {
-                return iSDL_GetGamepadTypeFromString(ptr1);
+                var result = iSDL_GetGamepadTypeFromString((byte*)strPtr);
+                {
+                    Native.Free(strPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static string SDL_GetGamepadStringForType(SDL_GamepadType type)
         {
-            return SDL_NativeToString(iSDL_GetGamepadStringForType(type));
+            return Native.NativeToString((IntPtr)iSDL_GetGamepadStringForType(type));
         }
 
         public static SDL_GamepadAxis SDL_GetGamepadAxisFromString(string str)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(str))
+            var strPtr = Native.StringToNative(str, SDL_NativeProvider);
             {
-                return iSDL_GetGamepadAxisFromString(ptr1);
+                var result = iSDL_GetGamepadAxisFromString((byte*)strPtr);
+                {
+                    Native.Free(strPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static string SDL_GetGamepadStringForAxis(SDL_GamepadAxis axis)
         {
-            return SDL_NativeToString(iSDL_GetGamepadStringForAxis(axis));
+            return Native.NativeToString((IntPtr)iSDL_GetGamepadStringForAxis(axis));
         }
 
         public static bool SDL_GamepadHasAxis(SDL_Gamepad* gamepad, SDL_GamepadAxis axis)
@@ -294,15 +314,19 @@ namespace Engine.SDL3
 
         public static SDL_GamepadButton SDL_GetGamepadButtonFromString(string str)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(str))
+            var strPtr = Native.StringToNative(str, SDL_NativeProvider);
             {
-                return iSDL_GetGamepadButtonFromString(ptr1);
+                var result = iSDL_GetGamepadButtonFromString((byte*)strPtr);
+                {
+                    Native.Free(strPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
 
         public static string SDL_GetGamepadStringForButton(SDL_GamepadButton button)
         {
-            return SDL_NativeToString(iSDL_GetGamepadStringForButton(button));
+            return Native.NativeToString((IntPtr)iSDL_GetGamepadStringForButton(button));
         }
 
         public static bool SDL_GamepadHasButton(SDL_Gamepad* gamepad, SDL_GamepadButton button)
@@ -418,12 +442,12 @@ namespace Engine.SDL3
 
         public static string SDL_GetGamepadAppleSFSymbolsNameForButton(SDL_Gamepad* gamepad, SDL_GamepadButton button)
         {
-            return SDL_NativeToString(iSDL_GetGamepadAppleSFSymbolsNameForButton(gamepad, button));
+            return Native.NativeToString((IntPtr)iSDL_GetGamepadAppleSFSymbolsNameForButton(gamepad, button));
         }
 
         public static string SDL_GetGamepadAppleSFSymbolsNameForAxis(SDL_Gamepad* gamepad, SDL_GamepadAxis axis)
         {
-            return SDL_NativeToString(iSDL_GetGamepadAppleSFSymbolsNameForAxis(gamepad, axis));
+            return Native.NativeToString((IntPtr)iSDL_GetGamepadAppleSFSymbolsNameForAxis(gamepad, axis));
         }
     }
 }
