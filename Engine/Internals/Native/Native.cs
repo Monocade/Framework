@@ -4,6 +4,29 @@ using System;
 
 namespace Engine
 {
+    // Callback
+    internal static unsafe partial class Native
+    {
+        public static IntPtr CallbackToNative<T>(T value) where T : class
+        {
+            return GCHandle.ToIntPtr(GCHandle.Alloc(value));
+        }
+        
+        public static T NativeToCallback<T>(IntPtr ptr) where T : class
+        {
+            var handle = GCHandle.FromIntPtr(ptr);
+
+            try
+            {
+                return handle.Target as T;
+            }
+            finally
+            {
+                handle.Free();
+            }
+        }
+    }
+
     // String
     internal static unsafe partial class Native
     {

@@ -78,7 +78,7 @@ namespace Engine
         {
             var files = SDL_NativeToArray(fileList, out var count, false);
             {
-                var callback = SDL_FreeCallback<DialogCallback>(ptr);
+                var callback = Native.NativeToCallback<DialogCallback>(ptr);
                 {
                     callback?.Invoke(fileList == null ? DialogResult.Failed : count == 0 ? DialogResult.Cancelled : DialogResult.Success, files);
                 }
@@ -90,7 +90,7 @@ namespace Engine
         {
             path = Normalize(path);
             {
-                var ptr = SDL_CreateCallback(callback);
+                var ptr = Native.CallbackToNative(callback);
                 {
                     SDL_ShowOpenFileDialog(DialogCallbackHandler, ptr, Window.handle, null, 0, path, true);
                 }
@@ -101,7 +101,7 @@ namespace Engine
         {
             path = Normalize(path);
             {
-                var ptr = SDL_CreateCallback(callback);
+                var ptr = Native.CallbackToNative(callback);
                 {
                     SDL_ShowOpenFileDialog(DialogCallbackHandler, ptr, Window.handle, null, 0, path, true);
                 }
@@ -112,7 +112,7 @@ namespace Engine
         {
             path = Normalize(path);
             {
-                var ptr = SDL_CreateCallback(callback);
+                var ptr = Native.CallbackToNative(callback);
                 {
                     SDL_ShowOpenFolderDialog(DialogCallbackHandler, ptr, Window.handle, path, true);
                 }
@@ -123,7 +123,7 @@ namespace Engine
         {
             path = Normalize(path);
             {
-                var ptr = SDL_CreateCallback(callback);
+                var ptr = Native.CallbackToNative(callback);
                 {
                     SDL_ShowOpenFolderDialog(DialogCallbackHandler, ptr, Window.handle, path, false);
                 }
@@ -134,7 +134,7 @@ namespace Engine
         {
             path = Normalize(path);
             {
-                var ptr = SDL_CreateCallback(callback);
+                var ptr = Native.CallbackToNative(callback);
                 {
                     SDL_ShowSaveFileDialog(DialogCallbackHandler, ptr, Window.handle, null, 0, path);
                 }
