@@ -254,8 +254,6 @@ namespace Engine
             value ??= string.Empty;
             int byteCount = Encoding.UTF8.GetByteCount(value);
             byte* ptr = (byte*)provider.Allocate((nuint)(byteCount + 1));
-            
-            Console.WriteLine($"ALLOC: {(IntPtr)ptr}");
 
             if (ptr == null)
             {
@@ -307,7 +305,6 @@ namespace Engine
     {
         public static void Free(IntPtr ptr, NativeProvider provider)
         {
-            Console.WriteLine($"FREE: {ptr}");
             provider?.Free(ptr);
         }
     }
