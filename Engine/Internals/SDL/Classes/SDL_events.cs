@@ -123,9 +123,13 @@ namespace Engine.SDL3
 
         public static int SDL_GetEventDescription(SDL_Event* @event, string buffer, int bufferLength)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(buffer))
+            var bufferPtr = Native.StringToNative(buffer, SDL_NativeProvider);
             {
-                return iSDL_GetEventDescription(@event, ptr1, bufferLength);
+                var result = iSDL_GetEventDescription(@event, (byte*)bufferPtr, bufferLength);
+                {
+                    Native.Free(bufferPtr, SDL_NativeProvider);
+                    return result;
+                }
             }
         }
     }

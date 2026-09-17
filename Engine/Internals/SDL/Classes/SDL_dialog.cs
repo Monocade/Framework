@@ -7,27 +7,38 @@ namespace Engine.SDL3
     {
         public static void SDL_ShowOpenFileDialog(SDL_DialogFileCallback callback, IntPtr userdata, SDL_Window* window, SDL_DialogFileFilter[] filters, int numFilters, string defaultLocation, bool allowMany)
         {
+            var defaultLocationPtr = Native.StringToNative(defaultLocation, SDL_NativeProvider);
+                
             fixed (SDL_DialogFileFilter* ptr1 = filters)
-            fixed (byte* ptr2 = SDL_StringToNative(defaultLocation))
             {
-                iSDL_ShowOpenFileDialog(Marshal.GetFunctionPointerForDelegate(callback), userdata, window, ptr1, numFilters, ptr2, allowMany);
+                iSDL_ShowOpenFileDialog(Marshal.GetFunctionPointerForDelegate(callback), userdata, window, ptr1, numFilters, (byte*)defaultLocationPtr, allowMany);
+                {
+                    Native.Free(defaultLocationPtr, SDL_NativeProvider);
+                }
             }
         }
 
         public static void SDL_ShowSaveFileDialog(SDL_DialogFileCallback callback, IntPtr userdata, SDL_Window* window, SDL_DialogFileFilter[] filters, int numFilters, string defaultLocation)
         {
+            var defaultLocationPtr = Native.StringToNative(defaultLocation, SDL_NativeProvider);
+                
             fixed (SDL_DialogFileFilter* ptr1 = filters)
-            fixed (byte* ptr2 = SDL_StringToNative(defaultLocation))
             {
-                iSDL_ShowSaveFileDialog(Marshal.GetFunctionPointerForDelegate(callback), userdata, window, ptr1, numFilters, ptr2);
+                iSDL_ShowSaveFileDialog(Marshal.GetFunctionPointerForDelegate(callback), userdata, window, ptr1, numFilters, (byte*)defaultLocationPtr);
+                {
+                    Native.Free(defaultLocationPtr, SDL_NativeProvider);
+                }
             }
         }
 
         public static void SDL_ShowOpenFolderDialog(SDL_DialogFileCallback callback, IntPtr userdata, SDL_Window* window, string defaultLocation, bool allowMany)
         {
-            fixed (byte* ptr1 = SDL_StringToNative(defaultLocation))
+            var defaultLocationPtr = Native.StringToNative(defaultLocation, SDL_NativeProvider);
             {
-                iSDL_ShowOpenFolderDialog(Marshal.GetFunctionPointerForDelegate(callback), userdata, window, ptr1, allowMany);
+                iSDL_ShowOpenFolderDialog(Marshal.GetFunctionPointerForDelegate(callback), userdata, window, (byte*)defaultLocationPtr, allowMany);
+                {
+                    Native.Free(defaultLocationPtr, SDL_NativeProvider);
+                }
             }
         }
 
