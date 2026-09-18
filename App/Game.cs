@@ -9,7 +9,7 @@ namespace Application
         {
             base.Initialize();
             {
-                FileSystem.OpenFileDialog(FileSystem.BasePath, DialogCallbackMultiple, [new DialogFilter { Name = "Dlls", Pattern = "dll" }], false);
+                Storage.OpenFileDialog(Storage.BasePath, DialogCallbackMultiple, [new DialogFilter { Name = "Dlls", Pattern = "dll" }], false);
             }
         }
 

@@ -6,12 +6,12 @@ namespace Engine
     // App
     public abstract partial class App : Bootstrap
     {
-        private FileSystem FileSystem;
+        private Storage Storage;
         private Window Window;
 
         internal override void MainInitialize()
         {
-            FileSystem = new FileSystem(this);
+            Storage = new Storage(this);
             Window = new Window(this);
             {
                 Initialize();

@@ -3,7 +3,7 @@
 namespace Engine
 {
     // Title Storage Provider
-    internal sealed unsafe class TitleStorage(SDL_Storage* handle) : Storage(handle)
+    internal sealed unsafe class TitleStorageProvider(SDL_Storage* handle) : StorageProvider(handle)
     {
         public override bool IsReady => SDL_StorageReady(Handle);
         
