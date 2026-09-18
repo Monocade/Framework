@@ -1,50 +1,39 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System;
 
 namespace Engine
 {
-    // Storage
-    public abstract unsafe partial class Storage : IDisposable
+    // Title Storage Provider
+    public sealed unsafe partial class TitleStorageProvider(string path) : StorageProvider
     {
-        private string Normalize(string path) => path.Replace("\\", "/");
+        private SDL_Storage* Handle = SDL_OpenTitleStorage(path, 0);
         
-        public abstract bool IsWritable { get; }
+        public override bool IsReady => SDL_StorageReady(Handle);
 
-        public abstract bool IsReadable { get; }
+        public override bool IsWritable => false;
 
-        public abstract bool IsReady { get; }
+        public override bool IsReadable => true;
         
-        internal SDL_Storage* Handle
+        
+        public override string Normalize(string path)
         {
-            get; private set;
+            return path.Replace("\\", "/");
         }
 
-        
-        internal Storage(SDL_Storage* handle)
-        {
-            if (handle == null)
-            {
-                throw new Exception($"Failed to open storage: {SDL_GetError()}");
-            }
-            
-            Handle = handle;
-        }
-
-        public void Dispose()
+        public override void Dispose(bool disposing)
         {
             if (Handle != null)
             {
-                Console.WriteLine("Disposed");
                 SDL_CloseStorage(Handle);
                 Handle = null;
             }
         }
     }
-    
-    // Storage Directory
-    public unsafe partial class Storage
+
+    // Directory
+    public unsafe partial class TitleStorageProvider
     {
-        public string[] DirectoryEnumerate(string path, string pattern)
+        public override string[] DirectoryEnumerate(string path, string pattern)
         {
             pattern = Normalize(pattern);
             path = Normalize(path);
@@ -53,7 +42,7 @@ namespace Engine
                 {
                     throw new Exception("Storage is not ready");
                 }
-                
+
                 if (!IsReadable)
                 {
                     throw new Exception("Storage is not readable");
@@ -71,12 +60,12 @@ namespace Engine
                         throw new Exception($"Failed to enumerate directory {path}: {SDL_GetError()}");
                     }
                 }
-                
+
                 return result;
             }
         }
 
-        public void DirectoryCopy(string path, string destination)
+        public override void DirectoryCopy(string path, string destination)
         {
             destination = Normalize(destination);
             path = Normalize(path);
@@ -85,7 +74,7 @@ namespace Engine
                 {
                     throw new Exception("Storage is not ready");
                 }
-                
+
                 if (!IsReadable)
                 {
                     throw new Exception("Storage is not readable");
@@ -122,7 +111,7 @@ namespace Engine
             }
         }
 
-        public void DirectoryRename(string path, string destination)
+        public override void DirectoryRename(string path, string destination)
         {
             destination = Normalize(destination);
             path = Normalize(path);
@@ -131,7 +120,7 @@ namespace Engine
                 {
                     throw new Exception("Storage is not ready");
                 }
-                
+
                 if (!IsReadable)
                 {
                     throw new Exception("Storage is not readable");
@@ -152,7 +141,7 @@ namespace Engine
             }
         }
 
-        public bool DirectoryExists(string path)
+        public override bool DirectoryExists(string path)
         {
             path = Normalize(path);
             {
@@ -160,7 +149,7 @@ namespace Engine
                 {
                     throw new Exception("Storage is not ready");
                 }
-                
+
                 if (!IsReadable)
                 {
                     throw new Exception("Storage is not readable");
@@ -173,7 +162,7 @@ namespace Engine
             }
         }
 
-        public ulong DirectorySize(string path)
+        public override ulong DirectorySize(string path)
         {
             path = Normalize(path);
             {
@@ -181,7 +170,7 @@ namespace Engine
                 {
                     throw new Exception("Storage is not ready");
                 }
-                
+
                 if (!IsReadable)
                 {
                     throw new Exception("Storage is not readable");
@@ -204,7 +193,7 @@ namespace Engine
             }
         }
 
-        public void DirectoryCreate(string path)
+        public override void DirectoryCreate(string path)
         {
             path = Normalize(path);
             {
@@ -212,7 +201,7 @@ namespace Engine
                 {
                     throw new Exception("Storage is not ready");
                 }
-                
+
                 if (!IsReadable)
                 {
                     throw new Exception("Storage is not readable");
@@ -233,7 +222,7 @@ namespace Engine
             }
         }
 
-        public void DirectoryDelete(string path)
+        public override void DirectoryDelete(string path)
         {
             path = Normalize(path);
             {
@@ -241,7 +230,7 @@ namespace Engine
                 {
                     throw new Exception("Storage is not ready");
                 }
-                
+
                 if (!IsReadable)
                 {
                     throw new Exception("Storage is not readable");
@@ -262,7 +251,7 @@ namespace Engine
             }
         }
 
-        public bool IsDirectory(string path)
+        public override bool IsDirectory(string path)
         {
             path = Normalize(path);
             {
@@ -270,7 +259,7 @@ namespace Engine
                 {
                     throw new Exception("Storage is not ready");
                 }
-                
+
                 if (!IsReadable)
                 {
                     throw new Exception("Storage is not readable");
@@ -284,10 +273,10 @@ namespace Engine
         }
     }
     
-    // Storage File
-    public abstract unsafe partial class Storage
+    // File
+    public unsafe partial class TitleStorageProvider
     {
-        public bool IsFile(string path)
+        public override bool IsFile(string path)
         {
             path = Normalize(path);
             {
@@ -308,7 +297,7 @@ namespace Engine
             }
         }
         
-        public void FileCopy(string path, string destination)
+        public override void FileCopy(string path, string destination)
         {
             destination = Normalize(destination);
             path = Normalize(path);
@@ -338,7 +327,7 @@ namespace Engine
             }
         }
         
-        public void FileRename(string path, string destination)
+        public override void FileRename(string path, string destination)
         {
             destination = Normalize(destination);
             path = Normalize(path);
@@ -368,7 +357,7 @@ namespace Engine
             }
         }
         
-        public bool FileExists(string path)
+        public override bool FileExists(string path)
         {
             path = Normalize(path);
             {
@@ -389,7 +378,7 @@ namespace Engine
             }
         }
         
-        public ulong FileSize(string path)
+        public override ulong FileSize(string path)
         {
             path = Normalize(path);
             {
@@ -420,7 +409,7 @@ namespace Engine
             }
         }
         
-        public void FileDelete(string path)
+        public override void FileDelete(string path)
         {
             path = Normalize(path);
             {
@@ -449,7 +438,65 @@ namespace Engine
             }
         }
         
-        public byte[] FileReadBytes(string path, ulong bufferSize = 0)
+        public override void FileWriteBytes(string path, byte[] buffer, ulong bufferSize = 0)
+        {
+            path = Normalize(path);
+            {
+                if (!IsReady)
+                {
+                    throw new Exception("Storage is not ready");
+                }
+                
+                if (!IsWritable)
+                {
+                    throw new Exception("Storage is not writable");
+                }
+
+                var size = bufferSize;
+                
+                if (size <= 0 || size > (ulong)buffer.Length)
+                {
+                    size = (ulong)buffer.Length;
+                }
+
+                var result = SDL_WriteStorageFile(Handle, path, buffer, bufferSize > 0 ? bufferSize : size);
+                {
+                    if (!result)
+                    {
+                        throw new Exception($"Failed to write file {path}: {SDL_GetError()}");
+                    }
+                }
+            }
+        }
+        
+        public override void FileWrite(string path, Stream stream)
+        {
+            path = Normalize(path);
+            {
+                if (!IsReady)
+                {
+                    throw new Exception("Storage is not ready");
+                }
+                
+                if (!IsWritable)
+                {
+                    throw new Exception("Storage is not writable");
+                }
+
+                using var memory = new MemoryStream();
+                stream.CopyTo(memory);
+                
+                var result = SDL_WriteStorageFile(Handle, path, memory.ToArray(), (ulong)memory.Length);
+                {
+                    if (!result)
+                    {
+                        throw new Exception($"Failed to write file {path}: {SDL_GetError()}");
+                    }
+                }
+            }
+        }
+        
+        public override byte[] FileReadBytes(string path, ulong bufferSize = 0)
         {
             path = Normalize(path);
             {
@@ -483,38 +530,7 @@ namespace Engine
             }
         }
         
-        public void FileWriteBytes(string path, byte[] buffer, ulong bufferSize = 0)
-        {
-            path = Normalize(path);
-            {
-                if (!IsReady)
-                {
-                    throw new Exception("Storage is not ready");
-                }
-                
-                if (!IsWritable)
-                {
-                    throw new Exception("Storage is not writable");
-                }
-
-                var size = bufferSize;
-                
-                if (size <= 0 || size > (ulong)buffer.Length)
-                {
-                    size = (ulong)buffer.Length;
-                }
-
-                var result = SDL_WriteStorageFile(Handle, path, buffer, bufferSize > 0 ? bufferSize : size);
-                {
-                    if (!result)
-                    {
-                        throw new Exception($"Failed to write file {path}: {SDL_GetError()}");
-                    }
-                }
-            }
-        }
-        
-        public Stream FileRead(string path)
+        public override Stream FileRead(string path)
         {
             path = Normalize(path);
             {
@@ -537,33 +553,6 @@ namespace Engine
                 }
 
                 return new MemoryStream(buffer);
-            }
-        }
-        
-        public void FileWrite(string path, Stream stream)
-        {
-            path = Normalize(path);
-            {
-                if (!IsReady)
-                {
-                    throw new Exception("Storage is not ready");
-                }
-                
-                if (!IsWritable)
-                {
-                    throw new Exception("Storage is not writable");
-                }
-
-                using var memory = new MemoryStream();
-                stream.CopyTo(memory);
-                
-                var result = SDL_WriteStorageFile(Handle, path, memory.ToArray(), (ulong)memory.Length);
-                {
-                    if (!result)
-                    {
-                        throw new Exception($"Failed to write file {path}: {SDL_GetError()}");
-                    }
-                }
             }
         }
     }

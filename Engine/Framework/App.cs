@@ -5,17 +5,19 @@ namespace Engine
     // App
     public abstract partial class App : Bootstrap
     {
-        public FileSystem FileSystem { get; private set; }
         public Platform Platform { get; private set; }
+        public Storage Storage { get; private set; }
+        public Dialog Dialog { get; private set; }
         public Window Window { get; private set; }
         public Debug Debug { get; private set; }
         
 
         internal override void MainInitialize()
         {
-            FileSystem = new FileSystem(this);
+            Storage = new Storage(this);
             Platform = new Platform(this);
             Window = new Window(this);
+            Dialog = new Dialog(this);
             Debug = new Debug(this);
             {
                 Initialize();
