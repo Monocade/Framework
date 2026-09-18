@@ -4,7 +4,7 @@ namespace Engine
 {
     public abstract class Module : IDisposable
     {
-        private readonly App App;
+        protected App App { get; private set; }
         
         protected Module(App App)
         {

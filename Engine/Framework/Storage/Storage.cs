@@ -1,19 +1,20 @@
-﻿using System;
-using System.IO;
+﻿using System.Threading.Tasks;
+using System.Threading;
+using System;
 
 namespace Engine
 {
     // Storage
     public sealed partial class Storage : Module
     {
-        public static string PrefPath(string name) => SDL_GetPrefPath(string.Empty, name);
+        public static string PrefPath(string app, string name) => SDL_GetPrefPath(app, name);
 
         public static string Normalize(string path) => path.Replace("\\", "/");
         
         public static string BasePath => SDL_GetBasePath();
         
         
-        internal Storage(App app) : base(app)
+        internal Storage(App App) : base(App)
         {
             // Constructor
         }
@@ -22,50 +23,65 @@ namespace Engine
     // Storage API
     public unsafe partial class Storage
     {
-        public static StorageProvider OpenStorage(StorageType type, string name = null)
+        public static void OpenUserStorage(string app, string user, Action<StorageProvider> onReady)
         {
-            name = Normalize(name);
+            user = Normalize(user);
+            app = Normalize(app);
             {
-                StorageProvider storageProvider;
-            
-                switch (type)
+                OpenStorageHandler(new UserStorageProvider(SDL_OpenUserStorage(app, user, 0)), onReady);
+            }
+        }
+        
+        public static void OpenTitleStorage(string path, Action<StorageProvider> onReady)
+        {
+            path = Normalize(path);
+            {
+                OpenStorageHandler(new TitleStorageProvider(SDL_OpenTitleStorage(path, 0)), onReady);
+            }
+        }
+        
+        public static void OpenFileStorage(string path, Action<StorageProvider> onReady)
+        {
+            path = Normalize(path);
+            {
+                OpenStorageHandler(new FileStorageProvider(SDL_OpenFileStorage(path)), onReady);
+            }
+        }
+
+        private static void OpenStorageHandler(StorageProvider storageProvider, Action<StorageProvider> onReady)
+        {
+            void Callback()
+            {
+                try
                 {
-                    case StorageType.File:
-                    {
-                        storageProvider = new FileStorageProvider(SDL_OpenFileStorage(name));
-                        break;
-                    }
-                    case StorageType.Title:
-                    {
-                        storageProvider = new TitleStorageProvider(SDL_OpenTitleStorage(name, 0));
-                        break;
-                    }
-                    case StorageType.User:
-                    {
-                        storageProvider = new UserStorageProvider(SDL_OpenUserStorage(string.Empty, name, 0));
-                        break;
-                    }
-                    default:
-                    {
-                        throw new Exception($"Unknown storage: {type}");
-                    }
+                    onReady(storageProvider);
                 }
-            
+                finally
+                {
+                    storageProvider.Dispose();
+                }
+            }
+
+            if (storageProvider.IsReady)
+            {
+                Callback();
+                return;
+            }
+
+            Task.Run(() =>
+            {
                 while (!storageProvider.IsReady)
                 {
-                    SDL_Delay(1);
+                    Thread.Sleep(100);
                 }
 
-                return storageProvider;
-            }
+                App.RunOnMainThread(Callback);
+            });
         }
 
         public static void CloseStorage(StorageProvider storageProvider)
         {
-            if (storageProvider != null)
-            {
-                storageProvider.Dispose();
-            }
+            storageProvider?.Dispose();
         }
     }
 
@@ -74,8 +90,23 @@ namespace Engine
     {
         public delegate void DialogCallback(DialogResult result, string[] contents);
         
-
-        private static void DialogHandler(string path, DialogCallback callback, DialogFilter[] filters, DialogMode mode, bool multiple)
+        
+        public static void OpenFolderDialog(string path, DialogCallback callback, DialogFilter[] filters = null, bool multiple = false)
+        {
+            OpenDialogHandler(path, callback, filters, DialogMode.OpenFolder, multiple);
+        }
+        
+        public static void OpenFileDialog(string path, DialogCallback callback, DialogFilter[] filters = null, bool multiple = false)
+        {
+            OpenDialogHandler(path, callback, filters, DialogMode.OpenFile, multiple);
+        }
+        
+        public static void OpenSaveDialog(string path, DialogCallback callback, DialogFilter[] filters = null)
+        {
+            OpenDialogHandler(path, callback, filters, DialogMode.SaveFile, false);
+        }
+        
+        private static void OpenDialogHandler(string path, DialogCallback callback, DialogFilter[] filters, DialogMode mode, bool multiple)
         {
             var nativeFilters = new SDL_DialogFileFilter[filters?.Length ?? 0];
 
@@ -92,10 +123,7 @@ namespace Engine
             (
                 new DialogContext
                 (
-                    path,
-                    callback,
-                    nativeFilters,
-                    mode
+                    path, callback, nativeFilters, mode
                 )
             );
             
@@ -135,458 +163,6 @@ namespace Engine
                 {
                     Native.Free((IntPtr)filter.Name, SDL_NativeProvider);
                     Native.Free((IntPtr)filter.Pattern, SDL_NativeProvider);
-                }
-            }
-        }
-        
-        public static void OpenFolderDialog(string path, DialogCallback callback, DialogFilter[] filters = null, bool multiple = false)
-        {
-            DialogHandler(path, callback, filters, DialogMode.OpenFolder, multiple);
-        }
-        
-        public static void OpenFileDialog(string path, DialogCallback callback, DialogFilter[] filters = null, bool multiple = false)
-        {
-            DialogHandler(path, callback, filters, DialogMode.OpenFile, multiple);
-        }
-        
-        public static void OpenSaveDialog(string path, DialogCallback callback, DialogFilter[] filters = null)
-        {
-            DialogHandler(path, callback, filters, DialogMode.SaveFile, false);
-        }
-    }
-    
-    // Directory API
-    public unsafe partial class Storage
-    {
-        public static string[] DirectoryEnumerate(StorageProvider storage, string path, string pattern)
-        {
-            pattern = Normalize(pattern);
-            path = Normalize(path);
-            {
-                if (!storage.IsReadable)
-                {
-                    throw new Exception("Storage is not readable");
-                }
-
-                if (!DirectoryExists(storage, path))
-                {
-                    throw new Exception($"Path {path} is not a valid directory");
-                }
-
-                var result = SDL_GlobStorageDirectory(storage.Handle, path, pattern, SDL_GlobFlags.SDL_GLOB_CASEINSENSITIVE, out _);
-                {
-                    if (result == null)
-                    {
-                        throw new Exception($"Failed to enumerate directory {path}: {SDL_GetError()}");
-                    }
-                }
-                
-                return result;
-            }
-        }
-
-        public static void DirectoryCopy(StorageProvider storage, string path, string destination)
-        {
-            destination = Normalize(destination);
-            path = Normalize(path);
-            {
-                if (!storage.IsReadable)
-                {
-                    throw new Exception("Storage is not readable");
-                }
-
-                if (!storage.IsWritable)
-                {
-                    throw new Exception("Storage is not writable");
-                }
-
-                if (!DirectoryExists(storage, path))
-                {
-                    throw new Exception($"Failed to copy directory {path}: Not a valid directory");
-                }
-
-                DirectoryCreate(storage, destination);
-                {
-                    foreach (var entry in DirectoryEnumerate(storage, path, "*"))
-                    {
-                        var source = string.IsNullOrEmpty(path) ? entry : $"{path}/{entry}";
-                        var relative = string.IsNullOrEmpty(path) ? entry : source.Substring(path.Length + 1);
-                        var target = string.IsNullOrEmpty(destination) ? relative : $"{destination}/{relative}";
-
-                        if (IsDirectory(storage, source))
-                        {
-                            DirectoryCopy(storage, source, target);
-                        }
-                        else if (IsFile(storage, source))
-                        {
-                            FileCopy(storage, source, target);
-                        }
-                    }
-                }
-            }
-        }
-
-        public static void DirectoryRename(StorageProvider storage, string path, string destination)
-        {
-            destination = Normalize(destination);
-            path = Normalize(path);
-            {
-                if (!storage.IsReadable)
-                {
-                    throw new Exception("Storage is not readable");
-                }
-
-                if (!storage.IsWritable)
-                {
-                    throw new Exception("Storage is not writable");
-                }
-
-                var result = SDL_RenameStoragePath(storage.Handle, path, destination);
-                {
-                    if (result == false)
-                    {
-                        throw new Exception($"Failed to rename {path} to {destination}: {SDL_GetError()}");
-                    }
-                }
-            }
-        }
-
-        public static bool DirectoryExists(StorageProvider storage, string path)
-        {
-            path = Normalize(path);
-            {
-                if (!storage.IsReadable)
-                {
-                    throw new Exception("Storage is not readable");
-                }
-
-                var result = SDL_GetStoragePathInfo(storage.Handle, path, out var info);
-                {
-                    return result && info.Type == SDL_PathType.SDL_PATHTYPE_DIRECTORY;
-                }
-            }
-        }
-
-        public static ulong DirectorySize(StorageProvider storage, string path)
-        {
-            path = Normalize(path);
-            {
-                if (!storage.IsReadable)
-                {
-                    throw new Exception("Storage is not readable");
-                }
-
-                var result = SDL_GetStoragePathInfo(storage.Handle, path, out var info);
-                {
-                    if (!result)
-                    {
-                        throw new Exception($"Failed to get directory size {path}: {SDL_GetError()}");
-                    }
-
-                    if (info.Type != SDL_PathType.SDL_PATHTYPE_DIRECTORY)
-                    {
-                        throw new Exception($"Failed to get directory size {path}: Not a valid directory");
-                    }
-                }
-
-                return info.Size;
-            }
-        }
-
-        public static void DirectoryCreate(StorageProvider storage, string path)
-        {
-            path = Normalize(path);
-            {
-                if (!storage.IsReadable)
-                {
-                    throw new Exception("Storage is not readable");
-                }
-
-                if (!storage.IsWritable)
-                {
-                    throw new Exception("Storage is not writable");
-                }
-
-                var result = SDL_CreateStorageDirectory(storage.Handle, path);
-                {
-                    if (!result)
-                    {
-                        throw new Exception($"Failed to create directory {path}: {SDL_GetError()}");
-                    }
-                }
-            }
-        }
-
-        public static void DirectoryDelete(StorageProvider storage, string path)
-        {
-            path = Normalize(path);
-            {
-                if (!storage.IsReadable)
-                {
-                    throw new Exception("Storage is not readable");
-                }
-
-                if (!storage.IsWritable)
-                {
-                    throw new Exception("Storage is not writable");
-                }
-
-                var result = SDL_RemoveStoragePath(storage.Handle, path);
-                {
-                    if (!result)
-                    {
-                        throw new Exception($"Failed to delete directory {path}: {SDL_GetError()}");
-                    }
-                }
-            }
-        }
-
-        public static bool IsDirectory(StorageProvider storage, string path)
-        {
-            path = Normalize(path);
-            {
-                if (!storage.IsReadable)
-                {
-                    throw new Exception("Storage is not readable");
-                }
-
-                var result = SDL_GetStoragePathInfo(storage.Handle, path, out var info);
-                {
-                    return result && info.Type == SDL_PathType.SDL_PATHTYPE_DIRECTORY;
-                }
-            }
-        }
-    }
-    
-    // File API
-    public unsafe partial class Storage
-    {
-        public static bool IsFile(StorageProvider storage, string path)
-        {
-            path = Normalize(path);
-            {
-                if (!storage.IsReadable)
-                {
-                    throw new Exception("Storage is not readable");
-                }
-
-                var result = SDL_GetStoragePathInfo(storage.Handle, path, out var info);
-                {
-                    return result && info.Type == SDL_PathType.SDL_PATHTYPE_FILE;
-                }
-            }
-        }
-        
-        public static void FileCopy(StorageProvider storage, string path, string destination)
-        {
-            destination = Normalize(destination);
-            path = Normalize(path);
-            {
-                if (!storage.IsReadable)
-                {
-                    throw new Exception("Storage is not readable");
-                }
-
-                if (!storage.IsWritable)
-                {
-                    throw new Exception("Storage is not writable");
-                }
-
-                var result = SDL_CopyStorageFile(storage.Handle, path, destination);
-                {
-                    if (!result)
-                    {
-                        throw new Exception($"Failed to copy file from {path} to {destination}: {SDL_GetError()}");
-                    }
-                }
-            }
-        }
-        
-        public static void FileRename(StorageProvider storage, string path, string destination)
-        {
-            destination = Normalize(destination);
-            path = Normalize(path);
-            {
-                if (!storage.IsReadable)
-                {
-                    throw new Exception("Storage is not readable");
-                }
-
-                if (!storage.IsWritable)
-                {
-                    throw new Exception("Storage is not writable");
-                }
-
-                var result = SDL_RenameStoragePath(storage.Handle, path, destination);
-                {
-                    if (!result)
-                    {
-                        throw new Exception($"Failed to rename file from {path} to {destination}: {SDL_GetError()}");
-                    }
-                }
-            }
-        }
-        
-        public static bool FileExists(StorageProvider storage, string path)
-        {
-            path = Normalize(path);
-            {
-                if (!storage.IsReadable)
-                {
-                    throw new Exception("Storage is not readable");
-                }
-
-                var result = SDL_GetStoragePathInfo(storage.Handle, path, out var info);
-                {
-                    return result && info.Type == SDL_PathType.SDL_PATHTYPE_FILE;
-                }
-            }
-        }
-        
-        public static ulong FileSize(StorageProvider storage, string path)
-        {
-            path = Normalize(path);
-            {
-                if (!storage.IsReadable)
-                {
-                    throw new Exception("Storage is not readable");
-                }
-
-                var result = SDL_GetStoragePathInfo(storage.Handle, path, out var info);
-                {
-                    if (!result)
-                    {
-                        throw new Exception($"Failed to get file size {path}: {SDL_GetError()}");
-                    }
-
-                    if (info.Type != SDL_PathType.SDL_PATHTYPE_FILE)
-                    {
-                        throw new Exception($"Failed to get file size {path}: Not a valid file");
-                    }
-                }
-
-                return info.Size;
-            }
-        }
-        
-        public static void FileDelete(StorageProvider storage, string path)
-        {
-            path = Normalize(path);
-            {
-                if (!storage.IsReadable)
-                {
-                    throw new Exception("Storage is not readable");
-                }
-
-                if (!storage.IsWritable)
-                {
-                    throw new Exception("Storage is not writable");
-                }
-
-                var result = SDL_RemoveStoragePath(storage.Handle, path);
-                {
-                    if (!result)
-                    {
-                        throw new Exception($"Failed to delete file {path}: {SDL_GetError()}");
-                    }
-                }
-            }
-        }
-        
-        public static byte[] FileReadBytes(StorageProvider storage, string path, ulong bufferSize = 0)
-        {
-            path = Normalize(path);
-            {
-                if (!storage.IsReadable)
-                {
-                    throw new Exception("Storage is not readable");
-                }
-
-                var size = bufferSize;
-                var fileSize = FileSize(storage, path);
-                
-                if (bufferSize <= 0 || bufferSize > fileSize)
-                {
-                    size = fileSize;
-                }
-
-                var result = SDL_ReadStorageFile(storage.Handle, path, out byte[] buffer, size);
-                {
-                    if (!result)
-                    {
-                        throw new Exception($"Failed to read file {path}: {SDL_GetError()}");
-                    }
-                }
-                    
-                return buffer;
-            }
-        }
-        
-        public static void FileWriteBytes(StorageProvider storage, string path, byte[] buffer, ulong bufferSize = 0)
-        {
-            path = Normalize(path);
-            {
-                if (!storage.IsWritable)
-                {
-                    throw new Exception("Storage is not writable");
-                }
-
-                var size = bufferSize;
-                
-                if (size <= 0 || size > (ulong)buffer.Length)
-                {
-                    size = (ulong)buffer.Length;
-                }
-
-                var result = SDL_WriteStorageFile(storage.Handle, path, buffer, bufferSize > 0 ? bufferSize : size);
-                {
-                    if (!result)
-                    {
-                        throw new Exception($"Failed to write file {path}: {SDL_GetError()}");
-                    }
-                }
-            }
-        }
-        
-        public static Stream FileRead(StorageProvider storage, string path)
-        {
-            path = Normalize(path);
-            {
-                if (!storage.IsReadable)
-                {
-                    throw new Exception("Storage is not readable");
-                }
-
-                var result = SDL_ReadStorageFile(storage.Handle, path, out byte[] buffer, FileSize(storage, path));
-                {
-                    if (!result)
-                    {
-                        throw new Exception($"Failed to read file {path}: {SDL_GetError()}");
-                    }
-                }
-
-                return new MemoryStream(buffer);
-            }
-        }
-        
-        public static void FileWrite(StorageProvider storage, string path, Stream stream)
-        {
-            path = Normalize(path);
-            {
-                if (!storage.IsWritable)
-                {
-                    throw new Exception("Storage is not writable");
-                }
-
-                using var memory = new MemoryStream();
-                stream.CopyTo(memory);
-                
-                var result = SDL_WriteStorageFile(storage.Handle, path, memory.ToArray(), (ulong)memory.Length);
-                {
-                    if (!result)
-                    {
-                        throw new Exception($"Failed to write file {path}: {SDL_GetError()}");
-                    }
                 }
             }
         }
