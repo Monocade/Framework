@@ -1,21 +1,22 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System;
+﻿using System;
 
 namespace Engine
 {
     // App
     public abstract partial class App : Bootstrap
     {
-        private static readonly ConcurrentQueue<Action> MainThreadQueue = new();
-        private static Storage Storage;
-        private static Window Window;
+        public FileSystem FileSystem { get; private set; }
+        public Platform Platform { get; private set; }
+        public Window Window { get; private set; }
+        public Debug Debug { get; private set; }
         
 
         internal override void MainInitialize()
         {
-            Storage = new Storage(this);
+            FileSystem = new FileSystem(this);
+            Platform = new Platform(this);
             Window = new Window(this);
+            Debug = new Debug(this);
             {
                 Initialize();
                 {
@@ -26,7 +27,7 @@ namespace Engine
 
         internal override void MainUpdate()
         {
-            while (MainThreadQueue.TryDequeue(out var action))
+            while (AppThreadQueue.TryDequeue(out var action))
             {
                 action();
             }
@@ -46,7 +47,7 @@ namespace Engine
         }
     }
 
-    // Main
+    // API
     public abstract partial class App
     {
         internal event Action<SDL_Event> OnEvent;
@@ -55,6 +56,11 @@ namespace Engine
         internal event Action OnRender;
         internal event Action OnQuit;
         
+        
+        public void RunOnMainThread(Action action)
+        {
+            AppThreadQueue.Enqueue(action);
+        }
         
         public virtual void Initialize()
         {
@@ -74,15 +80,6 @@ namespace Engine
         public virtual void Quit()
         {
             OnQuit?.Invoke();
-        }
-    }
-
-    // API
-    public abstract partial class App
-    {
-        internal static void RunOnMainThread(Action action)
-        {
-            MainThreadQueue.Enqueue(action);
         }
     }
 }

@@ -4,8 +4,8 @@ namespace Engine
 {
     public enum DialogResult
     {
-        Success,
         Cancelled,
+        Success,
         Failed
     }
 }

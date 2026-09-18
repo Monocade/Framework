@@ -1,14 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System;
 
 namespace Engine
 {
     public abstract unsafe class Bootstrap
     {
+        internal readonly ConcurrentQueue<Action> AppThreadQueue = new ConcurrentQueue<Action>();
+        
         internal readonly Queue<SDL_Event> AppEvents = new Queue<SDL_Event>();
         
         internal abstract void MainInitialize();
+        
         internal abstract void MainUpdate();
+        
         internal abstract void MainQuit();
 
 

@@ -9,7 +9,15 @@ namespace Application
         {
             base.Initialize();
             {
-                
+                FileSystem.OpenFileDialog(FileSystem.BasePath, Callback, null, true);
+            }
+        }
+
+        private void Callback(DialogResult result, string[] contents)
+        {
+            foreach (var file in contents)
+            {
+                Console.WriteLine(file);
             }
         }
     }

@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-    public enum Platforms
+    public enum SystemPlatform
     {
         Unknown,
         Windows,

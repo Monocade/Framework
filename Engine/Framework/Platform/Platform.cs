@@ -3,49 +3,29 @@
 namespace Engine
 {
     // Platform
-    public static partial class Platform
+    public sealed partial class Platform(App App) : Module(App)
     {
-        internal static PlatformProvider Provider { get; private set; }
-        
-        static Platform()
+        public SystemPlatform GetPlatform()
         {
-            Provider = GetPlatform() switch
-            {
-                Platforms.Android => new Android(),
-                Platforms.Windows => new Windows(),
-                Platforms.Linux => new Linux(),
-                Platforms.Mac => new Mac(),
-                Platforms.IOS => new IOS(),
-
-                _ => throw new Exception($"Unsupported platform: {GetPlatform()}")
-            };
-        }
-    }
-
-    // API
-    public static partial class Platform
-    {
-        public static Platforms GetPlatform()
-        {
-            return (Platforms)SDL_GetPlatform();
+            return (SystemPlatform)SDL_GetPlatform();
         }
 
-        public static bool IsDesktop()
+        public bool IsDesktop()
         {
             return !IsMobile() && !IsTablet() && !IsTV();
         }
 
-        public static bool IsMobile()
+        public bool IsMobile()
         {
             return SDL_IsPhone();
         }
 
-        public static bool IsTablet()
+        public bool IsTablet()
         {
             return SDL_IsTablet();
         }
 
-        public static bool IsTV()
+        public bool IsTV()
         {
             return SDL_IsTV();
         }

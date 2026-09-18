@@ -3,36 +3,12 @@
 namespace Engine
 {
     // Constructor
-    public sealed partial class Window : Module
+    public sealed unsafe partial class Window(App App) : Module(App)
     {
-        internal Window(App app) : base(app)
-        {
-            // Constructor
-        }
-    }
-
-    // Window
-    public unsafe partial class Window
-    {
-        internal static SDL_Window* Handle
+        internal SDL_Window* Handle
         {
             get; private set;
         }
-        
-        public Action OnFullscreenEnter;
-        public Action OnFullscreenExit;
-        public Action OnMouseEnter;
-        public Action OnMouseExit;
-        public Action OnFocusLost;
-        public Action OnFocusGain;
-        public Action OnMaximize;
-        public Action OnMinimize;
-        public Action OnRestore;
-        public Action OnResize;
-        public Action OnMoved;
-        public Action OnShow;
-        public Action OnHide;
-
 
         internal override void Initialize()
         {
@@ -86,7 +62,22 @@ namespace Engine
     // API
     public unsafe partial class Window
     {
-        public static string Title
+        public Action OnFullscreenEnter;
+        public Action OnFullscreenExit;
+        public Action OnMouseEnter;
+        public Action OnMouseExit;
+        public Action OnFocusLost;
+        public Action OnFocusGain;
+        public Action OnMaximize;
+        public Action OnMinimize;
+        public Action OnRestore;
+        public Action OnResize;
+        public Action OnMoved;
+        public Action OnShow;
+        public Action OnHide;
+        
+        
+        public string Title
         {
             set => SDL_SetWindowTitle(Handle, value);
             get
@@ -98,7 +89,7 @@ namespace Engine
             }
         }
         
-        public static int Width
+        public int Width
         {
             set => SDL_SetWindowSize(Handle, value, Height);
             get
@@ -110,7 +101,7 @@ namespace Engine
             }
         }
         
-        public static int Height
+        public int Height
         {
             set => SDL_SetWindowSize(Handle, Width, value);
             get
@@ -122,7 +113,7 @@ namespace Engine
             }
         }
         
-        public static Vector2 Size
+        public Vector2 Size
         {
             set => SDL_SetWindowSize(Handle, (int)value.X, (int)value.Y);
             get
@@ -134,7 +125,7 @@ namespace Engine
             }
         }
         
-        public static Vector2 MinSize
+        public Vector2 MinSize
         {
             set => SDL_SetWindowMinimumSize(Handle, (int)value.X, (int)value.Y);
             get
@@ -146,7 +137,7 @@ namespace Engine
             }
         }
         
-        public static Vector2 MaxSize
+        public Vector2 MaxSize
         {
             set => SDL_SetWindowMaximumSize(Handle, (int)value.X, (int)value.Y);
             get
@@ -158,7 +149,7 @@ namespace Engine
             }
         }
         
-        public static Vector2 Position
+        public Vector2 Position
         {
             set => SDL_SetWindowPosition(Handle, (int)value.X, (int)value.Y);
             get
@@ -170,7 +161,7 @@ namespace Engine
             }
         }
         
-        public static Vector2 AspectRatio
+        public Vector2 AspectRatio
         {
             set => SDL_SetWindowAspectRatio(Handle, (int)value.X, (int)value.Y);
             get
@@ -182,7 +173,7 @@ namespace Engine
             }
         }
         
-        public static bool Fullscreen
+        public bool Fullscreen
         {
             set => SDL_SetWindowFullscreen(Handle, value);
             get
@@ -194,7 +185,7 @@ namespace Engine
             }
         }
         
-        public static bool Resizable
+        public bool Resizable
         {
             set => SDL_SetWindowResizable(Handle, value);
             get
@@ -206,7 +197,7 @@ namespace Engine
             }
         }
         
-        public static bool Focusable
+        public bool Focusable
         {
             set => SDL_SetWindowFocusable(Handle, value);
             get
@@ -218,7 +209,7 @@ namespace Engine
             }
         }
         
-        public static bool Minimized
+        public bool Minimized
         {
             set
             {
@@ -240,7 +231,7 @@ namespace Engine
             }
         }
         
-        public static bool Maximized
+        public bool Maximized
         {
             set
             {
@@ -262,32 +253,32 @@ namespace Engine
             }
         }
         
-        public static void Restore()
+        public void Restore()
         {
             SDL_RestoreWindow(Handle);
         }
         
-        public static void Minimize()
+        public void Minimize()
         {
             SDL_MinimizeWindow(Handle);
         }
         
-        public static void Maximize()
+        public void Maximize()
         {
             SDL_MaximizeWindow(Handle);
         }
         
-        public static void Focus()
+        public void Focus()
         {
             SDL_RaiseWindow(Handle);
         }
         
-        public static void Hide()
+        public void Hide()
         {
             SDL_HideWindow(Handle);
         }
 
-        public static void Show()
+        public void Show()
         {
             SDL_ShowWindow(Handle);
         }

@@ -1,30 +1,35 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics;
-using System.Text;
 using System;
 
 namespace Engine
 {
     // Debug
-    public static class Debug
+    public sealed partial class Debug(App App) : Module(App)
     {
-        static Debug()
+        internal override void Initialize()
         {
-            SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_INFO, "");
-            SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_WARN, "");
-            SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_ERROR, "");
-            SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_CRITICAL, "");
-            SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_COUNT, "");
-            SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_DEBUG, "");
-            SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_INVALID, "");
-            SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_TRACE, "");
-            SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_VERBOSE, "");
+            base.Initialize();
+            {
+                SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_INFO, "");
+                SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_WARN, "");
+                SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_ERROR, "");
+                SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_CRITICAL, "");
+                SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_COUNT, "");
+                SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_DEBUG, "");
+                SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_INVALID, "");
+                SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_TRACE, "");
+                SDL_SetLogPriorityPrefix(SDL_LogPriority.SDL_LOG_PRIORITY_VERBOSE, "");
+            }
         }
-        
-        
+    }
+    
+    // API
+    public partial class Debug
+    {
         [DebuggerHidden]
         [StackTraceHidden]
-        public static void Log(string message)
+        public void Log(string message)
         {
             if (message != null)
             {
@@ -34,7 +39,7 @@ namespace Engine
         
         [DebuggerHidden]
         [StackTraceHidden]
-        public static void Log(object message)
+        public void Log(object message)
         {
             if (message != null)
             {
@@ -45,7 +50,7 @@ namespace Engine
         
         [DebuggerHidden]
         [StackTraceHidden]
-        public static void Warning(string message)
+        public void Warning(string message)
         {
             if (message != null)
             {
@@ -55,7 +60,7 @@ namespace Engine
         
         [DebuggerHidden]
         [StackTraceHidden]
-        public static void Warning(object message)
+        public void Warning(object message)
         {
             if (message != null)
             {
@@ -66,7 +71,7 @@ namespace Engine
         
         [DebuggerHidden]
         [StackTraceHidden]
-        public static void Error(string message)
+        public void Error(string message)
         {
             if (message != null)
             {
@@ -76,7 +81,7 @@ namespace Engine
         
         [DebuggerHidden]
         [StackTraceHidden]
-        public static void Error(object message)
+        public void Error(object message)
         {
             if (message != null)
             {
@@ -87,7 +92,7 @@ namespace Engine
         
         [DebuggerHidden]
         [StackTraceHidden]
-        public static void Assert([DoesNotReturnIf(false)] bool condition, Exception exception)
+        public void Assert([DoesNotReturnIf(false)] bool condition, Exception exception)
         {
             if (!condition)
             {
@@ -97,7 +102,7 @@ namespace Engine
         
         [DebuggerHidden]
         [StackTraceHidden]
-        public static void Assert([DoesNotReturnIf(false)] bool condition, string message)
+        public void Assert([DoesNotReturnIf(false)] bool condition, string message)
         {
             if (!condition)
             {
@@ -107,7 +112,7 @@ namespace Engine
         
         [DebuggerHidden]
         [StackTraceHidden]
-        public static void Assert([DoesNotReturnIf(false)] bool condition, object message)
+        public void Assert([DoesNotReturnIf(false)] bool condition, object message)
         {
             if (!condition)
             {
@@ -119,7 +124,7 @@ namespace Engine
         [DoesNotReturn]
         [DebuggerHidden]
         [StackTraceHidden]
-        public static void Exception(Exception exception)
+        public void Exception(Exception exception)
         {
             throw exception;
         }
@@ -127,7 +132,7 @@ namespace Engine
         [DoesNotReturn]
         [DebuggerHidden]
         [StackTraceHidden]
-        public static void Exception(string message)
+        public void Exception(string message)
         {
             throw new Exception($"{message}");
         }
@@ -135,7 +140,7 @@ namespace Engine
         [DoesNotReturn]
         [DebuggerHidden]
         [StackTraceHidden]
-        public static void Exception(object message)
+        public void Exception(object message)
         {
             throw new Exception($"{message}");
         }

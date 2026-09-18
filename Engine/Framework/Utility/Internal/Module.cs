@@ -4,7 +4,10 @@ namespace Engine
 {
     public abstract class Module : IDisposable
     {
-        protected App App { get; private set; }
+        protected App App
+        {
+            get; private set;
+        }
         
         protected Module(App App)
         {
@@ -18,17 +21,31 @@ namespace Engine
                 App.OnQuit += Dispose;
             }
         }
-        
-        internal virtual void Event(SDL_Event e) { }
-        
-        internal virtual void Initialize() { }
-        
-        internal virtual void Update() { }
-        
-        internal virtual void Render() { }
-        
-        internal virtual void Quit() { }
-        
+
+        internal virtual void Event(SDL_Event e)
+        {
+            // Module Events
+        }
+
+        internal virtual void Initialize()
+        {
+            // Module Initialize
+        }
+
+        internal virtual void Update()
+        {
+            // Module Update
+        }
+
+        internal virtual void Render()
+        {
+            // Module Render
+        }
+
+        internal virtual void Quit()
+        {
+            // Module Quit
+        }
         
         public void Dispose()
         {

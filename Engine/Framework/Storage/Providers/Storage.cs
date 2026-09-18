@@ -4,8 +4,10 @@ using System.IO;
 namespace Engine
 {
     // Storage
-    public abstract unsafe partial class StorageProvider : IDisposable
+    public abstract unsafe partial class Storage : IDisposable
     {
+        private string Normalize(string path) => path.Replace("\\", "/");
+        
         public abstract bool IsWritable { get; }
 
         public abstract bool IsReadable { get; }
@@ -18,7 +20,7 @@ namespace Engine
         }
 
         
-        internal StorageProvider(SDL_Storage* handle)
+        internal Storage(SDL_Storage* handle)
         {
             if (handle == null)
             {
@@ -40,12 +42,12 @@ namespace Engine
     }
     
     // Storage Directory
-    public unsafe partial class StorageProvider
+    public unsafe partial class Storage
     {
         public string[] DirectoryEnumerate(string path, string pattern)
         {
-            pattern = Storage.Normalize(pattern);
-            path = Storage.Normalize(path);
+            pattern = Normalize(pattern);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
@@ -76,8 +78,8 @@ namespace Engine
 
         public void DirectoryCopy(string path, string destination)
         {
-            destination = Storage.Normalize(destination);
-            path = Storage.Normalize(path);
+            destination = Normalize(destination);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
@@ -122,8 +124,8 @@ namespace Engine
 
         public void DirectoryRename(string path, string destination)
         {
-            destination = Storage.Normalize(destination);
-            path = Storage.Normalize(path);
+            destination = Normalize(destination);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
@@ -152,7 +154,7 @@ namespace Engine
 
         public bool DirectoryExists(string path)
         {
-            path = Storage.Normalize(path);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
@@ -173,7 +175,7 @@ namespace Engine
 
         public ulong DirectorySize(string path)
         {
-            path = Storage.Normalize(path);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
@@ -204,7 +206,7 @@ namespace Engine
 
         public void DirectoryCreate(string path)
         {
-            path = Storage.Normalize(path);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
@@ -233,7 +235,7 @@ namespace Engine
 
         public void DirectoryDelete(string path)
         {
-            path = Storage.Normalize(path);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
@@ -262,7 +264,7 @@ namespace Engine
 
         public bool IsDirectory(string path)
         {
-            path = Storage.Normalize(path);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
@@ -283,11 +285,11 @@ namespace Engine
     }
     
     // Storage File
-    public abstract unsafe partial class StorageProvider
+    public abstract unsafe partial class Storage
     {
         public bool IsFile(string path)
         {
-            path = Storage.Normalize(path);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
@@ -308,8 +310,8 @@ namespace Engine
         
         public void FileCopy(string path, string destination)
         {
-            destination = Storage.Normalize(destination);
-            path = Storage.Normalize(path);
+            destination = Normalize(destination);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
@@ -338,8 +340,8 @@ namespace Engine
         
         public void FileRename(string path, string destination)
         {
-            destination = Storage.Normalize(destination);
-            path = Storage.Normalize(path);
+            destination = Normalize(destination);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
@@ -368,7 +370,7 @@ namespace Engine
         
         public bool FileExists(string path)
         {
-            path = Storage.Normalize(path);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
@@ -389,7 +391,7 @@ namespace Engine
         
         public ulong FileSize(string path)
         {
-            path = Storage.Normalize(path);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
@@ -420,7 +422,7 @@ namespace Engine
         
         public void FileDelete(string path)
         {
-            path = Storage.Normalize(path);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
@@ -449,7 +451,7 @@ namespace Engine
         
         public byte[] FileReadBytes(string path, ulong bufferSize = 0)
         {
-            path = Storage.Normalize(path);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
@@ -483,7 +485,7 @@ namespace Engine
         
         public void FileWriteBytes(string path, byte[] buffer, ulong bufferSize = 0)
         {
-            path = Storage.Normalize(path);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
@@ -514,7 +516,7 @@ namespace Engine
         
         public Stream FileRead(string path)
         {
-            path = Storage.Normalize(path);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
@@ -540,7 +542,7 @@ namespace Engine
         
         public void FileWrite(string path, Stream stream)
         {
-            path = Storage.Normalize(path);
+            path = Normalize(path);
             {
                 if (!IsReady)
                 {
