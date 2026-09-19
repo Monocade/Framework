@@ -16,9 +16,9 @@ namespace Engine
         {
             Storage = new Storage(this, new SDLStorageProvider(this));
             Dialog = new Dialog(this, new SDLDialogProvider(this));
+            Debug = new Debug(this, new SDLDebugProvider(this));
             Platform = new Platform(this);
             Window = new Window(this);
-            Debug = new Debug(this);
             {
                 Initialize();
                 {
