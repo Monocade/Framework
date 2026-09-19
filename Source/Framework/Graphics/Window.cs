@@ -2,14 +2,17 @@
 
 namespace Engine
 {
-    // Constructor
-    public sealed unsafe partial class Window(App App) : Module(App)
+    public sealed unsafe partial class Window : Module
     {
-        internal SDL_Window* Handle
+        internal SDL_Window* Handle { get; private set; }
+        
+        
+        internal Window(App app) : base(app)
         {
-            get; private set;
+            // Constructor
         }
-
+        
+        
         internal override void Initialize()
         {
             base.Initialize();
@@ -63,17 +66,29 @@ namespace Engine
     public unsafe partial class Window
     {
         public Action OnFullscreenEnter;
+        
         public Action OnFullscreenExit;
+        
         public Action OnMouseEnter;
+        
         public Action OnMouseExit;
+        
         public Action OnFocusLost;
+        
         public Action OnFocusGain;
+        
         public Action OnMaximize;
+        
         public Action OnMinimize;
+        
         public Action OnRestore;
+        
         public Action OnResize;
+        
         public Action OnMoved;
+        
         public Action OnShow;
+        
         public Action OnHide;
         
         

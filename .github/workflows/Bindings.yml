@@ -91,7 +91,7 @@ jobs:
 
       - name: Reference
         run: |
-          SUBMODULE_PATH="Engine/Natives/Bindings"
+          SUBMODULE_PATH="Source/Natives/Bindings"
           
           git checkout ${{ github.ref_name }}
           

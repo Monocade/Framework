@@ -2,9 +2,9 @@
 
 <img width="256" src="Icon.png">
 
-**Monocade**
+**Toolkit**
 
-Cross-platform game framework
+Developed by Monocade
 
 🚧 This project is currently under construction 🚧
 
