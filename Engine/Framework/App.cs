@@ -5,19 +5,11 @@ namespace Engine
     // App
     public abstract partial class App : Bootstrap
     {
-        public Platform Platform { get; private set; }
-        public Storage Storage { get; private set; }
-        public Dialog Dialog { get; private set; }
         public Window Window { get; private set; }
-        public Debug Debug { get; private set; }
         
 
         internal override void MainInitialize()
         {
-            Platform = new Platform(this, new SDLPlatformProvider(this));
-            Storage = new Storage(this, new SDLStorageProvider(this));
-            Dialog = new Dialog(this, new SDLDialogProvider(this));
-            Debug = new Debug(this, new SDLDebugProvider(this));
             Window = new Window(this);
             {
                 Initialize();

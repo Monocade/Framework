@@ -6,7 +6,7 @@ namespace Engine
     {
         protected App App
         {
-            get; private set;
+            get;
         }
         
         protected Module(App App)

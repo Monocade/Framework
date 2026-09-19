@@ -1,5 +1,4 @@
-﻿using System;
-using Engine;
+﻿using Engine;
 
 namespace Application
 {
@@ -9,15 +8,7 @@ namespace Application
         {
             base.Initialize();
             {
-                Dialog.OpenFileDialog(Callback, null, "Dlls", "dll");
-            }
-        }
-        
-        private void Callback(DialogResult result, string[] contents)
-        {
-            foreach (var file in contents)
-            {
-                Console.WriteLine(file);
+                
             }
         }
     }
