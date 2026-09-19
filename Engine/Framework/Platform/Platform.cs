@@ -3,31 +3,31 @@
 namespace Engine
 {
     // Platform
-    public sealed partial class Platform(App App) : Module(App)
+    public sealed partial class Platform(App App, PlatformProvider provider) : Module(App)
     {
         public SystemPlatform GetPlatform()
         {
-            return (SystemPlatform)SDL_GetPlatform();
+            return provider.GetPlatform();
         }
 
         public bool IsDesktop()
         {
-            return !IsMobile() && !IsTablet() && !IsTV();
+            return provider.IsDesktop();
         }
 
         public bool IsMobile()
         {
-            return SDL_IsPhone();
+            return provider.IsMobile();
         }
 
         public bool IsTablet()
         {
-            return SDL_IsTablet();
+            return provider.IsTablet();
         }
 
         public bool IsTV()
         {
-            return SDL_IsTV();
+            return provider.IsTV();
         }
     }
 }
