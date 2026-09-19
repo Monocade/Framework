@@ -2,3 +2,7 @@
 	path = Source/Natives/Bindings
 	url = https://github.com/Monocade/Toolkit
 	branch = Bindings
+[submodule "Source/Natives/Libraries"]
+	path = Source/Natives/Libraries
+	url = https://github.com/Monocade/Toolkit
+	branch = Libraries
