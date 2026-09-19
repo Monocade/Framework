@@ -4,23 +4,18 @@ using System;
 namespace Engine
 {
     // SDL Storage Container
-    public sealed unsafe partial class SDLStorageContainer : StorageContainer
+    public sealed unsafe partial class SDLStorageContainer(App app, IntPtr handle) : StorageContainer(app)
     {
         public override string Normalize(string path) => path.Replace("\\", "/");
         
         public override bool IsReady => SDL_StorageReady(Handle);
 
+        private SDL_Storage* Handle = (SDL_Storage*)handle;
+        
         public override bool IsWritable => false;
 
         public override bool IsReadable => true;
 
-        private SDL_Storage* Handle;
-
-        
-        internal SDLStorageContainer(SDL_Storage* handle)
-        {
-            this.Handle = handle;
-        }
 
         public override void Dispose(bool disposing)
         {

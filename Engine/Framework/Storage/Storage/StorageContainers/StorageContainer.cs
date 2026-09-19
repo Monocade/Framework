@@ -4,8 +4,10 @@ using System;
 namespace Engine
 {
     // Storage Container
-    public abstract partial class StorageContainer : IDisposable
+    public abstract partial class StorageContainer(App app) : IDisposable
     {
+        protected readonly App App = app;
+        
         public abstract bool IsReady { get; }
 
         public abstract bool IsWritable { get; }

@@ -2,14 +2,35 @@
 
 namespace Engine
 {
-    // Dialog API
-    public sealed class Dialog(App App) : Module(App)
+    // Dialog
+    public sealed class Dialog(App App, DialogProvider provider) : Module(App)
     {
         public delegate void DialogCallback(DialogResult result, string[] selection);
         
-        public void Open(DialogProvider provider, DialogCallback callback)
+
+        public void OpenFoldersDialog(DialogCallback callback, string path, string name = null, string pattern = null)
         {
-            provider.Open(callback);
+            provider.OpenFoldersDialog(callback, path, name, pattern);
+        }
+        
+        public void OpenFolderDialog(DialogCallback callback, string path, string name = null, string pattern = null)
+        {
+            provider.OpenFolderDialog(callback, path, name, pattern);
+        }
+
+        public void OpenFilesDialog(DialogCallback callback, string path, string name = null, string pattern = null)
+        {
+            provider.OpenFilesDialog(callback, path, name, pattern);
+        }
+        
+        public void OpenFileDialog(DialogCallback callback, string path, string name = null, string pattern = null)
+        {
+            provider.OpenFileDialog(callback, path, name, pattern);
+        }
+
+        public void OpenSaveDialog(DialogCallback callback, string path, string name = null, string pattern = null)
+        {
+            provider.OpenSaveDialog(callback, path, name, pattern);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Application
         {
             base.Initialize();
             {
-                
+                Dialog.OpenFileDialog(Callback, null, "Dlls", "dll");
             }
         }
         

@@ -14,10 +14,10 @@ namespace Engine
 
         internal override void MainInitialize()
         {
-            Storage = new Storage(this, new SDLStorageProvider());
+            Storage = new Storage(this, new SDLStorageProvider(this));
+            Dialog = new Dialog(this, new SDLDialogProvider(this));
             Platform = new Platform(this);
             Window = new Window(this);
-            Dialog = new Dialog(this);
             Debug = new Debug(this);
             {
                 Initialize();

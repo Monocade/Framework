@@ -3,8 +3,10 @@
 namespace Engine
 {
     // Storage Provider
-    public abstract class StorageProvider
+    public abstract class StorageProvider(App app)
     {
+        protected readonly App App = app;
+        
         public abstract string PrefPath(string app, string name);
         
         public abstract string UserPath(UserFolder userFolder);

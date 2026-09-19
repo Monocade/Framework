@@ -3,7 +3,7 @@
 namespace Engine
 {
     // SDL Storage Provider
-    public sealed unsafe class SDLStorageProvider : StorageProvider
+    public sealed unsafe class SDLStorageProvider(App app) : StorageProvider(app)
     {
         public override string PrefPath(string app, string name) => SDL_GetPrefPath(app, name);
         
@@ -29,17 +29,17 @@ namespace Engine
         
         public override StorageContainer OpenUserStorage(string app, string user)
         {
-            return new SDLStorageContainer(SDL_OpenUserStorage(app, user, 0));
+            return new SDLStorageContainer(App, (IntPtr)SDL_OpenUserStorage(app, user, 0));
         }
 
         public override StorageContainer OpenTitleStorage(string path)
         {
-            return new SDLStorageContainer(SDL_OpenTitleStorage(path, 0));
+            return new SDLStorageContainer(App, (IntPtr)SDL_OpenTitleStorage(path, 0));
         }
 
         public override StorageContainer OpenFileStorage(string path)
         {
-            return new SDLStorageContainer(SDL_OpenFileStorage(path));
+            return new SDLStorageContainer(App, (IntPtr)SDL_OpenFileStorage(path));
         }
         
         public override void CloseStorage(StorageContainer container)
