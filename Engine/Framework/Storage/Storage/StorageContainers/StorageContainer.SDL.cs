@@ -3,21 +3,23 @@ using System;
 
 namespace Engine
 {
-    // Title Storage Provider
-    public sealed unsafe partial class TitleStorageProvider(string path) : StorageProvider
+    // SDL Storage Container
+    public sealed unsafe partial class SDLStorageContainer : StorageContainer
     {
-        private SDL_Storage* Handle = SDL_OpenTitleStorage(path, 0);
+        public override string Normalize(string path) => path.Replace("\\", "/");
         
         public override bool IsReady => SDL_StorageReady(Handle);
 
         public override bool IsWritable => false;
 
         public override bool IsReadable => true;
+
+        private SDL_Storage* Handle;
+
         
-        
-        public override string Normalize(string path)
+        internal SDLStorageContainer(SDL_Storage* handle)
         {
-            return path.Replace("\\", "/");
+            this.Handle = handle;
         }
 
         public override void Dispose(bool disposing)
@@ -29,9 +31,9 @@ namespace Engine
             }
         }
     }
-
+    
     // Directory
-    public unsafe partial class TitleStorageProvider
+    public sealed unsafe partial class SDLStorageContainer
     {
         public override string[] DirectoryEnumerate(string path, string pattern)
         {
@@ -274,7 +276,7 @@ namespace Engine
     }
     
     // File
-    public unsafe partial class TitleStorageProvider
+    public sealed unsafe partial class SDLStorageContainer
     {
         public override bool IsFile(string path)
         {

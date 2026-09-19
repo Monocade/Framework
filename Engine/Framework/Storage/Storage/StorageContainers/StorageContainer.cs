@@ -1,32 +1,31 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System;
 
 namespace Engine
 {
-    // Storage Provider
-    public abstract partial class StorageProvider : IDisposable
+    // Storage Container
+    public abstract partial class StorageContainer : IDisposable
     {
         public abstract bool IsReady { get; }
 
         public abstract bool IsWritable { get; }
 
         public abstract bool IsReadable { get; }
-
-
+        
         public abstract string Normalize(string path);
         
         public abstract void Dispose(bool disposing);
+        
         
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-            Console.WriteLine($"Storage {this} disposed");
         }
     }
     
     // Directory
-    public abstract partial class StorageProvider
+    public abstract partial class StorageContainer
     {
         public abstract string[] DirectoryEnumerate(string path, string pattern);
 
@@ -46,7 +45,7 @@ namespace Engine
     }
     
     // File
-    public abstract partial class StorageProvider
+    public abstract partial class StorageContainer
     {
         public abstract bool IsFile(string path);
 

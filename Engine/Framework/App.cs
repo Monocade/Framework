@@ -14,7 +14,7 @@ namespace Engine
 
         internal override void MainInitialize()
         {
-            Storage = new Storage(this);
+            Storage = new Storage(this, new SDLStorageProvider());
             Platform = new Platform(this);
             Window = new Window(this);
             Dialog = new Dialog(this);
