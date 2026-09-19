@@ -1,0 +1,4 @@
+[submodule "Source/Natives/Bindings"]
+	path = Source/Natives/Bindings
+	url = https://github.com/Monocade/Toolkit
+	branch = Bindings
